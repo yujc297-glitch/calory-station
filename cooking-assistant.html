@@ -98,6 +98,70 @@
             min-height: 100vh;
         }
         
+        /* 提示文字样式 */
+        .hint {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        /* 加入按钮样式 */
+        .btn-add {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-add.disabled {
+            background-color: #e0e0e0;
+            color: #999;
+            cursor: not-allowed;
+        }
+        
+        .btn-add.active {
+            background-color: #2e8b57;
+            color: white;
+        }
+        
+        /* 按钮状态示例容器 */
+        .demo-add-btn-states {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* 食材标签样式 */
+        .added-ingredients.demo .ingredients-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .ingredient-tag {
+            background-color: rgba(46, 139, 87, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tag-remove {
+            cursor: pointer;
+            color: #666;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+        
+        .tag-remove:hover {
+            color: #333;
+        }
+        
         /* 表单样式 */
         .form-section {
             background-color: white;
@@ -136,17 +200,121 @@
             color: #999;
         }
         
+        /* 食材输入区域样式 */
+        .ingredients-input-container {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+        
+        .ingredients-input-container input[type="text"] {
+            flex: 1;
+            border-radius: 5px 0 0 5px;
+        }
+        
+        /* 加入按钮样式 */
+        .btn-add {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-add.disabled {
+            background-color: #ccc;
+            color: #666;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .btn-add.active {
+            background-color: #2e8b57;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .btn-add.active:hover {
+            background-color: #277a4d;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(46, 139, 87, 0.2);
+        }
+        
+        /* 已添加食材标签样式 */
+        .added-ingredients {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+        
+        .added-ingredients h4 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        .ingredients-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .ingredient-tag {
+            display: inline-flex;
+            align-items: center;
+            background-color: #e8f5e9;
+            color: #2e8b57;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #c8e6c9;
+            transition: all 0.3s ease;
+        }
+        
+        .ingredient-tag:hover {
+            background-color: #c8e6c9;
+            transform: translateY(-1px);
+        }
+        
+        .tag-remove {
+            margin-left: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            color: #558b2f;
+            padding: 0 4px;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+        
+        .tag-remove:hover {
+            background-color: #a5d6a7;
+            color: #2e7d32;
+        }
+        
         /* 选项组样式 */
+        .options-section {
+            margin-bottom: 30px;
+        }
+        
+        .options-section h4 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 16px;
+        }
+        
         .options-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 15px;
         }
         
         .option-item {
             display: flex;
             align-items: center;
-            margin-right: 20px;
             margin-bottom: 10px;
         }
         
@@ -162,6 +330,78 @@
             margin: 0;
             font-weight: normal;
             cursor: pointer;
+            padding: 5px 0;
+        }
+        
+        /* 样式化的选项按钮 */
+        .styled-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 12px;
+        }
+        
+        .styled-option {
+            position: relative;
+            padding: 12px 15px;
+            background-color: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .styled-option:hover {
+            background-color: #f1f8e9;
+            border-color: #c8e6c9;
+        }
+        
+        .styled-option input {
+            position: absolute;
+            opacity: 0;
+        }
+        
+        .styled-option label {
+            margin: 0;
+            cursor: pointer;
+            display: block;
+        }
+        
+        /* 单选按钮选中状态 */
+        .styled-option input[type="radio"]:checked + label {
+            font-weight: bold;
+            color: #2e8b57;
+        }
+        
+        .styled-option input[type="radio"]:checked + label::before {
+            content: "✓";
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #2e8b57;
+            font-weight: bold;
+        }
+        
+        .styled-option input[type="radio"]:checked + .styled-option {
+            border-color: #2e8b57;
+            background-color: #e8f5e9;
+        }
+        
+        /* 复选框选中状态 */
+        .styled-option input[type="checkbox"]:checked + label {
+            font-weight: bold;
+            color: #2e8b57;
+        }
+        
+        .styled-option input[type="checkbox"]:checked + label::before {
+            content: "✓";
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #2e8b57;
+            font-weight: bold;
         }
         
         /* 按钮样式 */
@@ -347,58 +587,110 @@
         <div class="container">
             <h1 class="section-title">烹饪助手</h1>
             <p class="section-subtitle">根据食材和口味偏好，生成智能菜谱建议</p>
+            <p class="hint">(如果你从"原材料识别"页面跳转而来，可在下方看到示例食材标签)</p>
             
             <!-- 输入区域 -->
             <section class="form-section">
-                <div class="form-group">
-                    <label for="ingredients">已有食材</label>
-                    <input type="text" id="ingredients" placeholder="鸡胸肉、西兰花、番茄" />
-                </div>
+                <!-- 烹饪助手：已有食材添加与标签展示（静态示意，无真实交互） -->
                 
                 <div class="form-group">
-                    <label>菜系选择</label>
-                    <div class="options-group">
-                        <div class="option-item">
+                    <label for="ingredients">已有食材</label>
+                    <div class="ingredients-input-container">
+                        <input type="text" id="ingredients" placeholder="鸡胸肉、西兰花、番茄" />
+                        <button class="btn-add disabled">加入</button>
+                    </div>
+                    
+                    <!-- 说明：此处展示"加入"按钮的两种视觉状态，实际不具备交互功能 -->
+                    <div class="demo-add-btn-states">
+                        <!-- 输入框为空时的禁用状态 -->
+                        <button class="btn-add disabled">加入</button>
+
+                        <!-- 输入框有内容时的激活状态（仅示例展示） -->
+                        <button class="btn-add active">加入</button>
+                    </div>
+                </div>
+                
+                <!-- 已添加食材展示区 -->
+                <div class="added-ingredients demo">
+                    <!-- 说明：以上食材标签为静态展示，用于模拟"加入食材"后的视觉效果 -->
+                    <h4>已添加食材</h4>
+                    <div class="ingredients-tags">
+                        <!-- 示例：若用户从"原材料识别"页面点击"添加到烹饪助手"，此处模拟"已添加西兰花"效果 -->
+                        <div class="ingredient-tag">
+                            西兰花
+                            <span class="tag-remove">×</span>
+                        </div>
+                        <div class="ingredient-tag">
+                            鸡胸肉
+                            <span class="tag-remove">×</span>
+                        </div>
+                        <div class="ingredient-tag">
+                            胡萝卜
+                            <span class="tag-remove">×</span>
+                        </div>
+                        <div class="ingredient-tag">
+                            鸡蛋
+                            <span class="tag-remove">×</span>
+                        </div>
+                        <div class="ingredient-tag">
+                            番茄
+                            <span class="tag-remove">×</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 菜系选择区域 -->
+                <div class="options-section">
+                    <!-- 菜系/口味偏好选中状态仅为视觉示意，不具备真实逻辑 -->
+                    <h4>选择菜系</h4>
+                    <div class="styled-options">
+                        <div class="styled-option">
                             <input type="radio" id="cuisine1" name="cuisine" checked />
                             <label for="cuisine1">中餐</label>
                         </div>
-                        <div class="option-item">
+                        <div class="styled-option">
                             <input type="radio" id="cuisine2" name="cuisine" />
                             <label for="cuisine2">西餐</label>
                         </div>
-                        <div class="option-item">
+                        <div class="styled-option">
                             <input type="radio" id="cuisine3" name="cuisine" />
                             <label for="cuisine3">日餐</label>
                         </div>
-                        <div class="option-item">
+                        <div class="styled-option">
                             <input type="radio" id="cuisine4" name="cuisine" />
                             <label for="cuisine4">韩餐</label>
                         </div>
-                        <div class="option-item">
+                        <div class="styled-option">
                             <input type="radio" id="cuisine5" name="cuisine" />
                             <label for="cuisine5">东南亚</label>
                         </div>
                     </div>
                 </div>
                 
-                <div class="form-group">
-                    <label>口味偏好</label>
-                    <div class="options-group">
-                        <div class="option-item">
-                            <input type="checkbox" id="taste1" />
+                <!-- 口味偏好区域 -->
+                <div class="options-section">
+                    <!-- 菜系/口味偏好选中状态仅为视觉示意，不具备真实逻辑 -->
+                    <h4>选择口味偏好</h4>
+                    <div class="styled-options">
+                        <div class="styled-option">
+                            <input type="checkbox" id="taste1" checked />
                             <label for="taste1">清淡</label>
                         </div>
-                        <div class="option-item">
+                        <div class="styled-option">
                             <input type="checkbox" id="taste2" />
                             <label for="taste2">麻辣</label>
                         </div>
-                        <div class="option-item">
+                        <div class="styled-option">
                             <input type="checkbox" id="taste3" />
                             <label for="taste3">少油</label>
                         </div>
-                        <div class="option-item">
+                        <div class="styled-option">
                             <input type="checkbox" id="taste4" />
                             <label for="taste4">保留营养</label>
+                        </div>
+                        <div class="styled-option">
+                            <input type="checkbox" id="taste5" />
+                            <label for="taste5">低盐</label>
                         </div>
                     </div>
                 </div>

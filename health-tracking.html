@@ -186,27 +186,64 @@
             position: relative;
         }
         
+        /* 100%推荐摄入量参考线 */
+        .nutrition-bar::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: #ff9800;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        
+        /* 100%参考线标签 */
+        .nutrition-bar-container {
+            position: relative;
+        }
+        
+        .reference-line-label {
+            position: absolute;
+            top: -25px;
+            right: 0;
+            transform: translateX(50%);
+            font-size: 12px;
+            color: #ff9800;
+            white-space: nowrap;
+        }
+        
         .nutrition-fill {
             height: 100%;
-            background-color: #2e8b57;
             transition: width 1s ease;
+            position: relative;
         }
         
         /* 不同营养元素的颜色 */
         .nutrition-fill.carb {
-            background-color: #2e8b57;
+            background-color: #ff9800; /* 橙色 - 碳水化合物 */
         }
         
         .nutrition-fill.protein {
-            background-color: #4caf50;
+            background-color: #2196f3; /* 蓝色 - 蛋白质 */
         }
         
         .nutrition-fill.fat {
-            background-color: #66bb6a;
+            background-color: #f44336; /* 红色 - 脂肪 */
         }
         
         .nutrition-fill.fiber {
-            background-color: #81c784;
+            background-color: #4caf50; /* 绿色 - 膳食纤维 */
+        }
+        
+        .nutrition-fill.mineral {
+            background-color: #9c27b0; /* 紫色 - 矿物质 */
+        }
+        
+        .nutrition-fill.vitamin {
+            background-color: #ffeb3b; /* 黄色 - 维生素 */
+            color: #333; /* 黄色条上文字用深色 */
         }
         
         /* 进度条数值 */
@@ -218,6 +255,108 @@
             color: white;
             font-weight: bold;
             font-size: 12px;
+            z-index: 2;
+        }
+        
+        /* 维生素进度条文字用深色 */
+        .nutrition-fill.vitamin .progress-text {
+            color: #333;
+        }
+        
+        /* 超出100%的样式 */
+        .nutrition-fill.over-100 {
+            box-shadow: inset 0 0 0 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 营养说明文字 */
+        .nutrition-note {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            margin-top: 40px;
+            font-style: italic;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        
+        /* 历史记录按钮 */
+        .history-button {
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .history-button:hover {
+            background-color: #1976d2;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+        }
+        
+        /* 历史记录示例区域 */
+        .history-examples {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .history-title {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .history-date-group {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .history-date-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .history-date {
+            font-size: 18px;
+            color: #2196f3;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .history-data {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .history-data-item {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .history-data-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .history-data-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
         }
         
         /* 提示样式 */
@@ -348,6 +487,7 @@
             
             <!-- 今日摄入表格 -->
             <div class="table-container">
+                <button class="history-button">历史记录</button>
                 <div class="table-header">今日摄入记录</div>
                 <table class="data-table">
                     <thead>
@@ -417,9 +557,12 @@
                         <span class="nutrition-name">碳水化合物</span>
                         <span class="nutrition-status">基本达标</span>
                     </div>
-                    <div class="nutrition-bar">
-                        <div class="nutrition-fill carb" style="width: 60%;">
-                            <span class="progress-text">60%</span>
+                    <div class="nutrition-bar-container">
+                        <div class="reference-line-label">100% 推荐摄入量</div>
+                        <div class="nutrition-bar">
+                            <div class="nutrition-fill carb" style="width: 60%;">
+                                <span class="progress-text">60%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -459,6 +602,216 @@
                     <div class="nutrition-bar">
                         <div class="nutrition-fill fiber" style="width: 30%;">
                             <span class="progress-text">30%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 矿物质 -->
+                <div class="nutrition-item">
+                    <div class="nutrition-label">
+                        <span class="nutrition-name">矿物质</span>
+                        <span class="nutrition-status">理想状态</span>
+                    </div>
+                    <div class="nutrition-bar">
+                        <div class="nutrition-fill mineral" style="width: 95%;">
+                            <span class="progress-text">95%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 维生素 -->
+                <div class="nutrition-item">
+                    <div class="nutrition-label">
+                        <span class="nutrition-name">维生素</span>
+                        <span class="nutrition-status">略超标</span>
+                    </div>
+                    <div class="nutrition-bar">
+                        <div class="nutrition-fill vitamin over-100" style="width: 115%;">
+                            <span class="progress-text">115%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="nutrition-note">
+                    参考线基于中国居民膳食指南的推荐摄入量（示意），仅供可视化参考，并非精确计算。
+                </p>
+            </div>
+            
+            <!-- 历史记录展示区域：实际项目中可由点击按钮展开，这里为静态示例 -->
+            <div class="history-examples">
+                <h2 class="history-title">历史摄入记录（示例）</h2>
+                
+                <!-- 历史记录 1 -->
+                <div class="history-date-group">
+                    <div class="history-date">2025-11-20</div>
+                    <div class="history-data">
+                        <div class="history-data-item">
+                            <div class="history-data-label">总热量</div>
+                            <div class="history-data-value">1850 kcal</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">蛋白质</div>
+                            <div class="history-data-value">75 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">脂肪</div>
+                            <div class="history-data-value">45 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">碳水</div>
+                            <div class="history-data-value">240 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">膳食纤维</div>
+                            <div class="history-data-value">18 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">矿物质</div>
+                            <div class="history-data-value">85%</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">维生素</div>
+                            <div class="history-data-value">92%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 历史记录 2 -->
+                <div class="history-date-group">
+                    <div class="history-date">2025-11-19</div>
+                    <div class="history-data">
+                        <div class="history-data-item">
+                            <div class="history-data-label">总热量</div>
+                            <div class="history-data-value">2050 kcal</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">蛋白质</div>
+                            <div class="history-data-value">85 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">脂肪</div>
+                            <div class="history-data-value">55 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">碳水</div>
+                            <div class="history-data-value">270 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">膳食纤维</div>
+                            <div class="history-data-value">22 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">矿物质</div>
+                            <div class="history-data-value">95%</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">维生素</div>
+                            <div class="history-data-value">105%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 历史记录 3 -->
+                <div class="history-date-group">
+                    <div class="history-date">2025-11-18</div>
+                    <div class="history-data">
+                        <div class="history-data-item">
+                            <div class="history-data-label">总热量</div>
+                            <div class="history-data-value">1750 kcal</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">蛋白质</div>
+                            <div class="history-data-value">65 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">脂肪</div>
+                            <div class="history-data-value">40 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">碳水</div>
+                            <div class="history-data-value">220 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">膳食纤维</div>
+                            <div class="history-data-value">15 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">矿物质</div>
+                            <div class="history-data-value">75%</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">维生素</div>
+                            <div class="history-data-value">88%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 历史记录 4 -->
+                <div class="history-date-group">
+                    <div class="history-date">2025-11-17</div>
+                    <div class="history-data">
+                        <div class="history-data-item">
+                            <div class="history-data-label">总热量</div>
+                            <div class="history-data-value">2150 kcal</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">蛋白质</div>
+                            <div class="history-data-value">90 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">脂肪</div>
+                            <div class="history-data-value">60 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">碳水</div>
+                            <div class="history-data-value">290 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">膳食纤维</div>
+                            <div class="history-data-value">25 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">矿物质</div>
+                            <div class="history-data-value">105%</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">维生素</div>
+                            <div class="history-data-value">115%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 历史记录 5 -->
+                <div class="history-date-group">
+                    <div class="history-date">2025-11-16</div>
+                    <div class="history-data">
+                        <div class="history-data-item">
+                            <div class="history-data-label">总热量</div>
+                            <div class="history-data-value">1950 kcal</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">蛋白质</div>
+                            <div class="history-data-value">80 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">脂肪</div>
+                            <div class="history-data-value">50 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">碳水</div>
+                            <div class="history-data-value">250 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">膳食纤维</div>
+                            <div class="history-data-value">20 g</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">矿物质</div>
+                            <div class="history-data-value">90%</div>
+                        </div>
+                        <div class="history-data-item">
+                            <div class="history-data-label">维生素</div>
+                            <div class="history-data-value">95%</div>
                         </div>
                     </div>
                 </div>

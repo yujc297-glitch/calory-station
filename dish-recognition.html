@@ -98,6 +98,68 @@
             min-height: 100vh;
         }
         
+        /* 识别结果操作按钮样式 */
+        .recognition-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        
+        .btn-primary {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #2196f3;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #1976d2;
+        }
+        
+        .btn-secondary {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #e0e0e0;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #d5d5d5;
+        }
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .btn-primary,
+        .btn-secondary {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            text-decoration: none;
+            text-align: center;
+            flex: 1;
+        }
+        
+        .btn-primary {
+            background-color: #22c55e;
+            color: #fff;
+            border: none;
+        }
+        
+        .btn-secondary {
+            background-color: #ffffff;
+            color: #22c55e;
+            border: 1px solid #22c55e;
+        }
+        
         /* 识别区域 */
         .recognition-container {
             display: flex;
@@ -565,6 +627,12 @@
                     
                     <div class="nutrition-note">
                         富含维生素 C、膳食纤维和多种微量元素
+                    </div>
+                    
+                    <!-- 说明："添加到烹饪助手"为静态跳转示意，不具备真实食材传递功能 -->
+                    <div class="recognition-actions">
+                        <a class="btn-primary" href="health-tracking.html">添加至健康追踪</a>
+                        <a class="btn-secondary" href="cooking-assistant.html">添加到烹饪助手</a>
                     </div>
                     
                     <p style="font-size: 12px; color: #999; text-align: center; margin-top: 15px;">

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>维生素D Vitamin D - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>维生素D Vitamin D</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>维生素D是一种脂溶性维生素，也被称为“阳光维生素”，因为人体可以通过皮肤暴露在阳光下自行合成。它既是维生素，又可作为激素前体发挥作用。维生素D在体内主要以两种形式存在：维生素D2（麦角钙化醇，ergocalciferol）和维生素D3（胆钙化醇，cholecalciferol）。维生素D3主要由皮肤经紫外线B（UVB）照射合成，也存在于动物性食物中；维生素D2主要存在于植物性食物和补充剂中。维生素D在体内需要经过肝脏和肾脏的羟化作用，转化为活性形式1,25-二羟维生素D[1,25(OH)₂D]才能发挥生物学作用。</p>
+            
+            <div class="info-box">
+                <h3>【维生素D的特殊之处】</h3>
+                <p>维生素D是唯一一种人体可以自行合成的维生素（通过阳光照射），也被认为是一种激素前体。它与普通维生素不同，能够与细胞内的受体结合，调控多个基因的表达。</p>
+            </div>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>钙磷代谢调节：</strong>促进小肠对钙和磷的吸收，增加肾小管对钙的重吸收，维持血液中钙磷水平的稳定，是骨骼健康的关键因素。</li>
+                <li><strong>骨骼健康：</strong>促进骨形成和骨矿化，预防佝偻病（儿童）、骨软化症（成人）和骨质疏松症。</li>
+                <li><strong>免疫系统调节：</strong>参与免疫细胞的分化和功能，增强机体的免疫防御能力，可能对自身免疫性疾病有一定的调节作用。</li>
+                <li><strong>细胞生长与分化：</strong>抑制细胞过度增殖，促进细胞正常分化，可能具有抗癌症作用，尤其是对结肠癌、乳腺癌和前列腺癌。</li>
+                <li><strong>肌肉功能：</strong>维持正常的肌肉功能，预防肌肉无力和跌倒，特别是在老年人中。</li>
+                <li><strong>心血管健康：</strong>可能有助于降低心血管疾病风险，调节血压，改善血管内皮功能。</li>
+                <li><strong>神经功能：</strong>对神经系统的发育和功能有重要作用，可能与认知功能和情绪调节相关。</li>
+                <li><strong>内分泌调节：</strong>影响胰岛素分泌和敏感性，可能对糖尿病有一定的预防和辅助治疗作用。</li>
+                <li><strong>炎症反应调节：</strong>抑制炎症因子的产生，可能有助于减轻慢性炎症。</li>
+                <li><strong>生殖系统功能：</strong>对生殖激素的分泌和生殖系统的发育有一定影响。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>富含脂肪的鱼类：</strong>三文鱼、鲭鱼、金枪鱼、沙丁鱼、鲱鱼等，是维生素D的最佳食物来源之一。</li>
+                <li><strong>鱼肝油：</strong>如鳕鱼肝油，富含维生素D。</li>
+                <li><strong>蛋黄：</strong>含有少量维生素D。</li>
+                <li><strong>动物肝脏：</strong>猪肝、鸡肝等，含有一定量的维生素D。</li>
+                <li><strong>强化食品：</strong>一些牛奶、酸奶、橙汁、谷物早餐、植物奶（如豆浆）等可能添加了维生素D。</li>
+                <li><strong>某些蘑菇：</strong>经过紫外线照射的蘑菇（如香菇）可以产生维生素D2。</li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食维生素D推荐摄入量：</p>
+            <ul>
+                <li>成人：10微克/天（400国际单位）</li>
+                <li>老年人（65岁以上）：15微克/天（600国际单位）</li>
+                <li>孕妇和乳母：10微克/天（400国际单位）</li>
+                <li>儿童和青少年：10微克/天（400国际单位）</li>
+            </ul>
+            <p>需要注意的是，维生素D的需求量受多种因素影响，包括：</p>
+            <ul>
+                <li><strong>日照时间：</strong>生活在高纬度地区、冬季日照时间短的地区，或者户外活动少的人群，通过阳光合成的维生素D可能不足。</li>
+                <li><strong>肤色：</strong>深色皮肤的人群合成维生素D的能力较弱，需要更多的日照时间。</li>
+                <li><strong>年龄：</strong>老年人皮肤合成维生素D的能力下降，需要更多的摄入。</li>
+                <li><strong>防晒措施：</strong>过度使用防晒霜（SPF≥15）会减少紫外线的穿透，降低维生素D的合成。</li>
+                <li><strong>肥胖：</strong>体内脂肪会储存维生素D，导致血液中维生素D水平相对较低，肥胖人群可能需要更高的摄入量。</li>
+                <li><strong>某些疾病：</strong>如乳糜泻、炎症性肠病、肝病、肾病等，可能影响维生素D的吸收或活化。</li>
+                <li><strong>药物：</strong>某些药物（如抗癫痫药、糖皮质激素等）可能影响维生素D的代谢。</li>
+            </ul>
+            
+            <div class="info-box">
+                <h3>【阳光照射与维生素D】</h3>
+                <p>阳光照射是获取维生素D的主要途径。在阳光充足的情况下，每周2-3次，每次5-15分钟的面部、手臂和腿部阳光照射（不使用防晒霜），通常可以满足大多数人的维生素D需求。具体时间取决于季节、纬度、肤色和年龄等因素。</p>
+            </div>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>佝偻病：</strong>在儿童中，表现为骨骼发育异常，如鸡胸、漏斗胸、O型腿或X型腿、囟门闭合延迟等。</li>
+                <li><strong>骨软化症：</strong>在成人中，表现为骨骼疼痛、肌肉无力、易骨折等。</li>
+                <li><strong>骨质疏松症：</strong>长期维生素D不足可能增加骨质疏松症的风险，导致骨密度下降和骨折风险增加。</li>
+                <li><strong>肌肉无力：</strong>可能出现肌肉无力、疲劳、跌倒风险增加。</li>
+                <li><strong>免疫力下降：</strong>容易感染疾病，尤其是呼吸道感染。</li>
+                <li><strong>情绪变化：</strong>可能与抑郁症相关，特别是季节性抑郁症。</li>
+                <li><strong>慢性疼痛：</strong>非特异性的骨骼和肌肉疼痛。</li>
+                <li><strong>心血管疾病风险增加：</strong>可能与高血压、冠心病等风险增加相关。</li>
+            </ul>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>高钙血症：</strong>维生素D过量会导致钙吸收过多，引起血液中钙水平升高，表现为恶心、呕吐、便秘、口渴、多尿等。</li>
+                <li><strong>肾结石：</strong>高钙血症可能增加肾结石的风险。</li>
+                <li><strong>血管和软组织钙化：</strong>长期高钙血症可能导致血管、心脏、肾脏等软组织钙化，影响器官功能。</li>
+                <li><strong>肾功能损伤：</strong>严重情况下可能导致肾功能衰竭。</li>
+                <li><strong>心律失常：</strong>高钙血症可能影响心脏功能，导致心律失常。</li>
+                <li><strong>食欲减退、体重减轻：</strong>长期过量可能出现。</li>
+                <li><strong>头痛、嗜睡：</strong>可能出现神经系统症状。</li>
+            </ul>
+            <p>维生素D的可耐受最高摄入量（UL）成人一般为50微克/天（2000国际单位）。通过阳光照射和正常饮食一般不会导致维生素D中毒，但过量摄入补充剂可能导致中毒。</p>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 适当增加户外活动，接受阳光照射，但注意避免过度日晒导致皮肤损伤。</p>
+                <p>2. 食用富含维生素D的食物，如脂肪含量高的鱼类、蛋黄、强化食品等。</p>
+                <p>3. 对于阳光照射不足或高危人群（如老年人、深色皮肤、肥胖、室内工作者等），可在医生指导下补充维生素D。</p>
+                <p>4. 补充维生素D时，建议同时关注钙的摄入，两者协同作用才能维持骨骼健康。</p>
+                <p>5. 维生素D与维生素K2协同作用，维生素K2有助于将钙引导至骨骼而非沉积在软组织中。</p>
+                <p>6. 在补充维生素D前，最好进行血液检测，了解自身维生素D水平，避免盲目补充。</p>
+                <p>7. 儿童、孕妇、老年人等特殊人群应特别注意维生素D的摄入。</p>
+                <p>8. 长期使用防晒霜或穿着覆盖大部分皮肤的衣物时，应考虑通过食物或补充剂增加维生素D摄入。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

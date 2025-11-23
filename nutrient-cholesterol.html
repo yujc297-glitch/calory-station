@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>胆固醇 Cholesterol - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>胆固醇 Cholesterol</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>胆固醇是一种脂质（类固醇）物质，是人体细胞膜的重要组成成分，也是合成多种重要生理物质的前体。胆固醇主要有两个来源：内源性（由肝脏和其他组织合成，占总胆固醇的70%-80%）和外源性（通过食物摄入，占总胆固醇的20%-30%）。在血液中，胆固醇与脂蛋白结合形成低密度脂蛋白（LDL）和高密度脂蛋白（HDL）等，这些脂蛋白负责胆固醇的运输。</p>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>构成细胞膜：</strong>胆固醇是细胞膜的重要组成成分，对于维持细胞膜的流动性、稳定性和功能具有重要作用。</li>
+                <li><strong>合成激素：</strong>胆固醇是合成多种甾体激素的前体，包括皮质醇、醛固酮、雌激素、孕激素和睾酮等。</li>
+                <li><strong>合成胆汁酸：</strong>胆固醇在肝脏中可转化为胆汁酸，参与脂肪的消化和吸收。</li>
+                <li><strong>合成维生素D：</strong>胆固醇在皮肤中经紫外线照射可转化为维生素D前体，进一步在肝脏和肾脏中转化为活性维生素D。</li>
+                <li><strong>神经髓鞘形成：</strong>胆固醇参与神经髓鞘的形成，对于神经冲动的传导具有重要意义。</li>
+            </ul>
+            
+            <div class="info-box">
+                <h3>【好胆固醇与坏胆固醇】</h3>
+                <p>胆固醇本身并非有害物质，但不同形式的胆固醇对健康影响不同。低密度脂蛋白胆固醇（LDL-C）常被称为"坏胆固醇"，因为它可能在血管壁沉积形成斑块；而高密度脂蛋白胆固醇（HDL-C）被称为"好胆固醇"，因为它有助于清除血管中的胆固醇。</p>
+            </div>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>动物内脏：</strong>肝脏、肾脏、心脏等动物内脏中胆固醇含量较高。</li>
+                <li><strong>蛋黄：</strong>鸡蛋、鸭蛋等蛋类的蛋黄含有较高的胆固醇。</li>
+                <li><strong>海鲜：</strong>某些海鲜如虾、蟹、鱿鱼等含有较高的胆固醇。</li>
+                <li><strong>肉类：</strong>牛肉、猪肉、羊肉等红肉中的胆固醇含量相对较高。</li>
+                <li><strong>乳制品：</strong>全脂牛奶、奶油、黄油等乳制品含有一定量的胆固醇。</li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>关于胆固醇摄入的建议，近年来有所更新：</p>
+            <ul>
+                <li>过去的指南通常建议将每日胆固醇摄入量限制在300毫克以下，但最新研究表明，对于大多数健康人群，膳食胆固醇对血液胆固醇水平的影响有限。</li>
+                <li>目前的营养指南更加关注整体饮食模式，而不是单一营养素的摄入。</li>
+                <li>对于高胆固醇血症患者或心血管疾病高风险人群，仍建议限制高胆固醇食物的摄入。</li>
+                <li>每天摄入鸡蛋不超过1个是大多数人的健康选择，除非有特殊医嘱。</li>
+                <li>优先选择不饱和脂肪酸（如橄榄油、鱼类），限制饱和脂肪酸和反式脂肪酸的摄入，对维持健康的胆固醇水平更为重要。</li>
+            </ul>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>生长发育迟缓：</strong>对于儿童和青少年，胆固醇摄入不足可能影响生长发育。</li>
+                <li><strong>激素合成减少：</strong>胆固醇是激素合成的前体，严重不足可能影响相关激素的合成。</li>
+                <li><strong>神经系统问题：</strong>可能影响神经髓鞘的形成和功能。</li>
+                <li>需要注意的是，由于人体能够自身合成胆固醇，一般情况下通过饮食摄入不足导致的胆固醇缺乏极为罕见。</li>
+            </ul>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>心血管疾病风险增加：</strong>虽然个体差异较大，但长期过量摄入高胆固醇食物，结合其他不健康的生活方式，可能增加血液中胆固醇水平，特别是低密度脂蛋白胆固醇水平，从而增加心血管疾病的风险。</li>
+                <li><strong>代谢综合征风险：</strong>高胆固醇饮食常与高饱和脂肪饮食同时存在，可能增加代谢综合征的风险。</li>
+                <li><strong>肥胖风险：</strong>富含胆固醇的食物往往也含有较高的脂肪和能量，过量摄入可能增加肥胖风险。</li>
+            </ul>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 保持均衡饮食，适量摄入含胆固醇的食物，不必过度恐慌。</p>
+                <p>2. 每天可适量食用鸡蛋（一般不超过1个），但如果已经食用了其他高胆固醇食物，应适当减少。</p>
+                <p>3. 优先选择植物油（如橄榄油、亚麻籽油）替代动物油，减少饱和脂肪摄入。</p>
+                <p>4. 增加膳食纤维的摄入（如全谷物、蔬菜、水果），有助于降低胆固醇水平。</p>
+                <p>5. 保持规律运动，有助于提高"好胆固醇"水平，降低"坏胆固醇"水平。</p>
+                <p>6. 定期检测血脂水平，特别是对于有心血管疾病家族史或其他风险因素的人群。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

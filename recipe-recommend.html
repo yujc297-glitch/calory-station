@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>菜谱推荐 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 区块样式 */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        /* 主内容区域 */
+        .main-content {
+            padding-top: 120px;
+            min-height: 100vh;
+        }
+        
+        /* 标签样式 */
+        .tags-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .tag {
+            background-color: white;
+            color: #2e8b57;
+            padding: 10px 25px;
+            border-radius: 30px;
+            border: 1px solid #2e8b57;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .tag:hover,
+        .tag.active {
+            background-color: #2e8b57;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 菜谱分组样式 */
+        .recipe-category {
+            margin-bottom: 60px;
+        }
+        
+        .category-title {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .recipe-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .recipe-card h3 {
+            color: #2e8b57;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .recipe-info {
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .recipe-info strong {
+            color: #333;
+        }
+        
+        .recipe-description {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .recipe-ingredients {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .recipe-ingredients h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .recipe-ingredients ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .recipe-ingredients li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 5px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .recipe-ingredients li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2e8b57;
+        }
+        
+        /* 提示样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin-top: 50px;
+            border-radius: 5px;
+            text-align: center;
+            color: #555;
+        }
+        
+        /* 返回首页按钮 */
+        .back-home {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .btn-secondary {
+            display: inline-block;
+            background-color: white;
+            color: #2e8b57;
+            border: 1px solid #2e8b57;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #2e8b57;
+            color: white;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #2e8b57;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 100px;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+        
+        .footer p:last-child {
+            margin-bottom: 0;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .navbar {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .recipe-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 5px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .recipe-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-title {
+                font-size: 24px;
+            }
+            
+            .tag {
+                padding: 8px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站 Calorie Station</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html" class="active">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- 主内容区域 -->
+    <main class="main-content">
+        <div class="container">
+            <h1 class="section-title">菜谱推荐</h1>
+            <p class="section-subtitle">根据你的健康目标智能组合菜谱</p>
+            
+            <!-- 健康目标标签区 -->
+            <section class="tags-section">
+                <div class="tags-container">
+                    <span class="tag active">少热量</span>
+                    <span class="tag">高蛋白</span>
+                    <span class="tag">骨折恢复餐</span>
+                    <span class="tag">软食友好</span>
+                </div>
+            </section>
+            
+            <!-- 高蛋白菜谱组 -->
+            <section class="recipe-category">
+                <h2 class="category-title">高蛋白菜谱</h2>
+                <div class="recipe-grid">
+                    <div class="recipe-card">
+                        <h3>鸡胸肉沙拉碗</h3>
+                        <div class="recipe-info">
+                            <strong>适用人群：</strong>健身增肌、减脂人群
+                        </div>
+                        <div class="recipe-description">
+                            鲜嫩多汁的煎鸡胸肉搭配新鲜蔬菜和藜麦，营养均衡，饱腹感强。橄榄油和柠檬汁调味，健康低脂。
+                        </div>
+                        <div class="recipe-ingredients">
+                            <h4>主要食材：</h4>
+                            <ul>
+                                <li>鸡胸肉 150g</li>
+                                <li>混合生菜 100g</li>
+                                <li>藜麦 50g</li>
+                                <li>鸡蛋 1个</li>
+                                <li>牛油果 1/2个</li>
+                                <li>橄榄油、柠檬汁适量</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="recipe-card">
+                        <h3>牛肉藜麦碗</h3>
+                        <div class="recipe-info">
+                            <strong>适用人群：</strong>健身增肌、需要补充铁质人群
+                        </div>
+                        <div class="recipe-description">
+                            瘦牛肉富含优质蛋白和铁，搭配藜麦和蔬菜，是营养丰富的健康主食选择。
+                        </div>
+                        <div class="recipe-ingredients">
+                            <h4>主要食材：</h4>
+                            <ul>
+                                <li>瘦牛肉 150g</li>
+                                <li>藜麦 50g</li>
+                                <li>彩椒 1/2个</li>
+                                <li>西兰花 80g</li>
+                                <li>胡萝卜 1根</li>
+                                <li>低钠酱油、黑胡椒适量</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="recipe-card">
+                        <h3>三文鱼牛油果碗</h3>
+                        <div class="recipe-info">
+                            <strong>适用人群：</strong>需要补充Omega-3、健康养生人群
+                        </div>
+                        <div class="recipe-description">
+                            三文鱼富含优质蛋白和Omega-3脂肪酸，牛油果提供健康脂肪，搭配糙米和蔬菜，营养全面。
+                        </div>
+                        <div class="recipe-ingredients">
+                            <h4>主要食材：</h4>
+                            <ul>
+                                <li>三文鱼 120g</li>
+                                <li>牛油果 1/2个</li>
+                                <li>糙米 50g</li>
+                                <li>海苔丝 适量</li>
+                                <li>黄瓜 1/2根</li>
+                                <li>姜、柠檬适量</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 少热量菜谱组 -->
+            <section class="recipe-category">
+                <h2 class="category-title">少热量菜谱</h2>
+                <div class="recipe-grid">
+                    <div class="recipe-card">
+                        <h3>清蒸鱼配蔬菜</h3>
+                        <div class="recipe-info">
+                            <strong>适用人群：</strong>减脂塑形、高血压人群
+                        </div>
+                        <div class="recipe-description">
+                            清蒸方式保留鱼肉的鲜美和营养，搭配多种时令蔬菜，清淡少油，热量低，适合减脂期食用。
+                        </div>
+                        <div class="recipe-ingredients">
+                            <h4>主要食材：</h4>
+                            <ul>
+                                <li>鲈鱼/鲫鱼 200g</li>
+                                <li>西兰花 100g</li>
+                                <li>胡萝卜 1/2根</li>
+                                <li>豆腐 100g</li>
+                                <li>葱、姜、蒸鱼豉油适量</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="recipe-card">
+                        <h3>凉拌三丝</h3>
+                        <div class="recipe-info">
+                            <strong>适用人群：</strong>减脂塑形、夏季开胃
+                        </div>
+                        <div class="recipe-description">
+                            爽口的凉拌菜，低热量高蛋白，酸辣开胃，膳食纤维丰富，有助于促进肠道蠕动。
+                        </div>
+                        <div class="recipe-ingredients">
+                            <h4>主要食材：</h4>
+                            <ul>
+                                <li>鸡胸肉 100g</li>
+                                <li>黄瓜 1根</li>
+                                <li>胡萝卜 1/2根</li>
+                                <li>粉丝 50g</li>
+                                <li>醋、香油、蒜末适量</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="recipe-card">
+                        <h3>蔬菜豆腐汤</h3>
+                        <div class="recipe-info">
+                            <strong>适用人群：</strong>减脂塑形、需要控制体重人群
+                        </div>
+                        <div class="recipe-description">
+                            清淡的蔬菜豆腐汤，热量极低，富含水分和膳食纤维，有助于增加饱腹感，减少其他食物的摄入。
+                        </div>
+                        <div class="recipe-ingredients">
+                            <h4>主要食材：</h4>
+                            <ul>
+                                <li>嫩豆腐 200g</li>
+                                <li>白菜 150g</li>
+                                <li>西红柿 1个</li>
+                                <li>菌菇类 80g</li>
+                                <li>葱花、盐适量</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 提示框 -->
+            <div class="tip-box">
+                菜谱内容为示例，实际使用时可结合医生或营养师建议。
+            </div>
+            
+            <!-- 返回首页 -->
+            <div class="back-home">
+                <a href="index.html" class="btn-secondary">返回首页</a>
+            </div>
+        </div>
+    </main>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

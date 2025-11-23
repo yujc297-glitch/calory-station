@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>维生素B3 Niacin (烟酸) - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>维生素B3 Niacin (烟酸)</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>维生素B3，又称烟酸（Niacin）或尼克酸，是B族维生素的一种，属于水溶性维生素。它在体内主要以烟酰胺的形式存在，是辅酶I（NAD+）和辅酶II（NADP+）的组成部分。维生素B3对热、光和空气相对稳定，但在碱性条件下容易被破坏。此外，人体还可以通过色氨酸（一种必需氨基酸）在体内合成部分烟酸，但合成效率较低，约60mg色氨酸可转化为1mg烟酸。</p>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>能量代谢：</strong>作为辅酶I（NAD+）和辅酶II（NADP+）的组成部分，参与碳水化合物、脂肪和蛋白质的氧化代谢，产生能量。</li>
+                <li><strong>DNA修复：</strong>参与DNA修复过程，维持基因稳定性。</li>
+                <li><strong>抗氧化防御：</strong>作为NADPH的来源，参与谷胱甘肽还原酶的作用，帮助清除自由基。</li>
+                <li><strong>血脂调节：</strong>大剂量（药理剂量）的烟酸可以降低总胆固醇、低密度脂蛋白胆固醇（LDL-C）和甘油三酯，同时提高高密度脂蛋白胆固醇（HDL-C）水平。</li>
+                <li><strong>神经系统功能：</strong>维持神经系统的正常功能，参与神经递质的合成。</li>
+                <li><strong>消化系统健康：</strong>促进胃肠道正常蠕动和消化液分泌。</li>
+                <li><strong>皮肤健康：</strong>维持皮肤、黏膜和口腔的健康。</li>
+                <li><strong>血糖调节：</strong>参与葡萄糖耐量调节。</li>
+            </ul>
+            
+            <div class="info-box">
+                <h3>【维生素B3与糙皮病】</h3>
+                <p>糙皮病（Pellagra）是维生素B3严重缺乏导致的疾病，其典型症状被称为"3D症状"：皮炎（Dermatitis）、腹泻（Diarrhea）和痴呆（Dementia）。在极端情况下，如不及时治疗，可能导致死亡（Death）。现代社会中，糙皮病主要发生在以玉米为主食且缺乏多样化饮食的人群中，因为玉米中的烟酸是结合型的，不易被人体吸收，而玉米中的色氨酸含量也较低。</p>
+            </div>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>瘦肉：</strong>牛肉、猪肉、鸡肉等。</li>
+                <li><strong>动物内脏：</strong>肝、肾等，含量丰富。</li>
+                <li><strong>鱼类：</strong>尤其是金枪鱼、三文鱼、沙丁鱼等。</li>
+                <li><strong>全谷物：</strong>糙米、全麦面包等。</li>
+                <li><strong>豆类：</strong>黑豆、黄豆、绿豆等。</li>
+                <li><strong>坚果：</strong>花生、核桃、杏仁等。</li>
+                <li><strong>乳类：</strong>牛奶、酸奶等。</li>
+                <li><strong>蔬菜：</strong>番茄、青椒、花椰菜等。</li>
+                <li><strong>水果：</strong>香蕉、橙子等。</li>
+                <li><strong>酵母：</strong>是烟酸的极佳来源。</li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食维生素B3推荐摄入量（以烟酸当量NE计）：</p>
+            <ul>
+                <li>成年男性：15毫克NE/天</li>
+                <li>成年女性：12毫克NE/天</li>
+                <li>孕妇：15毫克NE/天</li>
+                <li>乳母：18毫克NE/天</li>
+                <li>儿童根据年龄不同：6-15毫克NE/天</li>
+            </ul>
+            <p>需要注意的是，以下人群可能需要适当增加维生素B3的摄入量：</p>
+            <ul>
+                <li>长期以玉米为主食且缺乏多样化饮食的人群</li>
+                <li>长期饮酒者（酒精会影响烟酸的吸收和代谢）</li>
+                <li>吸收不良综合征患者</li>
+                <li>甲状腺功能亢进患者（代谢率增加）</li>
+                <li>糖尿病患者</li>
+            </ul>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>轻度缺乏：</strong>疲劳、乏力、食欲减退、失眠、记忆力下降、情绪不稳定等。</li>
+                <li><strong>中度缺乏：</strong>口腔炎、舌炎（舌头红肿、疼痛）、皮肤干燥、瘙痒等。</li>
+                <li><strong>严重缺乏（糙皮病）：</strong>
+                    <ul>
+                        <li>皮炎：皮肤暴露部位出现对称性红肿、色素沉着、脱屑、粗糙等</li>
+                        <li>腹泻：水样便或血便、腹痛等</li>
+                        <li>痴呆：记忆力严重下降、精神错乱、幻觉、定向力障碍等</li>
+                    </ul>
+                </li>
+                <li><strong>消化系统症状：</strong>恶心、呕吐、腹痛、腹泻等。</li>
+                <li><strong>神经系统症状：</strong>头痛、头晕、焦虑、抑郁、周围神经炎等。</li>
+            </ul>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>皮肤潮红：</strong>大剂量摄入（尤其是烟酰胺形式）可能导致皮肤潮红、瘙痒、刺痛感，通常在摄入后30分钟内出现，持续20-30分钟。</li>
+                <li><strong>胃肠道反应：</strong>恶心、呕吐、腹痛、腹泻等。</li>
+                <li><strong>肝脏损伤：</strong>长期大剂量摄入（通常超过3克/天）可能导致肝功能异常、肝损伤。</li>
+                <li><strong>血糖异常：</strong>可能影响血糖控制，使糖尿病患者的血糖升高。</li>
+                <li><strong>高尿酸血症：</strong>可能导致尿酸水平升高，诱发痛风。</li>
+                <li><strong>眼毒性：</strong>长期大剂量可能导致黄斑水肿等眼部问题。</li>
+                <li><strong>低血压：</strong>可能导致血压下降，尤其是在体位变化时。</li>
+                <li><strong>药物相互作用：</strong>与他汀类降脂药合用时，可能增加肌病风险。</li>
+            </ul>
+            <p>需要注意的是，通过正常饮食摄入的维生素B3一般不会导致过量。过量主要发生在服用高剂量补充剂的情况下，特别是用于调节血脂等治疗目的时。</p>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 保持饮食多样化，摄入不同来源的食物，以确保足够的维生素B3摄入。</p>
+                <p>2. 玉米在碱性条件下烹饪（如加入小苏打）可以提高烟酸的生物利用度。</p>
+                <p>3. 避免长期大量饮酒，以免影响维生素B3的吸收和代谢。</p>
+                <p>4. 维生素B3与其他B族维生素（如B1、B2、B6）协同作用，保持均衡饮食有助于这些维生素的平衡。</p>
+                <p>5. 服用维生素B3补充剂时，应遵循产品说明，避免自行大剂量使用，尤其是用于治疗目的时，应在医生指导下使用。</p>
+                <p>6. 对于容易出现皮肤潮红反应的人群，可以选择服用烟酰胺形式的补充剂，或与食物一起服用以减轻反应。</p>
+                <p>7. 定期体检，关注肝功能、血糖、尿酸等指标，特别是在服用大剂量维生素B3补充剂的情况下。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

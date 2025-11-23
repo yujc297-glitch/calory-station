@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>维生素C Vitamin C - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>维生素C Vitamin C</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>维生素C，又称抗坏血酸（Ascorbic Acid），是一种水溶性维生素。它是人体必需的营养素之一，但人体无法自行合成，必须通过食物或补充剂获取。维生素C具有强抗氧化性，在体内参与多种生化反应，包括胶原蛋白合成、铁的吸收和利用、免疫功能支持等。由于其水溶性特性，维生素C不会在体内大量储存，过量摄入通常会通过尿液排出体外。维生素C对热、光、空气和碱性环境敏感，容易在烹饪和储存过程中损失。</p>
+            
+            <div class="info-box">
+                <h3>【历史与发现】</h3>
+                <p>维生素C的发现与坏血病的治疗密切相关。1747年，英国医生詹姆斯·林德（James Lind）通过实验发现，柑橘类水果可以预防和治疗坏血病。直到1932年，科学家才成功分离出维生素C并确定其化学结构。</p>
+            </div>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>抗氧化作用：</strong>作为强效抗氧化剂，清除体内自由基，减少氧化应激，保护细胞和组织免受损伤。</li>
+                <li><strong>胶原蛋白合成：</strong>参与胶原蛋白的羟化反应，是胶原蛋白合成的关键因素，对维持皮肤、骨骼、软骨、肌腱、韧带和血管壁的健康至关重要。</li>
+                <li><strong>免疫功能支持：</strong>促进白细胞的产生和功能，增强免疫系统对抗感染的能力，尤其对中性粒细胞的功能至关重要。</li>
+                <li><strong>铁的吸收促进：</strong>将三价铁（Fe³⁺）还原为二价铁（Fe²⁺），促进铁在肠道的吸收，有助于预防缺铁性贫血。</li>
+                <li><strong>促进伤口愈合：</strong>通过促进胶原蛋白合成，加速伤口修复和组织再生。</li>
+                <li><strong>神经递质合成：</strong>参与去甲肾上腺素和5-羟色胺等神经递质的合成。</li>
+                <li><strong>解毒作用：</strong>帮助肝脏解毒，特别是对某些药物和环境污染物的解毒。</li>
+                <li><strong>心血管健康：</strong>通过抗氧化作用和促进内皮功能，可能有助于降低心血管疾病风险。</li>
+                <li><strong>增强抗氧化剂活性：</strong>帮助再生维生素E等其他抗氧化剂。</li>
+                <li><strong>参与胆固醇代谢：</strong>可能参与胆固醇向胆汁酸的转化，有助于降低血液胆固醇水平。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>新鲜水果：</strong>柑橘类水果（橙子、柚子、柠檬、橘子）、猕猴桃、草莓、蓝莓、覆盆子、芒果、菠萝、番石榴等。</li>
+                <li><strong>新鲜蔬菜：</strong>辣椒（尤其是彩椒）、西兰花、花椰菜、羽衣甘蓝、菠菜、青椒、番茄、豌豆苗、白菜、萝卜缨等。</li>
+                <li><strong>其他：</strong>鲜榨果汁、一些强化食品和饮料、某些坚果和种子的维生素C含量较低，但仍可作为补充来源。</li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食维生素C推荐摄入量：</p>
+            <ul>
+                <li>成人：100毫克/天</li>
+                <li>孕妇（晚期）：130毫克/天</li>
+                <li>乳母：130毫克/天</li>
+                <li>儿童根据年龄不同：40-80毫克/天</li>
+            </ul>
+            <p>需要注意的是，以下人群可能需要特别关注维生素C摄入：</p>
+            <ul>
+                <li><strong>吸烟者：</strong>吸烟会增加体内自由基的产生，消耗更多的维生素C，建议摄入量增加50%。</li>
+                <li><strong>经常饮酒者：</strong>酒精会影响维生素C的吸收和代谢。</li>
+                <li><strong>压力大的人群：</strong>长期压力会增加维生素C的需求量。</li>
+                <li><strong>孕妇和哺乳期妇女：</strong>需要增加摄入量以满足自身和胎儿/婴儿的需求。</li>
+                <li><strong>老年人：</strong>吸收能力可能下降，需要注意摄入。</li>
+                <li><strong>运动员：</strong>高强度运动可能增加维生素C的消耗。</li>
+                <li><strong>慢性病患者：</strong>某些疾病状态（如感染、炎症性疾病、癌症等）可能增加维生素C的需求量。</li>
+            </ul>
+            
+            <div class="info-box">
+                <h3>【关于维生素C补充剂】</h3>
+                <p>虽然从食物中获取维生素C是最理想的方式，但在某些情况下，医生可能会建议补充维生素C。维生素C补充剂有多种形式，包括片剂、胶囊、粉末和咀嚼片等。然而，长期大剂量摄入补充剂可能带来不良反应，应在医生或营养师指导下使用。</p>
+            </div>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>坏血病：</strong>典型症状包括牙龈出血、牙齿松动、皮下出血点、关节疼痛、伤口愈合缓慢、疲劳等。在严重情况下可能危及生命。</li>
+                <li><strong>免疫力下降：</strong>容易感染疾病，尤其是上呼吸道感染。</li>
+                <li><strong>疲劳和乏力：</strong>可能感到持续疲劳、虚弱。</li>
+                <li><strong>皮肤问题：</strong>皮肤干燥、容易出现瘀斑、伤口愈合延迟。</li>
+                <li><strong>牙龈问题：</strong>牙龈肿胀、出血、牙龈炎。</li>
+                <li><strong>关节疼痛：</strong>由于胶原蛋白合成不足，可能导致关节疼痛。</li>
+                <li><strong>铁吸收障碍：</strong>可能加重缺铁性贫血。</li>
+                <li><strong>情绪变化：</strong>可能出现抑郁、易怒等情绪问题。</li>
+            </ul>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>胃肠道不适：</strong>恶心、呕吐、腹痛、腹泻等，这是最常见的不良反应。</li>
+                <li><strong>泌尿系统问题：</strong>可能增加肾结石（草酸钙结石）的风险，尤其是在肾功能不全的人群中。</li>
+                <li><strong>铁过载风险：</strong>促进铁的吸收，可能增加铁过载的风险，尤其是在遗传性血色病患者中。</li>
+                <li><strong>干扰某些药物作用：</strong>可能影响某些药物的疗效，如某些癌症化疗药物、抗凝血药等。</li>
+                <li><strong>维生素B12和铜吸收障碍：</strong>长期大剂量摄入可能干扰维生素B12和铜的吸收。</li>
+            </ul>
+            <p>维生素C的可耐受最高摄入量（UL）成人一般为2000毫克/天。通过正常饮食摄入维生素C一般不会导致过量，但长期大剂量摄入补充剂可能带来风险。</p>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 为保留食物中的维生素C，尽量吃新鲜的水果和蔬菜，避免长时间储存。</p>
+                <p>2. 烹饪蔬菜时采用快速烹饪方法（如蒸、快速翻炒、生食），减少维生素C的损失。</p>
+                <p>3. 避免长时间浸泡蔬菜，因为维生素C会溶解在水中。</p>
+                <p>4. 储存水果和蔬菜时，尽量低温、避光，可放在冰箱中。</p>
+                <p>5. 果汁虽然含有维生素C，但可能含有较高的糖分，应适量饮用，最好选择鲜榨果汁。</p>
+                <p>6. 维生素C与维生素E、β-胡萝卜素等其他抗氧化剂协同作用，共同抵御自由基损伤。</p>
+                <p>7. 吸烟者应增加维生素C的摄入量，可以通过增加水果和蔬菜的摄入或在医生指导下适当补充。</p>
+                <p>8. 服用铁补充剂时，可同时摄入富含维生素C的食物，以促进铁的吸收。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omega-3脂肪酸 - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        .title-section p {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .content-section h2 {
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+        }
+        
+        .content-section ul {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        
+        .content-section li {
+            margin-bottom: 8px;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #f0f7f0;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #f0f7ff;
+            border-left: 4px solid #1e88e5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1e88e5;
+            margin-bottom: 10px;
+        }
+        
+        /* 警告框样式 */
+        .warning-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box h3 {
+            color: #ffb300;
+            margin-bottom: 10px;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #fff8e1;
+            padding: 20px;
+            text-align: center;
+            margin: 40px 0;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #7d6f47;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+        
+        .footer p:last-child {
+            margin-bottom: 0;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>Omega-3脂肪酸</h1>
+            <p>对心血管健康、大脑功能和抗炎作用至关重要的多不饱和脂肪酸</p>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>定义</h2>
+            <p>Omega-3脂肪酸是一类多不饱和脂肪酸，其特点是在碳链的第三个碳原子上存在双键。它们是人体必需的脂肪酸，无法在体内合成，必须通过饮食摄入。主要的Omega-3脂肪酸包括α-亚麻酸(ALA)、二十碳五烯酸(EPA)和二十二碳六烯酸(DHA)。</p>
+        </section>
+        
+        <section class="content-section">
+            <h2>主要生理作用</h2>
+            <ul>
+                <li><strong>心血管健康：</strong>
+                    <ul>
+                        <li>降低血液中的甘油三酯水平</li>
+                        <li>降低血压（尤其是高血压人群）</li>
+                        <li>减少血小板聚集，降低血栓形成风险</li>
+                        <li>改善血管内皮功能，增加血管弹性</li>
+                        <li>降低心脏病和中风的风险</li>
+                    </ul>
+                </li>
+                <li><strong>大脑和神经系统功能：</strong>
+                    <ul>
+                        <li>DHA是大脑和视网膜的重要组成部分</li>
+                        <li>支持神经细胞的生长和维持</li>
+                        <li>促进婴幼儿大脑发育</li>
+                        <li>可能改善认知功能，降低认知衰退风险</li>
+                    </ul>
+                </li>
+                <li><strong>抗炎作用：</strong>
+                    <ul>
+                        <li>减少促炎细胞因子的产生</li>
+                        <li>缓解慢性炎症反应</li>
+                        <li>可能有助于减轻关节炎等炎症性疾病症状</li>
+                    </ul>
+                </li>
+                <li><strong>免疫功能：</strong>调节免疫系统反应</li>
+                <li><strong>视力健康：</strong>DHA是视网膜的重要组成部分，支持视觉发育和功能</li>
+                <li><strong>心理健康：</strong>可能有助于减轻抑郁和焦虑症状</li>
+                <li><strong>癌症预防：</strong>一些研究表明可能降低某些癌症的风险，如结肠癌</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>主要食物来源</h2>
+            <ul>
+                <li><strong>富含EPA和DHA的食物（动物性来源）：</strong>
+                    <ul>
+                        <li>深海鱼类：三文鱼、鲭鱼、鲱鱼、沙丁鱼、金枪鱼、鳕鱼、鲈鱼</li>
+                        <li>贝类：虾、蟹、扇贝、牡蛎</li>
+                        <li>鱼油：深海鱼油、磷虾油</li>
+                        <li>强化食品：添加了Omega-3的鸡蛋、牛奶</li>
+                    </ul>
+                </li>
+                <li><strong>富含ALA的食物（植物性来源）：</strong>
+                    <ul>
+                        <li>坚果和种子：亚麻籽、核桃、奇亚籽、南瓜籽</li>
+                        <li>植物油：亚麻籽油、紫苏籽油、核桃油、菜籽油</li>
+                        <li>绿叶蔬菜：菠菜、羽衣甘蓝、西兰花</li>
+                        <li>豆类：大豆、黑豆、扁豆</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="info-box">
+                <h3>Omega-3脂肪酸的转化</h3>
+                <p>人体可以将植物来源的ALA部分转化为EPA和DHA，但转化效率较低（通常小于15%）。因此，对于素食者和不吃鱼类的人群，可能需要考虑DHA和EPA的藻类补充剂。</p>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入建议</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国营养学会和美国心脏协会等组织的建议：</p>
+            <ul>
+                <li><strong>一般人群：</strong>
+                    <ul>
+                        <li>每周食用2-3次富含Omega-3的鱼类（约200-300克/次）</li>
+                        <li>ALA的推荐摄入量：成人男性约1.6克/天，女性约1.1克/天</li>
+                    </ul>
+                </li>
+                <li><strong>心血管疾病高风险人群：</strong>
+                    <ul>
+                        <li>每天摄入约500毫克的EPA和DHA</li>
+                        <li>可考虑在医生指导下使用鱼油补充剂</li>
+                    </ul>
+                </li>
+                <li><strong>孕妇和哺乳期妇女：</strong>
+                    <ul>
+                        <li>每天摄入约200-300毫克DHA，其中至少100毫克来源于鱼类</li>
+                        <li>应选择低汞鱼类，避免大型掠食性鱼类</li>
+                    </ul>
+                </li>
+                <li><strong>婴幼儿：</strong>
+                    <ul>
+                        <li>0-6个月：纯母乳喂养（或含DHA的配方奶）</li>
+                        <li>7-24个月：每天摄入约100毫克DHA</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入不足时的常见表现</h2>
+            <p>长期Omega-3脂肪酸摄入不足可能导致以下健康问题（注：本内容为科普信息，如有相关症状请咨询专业医疗人员）：</p>
+            <ul>
+                <li><strong>心血管问题：</strong>高血压、高甘油三酯、血栓形成风险增加</li>
+                <li><strong>神经系统异常：</strong>记忆力减退、注意力不集中、认知功能下降</li>
+                <li><strong>视力问题：</strong>视力发育不良、视网膜功能障碍</li>
+                <li><strong>皮肤问题：</strong>皮肤干燥、头皮屑增多、湿疹</li>
+                <li><strong>免疫系统功能下降：</strong>容易感染、炎症反应异常</li>
+                <li><strong>情绪障碍：</strong>抑郁、焦虑风险增加</li>
+                <li><strong>生长发育迟缓：</strong>儿童可能出现发育不良</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入过量的潜在风险</h2>
+            <p>虽然通过食物摄入Omega-3脂肪酸一般是安全的，但过量补充可能带来以下风险（注：本内容为科普信息，实际情况请咨询专业人士）：</p>
+            <ul>
+                <li><strong>出血风险增加：</strong>
+                    <ul>
+                        <li>可能延长凝血时间</li>
+                        <li>对于服用抗凝药物的人群，出血风险更高</li>
+                    </ul>
+                </li>
+                <li><strong>胃肠道不适：</strong>恶心、腹泻、胃部不适</li>
+                <li><strong>脂质过氧化：</strong>高剂量可能增加体内自由基的产生</li>
+                <li><strong>免疫功能抑制：</strong>极高剂量可能抑制免疫系统功能</li>
+                <li><strong>重金属污染风险：</strong>某些鱼类和鱼油可能含有汞、多氯联苯等污染物</li>
+                <li><strong>与某些药物相互作用：</strong>可能影响某些药物的效果，如抗凝血药、降血压药</li>
+            </ul>
+            <div class="warning-box">
+                <h3>注意</h3>
+                <p>补充剂的使用应在医生或营养师的指导下进行，特别是对于有特定健康状况或正在服用药物的人群。选择鱼油补充剂时，应优先考虑经过重金属检测和纯化的产品。孕妇和哺乳期妇女应避免食用高汞鱼类（如鲨鱼、旗鱼、方头鱼、大眼金枪鱼等）。</p>
+            </div>
+        </section>
+        
+        <section class="tip-box">
+            <h3>小贴士</h3>
+            <ul>
+                <li>每周食用2-3次富含Omega-3的鱼类是获取EPA和DHA的最佳方式</li>
+                <li>对于素食者，应增加亚麻籽、核桃、奇亚籽等富含ALA的食物摄入</li>
+                <li>亚麻籽最好碾碎后食用，以提高营养物质的吸收率</li>
+                <li>保持Omega-3和Omega-6脂肪酸的平衡（理想比例为1:4）</li>
+                <li>减少富含Omega-6的植物油（如大豆油、玉米油）的摄入</li>
+                <li>烹饪富含Omega-3的食物时，避免高温长时间烹煮，以减少营养损失</li>
+                <li>考虑在医生或营养师指导下使用高质量的Omega-3补充剂</li>
+                <li>选择低汞鱼类：三文鱼、鲱鱼、沙丁鱼、凤尾鱼等</li>
+            </ul>
+        </section>
+        
+        <section class="info-box">
+            <h3>健康小知识</h3>
+            <p>现代饮食中，Omega-6脂肪酸的摄入普遍过高，而Omega-3相对不足。理想的Omega-6与Omega-3比例应为1:1到4:1，但现代西方饮食中这一比例可能高达20:1。这种不平衡被认为与多种慢性疾病的发生风险增加有关，包括心血管疾病、炎症性疾病和自身免疫性疾病。</p>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            <p>本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。</p>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 卡路里基站 Calorie Station - AI智能膳食与营养管理平台</p>
+            <p>本网站提供的营养信息仅供参考，不构成医疗建议</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>碳水化合物 Carbohydrate - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>碳水化合物 Carbohydrate</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>碳水化合物是由碳、氢和氧三种元素组成的有机化合物，是人体最主要的能量来源之一。碳水化合物在人体内经过消化分解后转化为葡萄糖，为大脑、肌肉和其他器官提供能量。</p>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>提供能量：</strong>碳水化合物是人体最优先使用的能量来源，每克碳水化合物可提供约4千卡的能量。</li>
+                <li><strong>维持血糖稳定：</strong>适当摄入碳水化合物有助于维持正常的血糖水平，特别是对于大脑和神经系统的正常功能至关重要。</li>
+                <li><strong>构成组织结构：</strong>碳水化合物是细胞膜和结缔组织的重要组成部分，参与细胞识别和免疫反应。</li>
+                <li><strong>节约蛋白质：</strong>充足的碳水化合物可以减少蛋白质的分解，保证蛋白质用于身体组织的构建和修复。</li>
+                <li><strong>促进肠道健康：</strong>膳食纤维（一种特殊的碳水化合物）可以促进肠道蠕动，预防便秘，维持肠道菌群平衡。</li>
+                <li><strong>提供膳食纤维：</strong>不溶性纤维增加粪便体积，可溶性纤维降低胆固醇，稳定血糖。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>谷物类：</strong>米饭、面条、馒头、包子、燕麦、全麦面包、糙米等。</li>
+                <li><strong>薯类：</strong>红薯、土豆、山药、芋头等。</li>
+                <li><strong>豆类：</strong>红豆、绿豆、黑豆、芸豆、扁豆等。</li>
+                <li><strong>水果：</strong>苹果、香蕉、橙子、葡萄、梨、桃等。</li>
+                <li><strong>蔬菜：</strong>胡萝卜、南瓜、甜菜、洋葱等（含淀粉较多的蔬菜）。</li>
+                <li><strong>甜食：</strong>蔗糖、蜂蜜、糖果、巧克力、果酱、甜点等。</li>
+                <li><strong>乳制品：</strong>牛奶、酸奶（含有乳糖）。</li>
+                <li><strong>饮料：</strong>含糖饮料、果汁等。</li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>一般建议，碳水化合物摄入应占总能量摄入的45%-65%。在碳水化合物摄入中，应注意以下几点：</p>
+            <ul>
+                <li>选择富含膳食纤维的全谷物、豆类、水果和蔬菜，这些食物含有复杂碳水化合物。</li>
+                <li>减少精制碳水化合物（如白米饭、白面包、白面条）和添加糖的摄入。</li>
+                <li>每日膳食纤维摄入量建议为25-30克。</li>
+                <li>考虑个体差异，如糖尿病患者需要控制碳水化合物的摄入量和类型。</li>
+            </ul>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>能量不足：</strong>可能导致疲劳、头晕、注意力不集中等症状。</li>
+                <li><strong>酮症：</strong>长期碳水化合物摄入不足，身体会分解脂肪产生酮体，可能导致酮症，出现口臭、恶心等症状。</li>
+                <li><strong>便秘：</strong>膳食纤维摄入不足会导致肠道蠕动减慢，容易引起便秘。</li>
+                <li><strong>低血糖：</strong>特别是对于糖尿病患者或正在服用降糖药物的人，可能出现低血糖症状，如出汗、心悸、颤抖等。</li>
+                <li><strong>蛋白质浪费：</strong>碳水化合物不足时，身体会分解蛋白质来提供能量，影响身体组织的修复和生长。</li>
+            </ul>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>肥胖：</strong>摄入过多碳水化合物，尤其是精制碳水化合物和添加糖，容易导致能量摄入过剩，进而转化为脂肪储存。</li>
+                <li><strong>2型糖尿病：</strong>长期高碳水化合物（特别是精制碳水）饮食可能增加胰岛素抵抗，增加2型糖尿病风险。</li>
+                <li><strong>心血管疾病：</strong>高糖饮食与肥胖、高血压、血脂异常等心血管疾病风险因素相关。</li>
+                <li><strong>代谢综合征：</strong>过量摄入碳水化合物可能导致代谢综合征，表现为腹部肥胖、高血压、高血糖、血脂异常等。</li>
+                <li><strong>龋齿：</strong>过多摄入糖分会增加龋齿的风险。</li>
+            </ul>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 优先选择全谷物和高纤维食物，如糙米、燕麦、全麦面包等，而不是精制谷物。</p>
+                <p>2. 多吃水果和蔬菜，它们不仅提供碳水化合物，还富含维生素、矿物质和膳食纤维。</p>
+                <p>3. 控制添加糖的摄入，如糖果、甜饮料、甜点等，建议每日添加糖摄入不超过总能量的10%。</p>
+                <p>4. 注意食物的升糖指数（GI），选择低GI或中等GI的食物，有助于维持血糖稳定。</p>
+                <p>5. 保持均衡饮食，碳水化合物、蛋白质和脂肪的摄入要平衡，避免极端饮食。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

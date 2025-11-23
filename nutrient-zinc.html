@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>锌 Zinc - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>锌 Zinc (Zn)</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>锌（Zinc，Zn）是人体必需的微量元素之一，在成人体内约含2-3克。锌广泛分布于全身各组织器官中，其中肌肉、骨骼、皮肤和肝脏中的含量最高。锌在体内参与200多种酶的组成或作为酶的激活剂，是维持人体正常生理功能的重要营养素。锌与蛋白质、核酸的合成、免疫系统的功能、细胞分裂和生长发育等密切相关。</p>
+            
+            <div class="info-box">
+                <h3>【锌的吸收特点】</h3>
+                <p>锌主要在小肠（尤其是十二指肠和空肠）被吸收。食物中的锌吸收率受多种因素影响，一般为15%-40%。植酸、钙、铜、铁等会抑制锌的吸收，而蛋白质、某些氨基酸（如组氨酸、半胱氨酸）则可以促进锌的吸收。身体对锌的吸收会根据体内锌的状态进行调节，当体内锌不足时，吸收率会增加。</p>
+            </div>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>酶系统的组成与激活：</strong>参与200多种酶的组成或激活，包括DNA聚合酶、RNA聚合酶、碳酸酐酶等。</li>
+                <li><strong>蛋白质合成：</strong>促进蛋白质的合成，对细胞生长和修复至关重要。</li>
+                <li><strong>核酸代谢：</strong>参与DNA和RNA的合成与修复。</li>
+                <li><strong>免疫功能：</strong>维持免疫系统的正常功能，包括T细胞的增殖和功能、抗体的产生等。</li>
+                <li><strong>生长发育：</strong>促进儿童和青少年的生长发育，尤其是骨骼和性器官的发育。</li>
+                <li><strong>味觉和嗅觉：</strong>参与味觉和嗅觉感受器的形成和功能。</li>
+                <li><strong>伤口愈合：</strong>促进伤口愈合和组织修复。</li>
+                <li><strong>胰岛素功能：</strong>参与胰岛素的储存和分泌。</li>
+                <li><strong>抗氧化防御：</strong>参与抗氧化酶系统，保护细胞免受氧化损伤。</li>
+                <li><strong>神经功能：</strong>维持神经系统的正常功能，参与神经递质的合成和释放。</li>
+                <li><strong>视力保护：</strong>参与视网膜中视黄醇结合蛋白的合成。</li>
+                <li><strong>生殖功能：</strong>对男性生殖系统的发育和功能至关重要，影响精子的生成和质量。</li>
+                <li><strong>激素调节：</strong>参与多种激素的合成和调节。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>动物性食品（锌含量高且吸收率好）：</strong></li>
+                <li>- 贝壳类海产品：牡蛎、扇贝、贻贝等，尤其是牡蛎锌含量极高。</li>
+                <li>- 红色肉类：牛肉、羊肉、猪肉等，尤其是瘦肉部分。</li>
+                <li>- 动物内脏：肝脏、肾脏等。</li>
+                <li>- 鱼类：沙丁鱼、鲱鱼、金枪鱼等。</li>
+                <li>- 家禽：鸡肉、鸭肉等。</li>
+                <li>- 蛋类：蛋黄含有一定量的锌。</li>
+                <li><strong>植物性食品（锌含量相对较低且吸收率较差）：</strong></li>
+                <li>- 豆类：黄豆、黑豆、红豆、鹰嘴豆等。</li>
+                <li>- 坚果和种子：南瓜籽、芝麻、杏仁、核桃等。</li>
+                <li>- 全谷物：燕麦、糙米、全麦面包等，但含有的植酸可能影响锌的吸收。</li>
+                <li>- 乳制品：牛奶、奶酪等。</li>
+                <li>- 深色蔬菜：菠菜、芦笋等。</li>
+                <li>- 强化食品：一些强化锌的谷物、面包、麦片等。</li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食锌推荐摄入量：</p>
+            <ul>
+                <li>0-6个月：1.5毫克/天</li>
+                <li>7-12个月：8.0毫克/天</li>
+                <li>1-3岁：9.0毫克/天</li>
+                <li>4-6岁：12.0毫克/天</li>
+                <li>7-10岁：13.5毫克/天</li>
+                <li>11-13岁（男）：18.0毫克/天</li>
+                <li>11-13岁（女）：15.0毫克/天</li>
+                <li>14-17岁（男）：19.0毫克/天</li>
+                <li>14-17岁（女）：15.5毫克/天</li>
+                <li>18-49岁（男）：12.5毫克/天</li>
+                <li>18-49岁（女）：7.5毫克/天</li>
+                <li>50岁及以上（男）：12.5毫克/天</li>
+                <li>50岁及以上（女）：7.5毫克/天</li>
+                <li>孕妇（孕早期）：9.5毫克/天</li>
+                <li>孕妇（孕中期）：10.0毫克/天</li>
+                <li>孕妇（孕晚期）：10.0毫克/天</li>
+                <li>乳母：13.5毫克/天</li>
+            </ul>
+            <p>需要注意的是，以下人群可能需要特别关注锌的摄入：</p>
+            <ul>
+                <li><strong>婴幼儿和青少年：</strong>处于生长发育高峰期，对锌的需求量大。</li>
+                <li><strong>孕妇和乳母：</strong>需要额外的锌来满足胎儿发育和乳汁分泌的需求。</li>
+                <li><strong>素食者：</strong>尤其是严格素食者，由于摄入的多为植物性食品，锌的吸收率较低。</li>
+                <li><strong>老年人：</strong>可能因摄入不足或吸收不良导致锌缺乏。</li>
+                <li><strong>胃肠道疾病患者：</strong>如腹泻、炎症性肠病等患者，锌的吸收可能受到影响。</li>
+                <li><strong>糖尿病患者：</strong>可能存在锌代谢异常。</li>
+                <li><strong>烧伤和创伤患者：</strong>锌的丢失增加。</li>
+                <li><strong>大量出汗的人群：</strong>如运动员、高温环境工作者等，锌随汗液丢失增加。</li>
+            </ul>
+            
+            <div class="info-box">
+                <h3>【提高锌吸收率的方法】</h3>
+                <p>1. 适量摄入肉类、鱼类、禽类等富含优质蛋白质的食物，可以促进锌的吸收。</p>
+                <p>2. 避免在同一餐中摄入过多抑制锌吸收的食物（如富含植酸的全谷物、豆类等）。</p>
+                <p>3. 发酵食物（如发酵豆制品）中的植酸会被降解，可以提高锌的吸收率。</p>
+                <p>4. 避免过量摄入钙、铁等矿物质，它们可能与锌竞争吸收。</p>
+                <p>5. 保持良好的胃肠道健康，有助于锌的正常吸收。</p>
+            </div>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>生长发育迟缓：</strong>儿童缺锌可能导致身材矮小、性发育延迟。</li>
+                <li><strong>免疫力下降：</strong>容易感染疾病，伤口愈合缓慢。</li>
+                <li><strong>味觉和嗅觉异常：</strong>味觉减退、食欲不振，可能出现异食癖。</li>
+                <li><strong>皮肤问题：</strong>皮肤干燥、粗糙、痤疮、脱发等。</li>
+                <li><strong>胃肠道症状：</strong>腹泻、消化不良等。</li>
+                <li><strong>认知功能受损：</strong>注意力不集中、学习能力下降、记忆力减退。</li>
+                <li><strong>视力问题：</strong>可能出现夜盲症或其他视力异常。</li>
+                <li><strong>生殖功能障碍：</strong>男性可能出现精子数量减少、质量下降；女性可能出现月经不调。</li>
+                <li><strong>贫血：</strong>可能与铁代谢异常有关。</li>
+                <li><strong>情绪波动：</strong>易怒、抑郁等情绪问题。</li>
+            </ul>
+            <p>锌缺乏通常是渐进性的，早期可能没有明显症状。长期锌摄入不足会严重影响身体健康，尤其是对儿童的生长发育影响较大。</p>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>铜缺乏：</strong>过量的锌会干扰铜的吸收和利用，导致铜缺乏。</li>
+                <li><strong>胃肠道不适：</strong>可能出现恶心、呕吐、腹泻、腹痛等症状。</li>
+                <li><strong>免疫功能受损：</strong>过高的锌摄入可能抑制免疫系统的功能。</li>
+                <li><strong>铁代谢异常：</strong>可能干扰铁的吸收和利用。</li>
+                <li><strong>神经系统症状：</strong>可能出现头痛、头晕、共济失调等。</li>
+                <li><strong>高密度脂蛋白胆固醇降低：</strong>可能增加心血管疾病的风险。</li>
+                <li><strong>急性锌中毒：</strong>大剂量摄入可能导致急性中毒，表现为恶心、呕吐、腹泻、发热等。</li>
+            </ul>
+            <p>中国居民膳食锌可耐受最高摄入量（UL）：</p>
+            <ul>
+                <li>0-1岁：5毫克/天</li>
+                <li>1-3岁：8毫克/天</li>
+                <li>4-6岁：12毫克/天</li>
+                <li>7-10岁：14毫克/天</li>
+                <li>11-17岁：18毫克/天</li>
+                <li>18岁及以上：40毫克/天</li>
+                <li>孕妇：35毫克/天</li>
+                <li>乳母：35毫克/天</li>
+            </ul>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 均衡饮食是获取足够锌的最佳方式，优先选择富含锌且吸收率好的动物性食品。</p>
+                <p>2. 对于素食者，应特别注意锌的摄入，可以通过食用发酵豆制品、搭配富含优质蛋白质的食物来提高吸收率。</p>
+                <p>3. 避免在同一餐中同时摄入过多抑制锌吸收的食物。</p>
+                <p>4. 婴幼儿应及时添加富含锌的辅食（如肉类、蛋黄等）。</p>
+                <p>5. 对于容易缺锌的人群（如孕妇、乳母、青少年等），应在医生或营养师的指导下适当补充锌剂。</p>
+                <p>6. 锌剂最好在饭后服用，以减少对胃肠道的刺激。</p>
+                <p>7. 不要自行大量补充锌剂，以免干扰其他矿物质的吸收和利用。</p>
+                <p>8. 定期进行体检，特别是容易缺锌的人群，以便及早发现和治疗锌缺乏。</p>
+                <p>9. 保持良好的饮食习惯，避免挑食、偏食。</p>
+                <p>10. 注意食物的加工方式，过度加工可能导致锌的流失。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

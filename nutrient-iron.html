@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>铁 Iron - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>铁 Iron (Fe)</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>铁（Iron，Fe）是人体必需的微量元素之一，在成人体内约含3-5克。铁在体内主要以功能性铁和储存铁两种形式存在。功能性铁包括血红蛋白中的铁（约占总量的65%）、肌红蛋白中的铁（约占3%）以及参与酶系统和电子传递链的铁。储存铁主要以铁蛋白和含铁血黄素的形式存在于肝脏、脾脏和骨髓中。铁在氧气运输和能量代谢中起着至关重要的作用。</p>
+            
+            <div class="info-box">
+                <h3>【铁的两种存在形式】</h3>
+                <p>在食物中，铁主要以两种形式存在：血红素铁（主要存在于动物性食品中，如肉类、鱼类和禽类）和非血红素铁（主要存在于植物性食品中）。血红素铁的吸收率较高（约15%-35%），而非血红素铁的吸收率较低（约2%-20%）。维生素C和肉类因子等可以促进非血红素铁的吸收，而植酸、草酸、单宁酸等则会抑制其吸收。</p>
+            </div>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>氧气运输：</strong>是血红蛋白的重要组成成分，负责将氧气从肺部运输到身体各组织和细胞。</li>
+                <li><strong>氧气储存：</strong>构成肌红蛋白，在肌肉中储存和释放氧气。</li>
+                <li><strong>能量代谢：</strong>参与细胞呼吸和能量产生，是多种氧化还原酶的组成部分。</li>
+                <li><strong>免疫功能：</strong>参与免疫系统的正常功能，包括白细胞的增殖和杀菌能力。</li>
+                <li><strong>DNA合成：</strong>参与DNA的合成和修复过程。</li>
+                <li><strong>神经递质合成：</strong>参与多巴胺、去甲肾上腺素等神经递质的合成。</li>
+                <li><strong>体温调节：</strong>在体温调节中发挥一定作用。</li>
+                <li><strong>抗氧化防御：</strong>参与抗氧化酶系统，保护细胞免受氧化损伤。</li>
+                <li><strong>药物代谢：</strong>参与某些药物和毒素的代谢。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>动物性食品（血红素铁）：</strong></li>
+                <li>- 红肉：牛肉、羊肉、猪肉等，尤其是肝脏和瘦肉部分。</li>
+                <li>- 家禽：鸡肉、鸭肉等，深色肉含铁量更高。</li>
+                <li>- 鱼类：沙丁鱼、金枪鱼、鲤鱼等。</li>
+                <li>- 动物内脏：猪肝、鸡肝、鸭肝等，含铁量极高。</li>
+                <li>- 蛋类：蛋黄含有一定量的铁，但吸收率较低。</li>
+                <li><strong>植物性食品（非血红素铁）：</strong></li>
+                <li>- 深色蔬菜：菠菜、空心菜、苋菜等，但含有草酸可能影响吸收。</li>
+                <li>- 豆类：黑豆、黄豆、红豆、鹰嘴豆等。</li>
+                <li>- 坚果和种子：芝麻、南瓜籽、杏仁等。</li>
+                <li>- 全谷物：燕麦、糙米、全麦面包等。</li>
+                <li>- 菌菇类：香菇、黑木耳、紫菜等。</li>
+                <li>- 强化食品：一些强化铁的谷物、面包、麦片等。</li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食铁推荐摄入量：</p>
+            <ul>
+                <li>0-6个月：0.3毫克/天</li>
+                <li>7-12个月：10毫克/天</li>
+                <li>1-3岁：9毫克/天</li>
+                <li>4-6岁：10毫克/天</li>
+                <li>7-10岁：13毫克/天</li>
+                <li>11-13岁（男）：15毫克/天</li>
+                <li>11-13岁（女）：18毫克/天</li>
+                <li>14-17岁（男）：16毫克/天</li>
+                <li>14-17岁（女）：20毫克/天</li>
+                <li>18-49岁（男）：12毫克/天</li>
+                <li>18-49岁（女）：20毫克/天（考虑月经丢失）</li>
+                <li>50岁及以上（男）：12毫克/天</li>
+                <li>50岁及以上（女）：12毫克/天</li>
+                <li>孕妇（孕早期）：20毫克/天</li>
+                <li>孕妇（孕中期）：24毫克/天</li>
+                <li>孕妇（孕晚期）：29毫克/天</li>
+                <li>乳母：24毫克/天</li>
+            </ul>
+            <p>需要注意的是，以下人群可能需要特别关注铁的摄入：</p>
+            <ul>
+                <li><strong>月经期女性：</strong>每月失血会导致铁丢失增加。</li>
+                <li><strong>孕妇和乳母：</strong>需要额外的铁来满足胎儿发育和乳汁分泌的需求。</li>
+                <li><strong>婴幼儿和青少年：</strong>处于生长发育高峰期，对铁的需求量增加。</li>
+                <li><strong>素食者：</strong>尤其是严格素食者，由于摄入的多为非血红素铁，吸收率较低。</li>
+                <li><strong>慢性失血患者：</strong>如消化道溃疡、痔疮等患者。</li>
+                <li><strong>运动员：</strong>剧烈运动可能导致铁丢失增加。</li>
+                <li><strong>老年人：</strong>可能因摄入不足或吸收不良导致铁缺乏。</li>
+                <li><strong>长期大量饮用茶或咖啡的人：</strong>其中的单宁酸可能抑制铁的吸收。</li>
+            </ul>
+            
+            <div class="info-box">
+                <h3>【提高铁吸收率的方法】</h3>
+                <p>1. 同时摄入富含维生素C的食物（如柑橘类水果、草莓、青椒、番茄等），可以显著提高非血红素铁的吸收率。</p>
+                <p>2. 适量摄入肉类、鱼类、禽类等富含血红素铁的食物，其中的肉类因子可以促进非血红素铁的吸收。</p>
+                <p>3. 避免在同一餐中摄入过多抑制铁吸收的食物（如浓茶、咖啡、全谷物等）。</p>
+                <p>4. 烹饪时使用铸铁锅，部分铁会溶解到食物中。</p>
+                <p>5. 对于素食者，可以选择富含铁且吸收率相对较高的食物（如强化食品、豆类等）。</p>
+            </div>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>缺铁性贫血：</strong>最常见的症状，表现为乏力、疲劳、头晕、心悸等。</li>
+                <li><strong>皮肤和黏膜苍白：</strong>尤其是指甲床、口唇、眼睑等部位。</li>
+                <li><strong>免疫力下降：</strong>容易感染疾病。</li>
+                <li><strong>认知功能受损：</strong>注意力不集中、记忆力下降、学习能力减弱。</li>
+                <li><strong>运动耐力降低：</strong>稍微活动就感到疲劳。</li>
+                <li><strong>指甲异常：</strong>指甲变薄、易碎、凹陷（反甲）。</li>
+                <li><strong>口腔问题：</strong>口角炎、舌炎等。</li>
+                <li><strong>食欲减退：</strong>尤其在儿童中可能出现异食癖（如吃泥土、纸张等）。</li>
+                <li><strong>心悸和气短：</strong>活动时更为明显。</li>
+                <li><strong>生长发育迟缓：</strong>在儿童中可能影响正常生长发育。</li>
+            </ul>
+            <p>需要注意的是，铁缺乏通常是渐进性的，早期可能没有明显症状。长期铁摄入不足会导致缺铁性贫血，严重影响身体健康。</p>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>铁中毒：</strong>急性铁中毒可能导致呕吐、腹痛、腹泻、消化道出血、休克甚至死亡。</li>
+                <li><strong>慢性铁过载：</strong>长期过量摄入可能导致铁在器官中沉积，如肝脏、心脏、胰腺等。</li>
+                <li><strong>肝脏损伤：</strong>铁过载可能导致肝硬化、肝癌等肝脏疾病。</li>
+                <li><strong>心脏问题：</strong>可能增加心脏病的风险，导致心律失常、心力衰竭等。</li>
+                <li><strong>糖尿病风险增加：</strong>铁过载可能损害胰腺β细胞，影响胰岛素分泌。</li>
+                <li><strong>氧化应激：</strong>过量的铁可能促进自由基的产生，导致氧化损伤。</li>
+                <li><strong>感染风险增加：</strong>某些细菌的生长需要铁，过量铁可能促进细菌繁殖。</li>
+                <li><strong>胃肠道不适：</strong>可能出现恶心、呕吐、便秘、腹泻等症状。</li>
+            </ul>
+            <p>中国居民膳食铁可耐受最高摄入量（UL）：</p>
+            <ul>
+                <li>0-1岁：10毫克/天</li>
+                <li>1-3岁：30毫克/天</li>
+                <li>4-6岁：30毫克/天</li>
+                <li>7-10岁：30毫克/天</li>
+                <li>11-17岁：40毫克/天</li>
+                <li>18岁及以上：42毫克/天</li>
+                <li>孕妇和乳母：42毫克/天</li>
+            </ul>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 均衡饮食是获取足够铁的最佳方式，优先选择富含血红素铁的食物。</p>
+                <p>2. 对于素食者，应特别注意铁的摄入，可以通过食用强化食品、搭配富含维生素C的食物来提高吸收率。</p>
+                <p>3. 避免在同一餐中同时摄入过多抑制铁吸收的食物（如浓茶、咖啡、全谷物等）。</p>
+                <p>4. 烹饪时使用铸铁锅可以增加食物中的铁含量。</p>
+                <p>5. 对于容易缺铁的人群（如月经期女性、孕妇、婴幼儿等），应在医生或营养师的指导下适当补充铁剂。</p>
+                <p>6. 铁剂最好在饭后服用，以减少对胃肠道的刺激。</p>
+                <p>7. 不要自行大量补充铁剂，以免导致铁中毒。</p>
+                <p>8. 定期进行体检，特别是容易缺铁的人群，以便及早发现和治疗铁缺乏。</p>
+                <p>9. 哺乳期妇女应注意铁的摄入，以满足自身和婴儿的需求。</p>
+                <p>10. 婴幼儿应及时添加富含铁的辅食（如强化铁米粉、肉类等）。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

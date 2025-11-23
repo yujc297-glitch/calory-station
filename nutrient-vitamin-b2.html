@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>维生素B2 Riboflavin - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>维生素B2 Riboflavin (核黄素)</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>维生素B2（核黄素）是B族维生素的一种，属于水溶性维生素。它在体内主要以黄素单核苷酸（FMN）和黄素腺嘌呤二核苷酸（FAD）的形式存在，作为多种氧化还原酶的辅酶参与能量代谢。维生素B2微溶于水，在中性或酸性溶液中稳定，但在碱性溶液中容易被破坏。它对光敏感，特别是紫外线，容易分解。</p>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>能量代谢：</strong>作为多种脱氢酶的辅酶，参与碳水化合物、脂肪和蛋白质的氧化代谢，将食物转化为能量。</li>
+                <li><strong>抗氧化作用：</strong>作为谷胱甘肽还原酶的辅酶，参与抗氧化防御系统，保护细胞免受自由基损伤。</li>
+                <li><strong>维持皮肤和黏膜健康：</strong>促进皮肤、黏膜、眼睛等组织的正常生长和修复。</li>
+                <li><strong>铁代谢：</strong>参与铁的吸收、转运和储存，有助于预防贫血。</li>
+                <li><strong>药物和激素代谢：</strong>参与某些药物和激素的代谢过程。</li>
+                <li><strong>神经功能：</strong>维持神经系统的正常功能。</li>
+            </ul>
+            
+            <div class="info-box">
+                <h3>【维生素B2与口腔溃疡】</h3>
+                <p>维生素B2缺乏常与口腔和黏膜问题相关，如口角炎（烂嘴角）、舌炎、口腔溃疡等。补充维生素B2有助于缓解这些症状，但需要注意的是，口腔溃疡的原因多种多样，维生素B2缺乏只是其中之一。</p>
+            </div>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>奶类及奶制品：</strong>牛奶、酸奶、奶酪等是维生素B2的良好来源。</li>
+                <li><strong>蛋类：</strong>鸡蛋、鸭蛋等，蛋黄中的含量较高。</li>
+                <li><strong>动物内脏：</strong>猪肝、鸡肝、羊肝等，含量丰富。</li>
+                <li><strong>肉类：</strong>牛肉、猪肉、鸡肉等瘦肉。</li>
+                <li><strong>鱼类：</strong>尤其是鲑鱼、鳟鱼等。</li>
+                <li><strong>全谷物：</strong>糙米、全麦面包等。</li>
+                <li><strong>绿叶蔬菜：</strong>菠菜、西兰花、油菜等。</li>
+                <li><strong>豆类：</strong>黄豆、黑豆、绿豆等。</li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食维生素B2推荐摄入量：</p>
+            <ul>
+                <li>成年男性：1.4毫克/天</li>
+                <li>成年女性：1.2毫克/天</li>
+                <li>孕妇：1.7毫克/天</li>
+                <li>乳母：1.7毫克/天</li>
+                <li>儿童根据年龄不同：0.4-1.2毫克/天</li>
+            </ul>
+            <p>需要注意的是，以下人群可能需要适当增加维生素B2的摄入量：</p>
+            <ul>
+                <li>长期素食者（因为动物性食物是维生素B2的良好来源）</li>
+                <li>妊娠和哺乳期妇女</li>
+                <li>长期服用某些药物（如避孕药、抗结核药等）的人群</li>
+                <li>甲状腺功能亢进患者</li>
+                <li>慢性腹泻或吸收不良综合征患者</li>
+            </ul>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>口腔问题：</strong>口角炎（嘴角裂缝、溃疡）、舌炎（舌头红肿、疼痛、地图舌）、口腔溃疡等。</li>
+                <li><strong>眼部症状：</strong>畏光、流泪、眼睛充血、视力模糊等。</li>
+                <li><strong>皮肤问题：</strong>脂溢性皮炎（尤其是面部、鼻唇沟、耳后等部位）、皮肤干燥、脱屑等。</li>
+                <li><strong>黏膜问题：</strong>生殖器黏膜炎症、溃疡等。</li>
+                <li><strong>全身症状：</strong>疲劳、乏力、食欲减退等。</li>
+                <li><strong>贫血风险增加：</strong>可能与铁代谢障碍有关。</li>
+            </ul>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>水溶性特性：</strong>由于维生素B2是水溶性的，过量摄入后会随尿液排出体外，毒性较低。</li>
+                <li><strong>尿液变色：</strong>摄入过量（通常是通过补充剂）可能导致尿液呈亮黄色，这是正常现象，对健康无害。</li>
+                <li><strong>罕见的不良反应：</strong>极大量摄入可能导致瘙痒、麻木、灼热感等，但通常需要很大剂量。</li>
+                <li><strong>安全性：</strong>维生素B2的安全摄入量较高，通过正常饮食摄入一般不会导致过量。</li>
+            </ul>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 合理搭配食物，特别是将富含维生素B2的食物与其他B族维生素的食物一起食用，以获得协同效应。</p>
+                <p>2. 烹饪时应避免长时间光照，特别是紫外线，以防止维生素B2被破坏。</p>
+                <p>3. 减少淘米次数和浸泡时间，以保留更多的维生素B2。</p>
+                <p>4. 牛奶应装在不透明的容器中，避免光照导致维生素B2损失。</p>
+                <p>5. 长期素食者应特别注意摄入富含维生素B2的植物性食物，如全谷物、豆类和绿叶蔬菜。</p>
+                <p>6. 维生素B2与维生素B6、烟酸等B族维生素协同作用，保持均衡饮食有助于这些维生素的平衡。</p>
+                <p>7. 在服用维生素B2补充剂时，应遵循产品说明，避免过量摄入。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

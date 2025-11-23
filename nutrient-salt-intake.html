@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>钠盐摄入 - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        .title-section p {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .content-section h2 {
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section h3 {
+            color: #1e88e5;
+            margin: 20px 0 15px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+        }
+        
+        .content-section ul {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        
+        .content-section li {
+            margin-bottom: 8px;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #f0f7f0;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #f0f7ff;
+            border-left: 4px solid #1e88e5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1e88e5;
+            margin-bottom: 10px;
+        }
+        
+        /* 警告框样式 */
+        .warning-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box h3 {
+            color: #ffb300;
+            margin-bottom: 10px;
+        }
+        
+        /* 健康风险框样式 */
+        .risk-box {
+            background-color: #ffebee;
+            border-left: 4px solid #e53935;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .risk-box h3 {
+            color: #e53935;
+            margin-bottom: 10px;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #fff8e1;
+            padding: 20px;
+            text-align: center;
+            margin: 40px 0;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #7d6f47;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+        
+        .footer p:last-child {
+            margin-bottom: 0;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>钠盐摄入</h1>
+            <p>了解钠盐与健康的关系及合理摄入指南</p>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>定义</h2>
+            <p>钠盐主要指氯化钠（NaCl），即日常食用的食盐。钠是人体必需的矿物质之一，在维持体液平衡、神经传导、肌肉收缩等生理功能中发挥重要作用。然而，过量摄入钠盐是高血压、心血管疾病等多种慢性疾病的重要危险因素。</p>
+            <h3>钠在体内的主要存在形式</h3>
+            <ul>
+                <li><strong>氯化钠（NaCl）：</strong>最主要的存在形式，占膳食钠的大部分</li>
+                <li><strong>碳酸氢钠（NaHCO₃）：</strong>小苏打</li>
+                <li><strong>谷氨酸钠（MSG）：</strong>味精的主要成分</li>
+                <li><strong>磷酸钠：</strong>食品添加剂中的常用形式</li>
+                <li><strong>亚硫酸钠：</strong>防腐剂</li>
+                <li><strong>其他：</strong>亚硝酸钠（防腐剂）、苯甲酸钠（防腐剂）等</li>
+            </ul>
+            <h3>食品中钠的来源分类</h3>
+            <ul>
+                <li><strong>烹饪添加的盐：</strong>家用盐罐中添加的食盐</li>
+                <li><strong>加工食品中的盐：</strong>各种加工食品中添加的盐和含钠添加剂</li>
+                <li><strong>天然食物中的钠：</strong>天然存在于食物中的钠（通常含量较低）</li>
+                <li><strong>酱油、酱类等调味品：</strong>高钠调味品</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>钠的生理作用</h2>
+            <p>钠虽然在体内含量不高，但在维持正常生理功能方面起着至关重要的作用：</p>
+            <ul>
+                <li><strong>体液平衡：</strong>
+                    <ul>
+                        <li>与钾一起维持细胞内外的渗透压平衡</li>
+                        <li>调节体内水分分布</li>
+                        <li>维持血容量和血压稳定</li>
+                    </ul>
+                </li>
+                <li><strong>神经肌肉功能：</strong>
+                    <ul>
+                        <li>参与神经冲动的传导</li>
+                        <li>维持肌肉正常收缩和放松</li>
+                        <li>特别是心肌的正常功能</li>
+                    </ul>
+                </li>
+                <li><strong>酸碱平衡：</strong>
+                    <ul>
+                        <li>作为缓冲系统的组成部分</li>
+                        <li>帮助维持血液pH值稳定</li>
+                    </ul>
+                </li>
+                <li><strong>其他功能：</strong>
+                    <ul>
+                        <li>参与某些酶的激活</li>
+                        <li>协助营养物质的吸收</li>
+                        <li>维持细胞正常代谢</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>过量摄入钠盐的健康风险</h2>
+            <div class="risk-box">
+                <h3>过量摄入钠盐可能导致的健康问题：</h3>
+            </div>
+            
+            <ul>
+                <li><strong>高血压：</strong>
+                    <ul>
+                        <li>钠摄入过多会增加血容量，升高血压</li>
+                        <li>是高血压的主要风险因素之一</li>
+                        <li>约30%-50%的高血压与高盐饮食有关</li>
+                    </ul>
+                </li>
+                <li><strong>心血管疾病：</strong>
+                    <ul>
+                        <li>增加心脏病发作和中风的风险</li>
+                        <li>导致心脏肥大和心力衰竭</li>
+                        <li>损害血管内皮功能</li>
+                        <li>增加冠心病风险</li>
+                    </ul>
+                </li>
+                <li><strong>肾脏问题：</strong>
+                    <ul>
+                        <li>增加肾脏负担，损害肾脏功能</li>
+                        <li>导致肾结石风险增加</li>
+                        <li>可能加速慢性肾病进展</li>
+                        <li>增加肾功能衰竭风险</li>
+                    </ul>
+                </li>
+                <li><strong>骨质疏松：</strong>
+                    <ul>
+                        <li>高钠摄入会增加尿钙排泄</li>
+                        <li>长期可能导致钙流失，影响骨骼健康</li>
+                        <li>增加骨质疏松和骨折风险</li>
+                    </ul>
+                </li>
+                <li><strong>胃癌：</strong>
+                    <ul>
+                        <li>长期高盐饮食与胃癌风险增加相关</li>
+                        <li>可能损害胃黏膜，促进幽门螺杆菌感染</li>
+                    </ul>
+                </li>
+                <li><strong>其他健康问题：</strong>
+                    <ul>
+                        <li>水肿（尤其是面部和下肢）</li>
+                        <li>增加白内障风险</li>
+                        <li>可能加重哮喘症状</li>
+                        <li>增加自身免疫性疾病风险</li>
+                        <li>可能影响认知功能</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>主要食物来源</h2>
+            <ul>
+                <li><strong>调味品：</strong>
+                    <ul>
+                        <li>食盐（氯化钠）</li>
+                        <li>酱油（普通酱油、生抽、老抽）</li>
+                        <li>酱类（豆瓣酱、甜面酱、黄豆酱）</li>
+                        <li>咸菜、腌制品（如咸菜、腌肉、泡菜）</li>
+                        <li>腐乳、豆豉</li>
+                        <li>鸡精、味精（谷氨酸钠）</li>
+                        <li>鱼露、虾酱</li>
+                        <li>辣椒酱、辣酱</li>
+                    </ul>
+                </li>
+                <li><strong>加工食品：</strong>
+                    <ul>
+                        <li>方便食品（方便面、速冻饺子、速冻包子）</li>
+                        <li>罐头食品（肉类罐头、蔬菜罐头）</li>
+                        <li>腌制肉类（火腿、香肠、腊肉、午餐肉）</li>
+                        <li>咸味零食（薯片、椒盐饼干、锅巴）</li>
+                        <li>即食汤料、调味料包</li>
+                        <li>某些面包、糕点</li>
+                        <li>奶酪和加工奶制品</li>
+                    </ul>
+                </li>
+                <li><strong>快餐食品：</strong>
+                    <ul>
+                        <li>汉堡、炸鸡等快餐</li>
+                        <li>披萨</li>
+                        <li>油条、油饼等油炸食品</li>
+                        <li>麻辣烫、火锅底料</li>
+                    </ul>
+                </li>
+                <li><strong>天然食物（含钠量相对较低）：</strong>
+                    <ul>
+                        <li>肉类、鱼类（新鲜未加工）</li>
+                        <li>贝类、虾蟹类</li>
+                        <li>某些蔬菜（如芹菜、菠菜、胡萝卜等，但含量远低于加工食品）</li>
+                        <li>牛奶（含有天然钠，但适量饮用不会导致过量）</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="info-box">
+                <h3>注意</h3>
+                <p>许多加工食品中含有"隐藏盐"，即虽然吃起来可能不觉得很咸，但钠含量很高。例如，一些甜味零食、面包、饼干等也可能添加了大量盐。阅读食品标签，查看钠含量是识别高盐食品的重要方法。一般而言，每100克食品中钠含量超过600毫克（相当于约1.5克盐）的食品应视为高盐食品。</p>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入建议</h2>
+            <p>世界卫生组织（WHO）和中国营养学会等权威机构对钠盐的摄入有明确建议：</p>
+            <ul>
+                <li><strong>WHO建议：</strong>
+                    <ul>
+                        <li>成年人每天钠摄入不应超过2000毫克（相当于5克盐）</li>
+                        <li>理想情况下应控制在1500毫克（约3.75克盐）以下</li>
+                    </ul>
+                </li>
+                <li><strong>中国营养学会建议：</strong>
+                    <ul>
+                        <li>成年人每天食盐摄入量不超过5克</li>
+                        <li>高血压、冠心病等患者应进一步减少至3克以下</li>
+                    </ul>
+                </li>
+                <li><strong>不同人群考虑：</strong>
+                    <ul>
+                        <li><strong>儿童：</strong>应根据年龄适当减少，1-3岁不超过2克/天，4-6岁不超过3克/天，7-10岁不超过4克/天</li>
+                        <li><strong>高血压患者：</strong>应严格控制在3克/天以下</li>
+                        <li><strong>老年人：</strong>由于对钠更敏感，应控制在4克/天以下</li>
+                        <li><strong>肾功能不全者：</strong>应根据肾功能情况，在医生指导下严格控制</li>
+                        <li><strong>孕妇和哺乳期妇女：</strong>保持正常摄入，不建议过量</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="info-box">
+                <h3>钠与盐的换算关系</h3>
+                <p>1克钠 ≈ 2.5克盐（氯化钠）</p>
+                <p>1克盐（氯化钠）≈ 0.4克钠</p>
+                <p>例如：5克盐 ≈ 2克钠</p>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2>如何减少钠盐摄入</h2>
+            <div class="tip-box">
+                <h3>实用小贴士：</h3>
+                <ul>
+                    <li><strong>烹饪技巧：</strong>
+                        <ul>
+                            <li>使用限盐勺，控制每日用盐总量</li>
+                            <li>减少烹饪过程中添加的盐量，逐步适应清淡口味</li>
+                            <li>起锅前加盐，这样盐分附着在食物表面，感觉更咸</li>
+                            <li>避免高温油炸食物（高温会破坏食物的天然味道，使人更倾向于加盐）</li>
+                            <li>减少酱油、酱类等高钠调味品的使用，可用低钠版本替代</li>
+                        </ul>
+                    </li>
+                    <li><strong>使用替代调味品：</strong>
+                        <ul>
+                            <li>利用天然香料增加风味（如葱、姜、蒜、花椒、八角、桂皮等）</li>
+                            <li>使用香草和香辛料（如薄荷、罗勒、迷迭香、香菜等）</li>
+                            <li>用柠檬汁、醋、番茄酱（选择低盐版本）等酸味调味品增加风味</li>
+                            <li>使用香菇、紫菜等天然食材增加鲜味</li>
+                            <li>尝试使用低钠盐（但肾功能不全者禁用）</li>
+                        </ul>
+                    </li>
+                    <li><strong>食品选择：</strong>
+                        <ul>
+                            <li>优先选择新鲜食材，减少加工食品摄入</li>
+                            <li>购买食品时查看营养标签，选择低钠产品</li>
+                            <li>减少腌制食品、罐头食品的摄入</li>
+                            <li>少吃快餐和外卖食品</li>
+                            <li>避免食用过咸的零食</li>
+                        </ul>
+                    </li>
+                    <li><strong>饮食习惯：</strong>
+                        <ul>
+                            <li>吃饭时不额外加盐或酱油</li>
+                            <li>避免在餐桌上摆放盐瓶</li>
+                            <li>逐步减少盐的使用量，让味蕾适应清淡口味</li>
+                            <li>增加水果和蔬菜的摄入（富含钾，有助于平衡钠的影响）</li>
+                            <li>保持充足的水分摄入，促进钠的排出</li>
+                        </ul>
+                    </li>
+                    <li><strong>外出就餐策略：</strong>
+                        <ul>
+                            <li>要求餐厅少放盐或不放盐</li>
+                            <li>避免食用汤类（通常含盐量高）</li>
+                            <li>选择清蒸、水煮等烹饪方式的菜品</li>
+                            <li>使用清水涮洗过咸的食物</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="warning-box">
+            <h3>注意事项</h3>
+            <ul>
+                <li>低钠盐虽然含钠量较低，但含有较高的钾，肾功能不全者（如尿毒症患者）应避免使用，以免引起高钾血症</li>
+                <li>过度限制钠摄入可能导致低钠血症，出现头晕、恶心、乏力等症状，正常健康人不应过度限盐</li>
+                <li>高温作业、大量出汗、腹泻等情况下，应适当增加钠摄入，避免低钠血症</li>
+                <li>某些药物（如利尿剂）会增加钠的排出，使用时应在医生指导下调整饮食</li>
+                <li>儿童从小就应培养清淡口味，避免养成嗜盐习惯</li>
+            </ul>
+        </section>
+        
+        <section class="info-box">
+            <h3>健康小知识</h3>
+            <p>钠和钾的平衡对维持血压稳定至关重要。钠会增加血压，而钾有助于降低血压。因此，除了减少钠摄入外，增加富含钾的食物摄入（如香蕉、土豆、菠菜、红薯、番茄、柑橘类水果等）对维持心血管健康非常重要。此外，研究表明，DASH饮食（富含水果、蔬菜、全谷物、低脂乳制品，低钠、低饱和脂肪）能够有效降低血压，是预防和控制高血压的推荐饮食模式。</p>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            <p>本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。</p>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 卡路里基站 Calorie Station - AI智能膳食与营养管理平台</p>
+            <p>本网站提供的营养信息仅供参考，不构成医疗建议</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>植物多酚/抗氧化物质 - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        .title-section p {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .content-section h2 {
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section h3 {
+            color: #1e88e5;
+            margin: 20px 0 15px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+        }
+        
+        .content-section ul {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        
+        .content-section li {
+            margin-bottom: 8px;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #f0f7f0;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #f0f7ff;
+            border-left: 4px solid #1e88e5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1e88e5;
+            margin-bottom: 10px;
+        }
+        
+        /* 警告框样式 */
+        .warning-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box h3 {
+            color: #ffb300;
+            margin-bottom: 10px;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #fff8e1;
+            padding: 20px;
+            text-align: center;
+            margin: 40px 0;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #7d6f47;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+        
+        .footer p:last-child {
+            margin-bottom: 0;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>植物多酚/抗氧化物质</h1>
+            <p>来自植物的天然抗氧化物质，有助于抵抗自由基损伤，维护身体健康</p>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>定义</h2>
+            <p>植物多酚是一类广泛存在于植物中的天然化合物，是植物的次级代谢产物。它们具有多个酚羟基结构，这使它们具有强大的抗氧化能力。植物多酚种类繁多，目前已发现超过8000种不同的化合物，主要包括黄酮类、酚酸类、木酚素类和芪类等。</p>
+            <h3>主要类型</h3>
+            <ul>
+                <li><strong>黄酮类化合物：</strong>类黄酮、花青素、黄酮醇（如槲皮素）、黄烷酮（如橙皮素）、异黄酮（如大豆异黄酮）</li>
+                <li><strong>酚酸类：</strong>羟基苯甲酸、羟基肉桂酸（如咖啡酸、绿原酸）</li>
+                <li><strong>木酚素类：</strong>如松脂醇、落叶松脂素</li>
+                <li><strong>芪类：</strong>如白藜芦醇</li>
+                <li><strong>单宁类：</strong>水解单宁和缩合单宁</li>
+                <li><strong>其他：</strong>儿茶素、没食子酸、鞣花酸等</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>主要生理作用</h2>
+            <ul>
+                <li><strong>抗氧化作用：</strong>
+                    <ul>
+                        <li>清除自由基，减少氧化应激</li>
+                        <li>保护细胞免受氧化损伤</li>
+                        <li>延缓细胞衰老过程</li>
+                        <li>减少DNA损伤</li>
+                    </ul>
+                </li>
+                <li><strong>抗炎作用：</strong>
+                    <ul>
+                        <li>抑制促炎细胞因子的产生</li>
+                        <li>减轻炎症反应</li>
+                        <li>可能有助于缓解炎症性疾病症状</li>
+                    </ul>
+                </li>
+                <li><strong>心血管健康：</strong>
+                    <ul>
+                        <li>改善血管内皮功能</li>
+                        <li>降低血压</li>
+                        <li>降低胆固醇水平</li>
+                        <li>减少血小板聚集</li>
+                        <li>降低心血管疾病风险</li>
+                    </ul>
+                </li>
+                <li><strong>抗癌潜力：</strong>
+                    <ul>
+                        <li>抑制癌细胞生长</li>
+                        <li>诱导癌细胞凋亡</li>
+                        <li>抑制肿瘤血管生成</li>
+                        <li>可能降低某些癌症的发生风险</li>
+                    </ul>
+                </li>
+                <li><strong>神经保护：</strong>
+                    <ul>
+                        <li>保护神经元免受氧化损伤</li>
+                        <li>改善认知功能</li>
+                        <li>可能降低神经退行性疾病风险</li>
+                    </ul>
+                </li>
+                <li><strong>免疫调节：</strong>增强免疫系统功能</li>
+                <li><strong>抗菌和抗病毒作用：</strong>某些多酚具有抑制微生物生长的作用</li>
+                <li><strong>皮肤健康：</strong>保护皮肤免受紫外线损伤，延缓皮肤衰老</li>
+                <li><strong>代谢调节：</strong>可能有助于改善胰岛素敏感性，调节血糖</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>主要食物来源</h2>
+            <ul>
+                <li><strong>水果：</strong>
+                    <ul>
+                        <li>浆果类：蓝莓、草莓、黑莓、蔓越莓、覆盆子</li>
+                        <li>柑橘类：橙子、柚子、柠檬、橘子（尤其是果皮）</li>
+                        <li>其他：葡萄（尤其是红葡萄）、苹果、梨、石榴、樱桃</li>
+                    </ul>
+                </li>
+                <li><strong>蔬菜：</strong>
+                    <ul>
+                        <li>深色蔬菜：菠菜、羽衣甘蓝、西兰花</li>
+                        <li>根茎类：洋葱、大蒜、姜、姜黄</li>
+                        <li>其他：茄子、番茄、青椒、胡萝卜</li>
+                    </ul>
+                </li>
+                <li><strong>饮料：</strong>
+                    <ul>
+                        <li>茶：绿茶、红茶、乌龙茶、白茶</li>
+                        <li>咖啡</li>
+                        <li>红酒（适量）</li>
+                        <li>可可和黑巧克力（可可含量>70%）</li>
+                    </ul>
+                </li>
+                <li><strong>全谷物：</strong>燕麦、糙米、全麦面包</li>
+                <li><strong>坚果和种子：</strong>核桃、杏仁、花生、亚麻籽</li>
+                <li><strong>豆类：</strong>大豆、黑豆、扁豆</li>
+                <li><strong>香料和香草：</strong>
+                    <ul>
+                        <li>香料：桂皮、丁香、肉豆蔻、肉桂</li>
+                        <li>香草：迷迭香、百里香、牛至、薄荷</li>
+                    </ul>
+                </li>
+                <li><strong>其他：</strong>橄榄油、红酒</li>
+            </ul>
+            <div class="info-box">
+                <h3>注意</h3>
+                <p>植物多酚的含量在食物中差异很大，一般来说，颜色鲜艳、味道苦涩的植物性食物含量较高。烹饪方式会影响多酚的含量，蒸、煮等低温烹饪方式比煎、炸等高温烹饪方式能更好地保留多酚。</p>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入建议</h2>
+            <p>目前没有明确的植物多酚推荐摄入量，但研究表明，增加富含多酚的食物摄入对健康有益。</p>
+            <p>一般建议：</p>
+            <ul>
+                <li>每天摄入5-7份水果和蔬菜（约400-500克）</li>
+                <li>选择不同颜色的水果和蔬菜，以获取各种类型的多酚</li>
+                <li>适量饮用茶、咖啡和红酒（成年人）</li>
+                <li>在饮食中加入各种香料和香草</li>
+                <li>选择全谷物食品</li>
+                <li>适量食用坚果、种子和豆类</li>
+            </ul>
+            <p>根据一些研究，理想的每日多酚摄入量约为1000-2000毫克，但这通常通过均衡饮食即可达到，无需额外补充。</p>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入不足时的潜在影响</h2>
+            <p>虽然没有明确的"植物多酚缺乏症"，但长期摄入不足可能导致以下潜在影响（注：本内容为科普信息，实际情况请咨询专业人士）：</p>
+            <ul>
+                <li><strong>抗氧化能力下降：</strong>氧化应激增加，细胞损伤风险提高</li>
+                <li><strong>慢性疾病风险增加：</strong>心血管疾病、癌症、神经退行性疾病等风险可能增加</li>
+                <li><strong>炎症反应加剧：</strong>可能导致慢性炎症</li>
+                <li><strong>衰老加速：</strong>细胞和组织衰老可能加快</li>
+                <li><strong>免疫功能下降：</strong>抵抗力可能减弱</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入过量的潜在风险</h2>
+            <p>通过正常饮食摄入植物多酚一般是安全的，但过量摄入（主要通过补充剂）可能带来以下风险（注：本内容为科普信息，实际情况请咨询专业人士）：</p>
+            <ul>
+                <li><strong>胃肠道不适：</strong>过量可能导致恶心、呕吐、腹泻</li>
+                <li><strong>铁吸收障碍：</strong>某些多酚（如单宁酸）可能抑制非血红素铁的吸收</li>
+                <li><strong>药物相互作用：</strong>可能影响某些药物的吸收和代谢，如抗凝药物、降压药</li>
+                <li><strong>过敏反应：</strong>个别敏感人群可能出现过敏反应</li>
+                <li><strong>甲状腺功能影响：</strong>大量摄入某些多酚可能对甲状腺功能产生影响</li>
+            </ul>
+            <div class="warning-box">
+                <h3>注意</h3>
+                <p>虽然植物多酚对健康有益，但不应过度依赖补充剂。研究表明，从食物中获取的多酚可能比从补充剂中获取的更有效。此外，某些药物使用者（如服用抗凝药物的人群）应在医生指导下控制富含特定多酚的食物摄入。孕妇和哺乳期妇女在使用多酚补充剂前也应咨询医生。</p>
+            </div>
+        </section>
+        
+        <section class="tip-box">
+            <h3>小贴士</h3>
+            <ul>
+                <li>每天摄入丰富多彩的水果和蔬菜，不同颜色代表不同类型的抗氧化物质</li>
+                <li>尽量选择新鲜、完整的食物，而非加工食品</li>
+                <li>适当保留水果蔬菜的外皮，因为许多多酚集中在外皮中</li>
+                <li>烹饪时避免高温长时间加热，以保留更多的多酚</li>
+                <li>冲泡茶时，使用温水而非沸水，以减少多酚的破坏</li>
+                <li>在沙拉中加入少量柠檬汁，有助于提高蔬菜中抗氧化物质的吸收率</li>
+                <li>选择特级初榨橄榄油作为烹饪油，它含有丰富的多酚</li>
+                <li>适量食用黑巧克力（可可含量>70%），它是可可多酚的良好来源</li>
+            </ul>
+        </section>
+        
+        <section class="info-box">
+            <h3>健康小知识</h3>
+            <p>地中海饮食是公认的健康饮食模式，其益处部分归功于富含植物多酚的食物（如橄榄油、水果、蔬菜、坚果、红酒）。研究表明，长期坚持地中海饮食的人群，心血管疾病、癌症和神经退行性疾病的发病率较低，寿命也普遍较长。</p>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            <p>本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。</p>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 卡路里基站 Calorie Station - AI智能膳食与营养管理平台</p>
+            <p>本网站提供的营养信息仅供参考，不构成医疗建议</p>
+        </div>
+    </footer>
+</body>
+</html>

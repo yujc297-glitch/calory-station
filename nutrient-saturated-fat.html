@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>饱和脂肪酸 Saturated Fat - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>饱和脂肪酸 Saturated Fat</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>饱和脂肪酸是一类碳链中不含双键的脂肪酸，因为其碳原子完全被氢原子所饱和。在常温下，饱和脂肪酸通常呈固态，这也是动物脂肪在常温下呈固态的主要原因。饱和脂肪酸是人体必需的营养素之一，但过量摄入可能对健康造成不利影响。</p>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>提供能量：</strong>和其他脂肪一样，饱和脂肪酸是高能量密度的营养素，每克可提供约9千卡的能量。</li>
+                <li><strong>构成细胞膜：</strong>是细胞膜的重要组成成分，维持细胞膜的结构和功能。</li>
+                <li><strong>合成某些激素：</strong>是合成某些激素和信号分子的前体物质。</li>
+                <li><strong>保护内脏器官：</strong>适量的体脂（包括饱和脂肪酸）可以保护内脏器官免受机械损伤。</li>
+                <li><strong>促进脂溶性维生素吸收：</strong>有助于维生素A、D、E、K等脂溶性维生素的吸收。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>动物脂肪：</strong>猪油、牛油、羊油、奶油、黄油等。</li>
+                <li><strong>肉类：</strong>猪肉（特别是肥肉）、牛肉、羊肉等红肉中的脂肪。</li>
+                <li><strong>乳制品：</strong>全脂牛奶、奶酪、冰淇淋等。</li>
+                <li><strong>某些植物油：</strong>椰子油、棕榈油、棕榈仁油等热带植物油中饱和脂肪酸含量较高。</li>
+                <li><strong>加工食品：</strong>蛋糕、饼干、油炸食品、快餐等加工食品中可能含有大量饱和脂肪酸。</li>
+                <li><strong>蛋黄：</strong>鸡蛋黄中含有一定量的饱和脂肪酸。</li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>世界卫生组织（WHO）和许多国家的营养指南建议，饱和脂肪酸的摄入应限制在总能量摄入的10%以下，理想情况下应低于7%。在饱和脂肪酸摄入中，应注意以下几点：</p>
+            <ul>
+                <li>减少高饱和脂肪食物的摄入，如肥肉、奶油、黄油等。</li>
+                <li>选择瘦肉，去除肉类中的可见脂肪。</li>
+                <li>优先选择植物油（如橄榄油、花生油等）代替动物油和棕榈油。</li>
+                <li>减少加工食品和油炸食品的摄入。</li>
+                <li>用不饱和脂肪酸（如橄榄油、鱼油等）部分替代饮食中的饱和脂肪酸。</li>
+            </ul>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>能量不足：</strong>脂肪摄入过少可能导致能量摄入不足，出现疲劳、体重下降等。</li>
+                <li><strong>脂溶性维生素缺乏：</strong>可能影响维生素A、D、E、K等脂溶性维生素的吸收。</li>
+                <li><strong>荷尔蒙合成异常：</strong>可能影响某些激素的合成，如类固醇激素。</li>
+                <li><strong>皮肤问题：</strong>脂肪摄入不足可能导致皮肤干燥、脱屑等问题。</li>
+            </ul>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>心血管疾病：</strong>过量摄入饱和脂肪酸可能导致血液中低密度脂蛋白胆固醇（LDL-C）水平升高，增加动脉粥样硬化和心血管疾病的风险。</li>
+                <li><strong>肥胖：</strong>高饱和脂肪饮食可能导致能量摄入过剩，增加肥胖风险。</li>
+                <li><strong>2型糖尿病：</strong>长期高饱和脂肪摄入可能增加胰岛素抵抗，增加2型糖尿病风险。</li>
+                <li><strong>高血压：</strong>某些研究表明，高饱和脂肪饮食可能与高血压风险增加有关。</li>
+                <li><strong>某些癌症：</strong>有研究提示，高饱和脂肪摄入可能与某些癌症（如结肠癌、乳腺癌）风险增加有关，但证据尚不一致。</li>
+            </ul>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 选择健康的烹饪方式，如蒸、煮、烤、炖等，避免油炸。</p>
+                <p>2. 用橄榄油、亚麻籽油等富含不饱和脂肪酸的植物油替代动物油。</p>
+                <p>3. 多吃鱼类，尤其是富含Omega-3脂肪酸的深海鱼类。</p>
+                <p>4. 阅读食品标签，选择饱和脂肪含量低的食品。</p>
+                <p>5. 保持均衡饮食，控制总脂肪摄入量，合理分配饱和脂肪、单不饱和脂肪和多不饱和脂肪的比例。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

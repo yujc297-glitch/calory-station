@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>维生素B1 Thiamine - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>维生素B1 Thiamine (硫胺素)</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>维生素B1（硫胺素）是B族维生素中的第一种，属于水溶性维生素。它在体内主要以焦磷酸硫胺素（TPP）的形式存在，是多种酶的辅酶，参与能量代谢。由于维生素B1是水溶性的，不能在体内大量储存，因此需要每天从食物中摄入。维生素B1对热敏感，特别是在碱性环境中更容易被破坏。</p>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>能量代谢：</strong>作为丙酮酸脱氢酶和α-酮戊二酸脱氢酶的辅酶，参与碳水化合物和氨基酸的代谢，将葡萄糖转化为能量。</li>
+                <li><strong>神经系统功能：</strong>参与神经递质的合成和释放，维持神经系统的正常功能，特别是周围神经系统的健康。</li>
+                <li><strong>心肌功能：</strong>参与心肌能量代谢，对维持正常的心肌功能有重要作用。</li>
+                <li><strong>消化系统功能：</strong>促进胃肠道的正常蠕动和消化液的分泌，有助于消化吸收。</li>
+                <li><strong>生长发育：</strong>对儿童的生长发育有重要作用。</li>
+            </ul>
+            
+            <div class="info-box">
+                <h3>【脚气病与维生素B1】</h3>
+                <p>维生素B1缺乏最典型的表现是脚气病（Beriberi），这是一种由于长期严重缺乏维生素B1引起的疾病，主要分为干性脚气病（以周围神经炎为主要表现）和湿性脚气病（以心力衰竭、水肿为主要表现）。在过去，脚气病在以精白米面为主食的地区较为常见。</p>
+            </div>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>全谷物：</strong>糙米、全麦面包、燕麦、小米、黑米等。</li>
+                <li><strong>豆类：</strong>黄豆、黑豆、绿豆、红豆、芸豆等。</li>
+                <li><strong>坚果和种子：</strong>葵花籽、核桃、杏仁等。</li>
+                <li><strong>瘦肉：</strong>猪肉（尤其是猪瘦肉）、牛肉、羊肉等。</li>
+                <li><strong>内脏：</strong>猪肝、鸡肝等动物内脏。</li>
+                <li><strong>鱼类：</strong>尤其是鲤鱼、鲫鱼等淡水鱼。</li>
+                <li><strong>蛋类：</strong>鸡蛋、鸭蛋等。</li>
+                <li><strong>酵母：</strong>干酵母是维生素B1含量最高的食物之一。</li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食维生素B1推荐摄入量：</p>
+            <ul>
+                <li>成年男性：1.4毫克/天</li>
+                <li>成年女性：1.2毫克/天</li>
+                <li>孕妇：1.5毫克/天</li>
+                <li>乳母：1.5毫克/天</li>
+                <li>儿童根据年龄不同：0.4-1.2毫克/天</li>
+            </ul>
+            <p>需要注意的是，以下人群可能需要适当增加维生素B1的摄入量：</p>
+            <ul>
+                <li>长期摄入精制谷物的人群</li>
+                <li>长期饮酒者（酒精会干扰维生素B1的吸收和利用）</li>
+                <li>妊娠和哺乳期妇女</li>
+                <li>甲状腺功能亢进患者（代谢率高）</li>
+                <li>长期发热或慢性消耗性疾病患者</li>
+            </ul>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>脚气病：</strong>如前所述，分为干性和湿性两种类型。</li>
+                <li><strong>周围神经炎：</strong>表现为四肢麻木、刺痛、肌肉无力等。</li>
+                <li><strong>消化系统症状：</strong>食欲不振、消化不良、便秘、恶心等。</li>
+                <li><strong>心血管系统症状：</strong>心悸、气短、水肿等。</li>
+                <li><strong>神经系统症状：</strong>记忆力减退、注意力不集中、情绪不稳定等。</li>
+                <li><strong>肌肉无力：</strong>特别是下肢肌肉无力，严重时可能出现垂足。</li>
+            </ul>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>水溶性特性：</strong>由于维生素B1是水溶性的，过量摄入后会随尿液排出体外，毒性较低。</li>
+                <li><strong>罕见的不良反应：</strong>极大量摄入（通常是通过补充剂）可能导致头痛、烦躁、失眠、心悸、过敏反应等。</li>
+                <li><strong>安全性：</strong>维生素B1的安全摄入量较高，通过正常饮食摄入一般不会导致过量。</li>
+            </ul>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 选择全谷物食品，如糙米、全麦面包等，代替精制谷物，以获取更多的维生素B1。</p>
+                <p>2. 烹饪时应避免长时间高温加热，减少维生素B1的损失。</p>
+                <p>3. 减少淘米次数，避免用力搓洗，以防止维生素B1流失到水中。</p>
+                <p>4. 不要过量食用碱（如小苏打），因为维生素B1在碱性环境中容易被破坏。</p>
+                <p>5. 长期饮酒者应注意补充维生素B1，必要时可咨询医生或营养师。</p>
+                <p>6. 保持均衡饮食，不挑食、不偏食，有助于获取足够的维生素B1。</p>
+                <p>7. 食物多样化是获取各种B族维生素的最佳方式，因为B族维生素通常共同存在于食物中。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

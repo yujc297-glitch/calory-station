@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>维生素A Vitamin A - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>维生素A Vitamin A</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>维生素A是一种脂溶性维生素，对人体多项生理功能至关重要。它包括两类化合物：视黄醇（preformed vitamin A）和类胡萝卜素（provitamin A carotenoids），其中β-胡萝卜素是最重要的类胡萝卜素，可在体内转化为视黄醇。维生素A在体内主要以视黄醇、视黄醛和视黄酸三种形式发挥作用。</p>
+            
+            <div class="info-box">
+                <h3>【维生素A的两种形式】</h3>
+                <p><strong>1. 已形成的维生素A（视黄醇）：</strong>主要存在于动物性食物中，如肝脏、鱼肝油、蛋黄和乳制品。</p>
+                <p><strong>2. 维生素A原（类胡萝卜素）：</strong>主要存在于植物性食物中，如胡萝卜、南瓜、菠菜等深色蔬菜和水果。其中β-胡萝卜素转化为视黄醇的效率最高。</p>
+            </div>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>视觉功能：</strong>维生素A是视网膜中视紫红质的重要组成部分，参与暗视觉的形成，对维持正常视力至关重要。</li>
+                <li><strong>细胞生长与分化：</strong>参与细胞的生长、分化和增殖，对维持上皮组织的健康和完整性有重要作用。</li>
+                <li><strong>免疫功能：</strong>支持免疫系统的正常功能，增强机体对感染的抵抗力。</li>
+                <li><strong>生殖功能：</strong>对维持正常的生殖功能和胚胎发育有重要作用。</li>
+                <li><strong>骨骼生长：</strong>参与骨骼的生长和发育，对维持骨骼健康有一定作用。</li>
+                <li><strong>抗氧化作用：</strong>类胡萝卜素具有抗氧化作用，可清除自由基，减少氧化损伤。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>已形成的维生素A（视黄醇）：</strong>
+                    <ul>
+                        <li>动物肝脏：猪肝、牛肝、鸡肝等含量最高。</li>
+                        <li>鱼肝油：富含维生素A和维生素D。</li>
+                        <li>蛋黄：鸡蛋、鸭蛋等蛋类的蛋黄。</li>
+                        <li>全脂乳制品：全脂牛奶、黄油、奶酪等。</li>
+                        <li>鱼类：尤其是鲭鱼、沙丁鱼等油性鱼类。</li>
+                    </ul>
+                </li>
+                <li><strong>维生素A原（类胡萝卜素）：</strong>
+                    <ul>
+                        <li>橙色蔬菜：胡萝卜、南瓜、红薯等。</li>
+                        <li>深绿色叶菜：菠菜、西兰花、羽衣甘蓝等。</li>
+                        <li>橙色水果：芒果、杏、哈密瓜等。</li>
+                        <li>红辣椒：尤其是红辣椒干。</li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食维生素A推荐摄入量（视黄醇活性当量，RAE）：</p>
+            <ul>
+                <li>成年男性：800微克RAE/天</li>
+                <li>成年女性：700微克RAE/天</li>
+                <li>孕妇（中后期）：770-775微克RAE/天</li>
+                <li>乳母：1300微克RAE/天</li>
+                <li>儿童根据年龄不同：300-700微克RAE/天</li>
+            </ul>
+            <p>需要注意的是，1微克β-胡萝卜素约等于0.167微克RAE。</p>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>夜盲症：</strong>维生素A缺乏最早出现的症状，表现为在昏暗环境下视力下降，看不清物体。</li>
+                <li><strong>干眼病：</strong>结膜和角膜干燥，严重时可导致角膜软化、溃疡甚至失明。</li>
+                <li><strong>皮肤问题：</strong>皮肤干燥、粗糙、脱屑，毛囊角化过度。</li>
+                <li><strong>免疫功能下降：</strong>容易反复感染，特别是呼吸道和消化道感染。</li>
+                <li><strong>生长发育迟缓：</strong>儿童维生素A缺乏可能导致生长发育迟缓。</li>
+                <li><strong>生殖功能障碍：</strong>严重缺乏可能影响生殖功能。</li>
+            </ul>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>急性中毒：</strong>一次性大量摄入维生素A（成人超过30万微克RAE，儿童超过15万微克RAE）可能导致急性中毒，表现为恶心、呕吐、头痛、眩晕、视觉模糊等。</li>
+                <li><strong>慢性中毒：</strong>长期过量摄入（成人每天超过3000微克RAE）可能导致慢性中毒，表现为头痛、脱发、皮肤干燥、关节疼痛、肝脾肿大、骨密度下降等。</li>
+                <li><strong>致畸作用：</strong>孕妇摄入过量维生素A（每天超过3000微克RAE）可能增加胎儿畸形的风险。</li>
+                <li><strong>骨质疏松风险增加：</strong>长期过量摄入可能促进骨钙流失，增加骨质疏松风险。</li>
+                <li><strong>需要注意的是，</strong>类胡萝卜素摄入过量一般不会引起中毒，可能导致皮肤暂时性变黄（胡萝卜素血症），减少摄入后可自行消退。</li>
+            </ul>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 维生素A是脂溶性维生素，与脂肪一起摄入可提高吸收率。例如，在吃胡萝卜时可适当搭配少量油脂。</p>
+                <p>2. 深色蔬菜烹饪后类胡萝卜素的吸收率更高，但应避免长时间高温烹饪。</p>
+                <p>3. 动物肝脏虽然富含维生素A，但同时也可能含有较高的胆固醇和环境污染物，建议适量食用，每周不超过1-2次。</p>
+                <p>4. 对于无法经常食用动物性食物的人群，可适当多摄入富含类胡萝卜素的蔬果。</p>
+                <p>5. 补充维生素A制剂时应遵循医嘱或产品说明，避免过量摄入。孕妇尤其需要注意控制摄入量。</p>
+                <p>6. 维生素A与维生素D、E、K等其他脂溶性维生素协同作用，保持均衡饮食有助于这些维生素的平衡。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

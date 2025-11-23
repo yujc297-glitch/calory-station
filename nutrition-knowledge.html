@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 42px;
+            color: #2e8b57;
+            margin-bottom: 15px;
+        }
+        
+        .title-section h2 {
+            font-size: 24px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        .title-section p {
+            font-size: 18px;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 分类区域样式 */
+        .category-section {
+            margin-bottom: 60px;
+        }
+        
+        .category-title {
+            font-size: 28px;
+            color: #2e8b57;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        /* 营养卡片网格布局 */
+        .nutrition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        /* 营养卡片样式 */
+        .nutrition-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .nutrition-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .nutrition-card h3 {
+            font-size: 20px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        .nutrition-card .function {
+            color: #555;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .nutrition-card .source {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        /* 详细介绍按钮样式 */
+        .btn-detail {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-detail:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 提示条样式 */
+        .notice-bar {
+            background-color: #e8f5e8;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            color: #555;
+            font-size: 14px;
+            margin: 40px 0;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html" class="active">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>营养科普</h1>
+            <h2>全面了解人体所需营养成分与食物来源</h2>
+            <p>本页面是营养成分的总目录，点击每个成分的「详细介绍」按钮可进入具体科普页面，了解更多关于各类营养素的详细信息。</p>
+        </section>
+        
+        <!-- 提示条 -->
+        <div class="notice-bar">
+            本页面为营养科普信息，仅供学习参考，不作为医疗诊断或个性化营养处方依据。
+        </div>
+        
+        <!-- 1. 宏量营养素 -->
+        <section class="category-section">
+            <h2 class="category-title">1. 宏量营养素</h2>
+            <div class="nutrition-grid">
+                <div class="nutrition-card">
+                    <h3>蛋白质</h3>
+                    <p class="function">构成人体肌肉与组织的重要原料</p>
+                    <p class="source">常见食物来源：肉类、鱼、蛋、奶、豆制品</p>
+                    <a href="nutrient-protein.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>脂肪</h3>
+                    <p class="function">提供能量，保护器官，参与荷尔蒙合成</p>
+                    <p class="source">常见食物来源：植物油、坚果、肉类、奶制品</p>
+                    <a href="nutrient-fat.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>碳水化合物</h3>
+                    <p class="function">人体最主要的能量来源</p>
+                    <p class="source">常见食物来源：谷物、水果、蔬菜、淀粉类食物</p>
+                    <a href="nutrient-carbohydrate.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>膳食纤维</h3>
+                    <p class="function">促进肠道健康，帮助控制血糖和胆固醇</p>
+                    <p class="source">常见食物来源：全谷物、蔬菜、水果、豆类</p>
+                    <a href="nutrient-dietary-fiber.html" class="btn-detail">详细介绍</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 2. 脂肪相关细分成分 -->
+        <section class="category-section">
+            <h2 class="category-title">2. 脂肪相关细分成分</h2>
+            <div class="nutrition-grid">
+                <div class="nutrition-card">
+                    <h3>饱和脂肪酸</h3>
+                    <p class="function">影响胆固醇水平，摄入应适量</p>
+                    <p class="source">常见食物来源：动物脂肪、棕榈油、椰子油</p>
+                    <a href="nutrient-saturated-fat.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>单不饱和脂肪酸</h3>
+                    <p class="function">有助于降低坏胆固醇，保护心血管健康</p>
+                    <p class="source">常见食物来源：橄榄油、坚果、牛油果</p>
+                    <a href="nutrient-monounsaturated-fat.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>多不饱和脂肪酸</h3>
+                    <p class="function">包括Omega-3和Omega-6，对心脏和大脑健康有益</p>
+                    <p class="source">常见食物来源：鱼类、植物油、坚果</p>
+                    <a href="nutrient-polyunsaturated-fat.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>反式脂肪酸</h3>
+                    <p class="function">有害健康，应尽量避免摄入</p>
+                    <p class="source">常见食物来源：部分氢化植物油、油炸食品、加工食品</p>
+                    <a href="nutrient-trans-fat.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>胆固醇</h3>
+                    <p class="function">参与细胞膜形成和激素合成</p>
+                    <p class="source">常见食物来源：动物内脏、蛋黄、肉类</p>
+                    <a href="nutrient-cholesterol.html" class="btn-detail">详细介绍</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 3. 维生素类 -->
+        <section class="category-section">
+            <h2 class="category-title">3. 维生素类</h2>
+            <div class="nutrition-grid">
+                <div class="nutrition-card">
+                    <h3>维生素 A</h3>
+                    <p class="function">有助于视力与上皮细胞健康</p>
+                    <p class="source">常见食物来源：肝脏、胡萝卜、菠菜、南瓜</p>
+                    <a href="nutrient-vitamin-a.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>维生素 B1（硫胺素）</h3>
+                    <p class="function">参与能量代谢，维持神经系统健康</p>
+                    <p class="source">常见食物来源：全谷物、豆类、坚果、瘦肉</p>
+                    <a href="nutrient-vitamin-b1.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>维生素 B2（核黄素）</h3>
+                    <p class="function">参与能量代谢和细胞功能</p>
+                    <p class="source">常见食物来源：乳制品、瘦肉、绿叶蔬菜</p>
+                    <a href="nutrient-vitamin-b2.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>维生素 B3（烟酸）</h3>
+                    <p class="function">参与能量代谢，维持皮肤健康</p>
+                    <p class="source">常见食物来源：肉类、全谷物、坚果</p>
+                    <a href="nutrient-vitamin-b3.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>维生素 B6</h3>
+                    <p class="function">参与蛋白质代谢和神经递质合成</p>
+                    <p class="source">常见食物来源：肉类、鱼类、全谷物、豆类</p>
+                    <a href="nutrient-vitamin-b6.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>维生素 B12</h3>
+                    <p class="function">参与红细胞形成和神经功能</p>
+                    <p class="source">常见食物来源：肉类、鱼类、蛋类、奶制品</p>
+                    <a href="nutrient-vitamin-b12.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>叶酸（维生素 B9）</h3>
+                    <p class="function">参与DNA合成，对胎儿发育至关重要</p>
+                    <p class="source">常见食物来源：绿叶蔬菜、豆类、强化谷物</p>
+                    <a href="nutrient-folate.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>维生素 C</h3>
+                    <p class="function">抗氧化，促进铁吸收，支持免疫系统</p>
+                    <p class="source">常见食物来源：柑橘类水果、草莓、西兰花</p>
+                    <a href="nutrient-vitamin-c.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>维生素 D</h3>
+                    <p class="function">促进钙吸收，维持骨骼健康</p>
+                    <p class="source">常见食物来源：鱼类、蛋黄、强化食品、阳光照射</p>
+                    <a href="nutrient-vitamin-d.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>维生素 E</h3>
+                    <p class="function">抗氧化，保护细胞免受自由基损伤</p>
+                    <p class="source">常见食物来源：植物油、坚果、种子、绿叶蔬菜</p>
+                    <a href="nutrient-vitamin-e.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>维生素 K</h3>
+                    <p class="function">参与血液凝固和骨骼健康</p>
+                    <p class="source">常见食物来源：绿叶蔬菜、发酵食品</p>
+                    <a href="nutrient-vitamin-k.html" class="btn-detail">详细介绍</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 4. 矿物质/微量元素 -->
+        <section class="category-section">
+            <h2 class="category-title">4. 矿物质 / 微量元素</h2>
+            <div class="nutrition-grid">
+                <div class="nutrition-card">
+                    <h3>钙（Ca）</h3>
+                    <p class="function">维持骨骼结构，参与神经与肌肉兴奋</p>
+                    <p class="source">常见食物来源：乳制品、绿叶蔬菜、豆制品</p>
+                    <a href="nutrient-calcium.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>铁（Fe）</h3>
+                    <p class="function">参与造血，运输氧气</p>
+                    <p class="source">常见食物来源：红肉、肝脏、豆类、深绿色蔬菜</p>
+                    <a href="nutrient-iron.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>锌（Zn）</h3>
+                    <p class="function">参与免疫系统功能，伤口愈合，DNA合成</p>
+                    <p class="source">常见食物来源：肉类、贝类、豆类、坚果</p>
+                    <a href="nutrient-zinc.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>镁（Mg）</h3>
+                    <p class="function">参与能量代谢，肌肉和神经功能</p>
+                    <p class="source">常见食物来源：全谷物、坚果、绿叶蔬菜</p>
+                    <a href="nutrient-magnesium.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>钠（Na）</h3>
+                    <p class="function">维持体液平衡和神经功能</p>
+                    <p class="source">常见食物来源：食盐、加工食品、调味品</p>
+                    <a href="nutrient-sodium.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>钾（K）</h3>
+                    <p class="function">维持血压和心率，参与肌肉收缩</p>
+                    <p class="source">常见食物来源：香蕉、土豆、菠菜、橙子</p>
+                    <a href="nutrient-potassium.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>磷（P）</h3>
+                    <p class="function">与钙共同构成骨骼和牙齿</p>
+                    <p class="source">常见食物来源：肉类、鱼类、乳制品、全谷物</p>
+                    <a href="nutrient-phosphorus.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>碘（I）</h3>
+                    <p class="function">参与甲状腺激素合成</p>
+                    <p class="source">常见食物来源：碘盐、海产品、乳制品</p>
+                    <a href="nutrient-iodine.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>硒（Se）</h3>
+                    <p class="function">抗氧化，支持免疫系统</p>
+                    <p class="source">常见食物来源：海鲜、肉类、全谷物、坚果</p>
+                    <a href="nutrient-selenium.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>铜（Cu）</h3>
+                    <p class="function">参与铁代谢和抗氧化防御</p>
+                    <p class="source">常见食物来源：肝脏、贝类、坚果、全谷物</p>
+                    <a href="nutrient-copper.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>锰（Mn）</h3>
+                    <p class="function">参与骨骼形成和代谢过程</p>
+                    <p class="source">常见食物来源：全谷物、坚果、茶叶、豆类</p>
+                    <a href="nutrient-manganese.html" class="btn-detail">详细介绍</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 5. 其他常见营养与健康相关成分 -->
+        <section class="category-section">
+            <h2 class="category-title">5. 其他常见营养与健康相关成分</h2>
+            <div class="nutrition-grid">
+                <div class="nutrition-card">
+                    <h3>Omega-3 脂肪酸</h3>
+                    <p class="function">对心脏健康、大脑功能和抗炎有重要作用</p>
+                    <p class="source">常见食物来源：深海鱼类、亚麻籽、核桃</p>
+                    <a href="nutrient-omega3.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>植物多酚 / 抗氧化物质</h3>
+                    <p class="function">抗氧化，保护细胞，降低慢性疾病风险</p>
+                    <p class="source">常见食物来源：水果、蔬菜、茶叶、红酒</p>
+                    <a href="nutrient-polyphenols.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>益生菌</h3>
+                    <p class="function">有益肠道健康，支持免疫系统</p>
+                    <p class="source">常见食物来源：酸奶、发酵食品、益生菌补充剂</p>
+                    <a href="nutrient-probiotics.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>益生元</h3>
+                    <p class="function">促进肠道有益菌生长的膳食纤维</p>
+                    <p class="source">常见食物来源：菊粉、洋葱、大蒜、香蕉</p>
+                    <a href="nutrient-prebiotics.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>添加糖 / 游离糖</h3>
+                    <p class="function">过量摄入可能导致肥胖和慢性疾病</p>
+                    <p class="source">常见食物来源：糖果、饮料、甜点、加工食品</p>
+                    <a href="nutrient-added-sugar.html" class="btn-detail">详细介绍</a>
+                </div>
+                
+                <div class="nutrition-card">
+                    <h3>钠盐摄入</h3>
+                    <p class="function">过量摄入与高血压风险相关</p>
+                    <p class="source">常见食物来源：加工食品、腌制食品、调味品</p>
+                    <a href="nutrient-salt-intake.html" class="btn-detail">详细介绍</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 提示条 -->
+        <div class="notice-bar">
+            本页面为营养科普信息，仅供学习参考，不作为医疗诊断或个性化营养处方依据。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加糖 / 游离糖 - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        .title-section p {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .content-section h2 {
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section h3 {
+            color: #1e88e5;
+            margin: 20px 0 15px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+        }
+        
+        .content-section ul {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        
+        .content-section li {
+            margin-bottom: 8px;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #f0f7f0;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #f0f7ff;
+            border-left: 4px solid #1e88e5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1e88e5;
+            margin-bottom: 10px;
+        }
+        
+        /* 警告框样式 */
+        .warning-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box h3 {
+            color: #ffb300;
+            margin-bottom: 10px;
+        }
+        
+        /* 健康风险框样式 */
+        .risk-box {
+            background-color: #ffebee;
+            border-left: 4px solid #e53935;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .risk-box h3 {
+            color: #e53935;
+            margin-bottom: 10px;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #fff8e1;
+            padding: 20px;
+            text-align: center;
+            margin: 40px 0;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #7d6f47;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+        
+        .footer p:last-child {
+            margin-bottom: 0;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>添加糖 / 游离糖</h1>
+            <p>了解过量摄入的健康风险与合理控制方法</p>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>定义</h2>
+            <p>添加糖（Added sugars）是指在食品和饮料的加工、制备或烹饪过程中添加的单糖和双糖，以及作为甜味剂使用的糖浆和蜂蜜等。而游离糖（Free sugars）的概念更广泛，除了添加糖外，还包括天然存在于蜂蜜、糖浆、果汁和浓缩果汁中的糖，但不包括完整水果和蔬菜中的内源性糖。</p>
+            <h3>常见的添加糖种类</h3>
+            <ul>
+                <li><strong>单糖：</strong>
+                    <ul>
+                        <li>葡萄糖（Glucose）</li>
+                        <li>果糖（Fructose）</li>
+                    </ul>
+                </li>
+                <li><strong>双糖：</strong>
+                    <ul>
+                        <li>蔗糖（Sucrose）：由葡萄糖和果糖组成，普通食用糖</li>
+                        <li>乳糖（Lactose）：存在于乳制品中</li>
+                        <li>麦芽糖（Maltose）：由两个葡萄糖分子组成</li>
+                    </ul>
+                </li>
+                <li><strong>糖浆类：</strong>
+                    <ul>
+                        <li>高果糖玉米糖浆（High-fructose corn syrup）</li>
+                        <li>玉米糖浆（Corn syrup）</li>
+                        <li>麦芽糖浆（Malt syrup）</li>
+                        <li>转化糖浆（Invert syrup）</li>
+                        <li>龙舌兰糖浆（Agave syrup）</li>
+                        <li>枫糖浆（Maple syrup）</li>
+                    </ul>
+                </li>
+                <li><strong>其他甜味剂：</strong>
+                    <ul>
+                        <li>蜂蜜（Honey）</li>
+                        <li>糖蜜（Molasses）</li>
+                        <li>红糖（Brown sugar）</li>
+                        <li>冰糖（Rock sugar）</li>
+                        <li>椰子糖（Coconut sugar）</li>
+                        <li>各种水果浓缩汁</li>
+                    </ul>
+                </li>
+            </ul>
+            <h3>食品标签中常见的添加糖名称</h3>
+            <ul>
+                <li>蔗糖、砂糖、白糖、红糖、冰糖</li>
+                <li>果糖、葡萄糖、右旋糖</li>
+                <li>高果糖玉米糖浆（玉米甜味剂）</li>
+                <li>麦芽糖、麦芽糊精</li>
+                <li>乳糖（在非乳制品中作为添加糖）</li>
+                <li>蜂蜜、枫糖、龙舌兰蜜</li>
+                <li>转化糖、水解淀粉</li>
+                <li>各种水果糖浆、浓缩果汁</li>
+                <li>糖蜜、焦糖</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>主要健康风险</h2>
+            <div class="risk-box">
+                <h3>过量摄入添加糖/游离糖可能导致的健康问题：</h3>
+            </div>
+            
+            <ul>
+                <li><strong>肥胖和代谢综合征：</strong>
+                    <ul>
+                        <li>高添加糖饮食与体重增加和肥胖风险显著相关</li>
+                        <li>液体形式的添加糖（如含糖饮料）特别容易导致能量摄入过多</li>
+                        <li>果糖代谢特点可能促进脂肪合成和储存，尤其是腹部脂肪</li>
+                        <li>增加代谢综合征风险（高血压、高血糖、腹部肥胖、血脂异常的组合）</li>
+                    </ul>
+                </li>
+                <li><strong>心血管疾病：</strong>
+                    <ul>
+                        <li>增加心脏病和中风的风险</li>
+                        <li>升高血压</li>
+                        <li>导致血脂异常（高甘油三酯、低HDL胆固醇）</li>
+                        <li>增加炎症标志物水平</li>
+                        <li>可能导致血管内皮功能障碍</li>
+                    </ul>
+                </li>
+                <li><strong>2型糖尿病：</strong>
+                    <ul>
+                        <li>长期高添加糖摄入会增加2型糖尿病风险</li>
+                        <li>可能导致胰岛素抵抗</li>
+                        <li>过量果糖可能损害胰腺β细胞功能</li>
+                        <li>肥胖是糖尿病的主要风险因素，而添加糖摄入是肥胖的重要原因</li>
+                    </ul>
+                </li>
+                <li><strong>肝脏健康问题：</strong>
+                    <ul>
+                        <li>过量果糖摄入可导致非酒精性脂肪肝（NAFLD）</li>
+                        <li>可能进展为非酒精性脂肪性肝炎（NASH）</li>
+                        <li>长期可导致肝硬化甚至肝癌</li>
+                        <li>影响肝脏解毒功能</li>
+                    </ul>
+                </li>
+                <li><strong>牙齿健康：</strong>
+                    <ul>
+                        <li>是龋齿（蛀牙）的主要原因</li>
+                        <li>口腔细菌利用糖产生酸性物质，侵蚀牙齿珐琅质</li>
+                        <li>频繁摄入含糖食物和饮料会持续损害牙齿</li>
+                    </ul>
+                </li>
+                <li><strong>其他健康问题：</strong>
+                    <ul>
+                        <li>增加某些癌症风险（如结直肠癌、乳腺癌等）</li>
+                        <li>影响免疫系统功能</li>
+                        <li>可能加剧炎症性疾病</li>
+                        <li>与抑郁和焦虑风险增加相关</li>
+                        <li>影响认知功能，特别是记忆力和学习能力</li>
+                        <li>可能加速皮肤老化</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>主要食物来源</h2>
+            <ul>
+                <li><strong>饮料类：</strong>
+                    <ul>
+                        <li>碳酸饮料（可乐、雪碧等）</li>
+                        <li>果汁饮料和果味饮料</li>
+                        <li>运动饮料和能量饮料</li>
+                        <li>奶茶、含糖咖啡饮品</li>
+                        <li>即饮茶饮料</li>
+                        <li>植物蛋白饮料（如含糖豆浆、杏仁露等）</li>
+                    </ul>
+                </li>
+                <li><strong>甜点和糖果：</strong>
+                    <ul>
+                        <li>各类糖果（巧克力、硬糖、软糖等）</li>
+                        <li>蛋糕、饼干、糕点</li>
+                        <li>冰淇淋、雪糕、冰棍</li>
+                        <li>果冻、布丁、慕斯</li>
+                        <li>巧克力制品</li>
+                        <li>甜甜圈、松饼</li>
+                    </ul>
+                </li>
+                <li><strong>加工食品：</strong>
+                    <ul>
+                        <li>早餐麦片（许多即食麦片含糖量高）</li>
+                        <li>果酱、蜜饯、果脯</li>
+                        <li>调味酸奶（部分含糖量较高）</li>
+                        <li>沙拉酱、番茄酱等调味品</li>
+                        <li>一些罐头食品（如糖水水果罐头）</li>
+                        <li>饼干、薯片等零食（许多添加糖作为调味剂）</li>
+                        <li>方便食品和冷冻食品</li>
+                    </ul>
+                </li>
+                <li><strong>烹饪中添加：</strong>
+                    <ul>
+                        <li>烹饪过程中添加的糖（如糖醋菜、拔丝类菜品）</li>
+                        <li>甜饮料自制添加的糖</li>
+                        <li>咖啡、茶中添加的糖</li>
+                    </ul>
+                </li>
+                <li><strong>其他：</strong>
+                    <ul>
+                        <li>蜂蜜、枫糖浆等天然甜味剂（尽管被视为"天然"，但仍属于游离糖）</li>
+                        <li>浓缩果汁和果汁饮料</li>
+                        <li>水果干（尽管保留了水果的营养，但糖被浓缩，且失去了膳食纤维的部分益处）</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="info-box">
+                <h3>注意</h3>
+                <p>许多加工食品中含有"隐藏糖"，即添加糖但在食品名称中不明显。例如，番茄酱、沙拉酱、烧烤酱、面包、早餐麦片等看似不甜的食品，往往含有大量添加糖。阅读食品标签，查看配料表和营养成分表是识别添加糖的重要方法。</p>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入建议</h2>
+            <p>世界卫生组织（WHO）和中国营养学会等权威机构对添加糖/游离糖的摄入有明确建议：</p>
+            <ul>
+                <li><strong>WHO建议：</strong>
+                    <ul>
+                        <li>将游离糖的摄入量减少到总能量摄入的10%以下</li>
+                        <li>进一步建议将游离糖的摄入量减少到总能量摄入的5%以下（约25克，相当于6茶匙糖），以获得额外的健康益处</li>
+                    </ul>
+                </li>
+                <li><strong>中国营养学会建议：</strong>
+                    <ul>
+                        <li>添加糖的摄入量不超过总能量摄入的10%（对于轻体力活动成人约为50克/天）</li>
+                        <li>最好控制在25克/天以下（约6茶匙）</li>
+                    </ul>
+                </li>
+                <li><strong>特殊人群考虑：</strong>
+                    <ul>
+                        <li>儿童：应该严格限制添加糖摄入，避免养成嗜甜习惯</li>
+                        <li>糖尿病患者：应严格控制添加糖摄入，遵循医生或营养师的个体化建议</li>
+                        <li>超重/肥胖人群：应大幅减少添加糖摄入</li>
+                        <li>心血管疾病高风险人群：应控制添加糖摄入</li>
+                    </ul>
+                </li>
+            </ul>
+            <p>需要注意的是，这些建议指的是添加糖或游离糖，不包括完整水果和蔬菜中天然存在的糖，后者与膳食纤维一起摄入，对健康的影响较小。</p>
+        </section>
+        
+        <section class="content-section">
+            <h2>如何减少添加糖摄入</h2>
+            <div class="tip-box">
+                <h3>实用小贴士：</h3>
+                <ul>
+                    <li><strong>阅读食品标签：</strong>
+                        <ul>
+                            <li>检查配料表，识别各种添加糖的名称</li>
+                            <li>注意"每100克"或"每份"中的糖含量</li>
+                            <li>选择配料表中糖排名靠后的产品</li>
+                        </ul>
+                    </li>
+                    <li><strong>选择天然甜味：</strong>
+                        <ul>
+                            <li>用完整水果替代甜点和糖果</li>
+                            <li>在烹饪中使用少量香草和香料（如肉桂、香草精、柠檬）增加风味</li>
+                            <li>逐渐减少烹饪中添加的糖量，适应较淡的口味</li>
+                        </ul>
+                    </li>
+                    <li><strong>饮品选择：</strong>
+                        <ul>
+                            <li>以水为主要饮品</li>
+                            <li>选择不加糖的茶或黑咖啡</li>
+                            <li>避免含糖饮料、果汁饮料和运动饮料</li>
+                            <li>如选择酸奶，优先选择无糖或低糖产品</li>
+                        </ul>
+                    </li>
+                    <li><strong>饮食调整：</strong>
+                        <ul>
+                            <li>增加全谷物、蔬菜、豆类和健康脂肪的摄入</li>
+                            <li>保证足够的蛋白质摄入，有助于稳定血糖和减少饥饿感</li>
+                            <li>饮食规律，避免过度饥饿导致的高糖食物渴望</li>
+                        </ul>
+                    </li>
+                    <li><strong>烹饪技巧：</strong>
+                        <ul>
+                            <li>尝试使用天然甜味剂的替代品（如少量肉桂、香草精）</li>
+                            <li>使用酸味食物（如柠檬、醋）平衡甜味</li>
+                            <li>减少糖醋类菜肴的糖用量</li>
+                            <li>尝试使用少量甜味蔬菜（如胡萝卜、甜椒）增加天然甜味</li>
+                        </ul>
+                    </li>
+                    <li><strong>其他策略：</strong>
+                        <ul>
+                            <li>逐步减少糖摄入，让味蕾逐渐适应较淡的口味</li>
+                            <li>避免在餐间吃高糖零食</li>
+                            <li>保持充足的水分摄入，有时口渴会被误认为是饥饿或糖渴望</li>
+                            <li>保证充足的睡眠，睡眠不足可能增加对糖的渴望</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="warning-box">
+            <h3>注意事项</h3>
+            <ul>
+                <li>减少添加糖摄入不意味着可以无限制摄入人工甜味剂。虽然人工甜味剂提供甜味但几乎不含热量，但它们对健康的长期影响仍需更多研究</li>
+                <li>果汁即使是100%纯果汁，也含有游离糖，应适量饮用，不能替代完整水果</li>
+                <li>儿童应特别注意控制添加糖摄入，避免养成嗜甜习惯，影响终身健康</li>
+                <li>糖尿病患者需要在医生或营养师指导下严格控制添加糖摄入</li>
+                <li>突然大幅减少糖摄入可能导致暂时的不适（如头痛、疲劳、情绪变化），建议逐步减少</li>
+            </ul>
+        </section>
+        
+        <section class="info-box">
+            <h3>健康小知识</h3>
+            <p>添加糖与天然存在于完整水果和蔬菜中的糖有重要区别。完整水果中的糖被膳食纤维包围，释放较慢，不会导致血糖快速大幅波动。此外，完整水果还提供维生素、矿物质、抗氧化物质和植物化合物等营养成分。相比之下，添加糖提供"空热量"（高热量但几乎无其他营养价值），容易导致能量摄入过多，并且会引起血糖快速升高。因此，营养专家建议通过完整水果获取甜味，而不是通过添加糖或果汁。</p>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            <p>本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。</p>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 卡路里基站 Calorie Station - AI智能膳食与营养管理平台</p>
+            <p>本网站提供的营养信息仅供参考，不构成医疗建议</p>
+        </div>
+    </footer>
+</body>
+</html>

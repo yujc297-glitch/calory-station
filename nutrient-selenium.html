@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>硒 Selenium - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>硒 Selenium (Se)</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>硒（Selenium，Se）是人体必需的微量元素之一，在成人体内约含14-21毫克。硒主要以含硒蛋白质的形式存在于体内，其中以硒代半胱氨酸的形式参与多种酶的组成。硒在抗氧化防御系统中发挥着关键作用，被誉为"抗癌微量元素"。硒的摄入量与地区土壤中硒的含量密切相关，不同地区的食物中硒含量差异很大。</p>
+            
+            <div class="info-box">
+                <h3>【硒的存在形式】</h3>
+                <p>在食物中，硒主要以有机硒和无机硒两种形式存在。有机硒（如硒代蛋氨酸、硒代半胱氨酸）主要存在于动物性食品和植物性食品中，吸收率较高（约50%-90%）；无机硒（如亚硒酸钠、硒酸钠）主要存在于强化食品和补充剂中，吸收率相对较低（约30%-50%）。</p>
+            </div>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>抗氧化防御：</strong>是谷胱甘肽过氧化物酶（GSH-Px）的重要组成成分，能清除体内自由基和过氧化物，保护细胞免受氧化损伤。</li>
+                <li><strong>免疫调节：</strong>增强免疫系统的功能，促进抗体的产生和免疫细胞的增殖。</li>
+                <li><strong>甲状腺功能：</strong>参与甲状腺激素的合成、活化和代谢，是碘甲状腺原氨酸脱碘酶的组成成分。</li>
+                <li><strong>DNA合成与修复：</strong>参与DNA的合成和修复过程，减少DNA损伤。</li>
+                <li><strong>解毒作用：</strong>与金属元素（如汞、镉、铅等）结合，减轻其毒性。</li>
+                <li><strong>心血管健康：</strong>降低心血管疾病的风险，保护心血管内皮细胞。</li>
+                <li><strong>抗癌作用：</strong>通过抗氧化、免疫调节、抑制肿瘤血管生成等多种途径发挥抗癌作用。</li>
+                <li><strong>生殖功能：</strong>对男性生殖系统的发育和功能至关重要，影响精子的质量和活力。</li>
+                <li><strong>神经保护：</strong>保护神经系统，参与神经递质的代谢。</li>
+                <li><strong>延缓衰老：</strong>通过抗氧化作用延缓细胞衰老过程。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <p>食物中硒的含量受土壤硒含量的影响很大，以下是一些富含硒的食物（按硒含量从高到低排序）：</p>
+            <ul>
+                <li><strong>高硒食物（每100克含硒超过50微克）：</strong></li>
+                <li>- 海产品：海参、海蟹、牡蛎、沙丁鱼等。</li>
+                <li>- 动物内脏：猪肝、牛肝、羊肝等。</li>
+                <li>- 肉类：牛肉、羊肉、猪肉等，尤其是瘦肉部分。</li>
+                <li>- 坚果和种子：巴西坚果（特别富含硒，但需注意适量）、核桃、杏仁等。</li>
+                <li><strong>中等硒含量食物（每100克含硒10-50微克）：</strong></li>
+                <li>- 家禽：鸡肉、鸭肉等。</li>
+                <li>- 鱼类：鲤鱼、草鱼、鲫鱼等。</li>
+                <li>- 蛋类：鸡蛋、鸭蛋等。</li>
+                <li>- 全谷物：燕麦、糙米、全麦面包等。</li>
+                <li>- 豆类：黄豆、黑豆、红豆等。</li>
+                <li><strong>低硒食物（每100克含硒少于10微克）：</strong></li>
+                <li>- 大部分水果和蔬菜（除了生长在高硒土壤中的品种）。</li>
+                <li>- 乳制品：牛奶、酸奶等。</li>
+                <li>- 精制谷物：白米、白面粉等。</li>
+            </ul>
+            <p>需要注意的是，巴西坚果的硒含量极高（每颗约含68-91微克硒），过量食用可能导致硒中毒，建议每周食用不超过2-3颗。</p>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食硒推荐摄入量：</p>
+            <ul>
+                <li>0-6个月：15微克/天</li>
+                <li>7-12个月：20微克/天</li>
+                <li>1-3岁：25微克/天</li>
+                <li>4-6岁：30微克/天</li>
+                <li>7-10岁：40微克/天</li>
+                <li>11-13岁：50微克/天</li>
+                <li>14-17岁：60微克/天</li>
+                <li>18岁及以上：60微克/天</li>
+                <li>孕妇（孕早期）：65微克/天</li>
+                <li>孕妇（孕中期）：65微克/天</li>
+                <li>孕妇（孕晚期）：65微克/天</li>
+                <li>乳母：75微克/天</li>
+            </ul>
+            <p>需要注意的是，以下人群可能需要特别关注硒的摄入：</p>
+            <ul>
+                <li><strong>低硒地区居民：</strong>生活在土壤硒含量低的地区的人群，食物中硒含量可能不足。</li>
+                <li><strong>孕妇和乳母：</strong>需要额外的硒来满足胎儿发育和乳汁分泌的需求。</li>
+                <li><strong>免疫力低下人群：</strong>硒可以增强免疫力。</li>
+                <li><strong>甲状腺疾病患者：</strong>硒参与甲状腺激素的代谢。</li>
+                <li><strong>心血管疾病患者：</strong>硒对心血管健康有益。</li>
+                <li><strong>老年人：</strong>可能因摄入不足或吸收不良导致硒缺乏。</li>
+                <li><strong>素食者：</strong>尤其是严格素食者，食物中的硒含量可能较低。</li>
+                <li><strong>长期饮酒者：</strong>酒精可能影响硒的吸收和利用。</li>
+            </ul>
+            
+            <div class="info-box">
+                <h3>【影响硒吸收的因素】</h3>
+                <p>1. 硒的化学形式：有机硒（如硒代蛋氨酸）的吸收率高于无机硒。</p>
+                <p>2. 其他营养素：维生素E可以协同硒的抗氧化作用；重金属（如汞、镉、铅）可能干扰硒的吸收和利用。</p>
+                <p>3. 疾病状态：胃肠道疾病可能影响硒的吸收；某些慢性疾病可能增加硒的需要量。</p>
+                <p>4. 药物：某些药物（如避孕药、抗惊厥药等）可能影响硒的代谢。</p>
+            </div>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>克山病：</strong>一种与硒缺乏密切相关的地方性心肌病，主要表现为心律失常、心力衰竭等。</li>
+                <li><strong>大骨节病：</strong>也与硒缺乏有关，表现为骨关节疼痛、变形、活动受限等。</li>
+                <li><strong>免疫力下降：</strong>容易感染疾病，伤口愈合缓慢。</li>
+                <li><strong>抗氧化能力减弱：</strong>体内自由基增加，氧化损伤加重。</li>
+                <li><strong>甲状腺功能异常：</strong>可能导致甲状腺功能减退。</li>
+                <li><strong>心血管疾病风险增加：</strong>可能与抗氧化能力下降有关。</li>
+                <li><strong>认知功能受损：</strong>可能出现记忆力下降、注意力不集中等。</li>
+                <li><strong>生殖功能障碍：</strong>男性可能出现精子质量下降。</li>
+                <li><strong>肌肉无力：</strong>可能与肌肉中的硒蛋白功能异常有关。</li>
+                <li><strong>皮肤问题：</strong>可能出现皮肤干燥、脱屑等。</li>
+            </ul>
+            <p>硒缺乏通常是渐进性的，早期可能没有明显症状。长期硒摄入不足会增加多种疾病的风险，尤其是在低硒地区。</p>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>硒中毒：</strong>急性硒中毒表现为恶心、呕吐、腹泻、头痛、头晕、呼吸困难等；慢性硒中毒表现为脱发、指甲变形、皮肤损害、神经系统症状等。</li>
+                <li><strong>胃肠道不适：</strong>可能出现恶心、呕吐、腹泻、腹痛等症状。</li>
+                <li><strong>指甲和毛发改变：</strong>指甲变脆、脱落，头发脱落等。</li>
+                <li><strong>神经系统症状：</strong>可能出现头痛、头晕、共济失调、感觉异常等。</li>
+                <li><strong>皮肤损害：</strong>可能出现皮疹、皮肤瘙痒、皮肤变色等。</li>
+                <li><strong>大蒜气味：</strong>过量摄入硒可能导致呼吸和汗液中有大蒜气味。</li>
+                <li><strong>肝脏和肾脏损害：</strong>长期过量摄入可能导致肝肾功能异常。</li>
+                <li><strong>免疫功能抑制：</strong>过高的硒摄入可能抑制免疫系统的功能。</li>
+            </ul>
+            <p>中国居民膳食硒可耐受最高摄入量（UL）：</p>
+            <ul>
+                <li>0-1岁：55微克/天</li>
+                <li>1-3岁：120微克/天</li>
+                <li>4-6岁：180微克/天</li>
+                <li>7-10岁：240微克/天</li>
+                <li>11-17岁：300微克/天</li>
+                <li>18岁及以上：400微克/天</li>
+                <li>孕妇：400微克/天</li>
+                <li>乳母：400微克/天</li>
+            </ul>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 均衡饮食是获取足够硒的最佳方式，优先选择富含硒的动物性食品。</p>
+                <p>2. 对于生活在低硒地区的人群，应适当增加富含硒的食物摄入。</p>
+                <p>3. 巴西坚果虽然富含硒，但由于其硒含量极高，建议每周食用不超过2-3颗。</p>
+                <p>4. 硒与维生素E具有协同作用，可以同时摄入富含这两种营养素的食物。</p>
+                <p>5. 避免过量摄入硒补充剂，以免导致硒中毒。</p>
+                <p>6. 对于容易缺硒的人群（如孕妇、乳母、低硒地区居民等），应在医生或营养师的指导下适当补充硒剂。</p>
+                <p>7. 注意食物的多样性，以确保摄入足够的硒。</p>
+                <p>8. 长期饮酒者应特别注意硒的摄入，因为酒精可能影响硒的吸收和利用。</p>
+                <p>9. 保持良好的饮食习惯，避免挑食、偏食。</p>
+                <p>10. 定期进行体检，特别是生活在低硒地区的人群，以便及早发现和治疗硒缺乏。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>维生素B6 Vitamin B6 - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>维生素B6 Vitamin B6</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>维生素B6，又称吡哆醇（Pyridoxine），是B族维生素的一种，属于水溶性维生素。它在体内主要以磷酸吡哆醛（PLP）和磷酸吡哆胺（PMP）的形式作为辅酶参与多种代谢反应。维生素B6在酸性环境中稳定，但在碱性环境中容易被破坏，对光敏感，特别是紫外线。维生素B6参与氨基酸代谢、神经递质合成、血红素合成等多种生理过程。</p>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>氨基酸代谢：</strong>作为转氨酶、脱羧酶等多种酶的辅酶，参与氨基酸的代谢，包括转氨基、脱羧基、脱硫等反应。</li>
+                <li><strong>神经递质合成：</strong>参与多巴胺、血清素、去甲肾上腺素、γ-氨基丁酸（GABA）等神经递质的合成。</li>
+                <li><strong>血红素合成：</strong>参与血红蛋白的合成，对维持正常造血功能至关重要。</li>
+                <li><strong>糖原分解：</strong>参与糖原磷酸化酶的作用，促进糖原分解为葡萄糖。</li>
+                <li><strong>脂质代谢：</strong>参与亚油酸转化为花生四烯酸的过程，以及某些脂质的合成。</li>
+                <li><strong>同型半胱氨酸代谢：</strong>帮助降低血液中同型半胱氨酸水平，减少心血管疾病风险。</li>
+                <li><strong>免疫功能：</strong>参与抗体的合成，维持正常的免疫功能。</li>
+                <li><strong>激素调节：</strong>参与类固醇激素受体的调节，影响激素的作用效果。</li>
+                <li><strong>基因表达：</strong>参与DNA和RNA的合成，影响基因表达。</li>
+                <li><strong>抗氧化作用：</strong>通过参与某些抗氧化酶的活性，发挥抗氧化作用。</li>
+            </ul>
+            
+            <div class="info-box">
+                <h3>【维生素B6与妊娠呕吐】</h3>
+                <p>维生素B6在临床上常用于缓解妊娠呕吐症状。研究表明，补充维生素B6可以减轻孕妇的恶心和呕吐反应。然而，妊娠期间的营养补充应在医生指导下进行，以确保剂量安全。</p>
+            </div>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>肉类：</strong>牛肉、猪肉、鸡肉、鱼肉等，尤其是瘦肉部分。</li>
+                <li><strong>动物内脏：</strong>肝、肾等，含量丰富。</li>
+                <li><strong>全谷物：</strong>糙米、全麦面包、燕麦等。</li>
+                <li><strong>豆类：</strong>黄豆、黑豆、绿豆、扁豆等。</li>
+                <li><strong>坚果和种子：</strong>核桃、杏仁、花生、南瓜籽等。</li>
+                <li><strong>蔬菜：</strong>西兰花、胡萝卜、菠菜、土豆等。</li>
+                <li><strong>水果：</strong>香蕉、橙子、鳄梨等。</li>
+                <li><strong>乳类：</strong>牛奶、酸奶等。</li>
+                <li><strong>酵母：</strong>是维生素B6的极佳来源。</li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食维生素B6推荐摄入量：</p>
+            <ul>
+                <li>成年男性：1.4毫克/天</li>
+                <li>成年女性：1.2毫克/天</li>
+                <li>孕妇：1.9毫克/天</li>
+                <li>乳母：1.7毫克/天</li>
+                <li>儿童根据年龄不同：0.4-1.4毫克/天</li>
+            </ul>
+            <p>需要注意的是，以下人群可能需要适当增加维生素B6的摄入量：</p>
+            <ul>
+                <li>妊娠和哺乳期妇女</li>
+                <li>长期饮酒者（酒精会影响维生素B6的代谢）</li>
+                <li>服用某些药物（如口服避孕药、抗结核药等）的人群</li>
+                <li>高蛋白饮食者（需要更多的维生素B6参与氨基酸代谢）</li>
+                <li>吸收不良综合征患者</li>
+                <li>甲状腺功能亢进患者</li>
+            </ul>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>神经系统症状：</strong>周围神经炎（表现为手脚麻木、刺痛、感觉异常）、头痛、头晕、抑郁、焦虑、注意力不集中、记忆力减退等。</li>
+                <li><strong>皮肤问题：</strong>脂溢性皮炎、口炎、舌炎（舌头红肿、疼痛）、口角炎等。</li>
+                <li><strong>血液系统症状：</strong>小细胞低色素性贫血（类似于缺铁性贫血）。</li>
+                <li><strong>免疫功能下降：</strong>容易感染疾病。</li>
+                <li><strong>胃肠道症状：</strong>恶心、呕吐、食欲减退、腹泻等。</li>
+                <li><strong>内分泌紊乱：</strong>可能影响激素水平，尤其是与雌激素代谢相关的问题。</li>
+                <li><strong>高同型半胱氨酸血症：</strong>血液中同型半胱氨酸水平升高，增加心血管疾病风险。</li>
+            </ul>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>神经系统毒性：</strong>长期大剂量摄入（通常超过200毫克/天，持续数月）可能导致周围神经病变，表现为手脚麻木、刺痛、感觉异常等，严重时可能导致运动障碍。</li>
+                <li><strong>光敏感性增加：</strong>可能导致皮肤对阳光更加敏感，容易出现晒伤。</li>
+                <li><strong>胃肠道反应：</strong>恶心、呕吐、腹痛、腹泻等。</li>
+                <li><strong>药物相互作用：</strong>可能影响某些药物的效果，如左旋多巴（帕金森病治疗药物）。</li>
+                <li><strong>低血糖：</strong>可能影响血糖水平，导致低血糖。</li>
+                <li><strong>肝脏损伤：</strong>在某些情况下，可能导致肝功能异常。</li>
+            </ul>
+            <p>需要注意的是，维生素B6的可耐受最高摄入量（UL）成人一般为100毫克/天。通过正常饮食摄入的维生素B6一般不会导致过量。过量主要发生在长期服用高剂量补充剂的情况下。</p>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 保持饮食多样化，摄入不同来源的食物，以确保足够的维生素B6摄入。</p>
+                <p>2. 避免长时间高温烹饪食物，以减少维生素B6的损失。</p>
+                <p>3. 减少食物的加工处理，因为过度加工可能会损失大量维生素B6。</p>
+                <p>4. 维生素B6与其他B族维生素（尤其是B12、叶酸）协同作用，有助于降低同型半胱氨酸水平，预防心血管疾病。</p>
+                <p>5. 长期服用维生素B6补充剂时，应遵循产品说明，避免超过安全摄入量。</p>
+                <p>6. 对于妊娠呕吐的孕妇，应在医生指导下使用维生素B6补充剂。</p>
+                <p>7. 长期饮酒者应注意补充维生素B6，或考虑减少饮酒量。</p>
+                <p>8. 定期体检，特别是关注神经系统功能，尤其是在长期服用维生素B6补充剂的情况下。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>钙 Calcium - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>钙 Calcium (Ca)</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>钙（Calcium，Ca）是人体中含量最多的矿物质，约占体重的1.5%-2.0%。在成人体内，总钙量约为1200克，其中99%存在于骨骼和牙齿中，其余1%分布在血液、细胞外液和软组织中。钙是骨骼和牙齿的主要组成成分，同时也参与多种重要的生理功能。钙的代谢受多种激素调节，包括甲状旁腺激素、降钙素和维生素D等。</p>
+            
+            <div class="info-box">
+                <h3>【钙的存在形式】</h3>
+                <p>在体内，钙主要以两种形式存在：羟磷灰石结晶（主要存在于骨骼和牙齿中）和离子钙（存在于血液和细胞内外液中）。离子钙虽然只占总量的1%，但却发挥着至关重要的生理功能。血液中约50%的钙是游离的离子钙，40%与蛋白质结合，10%与阴离子（如碳酸氢根、磷酸根、柠檬酸根等）结合。</p>
+            </div>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>骨骼和牙齿的形成与维护：</strong>钙是羟磷灰石晶体的主要成分，为骨骼和牙齿提供强度和结构支持。</li>
+                <li><strong>神经传导：</strong>参与神经冲动的传导，维持正常的神经肌肉兴奋性。</li>
+                <li><strong>肌肉收缩：</strong>是肌肉收缩过程中不可或缺的离子，参与肌肉细胞的兴奋-收缩耦联。</li>
+                <li><strong>血液凝固：</strong>是凝血因子之一，参与血液凝固过程的多个环节。</li>
+                <li><strong>细胞信号传导：</strong>作为第二信使，参与细胞内多种信号通路的调节。</li>
+                <li><strong>酶活性调节：</strong>激活或抑制多种酶的活性，参与能量代谢等生理过程。</li>
+                <li><strong>激素分泌：</strong>影响多种激素的分泌和释放，如胰岛素、肾上腺素等。</li>
+                <li><strong>维持酸碱平衡：</strong>参与体内酸碱平衡的调节。</li>
+                <li><strong>血压调节：</strong>可能通过调节血管平滑肌的张力影响血压。</li>
+                <li><strong>免疫功能：</strong>参与免疫细胞的激活和功能调节。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>乳制品：</strong>牛奶、酸奶、奶酪、黄油等，是钙的最佳食物来源之一，不仅含钙量高，而且吸收率好。</li>
+                <li><strong>豆制品：</strong>豆腐、豆浆、豆腐干等，尤其是用石膏（硫酸钙）或卤水（氯化镁和氯化钙）制作的豆腐。</li>
+                <li><strong>深绿色蔬菜：</strong>菠菜、羽衣甘蓝、西兰花、芥蓝等，但某些蔬菜（如菠菜）中的草酸会影响钙的吸收。</li>
+                <li><strong>海鲜类：</strong>沙丁鱼（带骨）、鲑鱼、虾、贝类等。</li>
+                <li><strong>坚果和种子：</strong>杏仁、芝麻（尤其是芝麻酱）、南瓜籽等。</li>
+                <li><strong>强化食品：</strong>一些强化钙的谷物、果汁、植物奶等。</li>
+                <li><strong>蛋类：</strong>蛋黄含有少量钙。</li>
+                <li><strong>根茎类：</strong>白萝卜、胡萝卜、红薯等含有一定量的钙。</li>
+                <li><strong>食用菌：</strong>香菇、平菇、金针菇等。</li>
+                <li><strong>海藻：</strong>海带、紫菜等。</li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食钙推荐摄入量：</p>
+            <ul>
+                <li>0-6个月：200毫克/天</li>
+                <li>7-12个月：250毫克/天</li>
+                <li>1-3岁：600毫克/天</li>
+                <li>4-6岁：800毫克/天</li>
+                <li>7-10岁：1000毫克/天</li>
+                <li>11-13岁：1200毫克/天</li>
+                <li>14-17岁：1000毫克/天</li>
+                <li>18-49岁：800毫克/天</li>
+                <li>50岁及以上：1000毫克/天</li>
+                <li>孕妇（孕中期）：1000毫克/天</li>
+                <li>孕妇（孕晚期）：1200毫克/天</li>
+                <li>乳母：1200毫克/天</li>
+            </ul>
+            <p>需要注意的是，以下人群可能需要特别关注钙的摄入：</p>
+            <ul>
+                <li><strong>儿童和青少年：</strong>处于生长发育高峰期，骨骼生长迅速，需要充足的钙。</li>
+                <li><strong>孕妇和乳母：</strong>需要额外的钙来满足胎儿发育和乳汁分泌的需求。</li>
+                <li><strong>绝经后妇女：</strong>雌激素水平下降，骨密度流失加速，需要增加钙摄入。</li>
+                <li><strong>老年人：</strong>钙吸收能力下降，且容易发生骨质疏松，需要充足的钙摄入。</li>
+                <li><strong>素食者：</strong>特别是严格素食者，需要注意从植物性食物中获取足够的钙。</li>
+                <li><strong>乳糖不耐受者：</strong>可能无法从乳制品中获取足够的钙，需要寻找其他钙源。</li>
+                <li><strong>长期大量饮酒者：</strong>酒精会增加钙的排泄，可能导致钙缺乏。</li>
+                <li><strong>长期使用某些药物者：</strong>如糖皮质激素、抗癫痫药等，可能影响钙的吸收或增加钙的流失。</li>
+            </ul>
+            
+            <div class="info-box">
+                <h3>【钙的吸收率】</h3>
+                <p>钙的吸收率受多种因素影响，一般成人的钙吸收率约为20%-30%。婴儿的钙吸收率较高，可达60%左右。影响钙吸收的因素包括：维生素D水平、食物中的钙含量、食物中的其他成分（如草酸、植酸、膳食纤维等可能抑制钙吸收，而乳糖、某些氨基酸则可能促进钙吸收）、年龄、性别、生理状态等。</p>
+            </div>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>儿童佝偻病：</strong>骨骼发育不良，出现鸡胸、漏斗胸、O型腿或X型腿等。</li>
+                <li><strong>成人骨质疏松症：</strong>骨密度下降，骨骼变脆，容易发生骨折。</li>
+                <li><strong>骨软化症：</strong>骨骼矿化不全，导致骨骼疼痛、肌肉无力等。</li>
+                <li><strong>牙齿问题：</strong>牙齿发育不良、龋齿等。</li>
+                <li><strong>肌肉痉挛：</strong>尤其是腿部肌肉抽筋。</li>
+                <li><strong>神经症状：</strong>手足抽搐、感觉异常、癫痫发作等（严重缺钙时）。</li>
+                <li><strong>心血管问题：</strong>可能增加高血压、心脏病等疾病的风险。</li>
+                <li><strong>内分泌紊乱：</strong>可能影响激素分泌和代谢。</li>
+                <li><strong>生长发育迟缓：</strong>在儿童中可能影响正常生长发育。</li>
+            </ul>
+            <p>需要注意的是，钙缺乏通常是渐进性的，早期症状可能不明显。长期钙摄入不足会逐渐导致骨量流失，增加骨质疏松和骨折的风险。</p>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>肾结石：</strong>长期高钙摄入可能增加肾结石的风险，尤其是草酸钙结石。</li>
+                <li><strong>便秘：</strong>高剂量钙补充剂可能导致便秘。</li>
+                <li><strong>影响其他矿物质吸收：</strong>过量钙可能干扰铁、锌、镁等其他矿物质的吸收。</li>
+                <li><strong>高钙血症：</strong>严重过量可能导致高钙血症，表现为恶心、呕吐、口渴、多尿、便秘、腹痛等。</li>
+                <li><strong>血管钙化：</strong>长期过量钙摄入可能增加血管钙化的风险，进而增加心血管疾病的风险。</li>
+                <li><strong>肾功能损害：</strong>长期高钙摄入可能对肾功能造成损害。</li>
+                <li><strong>碱中毒：</strong>某些钙补充剂（如碳酸钙）可能导致碱中毒。</li>
+                <li><strong>药物相互作用：</strong>与某些药物（如四环素类抗生素）同时服用可能影响药物吸收。</li>
+            </ul>
+            <p>中国居民膳食钙可耐受最高摄入量（UL）：</p>
+            <ul>
+                <li>0-6个月：1000毫克/天</li>
+                <li>7-12个月：1500毫克/天</li>
+                <li>1-3岁：2000毫克/天</li>
+                <li>4-6岁：2500毫克/天</li>
+                <li>7-10岁：2000毫克/天</li>
+                <li>11-17岁：2000毫克/天</li>
+                <li>18岁及以上：2000毫克/天</li>
+                <li>孕妇和乳母：2000毫克/天</li>
+            </ul>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 均衡饮食是获取足够钙的最佳方式，优先选择富含钙的天然食物。</p>
+                <p>2. 乳制品是钙的优质来源，同时含有促进钙吸收的乳糖和维生素D。</p>
+                <p>3. 植物性食物中的钙吸收率可能较低，但可以通过多种食物搭配提高总摄入量。</p>
+                <p>4. 维生素D对于钙的吸收至关重要，适当晒太阳（每天10-15分钟）有助于体内维生素D的合成。</p>
+                <p>5. 避免过量摄入含草酸或植酸的食物（如菠菜、甜菜、全谷物等）与富含钙的食物同时食用，因为它们可能形成不溶性复合物，影响钙的吸收。</p>
+                <p>6. 适量运动（尤其是负重运动）有助于增加骨密度，减少钙流失。</p>
+                <p>7. 对于需要补充钙的人群，应在医生或营养师的指导下选择合适的钙补充剂。</p>
+                <p>8. 钙补充剂最好分多次服用，而不是一次服用大剂量，以提高吸收率。</p>
+                <p>9. 避免在同一时间服用钙补充剂和铁、锌等其他矿物质补充剂，以免相互影响吸收。</p>
+                <p>10. 老年人、绝经后妇女等高危人群应定期检测骨密度，以便及早发现骨质疏松。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

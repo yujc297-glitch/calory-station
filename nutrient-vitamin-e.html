@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>维生素E Vitamin E - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>维生素E Vitamin E</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>维生素E是一组脂溶性抗氧化剂的统称，包括8种化合物：α-生育酚、β-生育酚、γ-生育酚、δ-生育酚和四种生育三烯酚（α、β、γ、δ）。其中，α-生育酚是生物活性最强的形式，也是人体中最重要的维生素E形式。维生素E在体内主要作为抗氧化剂，保护细胞膜和其他脂质结构免受自由基损伤。它是一种脂溶性维生素，可以在体内储存，主要储存在肝脏、脂肪组织和肌肉中。维生素E对热和酸相对稳定，但对氧化、紫外线、碱和某些金属离子敏感。</p>
+            
+            <div class="info-box">
+                <h3>【维生素E的种类】</h3>
+                <p>虽然维生素E包含8种化合物，但在营养学上，通常主要关注α-生育酚，因为它在体内的生物活性最高，也是大多数膳食参考摄入量的基础。不过，其他形式的生育酚和生育三烯酚也可能具有重要的生物学功能。</p>
+            </div>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>抗氧化作用：</strong>是最重要的抗氧化剂之一，通过清除自由基和脂质过氧化物，保护细胞膜、脂蛋白、DNA和其他细胞成分免受氧化损伤。</li>
+                <li><strong>维护细胞膜完整性：</strong>保护细胞膜中的不饱和脂肪酸不被氧化，维持细胞膜的流动性和通透性。</li>
+                <li><strong>免疫功能支持：</strong>增强免疫系统功能，促进T淋巴细胞增殖和活性，提高机体对感染的抵抗力。</li>
+                <li><strong>心血管健康：</strong>通过抑制低密度脂蛋白（LDL）的氧化，可能有助于预防动脉粥样硬化，降低心血管疾病风险。</li>
+                <li><strong>抗衰老作用：</strong>通过减少氧化应激，可能有助于延缓细胞衰老过程。</li>
+                <li><strong>神经保护：</strong>保护神经系统免受氧化损伤，可能对预防神经退行性疾病有一定作用。</li>
+                <li><strong>眼睛健康：</strong>可能有助于预防年龄相关性黄斑变性和白内障等眼部疾病。</li>
+                <li><strong>生殖系统功能：</strong>在动物实验中，维生素E缺乏会导致生殖障碍，因此也被称为“生育酚”。</li>
+                <li><strong>抑制血小板聚集：</strong>可能具有抗血栓形成的作用。</li>
+                <li><strong>促进伤口愈合：</strong>通过抗氧化作用和改善血液循环，促进伤口修复。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>植物油：</strong>橄榄油、葵花籽油、玉米油、大豆油、花生油、芝麻油等，是维生素E的主要来源。</li>
+                <li><strong>坚果和种子：</strong>杏仁、核桃、榛子、松子、葵花籽、南瓜籽、花生等，含量丰富。</li>
+                <li><strong>全谷物：</strong>糙米、全麦面包、燕麦等，含有一定量的维生素E。</li>
+                <li><strong>绿叶蔬菜：</strong>菠菜、羽衣甘蓝、西兰花等，含有少量维生素E。</li>
+                <li><strong>蛋类：</strong>蛋黄中含有一定量的维生素E。</li>
+                <li><strong>水果：</strong>鳄梨（牛油果）、猕猴桃、芒果等，含有少量维生素E。</li>
+                <li><strong>肉类和鱼类：</strong>含有少量维生素E，但生物利用度可能较高。</li>
+                <li><strong>强化食品：</strong>一些早餐麦片、营养棒等可能添加了维生素E。</li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食维生素E推荐摄入量（以α-生育酚当量计）：</p>
+            <ul>
+                <li>成人：14毫克/天</li>
+                <li>孕妇：14毫克/天</li>
+                <li>乳母：17毫克/天</li>
+                <li>儿童根据年龄不同：3-14毫克/天</li>
+            </ul>
+            <p>需要注意的是，以下人群可能需要特别关注维生素E摄入：</p>
+            <ul>
+                <li><strong>早产儿和低出生体重儿：</strong>可能存在维生素E储存不足，需要补充。</li>
+                <li><strong>脂肪吸收不良的人群：</strong>如患有乳糜泻、炎症性肠病、胰腺功能不全等疾病的患者，可能无法有效吸收脂溶性维生素E。</li>
+                <li><strong>长期低脂饮食者：</strong>可能摄入不足。</li>
+                <li><strong>吸烟者：</strong>吸烟会增加体内自由基的产生，消耗更多的维生素E。</li>
+                <li><strong>运动员：</strong>剧烈运动可能增加氧化应激，需要更多的抗氧化剂。</li>
+                <li><strong>老年人：</strong>吸收能力可能下降，且氧化应激增加。</li>
+            </ul>
+            
+            <div class="info-box">
+                <h3>【维生素E与其他营养素的关系】</h3>
+                <p>维生素E与维生素C、硒等抗氧化剂具有协同作用。维生素C可以帮助再生维生素E；硒作为谷胱甘肽过氧化物酶的组成部分，与维生素E共同保护细胞免受氧化损伤。</p>
+            </div>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>溶血性贫血：</strong>维生素E缺乏会导致红细胞膜脆弱，容易破裂，引起溶血性贫血，尤其在婴儿中较为明显。</li>
+                <li><strong>神经系统症状：</strong>可能出现共济失调、感觉异常、肌肉无力、视力障碍等。</li>
+                <li><strong>免疫力下降：</strong>容易感染疾病。</li>
+                <li><strong>抗氧化能力下降：</strong>脂质过氧化增加，细胞膜损伤，可能与多种慢性疾病风险增加相关。</li>
+                <li><strong>生殖障碍：</strong>在动物中表现为不育，但在人类中维生素E缺乏导致的生殖障碍较为罕见。</li>
+                <li><strong>肌肉和骨骼问题：</strong>可能出现肌肉萎缩、肌肉疼痛等。</li>
+            </ul>
+            <p>维生素E缺乏在健康人群中较为罕见，主要发生在脂肪吸收不良的人群中。</p>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>出血风险增加：</strong>大剂量维生素E可能抑制血小板聚集，增加出血风险，尤其是在服用抗凝血药物的人群中。</li>
+                <li><strong>免疫功能抑制：</strong>长期大剂量摄入可能抑制某些免疫反应。</li>
+                <li><strong>恶心、腹泻、腹痛：</strong>可能出现胃肠道不适。</li>
+                <li><strong>头痛、疲劳：</strong>可能出现神经系统症状。</li>
+                <li><strong>干扰其他脂溶性维生素的吸收：</strong>长期大剂量摄入可能影响维生素A、D、K的吸收和代谢。</li>
+                <li><strong>增加某些疾病风险：</strong>一些研究表明，高剂量维生素E补充可能增加某些人群（如吸烟者）的肺癌风险，或增加死亡率。</li>
+            </ul>
+            <p>维生素E的可耐受最高摄入量（UL）成人一般为700毫克α-生育酚当量/天。通过正常饮食摄入维生素E一般不会导致过量，但长期大剂量摄入补充剂可能带来风险。</p>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 选择健康的植物油（如橄榄油、亚麻籽油）作为日常烹饪用油，增加维生素E的摄入。</p>
+                <p>2. 适量食用坚果和种子，但注意控制摄入量，因为它们热量较高。</p>
+                <p>3. 多吃富含不饱和脂肪酸的食物，维生素E可以保护这些脂肪酸不被氧化。</p>
+                <p>4. 储存食物时，避免长时间暴露在空气中和阳光下，以减少维生素E的氧化损失。</p>
+                <p>5. 烹饪时温度不宜过高、时间不宜过长，以保留食物中的维生素E。</p>
+                <p>6. 对于脂肪吸收不良的人群，可能需要补充水溶性维生素E制剂。</p>
+                <p>7. 服用维生素E补充剂时，应避免大剂量长期使用，并在医生或营养师指导下进行。</p>
+                <p>8. 维生素E与维生素C、硒等抗氧化剂协同作用，保持均衡饮食有助于获得全面的抗氧化保护。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

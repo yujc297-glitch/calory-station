@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蛋白质 Protein - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>蛋白质 Protein</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>蛋白质是由氨基酸组成的大分子有机化合物，是生命的物质基础，是构成细胞的基本有机物，是生命活动的主要承担者。在人体内，蛋白质参与了几乎所有的生理过程。</p>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>构成和修复组织：</strong>蛋白质是构成肌肉、骨骼、皮肤、头发、血液等人体组织的重要原料，对于身体的生长发育和组织修复至关重要。</li>
+                <li><strong>调节生理功能：</strong>许多酶、激素、抗体和其他生物活性物质都是由蛋白质构成，参与调节新陈代谢、免疫防御、物质运输等生理过程。</li>
+                <li><strong>提供能量：</strong>在碳水化合物和脂肪不足的情况下，蛋白质也可以被分解提供能量，每克蛋白质可提供约4千卡的能量。</li>
+                <li><strong>维持酸碱平衡：</strong>蛋白质参与维持体内的酸碱平衡，保持细胞内外环境的稳定。</li>
+                <li><strong>运输营养物质：</strong>许多蛋白质如血红蛋白负责运输氧气和二氧化碳，脂蛋白负责运输脂肪。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>动物蛋白：</strong>瘦肉、鸡肉、鱼肉、虾、蟹、贝类、蛋类、牛奶、奶酪、酸奶等。</li>
+                <li><strong>植物蛋白：</strong>大豆及豆制品（豆腐、豆浆、腐竹等）、黑豆、红豆、绿豆、鹰嘴豆、藜麦、坚果（杏仁、核桃、花生等）、种子（南瓜籽、亚麻籽等）、全谷物等。</li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>一般情况下，健康成年人的蛋白质推荐摄入量为每日每公斤体重0.8-1.0克。对于运动员、孕妇、哺乳期妇女、生长发育期的儿童和青少年，以及康复期的病人，蛋白质需求量可能更高，可达每日每公斤体重1.2-2.0克。</p>
+            <p>建议优质蛋白质（含有人体必需氨基酸且比例适宜的蛋白质）应占总蛋白质摄入量的一半以上。优质蛋白质主要来源于动物蛋白和大豆蛋白。</p>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>肌肉萎缩：</strong>长期蛋白质摄入不足会导致肌肉量减少，肌肉无力。</li>
+                <li><strong>免疫力下降：</strong>抗体合成减少，容易感染疾病。</li>
+                <li><strong>生长发育迟缓：</strong>儿童和青少年可能出现身高、体重增长缓慢。</li>
+                <li><strong>伤口愈合缓慢：</strong>蛋白质是伤口修复的重要原料。</li>
+                <li><strong>头发和皮肤问题：</strong>头发干枯易脱落，皮肤干燥、粗糙。</li>
+                <li><strong>水肿：</strong>蛋白质不足可能导致血浆白蛋白减少，引起水肿。</li>
+            </ul>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>肾脏负担增加：</strong>过量的蛋白质需要肾脏代谢和排泄，长期高蛋白饮食可能增加肾脏负担。</li>
+                <li><strong>钙流失：</strong>高蛋白饮食可能增加尿钙排泄，长期可能影响骨骼健康。</li>
+                <li><strong>肥胖风险：</strong>过多的蛋白质摄入如果超过身体需要，会转化为脂肪储存。</li>
+                <li><strong>代谢负担：</strong>蛋白质代谢产生的含氮废物需要肝脏和肾脏处理。</li>
+            </ul>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 均衡饮食是获取充足蛋白质的最佳方式，建议每餐都包含一定量的优质蛋白质。</p>
+                <p>2. 素食者可以通过搭配不同的植物蛋白（如豆类+谷物）来获取所有必需氨基酸。</p>
+                <p>3. 老年人由于消化吸收能力下降，可能需要适当增加优质蛋白质的摄入。</p>
+                <p>4. 蛋白质摄入的最佳时间分布：建议将每日蛋白质摄入量均匀分配到三餐中，而不是集中在某一餐。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

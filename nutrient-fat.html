@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>脂肪 Fat - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>脂肪 Fat</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>脂肪是由甘油和脂肪酸组成的三酰甘油酯，是人体重要的宏量营养素之一。脂肪是人体能量储存的主要形式，也是细胞膜的重要组成部分，同时参与多种生理功能的调节。</p>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>提供能量：</strong>脂肪是人体最浓缩的能量来源，每克脂肪可提供约9千卡的能量，是蛋白质和碳水化合物的2.25倍。</li>
+                <li><strong>储存能量：</strong>当摄入的能量超过消耗时，多余的能量会以脂肪的形式储存在脂肪组织中，以备不时之需。</li>
+                <li><strong>保护器官：</strong>脂肪组织包裹在重要器官周围，起到缓冲和保护的作用，减少外界冲击对器官的损伤。</li>
+                <li><strong>维持体温：</strong>皮下脂肪可以减少热量散失，帮助维持体温稳定。</li>
+                <li><strong>参与荷尔蒙合成：</strong>脂肪是合成某些激素（如雌激素、睾酮等）的前体物质。</li>
+                <li><strong>促进脂溶性维生素吸收：</strong>维生素A、D、E、K等脂溶性维生素需要脂肪才能被有效吸收。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>植物油：</strong>橄榄油、花生油、菜籽油、大豆油、玉米油、葵花籽油等。</li>
+                <li><strong>动物脂肪：</strong>猪油、牛油、羊油、奶油、黄油等。</li>
+                <li><strong>坚果和种子：</strong>核桃、杏仁、花生、腰果、芝麻、南瓜籽等。</li>
+                <li><strong>高脂乳制品：</strong>全脂牛奶、奶酪、冰淇淋等。</li>
+                <li><strong>肉类：</strong>猪肉、牛肉、羊肉、鸡肉（带皮）等。</li>
+                <li><strong>鱼类：</strong>富含脂肪的鱼类如三文鱼、金枪鱼、鲭鱼等。</li>
+                <li><strong>牛油果：</strong>富含单不饱和脂肪酸的水果。</li>
+                <li><strong>巧克力：</strong>尤其是黑巧克力含有可可脂。</li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>一般建议，脂肪摄入应占总能量摄入的20%-35%。在脂肪摄入中，应注意以下几点：</p>
+            <ul>
+                <li>饱和脂肪酸的摄入应控制在总能量的7%-10%以下。</li>
+                <li>单不饱和脂肪酸应占总能量的10%-15%。</li>
+                <li>多不饱和脂肪酸应占总能量的6%-10%，其中Omega-6和Omega-3脂肪酸的比例应适当，一般建议为4:1至1:1之间。</li>
+                <li>反式脂肪酸的摄入应尽量减少，最好不超过总能量的1%。</li>
+            </ul>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>脂溶性维生素缺乏：</strong>可能导致维生素A、D、E、K缺乏，出现相应症状。</li>
+                <li><strong>皮肤问题：</strong>皮肤干燥、脱屑、头发干枯等。</li>
+                <li><strong>免疫力下降：</strong>必需脂肪酸缺乏会影响免疫系统功能。</li>
+                <li><strong>能量不足：</strong>长期脂肪摄入不足可能导致能量摄入不足，出现疲劳、体重下降等。</li>
+                <li><strong>荷尔蒙水平异常：</strong>脂肪参与某些激素的合成，摄入不足可能影响荷尔蒙平衡。</li>
+            </ul>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>肥胖：</strong>摄入过多脂肪是导致肥胖的主要原因之一。</li>
+                <li><strong>心血管疾病：</strong>过量摄入饱和脂肪酸和反式脂肪酸会增加心血管疾病风险。</li>
+                <li><strong>2型糖尿病：</strong>高脂肪饮食可能增加胰岛素抵抗，增加2型糖尿病风险。</li>
+                <li><strong>某些癌症：</strong>有研究表明，高脂肪饮食可能与某些癌症（如乳腺癌、结肠癌）风险增加有关。</li>
+                <li><strong>脂肪肝：</strong>长期高脂肪饮食可能导致脂肪在肝脏堆积，形成脂肪肝。</li>
+            </ul>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 选择健康的脂肪来源，如橄榄油、坚果、鱼类等富含不饱和脂肪酸的食物。</p>
+                <p>2. 减少饱和脂肪和反式脂肪的摄入，如肥肉、油炸食品、加工食品等。</p>
+                <p>3. 注意烹饪方式，尽量选择蒸、煮、烤等低脂烹饪方式，减少油炸和油煎。</p>
+                <p>4. 控制每日总脂肪摄入量，保持能量平衡。</p>
+                <p>5. 适当摄入富含Omega-3脂肪酸的食物，如深海鱼类，有助于心血管健康。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

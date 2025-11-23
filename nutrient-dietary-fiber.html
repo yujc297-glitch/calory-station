@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>膳食纤维 Dietary Fiber - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>膳食纤维 Dietary Fiber</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>膳食纤维是一种不能被人体消化酶分解的碳水化合物，主要存在于植物性食物中。根据其在水中的溶解性，膳食纤维可分为可溶性膳食纤维和不溶性膳食纤维两大类。膳食纤维虽然不能被人体直接吸收利用，但对人体健康有着重要的作用。</p>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>促进肠道健康：</strong>增加粪便体积，促进肠道蠕动，预防便秘和痔疮。</li>
+                <li><strong>调节血糖：</strong>可溶性膳食纤维可以延缓碳水化合物的消化吸收，有助于稳定餐后血糖。</li>
+                <li><strong>降低胆固醇：</strong>可溶性膳食纤维可以结合胆固醇和胆汁酸，促进其排出体外，有助于降低血液中胆固醇水平。</li>
+                <li><strong>控制体重：</strong>膳食纤维可以增加饱腹感，减少食物摄入量，有助于控制体重。</li>
+                <li><strong>维持肠道菌群平衡：</strong>膳食纤维是肠道有益菌的重要食物来源，有助于维持肠道微生态平衡。</li>
+                <li><strong>预防结肠癌：</strong>增加膳食纤维摄入可能降低结肠癌的发病风险，这可能与促进排便、减少有害物质在肠道内停留时间有关。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>全谷物：</strong>燕麦、糙米、全麦面包、全麦面条、藜麦、小米等。</li>
+                <li><strong>豆类：</strong>红豆、绿豆、黑豆、芸豆、扁豆、鹰嘴豆等。</li>
+                <li><strong>水果：</strong>苹果、梨、香蕉、橙子、草莓、蓝莓、西梅等（特别是带皮吃的水果）。</li>
+                <li><strong>蔬菜：</strong>西兰花、胡萝卜、菠菜、芦笋、甜椒、洋葱、大蒜、菌类等。</li>
+                <li><strong>坚果和种子：</strong>杏仁、核桃、芝麻、亚麻籽、奇亚籽等。</li>
+                <li><strong>薯类：</strong>红薯、土豆（带皮）、芋头等。</li>
+                <li><strong>海藻类：</strong>海带、紫菜、裙带菜等。</li>
+                <li><strong>膳食纤维补充剂：</strong>菊粉、果胶、葡聚糖等（应在医生或营养师指导下使用）。</li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>一般建议，成人每日膳食纤维摄入量为25-30克。在膳食纤维摄入中，应注意以下几点：</p>
+            <ul>
+                <li>可溶性膳食纤维和不溶性膳食纤维应均衡摄入。</li>
+                <li>增加膳食纤维摄入时应逐渐增加，避免突然大量摄入导致胃肠不适。</li>
+                <li>增加膳食纤维摄入的同时应保证充足的水分摄入，以促进膳食纤维在肠道内的正常作用。</li>
+                <li>不同人群的需求可能有所不同，如老年人、儿童、孕妇等特殊人群应根据自身情况调整。</li>
+            </ul>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>便秘：</strong>膳食纤维摄入不足是导致便秘的常见原因之一。</li>
+                <li><strong>肥胖风险增加：</strong>缺乏膳食纤维会减少饱腹感，可能导致过度进食。</li>
+                <li><strong>血糖波动：</strong>可能导致餐后血糖升高较快，对糖尿病患者不利。</li>
+                <li><strong>胆固醇升高：</strong>可能影响胆固醇的代谢，增加心血管疾病风险。</li>
+                <li><strong>肠道健康问题：</strong>可能导致肠道菌群失衡，增加肠道疾病风险。</li>
+                <li><strong>结肠癌风险增加：</strong>长期膳食纤维摄入不足可能增加结肠癌的发病风险。</li>
+            </ul>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>胃肠不适：</strong>突然大量摄入膳食纤维可能导致腹胀、腹痛、腹泻等胃肠不适症状。</li>
+                <li><strong>矿物质吸收障碍：</strong>过量膳食纤维可能与钙、铁、锌等矿物质结合，影响其吸收。</li>
+                <li><strong>脱水风险：</strong>膳食纤维需要足够的水分才能发挥作用，摄入过量而水分不足可能加重便秘。</li>
+                <li><strong>营养物质吸收减少：</strong>过量膳食纤维可能干扰某些营养物质的吸收。</li>
+            </ul>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 每天摄入多种来源的膳食纤维，包括全谷物、豆类、水果、蔬菜和坚果。</p>
+                <p>2. 选择加工度低的食物，如全谷物而不是精制谷物，带皮吃的水果等。</p>
+                <p>3. 增加膳食纤维摄入时应循序渐进，让肠道有适应的过程。</p>
+                <p>4. 确保每日充足的水分摄入（约1500-2000毫升），以帮助膳食纤维发挥作用。</p>
+                <p>5. 对于有特殊健康状况的人群，如炎症性肠病患者，应在医生或营养师指导下调整膳食纤维摄入。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

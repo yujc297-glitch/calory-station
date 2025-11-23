@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>叶酸 Vitamin B9 - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>叶酸 Folic Acid (维生素B9)</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>叶酸（Folic Acid），又称维生素B9，是B族维生素的一种，属于水溶性维生素。它在体内主要以四氢叶酸（THF）的形式作为辅酶参与多种代谢反应。叶酸在食物中主要以多谷氨酸形式存在，需要在肠道中被分解为单谷氨酸形式才能被吸收。叶酸对热、光和空气相对敏感，容易在烹饪过程中损失。叶酸与DNA合成、红细胞生成、神经系统发育等密切相关。</p>
+            
+            <div class="info-box">
+                <h3>【叶酸与叶酸盐】</h3>
+                <p>叶酸是人工合成的形式，主要用于营养补充剂和强化食品中；而食物中天然存在的形式称为叶酸盐（Folate）。两者在体内的代谢途径相似，但叶酸的生物利用度通常高于叶酸盐。</p>
+            </div>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>DNA合成与修复：</strong>作为辅酶参与嘌呤和嘧啶的合成，这是DNA和RNA合成的基础。</li>
+                <li><strong>红细胞生成：</strong>与维生素B12协同作用，参与红细胞的成熟过程，预防巨幼红细胞性贫血。</li>
+                <li><strong>神经系统发育：</strong>在胎儿神经系统发育中起关键作用，特别是神经管的闭合，预防神经管缺陷。</li>
+                <li><strong>氨基酸代谢：</strong>参与某些氨基酸的互变，如丝氨酸与甘氨酸、组氨酸与谷氨酸的相互转化。</li>
+                <li><strong>同型半胱氨酸代谢：</strong>参与同型半胱氨酸的代谢，降低血液中同型半胱氨酸水平，减少心血管疾病风险。</li>
+                <li><strong>细胞分裂与增殖：</strong>对快速分裂的细胞（如消化道黏膜细胞、骨髓细胞等）尤为重要。</li>
+                <li><strong>免疫系统功能：</strong>维持正常的免疫功能，促进白细胞的生成和功能。</li>
+                <li><strong>神经递质合成：</strong>参与神经递质（如5-羟色胺、多巴胺）的合成，影响情绪和认知功能。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>绿叶蔬菜：</strong>菠菜、羽衣甘蓝、生菜、西兰花、芦笋等，含量丰富。</li>
+                <li><strong>豆类：</strong>黄豆、黑豆、绿豆、扁豆、鹰嘴豆等。</li>
+                <li><strong>坚果和种子：</strong>核桃、杏仁、葵花籽等。</li>
+                <li><strong>全谷物：</strong>糙米、全麦面包、燕麦等。</li>
+                <li><strong>动物肝脏：</strong>猪肝、鸡肝等，含量丰富。</li>
+                <li><strong>蛋类：</strong>鸡蛋、鸭蛋等。</li>
+                <li><strong>水果：</strong>柑橘类水果（橙子、柚子）、香蕉、草莓、猕猴桃等。</li>
+                <li><strong>强化食品：</strong>一些谷物产品（如早餐麦片）、面粉等可能添加了叶酸。</li>
+                <li><strong>酵母：</strong>是叶酸的良好来源。</li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食叶酸推荐摄入量：</p>
+            <ul>
+                <li>成人：400微克DFE/天（DFE为膳食叶酸当量）</li>
+                <li>孕妇：600微克DFE/天</li>
+                <li>乳母：500微克DFE/天</li>
+                <li>儿童根据年龄不同：150-400微克DFE/天</li>
+            </ul>
+            <p>需要注意的是，以下人群可能需要特别关注叶酸摄入：</p>
+            <ul>
+                <li><strong>准备怀孕的女性：</strong>建议在受孕前至少1个月开始补充叶酸，每天400微克，以降低胎儿神经管缺陷的风险。</li>
+                <li><strong>孕妇：</strong>需要增加叶酸摄入量，建议在医生指导下补充。</li>
+                <li><strong>哺乳期妇女：</strong>需要增加叶酸摄入量。</li>
+                <li><strong>素食者：</strong>虽然叶酸广泛存在于植物性食物中，但某些素食者可能摄入不足。</li>
+                <li><strong>长期饮酒者：</strong>酒精会影响叶酸的吸收和代谢。</li>
+                <li><strong>服用某些药物的人群：</strong>如长期服用抗癫痫药物、甲氨蝶呤等，可能需要增加叶酸摄入。</li>
+                <li><strong>吸收不良综合征患者：</strong>如乳糜泻、炎症性肠病等。</li>
+            </ul>
+            
+            <div class="info-box">
+                <h3>【关于叶酸补充剂】</h3>
+                <p>对于准备怀孕和已怀孕的女性，医生通常会建议服用叶酸补充剂。这是因为仅仅通过饮食很难确保足够的叶酸摄入，而叶酸对预防胎儿神经管缺陷至关重要。补充剂中的叶酸是合成形式，生物利用度较高。</p>
+            </div>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>巨幼红细胞性贫血：</strong>表现为疲劳、乏力、头晕、心悸、气短、皮肤苍白等。</li>
+                <li><strong>消化系统症状：</strong>舌炎（舌头光滑、红肿、疼痛）、口腔炎、腹泻、食欲减退、体重减轻等。</li>
+                <li><strong>神经系统症状：</strong>记忆力减退、注意力不集中、抑郁、焦虑等。</li>
+                <li><strong>生长发育迟缓：</strong>在儿童中可能导致生长发育迟缓。</li>
+                <li><strong>高同型半胱氨酸血症：</strong>血液中同型半胱氨酸水平升高，增加心血管疾病风险。</li>
+                <li><strong>胎儿神经管缺陷：</strong>孕妇叶酸缺乏可能导致胎儿出现脊柱裂、无脑畸形等严重的神经管缺陷。</li>
+            </ul>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>掩盖维生素B12缺乏：</strong>大剂量叶酸摄入可能掩盖维生素B12缺乏的血液学表现，但无法掩盖神经系统症状，从而延误维生素B12缺乏的诊断和治疗，导致不可逆的神经损伤。</li>
+                <li><strong>胃肠道反应：</strong>恶心、呕吐、腹痛、腹泻等。</li>
+                <li><strong>睡眠障碍：</strong>可能影响睡眠质量。</li>
+                <li><strong>易怒：</strong>可能导致情绪波动、易怒等。</li>
+                <li><strong>尿液变色：</strong>可能导致尿液颜色变深。</li>
+                <li><strong>增加某些癌症风险：</strong>一些研究表明，大剂量叶酸可能增加某些癌症（如前列腺癌）的风险，但证据尚不一致。</li>
+            </ul>
+            <p>叶酸的可耐受最高摄入量（UL）成人一般为1000微克/天（指合成叶酸的摄入量）。通过正常饮食摄入的叶酸一般不会导致过量。</p>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 准备怀孕的女性应在受孕前至少1个月开始补充叶酸，并持续整个孕期。</p>
+                <p>2. 烹饪蔬菜时采用快速烹饪方法（如蒸、快速翻炒），减少叶酸损失。</p>
+                <p>3. 多吃新鲜水果和蔬菜，尽量减少储存时间，因为叶酸会随时间推移而降解。</p>
+                <p>4. 保持饮食多样化，摄入不同来源的食物，以确保足够的叶酸摄入。</p>
+                <p>5. 叶酸与维生素B12协同作用，同时补充这两种维生素有助于降低同型半胱氨酸水平。</p>
+                <p>6. 长期服用叶酸补充剂时，应考虑同时补充维生素B12，以避免掩盖维生素B12缺乏。</p>
+                <p>7. 避免过量饮酒，以免影响叶酸的吸收和代谢。</p>
+                <p>8. 如正在服用可能影响叶酸代谢的药物，应咨询医生是否需要调整叶酸摄入量。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

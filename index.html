@@ -4,20 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>卡路里基站 - 智能饮食与营养管理平台</title>
-    <!-- 
-        卡路里基站网站 - 一站式智能饮食与营养管理平台
-        网站结构说明：
-        1. 顶部导航栏（Header）：包含网站Logo和四大功能模块导航链接
-        2. Hero介绍区域：网站简介和主要功能说明
-        3. 今日推荐食物卡片区：展示推荐食物及其营养信息
-        4. 功能模块1：烹饪助手 - 输入食材获取AI菜谱推荐
-        5. 功能模块2：菜谱推荐 - 按健康目标分类的菜谱推荐
-        6. 功能模块3：健康追踪 - 记录和展示营养摄入情况
-        7. 功能模块4：菜品识别 - AI菜品识别及营养分析
-        8. 页面底部（Footer）：版权信息和免责声明
-    -->
     <style>
-        /* 全局样式重置和基础设置 */
+        /* 基础样式重置 */
         * {
             margin: 0;
             padding: 0;
@@ -25,1798 +13,959 @@
         }
         
         body {
-            font-family: 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
             color: #333;
-            background-color: #f8f9fa;
+            background-color: #f5f5f5;
+            overflow-x: hidden;
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        /* 科技感和健康风全局样式 */
+        :root {
+            --primary-blue: #007bff;
+            --primary-green: #28a745;
+            --secondary-blue: #00a8ff;
+            --secondary-green: #4caf50;
+            --dark-color: #343a40;
+            --light-color: #f8f9fa;
+            --accent-color: #17a2b8;
+            --gradient-primary: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            --gradient-secondary: linear-gradient(135deg, #00c6ff, #0072ff);
         }
         
-        /* 顶部导航栏样式 */
-        header {
-            background-color: #fff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        /* 科技感文字效果 */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            color: var(--dark-color);
+            position: relative;
+        }
+        
+        /* 科技感线条装饰 */
+        .section-header::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-primary);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+        
+        /* 通用卡片样式增强 */
+        .feature-card,
+        .architecture-card,
+        .audience-card,
+        .workflow-step {
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        /* 卡片悬停效果增强 */
+        .feature-card:hover,
+        .architecture-card:hover,
+        .audience-card:hover,
+        .workflow-step:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 科技感按钮样式增强 */
+        a.btn,
+        .card-btn,
+        .primary-btn,
+        .secondary-btn {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        /* 按钮悬停效果增强 */
+        a.btn:hover,
+        .card-btn:hover,
+        .primary-btn:hover,
+        .secondary-btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* 添加科技感发光效果 */
+        .btn-primary:hover,
+        .primary-btn:hover {
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.4);
+        }
+        
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* 科技感背景装饰 */
+        body::before {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            z-index: 1000;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(0, 123, 255, 0.03), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(40, 167, 69, 0.03), transparent 40%);
+            z-index: -1;
         }
         
-        .nav-container {
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        /* 统一 Header 样式 */
+        .site-header {
+            position: sticky;
+            top: 0;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
         }
         
         .logo {
-            font-size: 20px;
+            font-size: 1.5rem;
             font-weight: bold;
-            color: #34a853;
-            text-decoration: none;
+            color: #28a745;
         }
         
-        .logo span {
-            font-size: 14px;
-            color: #666;
-            font-weight: normal;
-            margin-left: 5px;
-        }
-        
-        .nav-links {
+        .nav-list {
             display: flex;
-            gap: 20px;
+            list-style: none;
         }
         
-        .nav-links a {
-            text-decoration: none;
-            color: #555;
-            padding: 8px 15px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
+        .nav-list li {
+            margin-left: 2rem;
         }
         
-        .nav-links a:hover {
-            background-color: #f0f0f0;
-            color: #34a853;
+        .nav-list a {
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
         }
         
-        /* 移动端响应式导航 */
-        @media (max-width: 768px) {
-            .nav-links {
-                gap: 10px;
-            }
-            
-            .nav-links a {
-                padding: 5px 10px;
-                font-size: 14px;
-            }
+        .nav-list a:hover {
+            color: #28a745;
         }
         
-        /* Hero区域样式 */
+        /* 统一 Footer 样式 */
+        .site-footer {
+            background-color: #f8f9fa;
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .footer-text {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 主内容区样式 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        section {
+            padding: 4rem 0;
+        }
+        
+        /* Hero 区域样式 */
         .hero {
-            margin-top: 60px; /* 为固定导航栏留出空间 */
-            padding: 60px 0;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f7fa 100%);
-        }
-        
-        .hero-container {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+            min-height: 90vh;
             display: flex;
             align-items: center;
+            padding-top: 2rem;
+        }
+        
+        .hero-content {
+            display: flex;
             justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
         }
         
         .hero-text {
             flex: 1;
-            padding-right: 40px;
+            padding-right: 3rem;
         }
         
         .hero-text h1 {
-            font-size: 42px;
-            color: #333;
-            margin-bottom: 15px;
-            font-weight: 700;
+            font-size: 3.5rem;
+            color: #28a745;
+            margin-bottom: 1rem;
+            font-weight: bold;
         }
         
         .hero-text h2 {
-            font-size: 24px;
-            color: #555;
-            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #495057;
+            margin-bottom: 1.5rem;
             font-weight: 500;
         }
         
         .hero-text p {
-            font-size: 18px;
-            color: #666;
-            margin-bottom: 30px;
-        }
-        
-        .hero-button {
-            background-color: #34a853;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 16px;
-            font-weight: 500;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .hero-button:hover {
-            background-color: #2e8b47;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(52, 168, 83, 0.3);
+            font-size: 1.1rem;
+            color: #6c757d;
+            line-height: 1.8;
         }
         
         .hero-image {
             flex: 1;
-            max-width: 500px;
         }
         
         .image-placeholder {
-            border: 2px dashed #ccc;
+            width: 100%;
+            height: 350px;
+            border: 2px dashed #007bff;
             border-radius: 12px;
-            height: 300px;
             display: flex;
-            align-items: center;
             justify-content: center;
-            color: #999;
-            font-size: 18px;
+            align-items: center;
+            color: #007bff;
+            font-size: 1.2rem;
+            font-weight: 500;
             background-color: rgba(255, 255, 255, 0.7);
         }
         
-        /* Hero区域响应式设计 */
-        @media (max-width: 992px) {
-            .hero-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .hero-text {
-                padding-right: 0;
-                margin-bottom: 40px;
-            }
-            
-            .hero-text h1 {
-                font-size: 36px;
-            }
-            
-            .hero-text h2 {
-                font-size: 20px;
-            }
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
         }
         
-        @media (max-width: 576px) {
-            .hero {
-                padding: 40px 0;
-            }
-            
-            .hero-text h1 {
-                font-size: 30px;
-            }
-            
-            .image-placeholder {
-                height: 250px;
-            }
+        .btn-primary {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
         
-        /* 通用区域标题样式 */
-        .section-title {
-            font-size: 30px;
-            color: #333;
-            margin-bottom: 30px;
-            padding-top: 40px;
+        .btn-primary:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+        
+        .btn-secondary {
+            display: inline-block;
+            background-color: transparent;
+            color: #007bff;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid #007bff;
+            cursor: pointer;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #007bff;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+        
+        /* 产品整体架构区样式 */
+        .architecture {
+            background-color: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: #343a40;
+            margin-bottom: 1rem;
             font-weight: 600;
         }
         
-        /* 今日推荐食物卡片区样式 */
-        .food-cards {
-            padding: 60px 0;
-            background-color: #fff;
+        .section-header p {
+            font-size: 1.1rem;
+            color: #6c757d;
+            max-width: 700px;
+            margin: 0 auto;
         }
         
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-            gap: 25px;
-        }
-        
-        .food-card {
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            padding: 20px;
-            transition: all 0.3s ease;
-            border: 1px solid #f0f0f0;
-        }
-        
-        .food-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-        
-        .card-header {
+        .architecture-grid {
             display: flex;
+            gap: 2rem;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
+        }
+        
+        .architecture-card {
+            flex: 1;
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .architecture-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+        
+        .architecture-card.machine-side {
+            border-top: 4px solid #28a745;
+        }
+        
+        .architecture-card.website-side {
+            border-top: 4px solid #007bff;
         }
         
         .card-header h3 {
-            font-size: 20px;
-            color: #333;
-            font-weight: 600;
-            margin: 0;
-        }
-        
-        .tags {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        
-        .tag {
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        
-        .tag.light {
-            background-color: #e8f5e9;
-            color: #2e7d32;
-        }
-        
-        .tag.protein {
-            background-color: #e1f5fe;
-            color: #01579b;
-        }
-        
-        .tag.fitness {
-            background-color: #fff3e0;
-            color: #ef6c00;
-        }
-        
-        .tag.healthy {
-            background-color: #e0f7fa;
-            color: #006064;
-        }
-        
-        .tag.fiber {
-            background-color: #f3e5f5;
-            color: #4a148c;
-        }
-        
-        .food-info {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .info-item {
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .info-item .label {
-            font-size: 14px;
-            color: #666;
-            font-weight: 500;
-        }
-        
-        .info-item .value {
-            font-size: 14px;
-            color: #333;
-            font-weight: 500;
-        }
-        
-        .info-item.nutrition {
-            flex-direction: column;
-            gap: 5px;
-        }
-        
-        .info-item.nutrition .value {
-            color: #34a853;
-            font-size: 13px;
-        }
-        
-        /* 卡片区域响应式设计 */
-        @media (max-width: 1024px) {
-            .cards-container {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .cards-container {
-                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-                gap: 20px;
-            }
-            
-            .section-title {
-                font-size: 26px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .cards-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .food-card {
-                padding: 15px;
-            }
-            
-            .card-header {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .section-title {
-                font-size: 22px;
-                text-align: center;
-            }
-        }
-        
-        /* 区域描述文本样式 */
-        .section-description {
-            font-size: 18px;
-            color: #666;
-            margin-bottom: 40px;
-            max-width: 800px;
-        }
-        
-        /* 烹饪助手模块样式 */
-        .cooking-assistant {
-            padding: 60px 0;
-            background-color: #f8f9fa;
-        }
-        
-        .assistant-form {
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            padding: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 16px;
-            font-weight: 500;
-            color: #333;
-        }
-        
-        .form-group input[type="text"] {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
-        }
-        
-        .form-group input[type="text"]:focus {
-            outline: none;
-            border-color: #34a853;
-            box-shadow: 0 0 0 3px rgba(52, 168, 83, 0.1);
-        }
-        
-        /* 菜系选项样式 */
-        .cuisine-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .radio-label {
-            display: flex;
-            align-items: center;
-            padding: 8px 16px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 14px;
-        }
-        
-        .radio-label:hover {
-            border-color: #34a853;
-            background-color: #f0f9ff;
-        }
-        
-        .radio-label input[type="radio"] {
-            margin-right: 8px;
-            accent-color: #34a853;
-        }
-        
-        .radio-label input[type="radio"]:checked + span {
-            color: #34a853;
-            font-weight: 500;
-        }
-        
-        /* 口味选项样式 */
-        .taste-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            padding: 8px 16px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 14px;
-        }
-        
-        .checkbox-label:hover {
-            border-color: #34a853;
-            background-color: #f0f9ff;
-        }
-        
-        .checkbox-label input[type="checkbox"] {
-            margin-right: 8px;
-            accent-color: #34a853;
-        }
-        
-        .checkbox-label input[type="checkbox"]:checked + span {
-            color: #34a853;
-            font-weight: 500;
-        }
-        
-        /* 生成按钮样式 */
-        .generate-button {
-            background-color: #4285f4;
-            color: white;
-            border: none;
-            padding: 14px 30px;
-            font-size: 16px;
-            font-weight: 500;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .generate-button:hover {
-            background-color: #3367d6;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
-        }
-        
-        /* AI结果区域样式 */
-        .ai-results {
-            margin-top: 20px;
-        }
-        
-        .results-title {
-            font-size: 22px;
-            color: #333;
-            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #343a40;
+            margin-bottom: 1.5rem;
             font-weight: 600;
         }
         
-        .recipe-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+        .card-content ul {
+            list-style: none;
+            margin-bottom: 2rem;
         }
         
-        .recipe-card {
-            background-color: #fff;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-        
-        .recipe-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-        }
-        
-        .recipe-card h4 {
-            font-size: 18px;
-            color: #333;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-        
-        .recipe-info {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 12px;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .recipe-description {
-            font-size: 14px;
-            color: #555;
+        .card-content li {
+            position: relative;
+            padding-left: 1.8rem;
+            margin-bottom: 0.8rem;
+            color: #495057;
             line-height: 1.6;
         }
         
-        /* 烹饪助手模块响应式设计 */
-        @media (max-width: 768px) {
-            .assistant-form {
-                padding: 20px;
-            }
-            
-            .cuisine-options,
-            .taste-options {
-                flex-direction: column;
-            }
-            
-            .radio-label,
-            .checkbox-label {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .recipe-options {
-                grid-template-columns: 1fr;
-            }
+        .card-content li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
         }
         
-        /* 菜谱推荐模块样式 */
-        .recipe-recommendation {
-            background-color: #f8f8f8;
-            padding: 60px 0;
-        }
-        
-        .recipe-recommendation .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* 健康目标标签样式 */
-        .health-goal-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin: 30px 0;
-        }
-        
-        .goal-tag {
-            padding: 8px 20px;
-            border-radius: 25px;
-            background-color: #fff;
-            border: 2px solid #e0e0e0;
-            color: #666;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        .goal-tag:hover {
-            border-color: #4caf50;
-            color: #4caf50;
-            background-color: #f1f8e9;
-        }
-        
-        .goal-tag.active {
-            background-color: #4caf50;
-            color: white;
-            border-color: #4caf50;
-        }
-        
-        /* 推荐菜谱卡片容器 */
-        .recommended-recipes {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-        
-        /* 健康菜谱卡片样式 */
-        .health-recipe-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .health-recipe-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
-        }
-        
-        .recipe-header {
-            background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
-            padding: 20px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        
-        .recipe-header h3 {
-            margin: 0 0 10px 0;
-            color: #2e7d32;
-            font-size: 20px;
-        }
-        
-        .recipe-tags {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .recipe-tag {
-            padding: 4px 12px;
-            background-color: #fff;
-            color: #4caf50;
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        
-        .recipe-content {
-            padding: 20px;
-        }
-        
-        .recipe-target, .recipe-method, .recipe-ingredients {
-            margin-bottom: 12px;
-            color: #555;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        
-        .recipe-target:last-child, .recipe-method:last-child, .recipe-ingredients:last-child {
-            margin-bottom: 0;
-        }
-        
-        /* 菜谱推荐响应式设计 */
-        @media (max-width: 768px) {
-            .recommended-recipes {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .health-goal-tags {
-                justify-content: center;
-            }
-            
-            .goal-tag {
-                font-size: 13px;
-                padding: 6px 16px;
-            }
-        }
-        
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .recommended-recipes {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        /* 健康追踪模块样式 */
-        .health-tracking {
-            background-color: #fff;
-            padding: 60px 0;
-        }
-        
-        .health-tracking .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .tracking-content {
-            display: flex;
-            gap: 30px;
-            margin-top: 30px;
-        }
-        
-        /* 摄入表格容器 */
-        .intake-table-container {
-            flex: 2;
-            background-color: #f8f9fa;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-        }
-        
-        .intake-table-container h3 {
-            margin-top: 0;
-            margin-bottom: 20px;
-            color: #2e7d32;
-            font-size: 18px;
-        }
-        
-        /* 表格包装器，用于响应式滚动 */
-        .table-wrapper {
-            overflow-x: auto;
-            border-radius: 8px;
-            border: 1px solid #e0e0e0;
-        }
-        
-        /* 摄入表格样式 */
-        .intake-table {
+        .device-placeholder {
             width: 100%;
-            border-collapse: collapse;
-            background-color: white;
-        }
-        
-        .intake-table th,
-        .intake-table td {
-            padding: 12px 15px;
-            text-align: center;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        
-        .intake-table th {
-            background-color: #e8f5e9;
-            color: #2e7d32;
-            font-weight: 600;
-            font-size: 14px;
-            position: sticky;
-            top: 0;
-        }
-        
-        .intake-table tr:hover {
-            background-color: #f5f5f5;
-        }
-        
-        .intake-table .table-row-alt {
-            background-color: #fafafa;
-        }
-        
-        /* 营养均衡指标样式 */
-        .nutrition-balance {
-            flex: 1;
-            background-color: #f8f9fa;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-        }
-        
-        .nutrition-balance h3 {
-            margin-top: 0;
-            margin-bottom: 20px;
-            color: #2e7d32;
-            font-size: 18px;
-        }
-        
-        /* 进度条容器 */
-        .progress-bars {
+            height: 150px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
             display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-        
-        /* 单个进度条项目 */
-        .progress-item {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        /* 进度条标签 */
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            font-weight: 500;
-            color: #333;
-        }
-        
-        .progress-value {
-            color: #666;
-            font-weight: normal;
-        }
-        
-        /* 进度条容器 */
-        .progress-bar {
-            height: 12px;
-            background-color: #e0e0e0;
-            border-radius: 6px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        /* 进度条填充 */
-        .progress-fill {
-            height: 100%;
-            transition: width 0.5s ease;
-            position: relative;
-            border-radius: 6px;
-        }
-        
-        /* 不同营养成分的颜色 */
-        .carb-progress {
-            background: linear-gradient(90deg, #8bc34a, #4caf50);
-        }
-        
-        .protein-progress {
-            background: linear-gradient(90deg, #2196f3, #03a9f4);
-        }
-        
-        .fat-progress {
-            background: linear-gradient(90deg, #ff9800, #ffc107);
-        }
-        
-        .fiber-progress {
-            background: linear-gradient(90deg, #9c27b0, #ba68c8);
-        }
-        
-        /* 进度状态标签 */
-        .progress-status {
-            font-size: 13px;
-            color: #666;
-        }
-        
-        .protein-status {
-            color: #2196f3;
-        }
-        
-        .fiber-status {
-            color: #9c27b0;
-        }
-        
-        /* 健康追踪模块响应式设计 */
-        @media (max-width: 992px) {
-            .tracking-content {
-                flex-direction: column;
-            }
-            
-            .intake-table-container,
-            .nutrition-balance {
-                width: 100%;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .health-tracking {
-                padding: 40px 0;
-            }
-            
-            .intake-table-container,
-            .nutrition-balance {
-                padding: 20px;
-            }
-            
-            .intake-table th,
-            .intake-table td {
-                padding: 10px 8px;
-                font-size: 13px;
-            }
-        }
-        
-        /* 确保表格在移动设备上可以水平滚动 */
-        @media (max-width: 480px) {
-            .table-wrapper {
-                border-radius: 6px;
-            }
-            
-            .progress-bars {
-                gap: 20px;
-            }
-        }
-        
-        /* 菜品识别模块样式 */
-        .food-recognition {
-            background-color: #f8f8f8;
-            padding: 60px 0;
-        }
-        
-        .food-recognition .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .recognition-content {
-            display: flex;
-            gap: 30px;
-            margin-top: 30px;
-            align-items: flex-start;
-        }
-        
-        /* 图片容器样式 */
-        .image-container {
-            flex: 1.2;
-        }
-        
-        .image-placeholder {
-            background-color: white;
-            border: 2px dashed #ccc;
-            border-radius: 12px;
-            padding: 80px 40px;
-            text-align: center;
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            color: #6c757d;
+            font-size: 1rem;
+            background-color: white;
         }
         
-        .image-placeholder:hover {
-            border-color: #4caf50;
-            background-color: #fafafa;
+        /* 网站功能总览区样式 */
+        .features-overview {
+            background-color: #f8f9fa;
         }
         
-        .camera-icon {
-            font-size: 60px;
-            margin-bottom: 20px;
-            opacity: 0.7;
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
         
-        .placeholder-text {
-            font-size: 16px;
-            color: #666;
-            font-weight: 500;
-        }
-        
-        /* 识别结果卡片样式 */
-        .result-card {
-            flex: 1;
+        .feature-card {
             background-color: white;
             border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e0e0e0;
-        }
-        
-        .result-card h3 {
-            margin-top: 0;
-            color: #2e7d32;
-            font-size: 20px;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #e8f5e9;
-            padding-bottom: 12px;
-        }
-        
-        /* 菜品主要信息 */
-        .dish-main-info {
-            margin-bottom: 25px;
-        }
-        
-        .dish-name {
-            font-size: 24px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 10px;
-        }
-        
-        .dish-meta {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .meta-item {
-            background-color: #f5f5f5;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            color: #555;
-        }
-        
-        /* 营养详情 */
-        .nutrition-details {
-            margin-bottom: 25px;
-        }
-        
-        .nutrition-details h4 {
-            margin-top: 0;
-            margin-bottom: 15px;
-            color: #333;
-            font-size: 16px;
-            font-weight: 600;
-        }
-        
-        .nutrition-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .nutrition-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 16px;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 14px;
-        }
-        
-        .nutrition-item:last-child {
-            border-bottom: none;
-        }
-        
-        .nutrition-name {
-            color: #555;
-        }
-        
-        .nutrition-value {
-            font-weight: 600;
-            color: #333;
-        }
-        
-        /* 特殊营养说明 */
-        .special-nutrition {
-            background-color: #e3f2fd;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            border-left: 4px solid #2196f3;
-        }
-        
-        .special-nutrition strong {
-            color: #1976d2;
-            font-size: 14px;
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        .special-nutrition p {
-            margin: 0;
-            color: #555;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        
-        /* 操作按钮 */
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .add-tracking-btn,
-        .recognition-btn {
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
-            border: none;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
-        .add-tracking-btn {
-            flex: 1;
-            background: linear-gradient(135deg, #4caf50, #2e7d32);
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.4rem;
+            color: #343a40;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .feature-card p {
+            color: #6c757d;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+            line-height: 1.6;
+        }
+        
+        .card-btn {
+            display: inline-block;
+            background-color: #007bff;
             color: white;
-            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
-        }
-        
-        .add-tracking-btn:hover {
-            background: linear-gradient(135deg, #45a049, #2e7d32);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
-        }
-        
-        .recognition-btn {
-            background-color: #fff;
-            color: #4caf50;
-            border: 2px solid #4caf50;
-        }
-        
-        .recognition-btn:hover {
-            background-color: #4caf50;
-            color: white;
-        }
-        
-        /* 菜品识别模块响应式设计 */
-        @media (max-width: 992px) {
-            .recognition-content {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .image-placeholder {
-                min-height: 300px;
-                padding: 50px 30px;
-            }
-            
-            .camera-icon {
-                font-size: 50px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .food-recognition {
-                padding: 40px 0;
-            }
-            
-            .result-card {
-                padding: 20px;
-            }
-            
-            .dish-name {
-                font-size: 20px;
-            }
-            
-            .dish-meta {
-                gap: 10px;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .image-placeholder {
-                min-height: 250px;
-                padding: 40px 20px;
-            }
-            
-            .camera-icon {
-                font-size: 40px;
-            }
-            
-            .placeholder-text {
-                font-size: 14px;
-            }
-        }
-        
-        /* 页面底部（Footer）样式 */
-        .footer {
-            background-color: #2e7d32;
-            color: white;
-            padding: 40px 0;
-            margin-top: 60px;
-        }
-        
-        .footer .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .footer-content {
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
             text-align: center;
         }
         
-        .footer-title {
-            font-size: 16px;
-            margin: 0 0 10px 0;
-            font-weight: 500;
+        .card-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
         }
         
-        .footer-note {
-            font-size: 14px;
-            margin: 0;
-            opacity: 0.8;
+        /* 使用流程示意区样式 */
+        .workflow {
+            background-color: white;
+            padding: 5rem 0;
         }
         
-        /* 底部响应式设计 */
+        .workflow-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 2rem 0;
+        }
+        
+        .workflow-step {
+            flex: 1;
+            min-width: 200px;
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .workflow-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            background-color: #e3f2fd;
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 1.5rem;
+            background-color: #007bff;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .step-content {
+            margin-top: 1rem;
+        }
+        
+        .step-content h3 {
+            font-size: 1.2rem;
+            color: #343a40;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .step-content p {
+            color: #6c757d;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .workflow-arrow {
+            font-size: 2rem;
+            color: #007bff;
+            margin: 0 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+        }
+        
+        /* 适用人群与使用场景区样式 */
+        .audience {
+            background-color: #f8f9fa;
+            padding: 5rem 0;
+        }
+        
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .audience-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid #28a745;
+        }
+        
+        .audience-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+        
+        .audience-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .audience-card h3 {
+            font-size: 1.3rem;
+            color: #343a40;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .audience-card p {
+            color: #6c757d;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* 底部CTA区域样式 */
+        .cta {
+            background: linear-gradient(135deg, #007bff 0%, #28a745 100%);
+            padding: 5rem 0;
+            color: white;
+        }
+        
+        .cta-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .primary-btn {
+            background-color: white;
+            color: #007bff;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .primary-btn:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .secondary-btn {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .secondary-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* 响应式设计增强 */
         @media (max-width: 768px) {
-            .footer {
-                padding: 30px 0;
-                margin-top: 40px;
+            .site-header {
+                padding: 1rem;
             }
             
-            .footer-title {
-                font-size: 14px;
+            .nav-links {
+                display: none; /* 在移动端可以通过JS实现汉堡菜单 */
             }
             
-            .footer-note {
-                font-size: 12px;
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-text,
+            .hero-image {
+                width: 100%;
+            }
+            
+            .architecture-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .workflow-steps {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .workflow-arrow {
+                transform: rotate(90deg);
+                margin: 1rem 0;
+            }
+            
+            .cta-content h2 {
+                font-size: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
             }
         }
         
         @media (max-width: 480px) {
-            .footer {
-                padding: 25px 0;
+            h1 {
+                font-size: 2.2rem;
             }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.6rem;
+            }
+        }
+        
+        /* 添加微妙的进入动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        section {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        section:nth-child(odd) {
+            animation-delay: 0.1s;
+        }
+        
+        section:nth-child(even) {
+            animation-delay: 0.2s;
         }
     </style>
 </head>
 <body>
-    <!-- 顶部导航栏 -->
-    <header>
-        <div class="nav-container">
-            <a href="#" class="logo">卡路里基站 <span>Calorie Station</span></a>
-            <div class="nav-links">
-                <a href="#cooking-assistant">烹饪助手</a>
-                <a href="#recipe-recommendation">菜谱推荐</a>
-                <a href="#health-tracking">健康追踪</a>
-                <a href="#food-recognition">菜品识别</a>
-            </div>
+    <!-- 统一 Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo">卡路里基站 Calorie Station</div>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
     
-    <!-- Hero介绍区 -->
-    <section class="hero">
-        <div class="container hero-container">
-            <div class="hero-text">
-                <h1>卡路里基站</h1>
-                <h2>一站式智能饮食与营养管理平台</h2>
-                <p>用 AI 帮你看菜、算卡路里、配菜谱、管健康。</p>
-                <button class="hero-button">开始管理我的饮食</button>
-            </div>
-            <div class="hero-image">
-                <div class="image-placeholder">
-                    食物图片占位
+    <!-- 主内容区 -->
+    <main>
+        <!-- Hero 主视觉区 -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>卡路里基站</h1>
+                        <h2>原材料识别 + 智能菜谱 + 营养管理的一体化平台</h2>
+                        <p>我们的机器可以识别蔬菜、鸡蛋、肉类等原材料，自动记录重量；网站端可以分析营养、推荐菜谱、追踪健康、查营养科普。</p>
+                    </div>
+                    <div class="hero-image">
+                        <div class="image-placeholder">
+                            机器 + 网页界面示意图（占位）
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="cooking-assistant.html" class="btn-primary">开始使用烹饪助手</a>
+                    <a href="#feature-overview" class="btn-secondary">了解全部功能</a>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- 今日推荐食物卡片区 -->
-    <section class="food-cards">
-        <div class="container">
-            <h2 class="section-title">今日推荐食物</h2>
-            <div class="cards-container">
-                <!-- 食物卡片1 -->
-                <div class="food-card">
-                    <div class="card-header">
-                        <h3>番茄炒蛋</h3>
-                        <div class="tags">
-                            <span class="tag light">低热量</span>
-                            <span class="tag protein">高蛋白</span>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="food-info">
-                            <div class="info-item">
-                                <span class="label">卡路里：</span>
-                                <span class="value">180 kcal/份</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="label">烹饪方式：</span>
-                                <span class="value">炒</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="label">售价：</span>
-                                <span class="value">¥12 / 份</span>
-                            </div>
-                            <div class="info-item nutrition">
-                                <span class="label">营养信息：</span>
-                                <span class="value">富含维生素C和蛋白质</span>
-                            </div>
-                        </div>
-                    </div>
+        </section>
+        
+        <!-- 产品整体架构区：一台机器 + 一个网站 -->
+        <section class="architecture">
+            <div class="container">
+                <div class="section-header">
+                    <h2>卡路里基站如何工作？</h2>
+                    <p>一台识别原材料的智能机器 + 一个可视化营养管理网站，组成完整的饮食管理闭环。</p>
                 </div>
-                
-                <!-- 食物卡片2 -->
-                <div class="food-card">
-                    <div class="card-header">
-                        <h3>清蒸鸡胸肉</h3>
-                        <div class="tags">
-                            <span class="tag fitness">健身推荐</span>
-                            <span class="tag protein">高蛋白</span>
+                <div class="architecture-grid">
+                    <div class="architecture-card machine-side">
+                        <div class="card-header">
+                            <h3>机器端 · 原材料识别</h3>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="food-info">
-                            <div class="info-item">
-                                <span class="label">卡路里：</span>
-                                <span class="value">220 kcal/份</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="label">烹饪方式：</span>
-                                <span class="value">清蒸</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="label">售价：</span>
-                                <span class="value">¥18 / 份</span>
-                            </div>
-                            <div class="info-item nutrition">
-                                <span class="label">营养信息：</span>
-                                <span class="value">高蛋白、低脂肪，适合减脂期</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 食物卡片3 -->
-                <div class="food-card">
-                    <div class="card-header">
-                        <h3>牛油果沙拉</h3>
-                        <div class="tags">
-                            <span class="tag healthy">健康推荐</span>
-                            <span class="tag fiber">膳食纤维丰富</span>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="food-info">
-                            <div class="info-item">
-                                <span class="label">卡路里：</span>
-                                <span class="value">320 kcal/份</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="label">烹饪方式：</span>
-                                <span class="value">凉拌</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="label">售价：</span>
-                                <span class="value">¥28 / 份</span>
-                            </div>
-                            <div class="info-item nutrition">
-                                <span class="label">营养信息：</span>
-                                <span class="value">富含健康脂肪、维生素和矿物质</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 食物卡片4 -->
-                <div class="food-card">
-                    <div class="card-header">
-                        <h3>白灼西兰花</h3>
-                        <div class="tags">
-                            <span class="tag light">低热量</span>
-                            <span class="tag fiber">膳食纤维丰富</span>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="food-info">
-                            <div class="info-item">
-                                <span class="label">卡路里：</span>
-                                <span class="value">80 kcal/份</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="label">烹饪方式：</span>
-                                <span class="value">煮</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="label">售价：</span>
-                                <span class="value">¥10 / 份</span>
-                            </div>
-                            <div class="info-item nutrition">
-                                <span class="label">营养信息：</span>
-                                <span class="value">低热量、高纤维、富含维生素C</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 食物卡片5 -->
-                <div class="food-card">
-                    <div class="card-header">
-                        <h3>烤三文鱼</h3>
-                        <div class="tags">
-                            <span class="tag protein">高蛋白</span>
-                            <span class="tag healthy">健康推荐</span>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="food-info">
-                            <div class="info-item">
-                                <span class="label">卡路里：</span>
-                                <span class="value">350 kcal/份</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="label">烹饪方式：</span>
-                                <span class="value">烤</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="label">售价：</span>
-                                <span class="value">¥48 / 份</span>
-                            </div>
-                            <div class="info-item nutrition">
-                                <span class="label">营养信息：</span>
-                                <span class="value">富含优质蛋白和Omega-3脂肪酸</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 食物卡片6 -->
-                <div class="food-card">
-                    <div class="card-header">
-                        <h3>红烧豆腐</h3>
-                        <div class="tags">
-                            <span class="tag light">低热量</span>
-                            <span class="tag protein">高蛋白</span>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="food-info">
-                            <div class="info-item">
-                                <span class="label">卡路里：</span>
-                                <span class="value">160 kcal/份</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="label">烹饪方式：</span>
-                                <span class="value">炖</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="label">售价：</span>
-                                <span class="value">¥15 / 份</span>
-                            </div>
-                            <div class="info-item nutrition">
-                                <span class="label">营养信息：</span>
-                                <span class="value">植物蛋白丰富，低脂肪</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- 烹饪助手模块 -->
-    <section id="cooking-assistant" class="cooking-assistant">
-        <div class="container">
-            <h2 class="section-title">烹饪助手</h2>
-            <p class="section-description">输入食材和口味偏好，AI 帮你想菜谱。</p>
-            
-            <div class="assistant-form">
-                <!-- 食材输入 -->
-                <div class="form-group">
-                    <label for="ingredients">已有食材（例如：鸡胸肉、西兰花、番茄）</label>
-                    <input type="text" id="ingredients" placeholder="请输入您家里现有的食材" />
-                </div>
-                
-                <!-- 菜系偏好 -->
-                <div class="form-group">
-                    <label>菜系偏好</label>
-                    <div class="cuisine-options">
-                        <label class="radio-label">
-                            <input type="radio" name="cuisine" value="chinese" checked />
-                            <span>中餐</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="cuisine" value="western" />
-                            <span>西餐</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="cuisine" value="japanese" />
-                            <span>日餐</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="cuisine" value="korean" />
-                            <span>韩餐</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="cuisine" value="southeast" />
-                            <span>东南亚</span>
-                        </label>
-                    </div>
-                </div>
-                
-                <!-- 口味偏好 -->
-                <div class="form-group">
-                    <label>口味偏好</label>
-                    <div class="taste-options">
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="taste" value="light" />
-                            <span>清淡</span>
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="taste" value="spicy" />
-                            <span>麻辣</span>
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="taste" value="low-oil" />
-                            <span>少油</span>
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="taste" value="nutrition" />
-                            <span>保留营养</span>
-                        </label>
-                    </div>
-                </div>
-                
-                <!-- 生成按钮 -->
-                <div class="form-group">
-                    <button class="generate-button">生成做菜方案</button>
-                </div>
-            </div>
-            
-            <!-- AI输出的做菜选项卡片 -->
-            <div class="ai-results">
-                <h3 class="results-title">推荐方案</h3>
-                <div class="recipe-options">
-                    <!-- 方案1 -->
-                    <div class="recipe-card">
-                        <h4>清蒸鸡胸肉配西兰花</h4>
-                        <div class="recipe-info">
-                            <span class="recipe-difficulty">难易程度：简单</span>
-                            <span class="recipe-time">预计用时：20分钟</span>
-                        </div>
-                        <p class="recipe-description">高蛋白、低脂肪，适合减脂期。清蒸方式保留食材原味和营养，健康美味。</p>
-                    </div>
-                    
-                    <!-- 方案2 -->
-                    <div class="recipe-card">
-                        <h4>番茄鸡蛋意面</h4>
-                        <div class="recipe-info">
-                            <span class="recipe-difficulty">难易程度：中等</span>
-                            <span class="recipe-time">预计用时：25分钟</span>
-                        </div>
-                        <p class="recipe-description">酸甜可口，简单易学。番茄富含维生素C，鸡蛋提供优质蛋白质，是营养均衡的主食选择。</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- 菜谱推荐模块 -->
-    <section id="recipe-recommendation" class="recipe-recommendation">
-        <div class="container">
-            <h2 class="section-title">菜谱推荐</h2>
-            <p class="section-description">按健康目标推荐菜品</p>
-            
-            <!-- 健康目标标签 -->
-            <div class="health-goal-tags">
-                <span class="goal-tag active">少热量</span>
-                <span class="goal-tag">高蛋白</span>
-                <span class="goal-tag">骨折恢复餐</span>
-                <span class="goal-tag">偏软食物</span>
-            </div>
-            
-            <!-- 推荐菜谱卡片 -->
-            <div class="recommended-recipes">
-                <!-- 菜谱1 -->
-                <div class="health-recipe-card">
-                    <div class="recipe-header">
-                        <h3>清炒时蔬</h3>
-                        <div class="recipe-tags">
-                            <span class="recipe-tag">少热量</span>
-                            <span class="recipe-tag">高纤维</span>
-                        </div>
-                    </div>
-                    <div class="recipe-content">
-                        <p class="recipe-target"><strong>适用人群：</strong>减重人士，需要控制热量摄入的人群</p>
-                        <p class="recipe-method"><strong>做法说明：</strong>将各种时令蔬菜切丁，放入少量橄榄油快速翻炒，加入少量盐和鸡精调味即可。</p>
-                        <p class="recipe-ingredients"><strong>主要食材：</strong>西兰花、胡萝卜、玉米粒、青椒、洋葱</p>
-                    </div>
-                </div>
-                
-                <!-- 菜谱2 -->
-                <div class="health-recipe-card">
-                    <div class="recipe-header">
-                        <h3>虾仁蒸蛋</h3>
-                        <div class="recipe-tags">
-                            <span class="recipe-tag">高蛋白</span>
-                            <span class="recipe-tag">易消化</span>
-                        </div>
-                    </div>
-                    <div class="recipe-content">
-                        <p class="recipe-target"><strong>适用人群：</strong>健身人群，需要补充优质蛋白质的人群</p>
-                        <p class="recipe-method"><strong>做法说明：</strong>鸡蛋打散，加入温水搅拌均匀，表面撒上虾仁，放入锅中蒸10分钟，最后淋上少许生抽调味。</p>
-                        <p class="recipe-ingredients"><strong>主要食材：</strong>鸡蛋、虾仁、温水</p>
-                    </div>
-                </div>
-                
-                <!-- 菜谱3 -->
-                <div class="health-recipe-card">
-                    <div class="recipe-header">
-                        <h3>骨汤烩菜</h3>
-                        <div class="recipe-tags">
-                            <span class="recipe-tag">骨折恢复餐</span>
-                            <span class="recipe-tag">高钙</span>
-                        </div>
-                    </div>
-                    <div class="recipe-content">
-                        <p class="recipe-target"><strong>适用人群：</strong>骨折恢复期，需要补充钙质的人群</p>
-                        <p class="recipe-method"><strong>做法说明：</strong>使用猪骨或牛骨熬制高汤，加入切好的胡萝卜、白萝卜、豆腐等食材慢炖，最后加盐调味。</p>
-                        <p class="recipe-ingredients"><strong>主要食材：</strong>猪骨/牛骨、胡萝卜、白萝卜、豆腐</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- 健康追踪模块 -->
-    <section id="health-tracking" class="health-tracking">
-        <div class="container">
-            <h2 class="section-title">健康追踪</h2>
-            <p class="section-description">记录每日摄入，查看营养是否均衡</p>
-            
-            <div class="tracking-content">
-                <!-- 今日摄入表格 -->
-                <div class="intake-table-container">
-                    <h3>今日摄入示例</h3>
-                    <div class="table-wrapper">
-                        <table class="intake-table">
-                            <thead>
-                                <tr>
-                                    <th>日期</th>
-                                    <th>菜品名称</th>
-                                    <th>重量(g)</th>
-                                    <th>热量(kcal)</th>
-                                    <th>碳水化合物(g)</th>
-                                    <th>蛋白质(g)</th>
-                                    <th>脂肪(g)</th>
-                                    <th>膳食纤维(g)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>2023-06-15</td>
-                                    <td>番茄鸡蛋面</td>
-                                    <td>300</td>
-                                    <td>420</td>
-                                    <td>65</td>
-                                    <td>15</td>
-                                    <td>12</td>
-                                    <td>3</td>
-                                </tr>
-                                <tr class="table-row-alt">
-                                    <td>2023-06-15</td>
-                                    <td>清蒸鸡胸肉</td>
-                                    <td>150</td>
-                                    <td>255</td>
-                                    <td>0</td>
-                                    <td>45</td>
-                                    <td>5</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td>2023-06-15</td>
-                                    <td>凉拌西兰花</td>
-                                    <td>200</td>
-                                    <td>80</td>
-                                    <td>12</td>
-                                    <td>5</td>
-                                    <td>3</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr class="table-row-alt">
-                                    <td>2023-06-15</td>
-                                    <td>香蕉</td>
-                                    <td>100</td>
-                                    <td>89</td>
-                                    <td>23</td>
-                                    <td>1</td>
-                                    <td>0.3</td>
-                                    <td>2.6</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                
-                <!-- 营养均衡指标 -->
-                <div class="nutrition-balance">
-                    <h3>营养均衡指标</h3>
-                    <div class="progress-bars">
-                        <!-- 碳水化合物进度条 -->
-                        <div class="progress-item">
-                            <div class="progress-label">
-                                <span>碳水化合物</span>
-                                <span class="progress-value">100g / 120g</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill carb-progress" style="width: 83%;"></div>
-                            </div>
-                            <div class="progress-status">适中</div>
-                        </div>
-                        
-                        <!-- 蛋白质进度条 -->
-                        <div class="progress-item">
-                            <div class="progress-label">
-                                <span>蛋白质</span>
-                                <span class="progress-value">66g / 80g</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill protein-progress" style="width: 82%;"></div>
-                            </div>
-                            <div class="progress-status protein-status">略低</div>
-                        </div>
-                        
-                        <!-- 脂肪进度条 -->
-                        <div class="progress-item">
-                            <div class="progress-label">
-                                <span>脂肪</span>
-                                <span class="progress-value">20.3g / 60g</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill fat-progress" style="width: 34%;"></div>
-                            </div>
-                            <div class="progress-status">偏低</div>
-                        </div>
-                        
-                        <!-- 膳食纤维进度条 -->
-                        <div class="progress-item">
-                            <div class="progress-label">
-                                <span>膳食纤维</span>
-                                <span class="progress-value">10.6g / 25g</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill fiber-progress" style="width: 42%;"></div>
-                            </div>
-                            <div class="progress-status fiber-status">不足</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- 菜品识别模块 -->
-    <section id="food-recognition" class="food-recognition">
-        <div class="container">
-            <h2 class="section-title">菜品识别</h2>
-            <p class="section-description">自动识别菜品并估算营养</p>
-            
-            <div class="recognition-content">
-                <!-- 图片占位区域 -->
-                <div class="image-container">
-                    <div class="image-placeholder">
-                        <div class="camera-icon">📷</div>
-                        <div class="placeholder-text">摄像头/菜品图片区域（占位）</div>
-                    </div>
-                </div>
-                
-                <!-- 识别结果卡片 -->
-                <div class="result-card">
-                    <h3>识别结果</h3>
-                    <div class="dish-info">
-                        <div class="dish-main-info">
-                            <div class="dish-name">红烧牛肉饭</div>
-                            <div class="dish-meta">
-                                <span class="meta-item"><strong>重量：</strong>320 g</span>
-                                <span class="meta-item"><strong>热量：</strong>约 650 kcal</span>
-                            </div>
-                        </div>
-                        
-                        <div class="nutrition-details">
-                            <h4>营养成分</h4>
-                            <ul class="nutrition-list">
-                                <li class="nutrition-item">
-                                    <span class="nutrition-name">碳水化合物</span>
-                                    <span class="nutrition-value">85g</span>
-                                </li>
-                                <li class="nutrition-item">
-                                    <span class="nutrition-name">蛋白质</span>
-                                    <span class="nutrition-value">28g</span>
-                                </li>
-                                <li class="nutrition-item">
-                                    <span class="nutrition-name">脂肪</span>
-                                    <span class="nutrition-value">25g</span>
-                                </li>
-                                <li class="nutrition-item">
-                                    <span class="nutrition-name">膳食纤维</span>
-                                    <span class="nutrition-value">4g</span>
-                                </li>
+                        <div class="card-content">
+                            <ul>
+                                <li>识别原材料（如西兰花、鸡蛋、鸡胸肉等）</li>
+                                <li>自动记录原材料重量</li>
+                                <li>一键上传到网站端的健康追踪/菜谱推荐模块</li>
                             </ul>
+                            <div class="device-placeholder">
+                                机器设备示意图（占位）
+                            </div>
                         </div>
-                        
-                        <div class="special-nutrition">
-                            <strong>特殊营养说明：</strong>
-                            <p>富含蛋白质、铁、维生素B族，适量食用有助于补充体力。</p>
+                    </div>
+                    <div class="architecture-card website-side">
+                        <div class="card-header">
+                            <h3>网站端 · 智能管理</h3>
                         </div>
-                        
-                        <div class="action-buttons">
-                            <button class="add-tracking-btn">添加至健康追踪</button>
-                            <button class="recognition-btn">重新识别</button>
+                        <div class="card-content">
+                            <ul>
+                                <li>烹饪助手：根据原材料和口味偏好生成菜谱</li>
+                                <li>菜谱推荐：按健康目标（减脂、高蛋白等）推荐菜品</li>
+                                <li>健康追踪：记录每日摄入，生成营养均衡视图</li>
+                                <li>原材料识别界面：查看机器上传的数据和营养分析</li>
+                                <li>营养科普：全面了解各种营养成分、维生素、微量元素</li>
+                            </ul>
+                            <div class="device-placeholder">
+                                网站界面示意图（占位）
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- 页面底部（Footer） -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <p class="footer-title">© 2025 卡路里基站 | 智能饮食与营养管理平台</p>
-                    <p class="footer-note">本页面为演示界面，仅展示前端外观。</p>
+        </section>
+        
+        <!-- 网站功能总览区 -->
+        <section id="feature-overview" class="features-overview">
+            <div class="container">
+                <div class="section-header">
+                    <h2>网站功能模块总览</h2>
+                    <p>点击进入不同页面，完成从做饭到营养管理的全流程。</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="card-icon">👨‍🍳</div>
+                        <h3>烹饪助手</h3>
+                        <p>输入你手头的原材料 + 口味偏好，生成多种做菜方案。</p>
+                        <a href="cooking-assistant.html" class="card-btn">进入烹饪助手</a>
+                    </div>
+                    <div class="feature-card">
+                        <div class="card-icon">📋</div>
+                        <h3>菜谱推荐</h3>
+                        <p>根据减脂、高蛋白、骨折恢复、软食等目标推荐菜品。</p>
+                        <a href="recipe-recommend.html" class="card-btn">进入菜谱推荐</a>
+                    </div>
+                    <div class="feature-card">
+                        <div class="card-icon">📊</div>
+                        <h3>健康追踪</h3>
+                        <p>记录每日吃了什么，查看碳水/蛋白质/脂肪/膳食纤维是否均衡。</p>
+                        <a href="health-tracking.html" class="card-btn">进入健康追踪</a>
+                    </div>
+                    <div class="feature-card">
+                        <div class="card-icon">🔍</div>
+                        <h3>原材料识别界面</h3>
+                        <p>展示机器识别的原材料结果，并通过烹饪小助手推荐菜品。</p>
+                        <a href="dish-recognition.html" class="card-btn">查看原材料识别</a>
+                    </div>
+                    <div class="feature-card">
+                        <div class="card-icon">📚</div>
+                        <h3>营养科普</h3>
+                        <p>系统整理的营养成分知识库，包括宏量营养素、维生素、矿物质、微量元素等。</p>
+                        <a href="nutrition-knowledge.html" class="card-btn">进入营养科普</a>
+                    </div>
                 </div>
             </div>
+        </section>
+        
+        <!-- 使用流程示意区 -->
+        <section class="workflow">
+            <div class="container">
+                <div class="section-header">
+                    <h2>从"放上原材料"到"管理健康"的完整流程</h2>
+                </div>
+                <div class="workflow-steps">
+                    <div class="workflow-step">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h3>放上原材料</h3>
+                            <p>将蔬菜、鸡蛋、肉类放到机器上。</p>
+                        </div>
+                    </div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h3>机器识别 & 称重</h3>
+                            <p>机器识别原材料名称，记录重量。</p>
+                        </div>
+                    </div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <h3>网站端查看营养 & 推荐菜</h3>
+                            <p>在网页上查看营养成分，查看烹饪建议。</p>
+                        </div>
+                    </div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">
+                        <div class="step-number">04</div>
+                        <div class="step-content">
+                            <h3>添加到健康追踪</h3>
+                            <p>一键将当天摄入记录到健康追踪页面，查看营养均衡情况。</p>
+                        </div>
+                    </div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">
+                        <div class="step-number">05</div>
+                        <div class="step-content">
+                            <h3>查营养科普</h3>
+                            <p>如果想了解某个营养成分（如钙、铁、维生素 D），进入营养科普页面查看详细内容。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 适用人群与使用场景区 -->
+        <section class="audience">
+            <div class="container">
+                <div class="section-header">
+                    <h2>谁适合使用卡路里基站？</h2>
+                </div>
+                <div class="audience-grid">
+                    <div class="audience-card">
+                        <div class="audience-icon">💪</div>
+                        <h3>健身/增肌人群</h3>
+                        <p>精确追踪蛋白质和热量摄入，机器识别食材后自动计算营养成分，确保摄入足够的蛋白质支持肌肉生长。</p>
+                    </div>
+                    <div class="audience-card">
+                        <div class="audience-icon">🏃</div>
+                        <h3>减脂/控制体重人群</h3>
+                        <p>实时监控总热量和脂肪摄入，根据目标推荐低卡健康食谱，轻松管理每日卡路里摄入，科学减脂。</p>
+                    </div>
+                    <div class="audience-card">
+                        <div class="audience-icon">🏥</div>
+                        <h3>术后/康复患者</h3>
+                        <p>提供软食、易消化、营养密度高的菜谱推荐，精确控制营养摄入，帮助身体快速恢复健康。</p>
+                    </div>
+                    <div class="audience-card">
+                        <div class="audience-icon">👵</div>
+                        <h3>老年人/家庭照护</h3>
+                        <p>重点关注钙、维生素、膳食纤维等老年人所需的关键营养素，提供适合老年人的健康菜谱。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 底部CTA区域 -->
+        <section class="cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>准备好让饮食变得更"可视化"了吗？</h2>
+                    <p>从今天开始，记录每一口食物的营养价值。</p>
+                    <div class="cta-buttons">
+                        <a href="cooking-assistant.html" class="primary-btn">立即开始使用烹饪助手</a>
+                        <a href="nutrition-knowledge.html" class="secondary-btn">先了解营养科普</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+    <!-- 统一 Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <p class="footer-text">© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p class="footer-text">本网站界面仅为前端演示，不包含实际识别、计算与医疗功能。</p>
         </div>
     </footer>
-    <!-- 页面底部结束 -->
-    
-    <script>
-        // 注意：根据要求，我们不会添加任何JavaScript代码
-    </script>
 </body>
 </html>

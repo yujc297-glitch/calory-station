@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抗氧化物质 - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        .title-section p {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .content-section h2 {
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section h3 {
+            color: #1e88e5;
+            margin: 20px 0 15px 0;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+        }
+        
+        .content-section ul {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        
+        .content-section li {
+            margin-bottom: 8px;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #f0f7f0;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #f0f7ff;
+            border-left: 4px solid #1e88e5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1e88e5;
+            margin-bottom: 10px;
+        }
+        
+        /* 警告框样式 */
+        .warning-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box h3 {
+            color: #ffb300;
+            margin-bottom: 10px;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #fff8e1;
+            padding: 20px;
+            text-align: center;
+            margin: 40px 0;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #7d6f47;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+        
+        .footer p:last-child {
+            margin-bottom: 0;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>抗氧化物质</h1>
+            <p>对抗自由基损伤，保护细胞健康的重要营养素</p>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>定义</h2>
+            <p>抗氧化物质是一类能够中和自由基，减轻氧化应激的化合物。在生物体内，氧化反应是正常的生理过程，但当氧化反应过度发生时，会产生过多的自由基，这些自由基会攻击细胞中的生物分子（如DNA、蛋白质、脂质），导致细胞损伤，这一过程被称为氧化应激。</p>
+            <p>抗氧化物质可以通过以下方式发挥作用：</p>
+            <ul>
+                <li>直接中和自由基</li>
+                <li>激活内源性抗氧化系统</li>
+                <li>清除引起自由基产生的物质</li>
+                <li>修复被自由基损伤的生物分子</li>
+            </ul>
+            <p>抗氧化物质种类繁多，可分为酶类抗氧化剂和非酶类抗氧化剂两大类。</p>
+        </section>
+        
+        <section class="content-section">
+            <h2>主要种类</h2>
+            
+            <h3>维生素类抗氧化剂</h3>
+            <ul>
+                <li><strong>维生素C（抗坏血酸）：</strong>水溶性抗氧化剂，在体内可循环利用</li>
+                <li><strong>维生素E（生育酚）：</strong>脂溶性抗氧化剂，保护细胞膜免受脂质过氧化</li>
+                <li><strong>维生素A（视黄醇）和β-胡萝卜素：</strong>脂溶性抗氧化剂，保护细胞免受自由基损伤</li>
+                <li><strong>维生素D：</strong>近年来研究发现其具有抗氧化作用</li>
+            </ul>
+            
+            <h3>矿物质类抗氧化剂</h3>
+            <ul>
+                <li><strong>硒：</strong>谷胱甘肽过氧化物酶的重要组成部分</li>
+                <li><strong>锌：</strong>超氧化物歧化酶的辅助因子</li>
+                <li><strong>铜：</strong>超氧化物歧化酶的辅助因子</li>
+                <li><strong>锰：</strong>超氧化物歧化酶的辅助因子</li>
+            </ul>
+            
+            <h3>酶类抗氧化剂</h3>
+            <ul>
+                <li><strong>超氧化物歧化酶（SOD）：</strong>催化超氧化物阴离子转化为过氧化氢</li>
+                <li><strong>谷胱甘肽过氧化物酶（GPx）：</strong>分解过氧化氢和有机过氧化物</li>
+                <li><strong>过氧化氢酶（CAT）：</strong>分解过氧化氢为水和氧气</li>
+                <li><strong>谷胱甘肽还原酶：</strong>维持谷胱甘肽在还原状态</li>
+            </ul>
+            
+            <h3>植物多酚类抗氧化剂</h3>
+            <ul>
+                <li><strong>类黄酮：</strong>
+                    <ul>
+                        <li>黄酮醇：槲皮素、山奈酚</li>
+                        <li>黄酮：芹菜素、木犀草素</li>
+                        <li>黄烷酮：柚皮苷、橙皮苷</li>
+                        <li>异黄酮：大豆异黄酮（染料木黄酮、大豆苷元）</li>
+                        <li>花青素：矢车菊素、花青素</li>
+                        <li>儿茶素：表没食子儿茶素没食子酸酯(EGCG)、表儿茶素</li>
+                    </ul>
+                </li>
+                <li><strong>酚酸：</strong>
+                    <ul>
+                        <li>苯甲酸衍生物：没食子酸、原儿茶酸</li>
+                        <li>肉桂酸衍生物：咖啡酸、阿魏酸、绿原酸</li>
+                    </ul>
+                </li>
+                <li><strong>木质素：</strong>如松脂醇、落叶松脂醇</li>
+                <li><strong>芪类：</strong>如白藜芦醇</li>
+            </ul>
+            
+            <h3>其他抗氧化物质</h3>
+            <ul>
+                <li><strong>辅酶Q10：</strong>在线粒体电子传递链中起作用，保护细胞能量产生</li>
+                <li><strong>α-硫辛酸：</strong>既能溶于水又能溶于脂肪，可清除多种自由基</li>
+                <li><strong>谷胱甘肽：</strong>细胞内重要的抗氧化剂，由半胱氨酸、谷氨酸和甘氨酸组成</li>
+                <li><strong>褪黑素：</strong>具有强大的抗氧化作用，能穿透细胞膜和线粒体膜</li>
+                <li><strong>牛磺酸：</strong>具有抗氧化和稳定细胞膜的作用</li>
+                <li><strong>胡萝卜素类：</strong>如叶黄素、玉米黄质、番茄红素</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>主要生理作用</h2>
+            <ul>
+                <li><strong>中和自由基：</strong>
+                    <ul>
+                        <li>清除体内过多的自由基，减少氧化应激</li>
+                        <li>阻断自由基链式反应，防止进一步的氧化损伤</li>
+                        <li>保护DNA、蛋白质和脂质等生物分子免受损伤</li>
+                    </ul>
+                </li>
+                <li><strong>保护细胞和组织：</strong>
+                    <ul>
+                        <li>维持细胞膜的完整性和流动性</li>
+                        <li>保护细胞器（如线粒体、溶酶体）免受损伤</li>
+                        <li>减少细胞凋亡和坏死</li>
+                        <li>延缓细胞衰老过程</li>
+                    </ul>
+                </li>
+                <li><strong>调节免疫系统：</strong>
+                    <ul>
+                        <li>增强免疫细胞功能</li>
+                        <li>减轻过度炎症反应</li>
+                        <li>促进免疫细胞的增殖和活化</li>
+                        <li>增强机体对感染和疾病的抵抗力</li>
+                    </ul>
+                </li>
+                <li><strong>心血管保护：</strong>
+                    <ul>
+                        <li>抑制低密度脂蛋白（LDL）氧化</li>
+                        <li>防止动脉粥样硬化形成</li>
+                        <li>降低心血管疾病风险</li>
+                        <li>改善血管内皮功能</li>
+                    </ul>
+                </li>
+                <li><strong>抗肿瘤作用：</strong>
+                    <ul>
+                        <li>抑制致癌物质的活性</li>
+                        <li>修复DNA损伤，减少基因突变</li>
+                        <li>抑制肿瘤细胞增殖</li>
+                        <li>诱导肿瘤细胞凋亡</li>
+                    </ul>
+                </li>
+                <li><strong>神经系统保护：</strong>
+                    <ul>
+                        <li>保护神经元免受氧化损伤</li>
+                        <li>减少神经退行性疾病的发生风险</li>
+                        <li>改善认知功能</li>
+                        <li>延缓脑衰老</li>
+                    </ul>
+                </li>
+                <li><strong>抗炎作用：</strong>
+                    <ul>
+                        <li>抑制炎症因子的产生</li>
+                        <li>减轻氧化应激引起的炎症反应</li>
+                        <li>缓解慢性炎症</li>
+                    </ul>
+                </li>
+                <li><strong>其他作用：</strong>
+                    <ul>
+                        <li>保护眼睛健康，预防白内障和黄斑变性</li>
+                        <li>促进皮肤健康，延缓皮肤衰老</li>
+                        <li>改善运动表现和恢复</li>
+                        <li>可能延长寿命</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>主要食物来源</h2>
+            
+            <h3>富含维生素C的食物</h3>
+            <ul>
+                <li>柑橘类水果（橙子、柠檬、柚子）</li>
+                <li>草莓、蓝莓、猕猴桃</li>
+                <li>番石榴、石榴</li>
+                <li>青椒、红椒、黄椒</li>
+                <li>西兰花、花椰菜</li>
+                <li>羽衣甘蓝、菠菜</li>
+                <li>西红柿</li>
+            </ul>
+            
+            <h3>富含维生素E的食物</h3>
+            <ul>
+                <li>坚果（杏仁、核桃、榛子）</li>
+                <li>种子（向日葵籽、芝麻、南瓜籽）</li>
+                <li>植物油（橄榄油、葵花籽油、芝麻油）</li>
+                <li>全麦食品</li>
+                <li>鳄梨（牛油果）</li>
+                <li>豆类（大豆、黑豆）</li>
+                <li>绿叶蔬菜</li>
+            </ul>
+            
+            <h3>富含类胡萝卜素的食物</h3>
+            <ul>
+                <li>胡萝卜、南瓜</li>
+                <li>红薯、紫薯</li>
+                <li>菠菜、羽衣甘蓝</li>
+                <li>芒果、杏</li>
+                <li>番茄（特别是番茄红素）</li>
+                <li>彩椒</li>
+                <li>西兰花</li>
+            </ul>
+            
+            <h3>富含类黄酮的食物</h3>
+            <ul>
+                <li><strong>花青素（紫色/蓝色食物）：</strong>
+                    <ul>
+                        <li>蓝莓、黑莓、蔓越莓</li>
+                        <li>紫葡萄、葡萄汁、红酒</li>
+                        <li>紫薯、紫甘蓝</li>
+                        <li>茄子</li>
+                    </ul>
+                </li>
+                <li><strong>儿茶素（绿茶中含量高）：</strong>
+                    <ul>
+                        <li>绿茶</li>
+                        <li>白茶</li>
+                        <li>乌龙茶</li>
+                    </ul>
+                </li>
+                <li><strong>槲皮素：</strong>
+                    <ul>
+                        <li>洋葱</li>
+                        <li>苹果（带皮）</li>
+                        <li>绿茶</li>
+                        <li>浆果类</li>
+                    </ul>
+                </li>
+                <li><strong>异黄酮（大豆及制品）：</strong>
+                    <ul>
+                        <li>豆腐、豆浆</li>
+                        <li>纳豆、味噌</li>
+                        <li>大豆蛋白粉</li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <h3>富含白藜芦醇的食物</h3>
+            <ul>
+                <li>红葡萄皮</li>
+                <li>红酒（适量饮用）</li>
+                <li>花生</li>
+                <li>蓝莓</li>
+                <li>蔓越莓</li>
+            </ul>
+            
+            <h3>富含硒的食物</h3>
+            <ul>
+                <li>巴西坚果（含量最高）</li>
+                <li>海鲜（金枪鱼、虾、沙丁鱼）</li>
+                <li>肉类（猪肉、牛肉、鸡肉）</li>
+                <li>全谷物</li>
+                <li>鸡蛋</li>
+            </ul>
+            
+            <h3>其他富含抗氧化物质的食物</h3>
+            <ul>
+                <li><strong>富含番茄红素的食物：</strong>番茄（熟番茄含量更高）、西瓜、粉红葡萄柚</li>
+                <li><strong>富含姜黄素的食物：</strong>姜黄、咖喱粉</li>
+                <li><strong>富含硫化物的食物：</strong>大蒜、洋葱、韭菜</li>
+                <li><strong>富含辅酶Q10的食物：</strong>鱼类（尤其是深海鱼类）、坚果、全谷物</li>
+                <li><strong>富含多酚的食物：</strong>可可、黑巧克力（高可可含量）、茶（尤其是绿茶和红茶）</li>
+            </ul>
+            
+            <div class="tip-box">
+                <h3>小贴士</h3>
+                <p>抗氧化物质在食物中的含量受到多种因素影响：</p>
+                <ul>
+                    <li>烹饪方法：蒸、煮比煎、炸更能保留抗氧化物质</li>
+                    <li>储存时间：新鲜食物抗氧化物质含量更高</li>
+                    <li>加工程度：加工越少，抗氧化物质保留越多</li>
+                    <li>食用方式：有些抗氧化物质（如番茄红素）在加热和与脂肪一起食用时吸收率更高</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入建议</h2>
+            
+            <p>抗氧化物质的推荐摄入量因种类而异，以下是一些主要抗氧化物质的参考摄入量：</p>
+            
+            <h3>维生素类抗氧化剂</h3>
+            <ul>
+                <li><strong>维生素C：</strong>
+                    <ul>
+                        <li>成人推荐摄入量：100-200mg/天</li>
+                        <li>可耐受最高摄入量：2000mg/天</li>
+                    </ul>
+                </li>
+                <li><strong>维生素E：</strong>
+                    <ul>
+                        <li>成人推荐摄入量：10-15mg α-生育酚当量/天</li>
+                        <li>可耐受最高摄入量：300mg α-生育酚当量/天</li>
+                    </ul>
+                </li>
+                <li><strong>β-胡萝卜素：</strong>
+                    <ul>
+                        <li>成人推荐摄入量：6mg/天</li>
+                        <li>可耐受最高摄入量：30mg/天（作为补充剂时）</li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <h3>矿物质类抗氧化剂</h3>
+            <ul>
+                <li><strong>硒：</strong>
+                    <ul>
+                        <li>成人推荐摄入量：50-70μg/天</li>
+                        <li>可耐受最高摄入量：400μg/天</li>
+                    </ul>
+                </li>
+                <li><strong>锌：</strong>
+                    <ul>
+                        <li>成人推荐摄入量：男性15mg/天，女性12mg/天</li>
+                        <li>可耐受最高摄入量：40mg/天</li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <p>关于其他抗氧化物质（如植物多酚、辅酶Q10等），目前没有统一的推荐摄入量，但研究表明，通过多样化的饮食获取是最安全有效的方式。</p>
+            
+            <h3>摄入策略</h3>
+            <ul>
+                <li><strong>饮食多样化：</strong>摄入各种颜色的水果和蔬菜，以获取不同类型的抗氧化物质</li>
+                <li><strong>每天摄入足够的蔬果：</strong>建议每天摄入5-9份水果和蔬菜</li>
+                <li><strong>优先选择深色蔬果：</strong>颜色越深，通常抗氧化物质含量越高</li>
+                <li><strong>减少加工食品摄入：</strong>加工食品通常抗氧化物质含量较低</li>
+                <li><strong>适量食用坚果和种子：</strong>富含多种抗氧化物质</li>
+                <li><strong>选择健康油脂：</strong>如橄榄油、亚麻籽油等</li>
+                <li><strong>适量饮用茶：</strong>特别是绿茶和白茶</li>
+                <li><strong>考虑季节性食物：</strong>当季食物通常营养更丰富</li>
+            </ul>
+            
+            <p>对于特殊人群，如老年人、吸烟者、接触污染物较多的人群、慢性病患者等，可能需要摄入更多的抗氧化物质，但应在医生或营养师的指导下进行。</p>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入不足时的潜在影响</h2>
+            
+            <p>抗氧化物质摄入不足可能导致以下潜在影响（注：本内容为科普信息，如有相关症状请咨询专业医疗人员）：</p>
+            
+            <ul>
+                <li><strong>氧化应激增加：</strong>
+                    <ul>
+                        <li>自由基积累</li>
+                        <li>细胞膜脂质过氧化</li>
+                        <li>DNA和蛋白质损伤</li>
+                    </ul>
+                </li>
+                <li><strong>细胞和组织损伤：</strong>
+                    <ul>
+                        <li>细胞功能下降</li>
+                        <li>组织器官功能受损</li>
+                        <li>加速衰老过程</li>
+                    </ul>
+                </li>
+                <li><strong>免疫力下降：</strong>
+                    <ul>
+                        <li>容易感染疾病</li>
+                        <li>伤口愈合缓慢</li>
+                        <li>免疫相关疾病风险增加</li>
+                    </ul>
+                </li>
+                <li><strong>慢性疾病风险增加：</strong>
+                    <ul>
+                        <li>心血管疾病：动脉粥样硬化、高血压</li>
+                        <li>癌症：特别是与氧化应激相关的癌症</li>
+                        <li>糖尿病及其并发症</li>
+                        <li>神经退行性疾病：阿尔茨海默病、帕金森病</li>
+                        <li>白内障和黄斑变性等眼部疾病</li>
+                    </ul>
+                </li>
+                <li><strong>皮肤问题：</strong>
+                    <ul>
+                        <li>皮肤干燥、粗糙</li>
+                        <li>皱纹增加</li>
+                        <li>皮肤老化加速</li>
+                        <li>容易出现色斑</li>
+                    </ul>
+                </li>
+                <li><strong>特定维生素缺乏症状：</strong>
+                    <ul>
+                        <li>维生素C缺乏：坏血病、牙龈出血、伤口愈合不良</li>
+                        <li>维生素E缺乏：溶血性贫血、神经肌肉障碍</li>
+                        <li>硒缺乏：克山病、大骨节病</li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <p>长期抗氧化物质摄入不足可能会累积性地损害健康，并增加多种慢性疾病的风险。</p>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入过量的潜在风险</h2>
+            
+            <p>虽然抗氧化物质对健康有益，但摄入过量也可能带来风险（注：本内容为科普信息，实际情况请咨询专业人士）：</p>
+            
+            <h3>维生素类抗氧化剂过量</h3>
+            <ul>
+                <li><strong>维生素C：</strong>
+                    <ul>
+                        <li>胃肠道不适：腹泻、恶心、腹痛</li>
+                        <li>草酸钙肾结石风险增加</li>
+                        <li>干扰某些药物作用</li>
+                        <li>铁吸收过多，可能导致铁过载</li>
+                    </ul>
+                </li>
+                <li><strong>维生素E：</strong>
+                    <ul>
+                        <li>出血风险增加（抑制血小板聚集）</li>
+                        <li>免疫功能抑制</li>
+                        <li>恶心、腹泻、腹痛</li>
+                        <li>头痛、头晕</li>
+                    </ul>
+                </li>
+                <li><strong>β-胡萝卜素：</strong>
+                    <ul>
+                        <li>皮肤黄染（胡萝卜素血症）</li>
+                        <li>吸烟者补充高剂量β-胡萝卜素可能增加肺癌风险</li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <h3>矿物质类抗氧化剂过量</h3>
+            <ul>
+                <li><strong>硒：</strong>
+                    <ul>
+                        <li>硒中毒：恶心、呕吐、腹泻</li>
+                        <li>头发和指甲脱落</li>
+                        <li>皮肤病变</li>
+                        <li>神经系统异常</li>
+                        <li>慢性硒中毒可能导致肝硬化、心肌病等</li>
+                    </ul>
+                </li>
+                <li><strong>锌：</strong>
+                    <ul>
+                        <li>铜吸收障碍</li>
+                        <li>免疫功能抑制</li>
+                        <li>恶心、呕吐、腹泻</li>
+                        <li>头痛、头晕</li>
+                        <li>长期过量可能影响胆固醇代谢</li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <h3>其他抗氧化物质过量</h3>
+            <ul>
+                <li><strong>辅酶Q10：</strong>可能引起胃肠道不适、头痛、皮疹等</li>
+                <li><strong>类黄酮补充剂：</strong>可能引起头痛、头晕、胃肠道不适</li>
+                <li><strong>α-硫辛酸：</strong>可能引起低血糖、恶心、呕吐</li>
+            </ul>
+            
+            <div class="warning-box">
+                <h3>注意</h3>
+                <p>抗氧化物质过量主要发生在使用补充剂的情况下，通过正常饮食通常不会导致过量。以下人群在使用抗氧化补充剂前应咨询医生：</p>
+                <ul>
+                    <li>正在服用药物的人群（特别是抗凝药、免疫抑制剂等）</li>
+                    <li>有慢性疾病的人群</li>
+                    <li>孕妇和哺乳期妇女</li>
+                    <li>计划手术的人群</li>
+                    <li>儿童和青少年</li>
+                    <li>有特定遗传疾病的人群</li>
+                </ul>
+                <p>此外，值得注意的是，一些研究发现，在某些情况下，高剂量抗氧化补充剂可能产生"促氧化"作用，反而增加氧化应激。因此，抗氧化物质的摄入应适量，最好通过均衡饮食获取。</p>
+            </div>
+        </section>
+        
+        <section class="tip-box">
+            <h3>小贴士</h3>
+            <ul>
+                <li>通过饮食获取抗氧化物质是最安全有效的方式，应优先选择富含抗氧化物质的食物</li>
+                <li>每天摄入多种颜色的蔬果，以获取不同类型的抗氧化物质</li>
+                <li>烹饪时尽量减少高温长时间烹调，以保留更多抗氧化物质</li>
+                <li>食用水果和蔬菜时，尽可能保留皮，因为许多抗氧化物质集中在皮中</li>
+                <li>茶和咖啡含有抗氧化物质，但应适量饮用，避免过量咖啡因摄入</li>
+                <li>选择深色巧克力（可可含量>70%）作为健康零食</li>
+                <li>保持健康的生活方式，包括戒烟、限酒、适量运动和充足睡眠，以减少氧化应激</li>
+                <li>在使用抗氧化补充剂前，应咨询医生或营养师的建议</li>
+            </ul>
+        </section>
+        
+        <section class="info-box">
+            <h3>健康小知识</h3>
+            <p>抗氧化物质的协同作用：不同的抗氧化物质在体内可以协同作用，形成抗氧化网络。例如，维生素C可以再生被氧化的维生素E，而维生素E可以保护细胞膜免受脂质过氧化。因此，摄入多样化的抗氧化物质比单一补充更有效。此外，食物中的抗氧化物质通常与其他营养素一起存在，它们之间的相互作用可能产生协同效应，这是单纯补充剂无法提供的好处。</p>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            <p>本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。</p>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 卡路里基站 Calorie Station - AI智能膳食与营养管理平台</p>
+            <p>本网站提供的营养信息仅供参考，不构成医疗建议</p>
+        </div>
+    </footer>
+</body>
+</html>

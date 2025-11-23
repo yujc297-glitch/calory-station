@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>碘 Iodine - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        .title-section p {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .content-section h2 {
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+        }
+        
+        .content-section ul {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        
+        .content-section li {
+            margin-bottom: 8px;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #f0f7f0;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #f0f7ff;
+            border-left: 4px solid #1e88e5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1e88e5;
+            margin-bottom: 10px;
+        }
+        
+        /* 警告框样式 */
+        .warning-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box h3 {
+            color: #ffb300;
+            margin-bottom: 10px;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #fff8e1;
+            padding: 20px;
+            text-align: center;
+            margin: 40px 0;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #7d6f47;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+        
+        .footer p:last-child {
+            margin-bottom: 0;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>碘 Iodine (I)</h1>
+            <p>甲状腺激素合成的必需微量元素，对生长发育和代谢至关重要</p>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>定义</h2>
+            <p>碘是人体必需的微量元素之一，在人体内的含量非常少，约为15-20毫克。碘主要集中在甲状腺中，是甲状腺激素（T3和T4）的重要组成部分。甲状腺激素对人体的生长发育、新陈代谢、神经系统和心血管系统功能等方面都有着至关重要的作用。</p>
+        </section>
+        
+        <section class="content-section">
+            <h2>主要生理作用</h2>
+            <ul>
+                <li><strong>甲状腺激素合成：</strong>是甲状腺激素（甲状腺素T4和三碘甲状腺原氨酸T3）的必需组成部分</li>
+                <li><strong>生长发育：</strong>特别是对胎儿和婴幼儿的大脑发育至关重要</li>
+                <li><strong>新陈代谢调节：</strong>影响基础代谢率，调节体内能量消耗</li>
+                <li><strong>体温调节：</strong>参与维持正常体温</li>
+                <li><strong>神经系统发育：</strong>对中枢神经系统的发育和功能维持非常重要</li>
+                <li><strong>心血管功能：</strong>影响心率和心肌收缩力</li>
+                <li><strong>肌肉功能：</strong>维持正常的肌肉收缩和神经肌肉兴奋性</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>主要食物来源</h2>
+            <ul>
+                <li><strong>海产品：</strong>海带、紫菜、海藻、海鱼（如鳕鱼、鲭鱼）、贝类、虾、蟹</li>
+                <li><strong>加碘盐：</strong>目前最主要的碘来源，是预防碘缺乏的有效措施</li>
+                <li><strong>乳制品：</strong>牛奶、酸奶、奶酪（含量取决于饲料中的碘含量）</li>
+                <li><strong>蛋类：</strong>特别是蛋黄</li>
+                <li><strong>部分水果和蔬菜：</strong>含量取决于土壤中的碘含量，沿海地区的农产品含碘量较高</li>
+                <li><strong>碘化面包：</strong>某些国家在面包制作过程中添加碘</li>
+            </ul>
+            <div class="info-box">
+                <h3>注意</h3>
+                <p>内陆地区和山区的土壤和水中碘含量较低，这些地区的食物中碘含量也相对较低。加碘盐是这些地区人群获取碘的重要途径。</p>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入建议</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国营养学会推荐的每日碘摄入量为：</p>
+            <ul>
+                <li>成人：120微克/天</li>
+                <li>孕妇：230微克/天</li>
+                <li>乳母：240微克/天</li>
+                <li>儿童（7-12岁）：120微克/天</li>
+                <li>儿童（1-6岁）：90微克/天</li>
+                <li>婴儿（0-1岁）：50微克/天</li>
+            </ul>
+            <p>世界卫生组织建议成人每日碘摄入量为150微克。</p>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入不足时的常见表现</h2>
+            <p>碘缺乏是全球最常见的营养缺乏病之一，可导致以下健康问题（注：本内容为科普信息，如有相关症状请咨询专业医疗人员）：</p>
+            <ul>
+                <li><strong>地方性甲状腺肿：</strong>甲状腺肿大，俗称"大脖子病"</li>
+                <li><strong>克汀病：</strong>严重的碘缺乏导致的先天性疾病，表现为智力低下、身材矮小、聋哑等</li>
+                <li><strong>亚临床甲状腺功能减退：</strong>可能没有明显症状，但会影响新陈代谢</li>
+                <li><strong>妊娠期碘缺乏：</strong>可能导致流产、早产、死胎，以及胎儿神经系统发育不良</li>
+                <li><strong>儿童发育迟缓：</strong>影响身体和智力发育</li>
+                <li><strong>能量代谢降低：</strong>疲劳、体重增加、怕冷</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入过量的潜在风险</h2>
+            <p>长期过量摄入碘可能导致以下健康问题（注：本内容为科普信息，实际情况请咨询专业人士）：</p>
+            <ul>
+                <li><strong>甲状腺功能异常：</strong>可能导致甲状腺功能亢进或减退</li>
+                <li><strong>甲状腺肿大：</strong>过量碘也可能引起甲状腺肿大</li>
+                <li><strong>碘致甲状腺炎：</strong>诱发甲状腺炎症</li>
+                <li><strong>高碘性甲状腺功能减退：</strong>特别是对甲状腺功能已经受损的人群</li>
+            </ul>
+            <div class="warning-box">
+                <h3>注意</h3>
+                <p>中国营养学会建议的碘可耐受最高摄入量为成人600微克/天。甲状腺疾病患者应在医生指导下调整碘的摄入量。</p>
+            </div>
+        </section>
+        
+        <section class="tip-box">
+            <h3>小贴士</h3>
+            <ul>
+                <li>食用加碘盐是预防碘缺乏最简单有效的方法</li>
+                <li>适量摄入海产品，特别是海带、紫菜等富含碘的食物</li>
+                <li>孕妇和哺乳期妇女需要特别注意碘的摄入，可适当增加海产品摄入或在医生指导下补充碘</li>
+                <li>碘盐应密封保存，避免高温和阳光直射，以防碘挥发</li>
+                <li>烹饪时，最好在菜肴快出锅时再放盐，减少碘的损失</li>
+                <li>避免长期大量摄入含碘极高的食物，如海带、紫菜等，以防碘过量</li>
+                <li>甲状腺疾病患者应在医生指导下调整碘的摄入量</li>
+            </ul>
+        </section>
+        
+        <section class="info-box">
+            <h3>健康小知识</h3>
+            <p>全球约有20亿人面临碘缺乏的风险。中国自1996年开始实施全民食用加碘盐政策以来，有效降低了碘缺乏病的发生率。但近年来，随着饮食结构的改变和加碘盐的普及，也出现了一些地区人群碘摄入过量的情况，需要根据当地实际情况进行适当调整。</p>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            <p>本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。</p>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 卡路里基站 Calorie Station - AI智能膳食与营养管理平台</p>
+            <p>本网站提供的营养信息仅供参考，不构成医疗建议</p>
+        </div>
+    </footer>
+</body>
+</html>

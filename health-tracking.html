@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健康追踪 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 区块样式 */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        /* 主内容区域 */
+        .main-content {
+            padding-top: 120px;
+            min-height: 100vh;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            margin-bottom: 50px;
+            overflow-x: auto;
+        }
+        
+        .table-header {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        
+        .data-table th {
+            background-color: #e8f5e8;
+            color: #2e8b57;
+            padding: 15px;
+            font-weight: bold;
+        }
+        
+        .data-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .data-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        /* 营养均衡可视化区 */
+        .nutrition-visualization {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .visualization-header {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        
+        .nutrition-item {
+            margin-bottom: 25px;
+        }
+        
+        .nutrition-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .nutrition-name {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .nutrition-status {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .nutrition-bar {
+            height: 25px;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .nutrition-fill {
+            height: 100%;
+            background-color: #2e8b57;
+            transition: width 1s ease;
+        }
+        
+        /* 不同营养元素的颜色 */
+        .nutrition-fill.carb {
+            background-color: #2e8b57;
+        }
+        
+        .nutrition-fill.protein {
+            background-color: #4caf50;
+        }
+        
+        .nutrition-fill.fat {
+            background-color: #66bb6a;
+        }
+        
+        .nutrition-fill.fiber {
+            background-color: #81c784;
+        }
+        
+        /* 进度条数值 */
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        /* 提示样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin-top: 50px;
+            border-radius: 5px;
+            text-align: center;
+            color: #555;
+        }
+        
+        /* 返回首页按钮 */
+        .back-home {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .btn-secondary {
+            display: inline-block;
+            background-color: white;
+            color: #2e8b57;
+            border: 1px solid #2e8b57;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #2e8b57;
+            color: white;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #2e8b57;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 100px;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+        
+        .footer p:last-child {
+            margin-bottom: 0;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .navbar {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 5px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .table-container,
+            .nutrition-visualization {
+                padding: 20px;
+            }
+            
+            .data-table th,
+            .data-table td {
+                padding: 10px 8px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .nutrition-label {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nutrition-status {
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站 Calorie Station</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html" class="active">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- 主内容区域 -->
+    <main class="main-content">
+        <div class="container">
+            <h1 class="section-title">健康追踪</h1>
+            <p class="section-subtitle">记录每日摄入，查看营养均衡情况</p>
+            
+            <!-- 今日摄入表格 -->
+            <div class="table-container">
+                <div class="table-header">今日摄入记录</div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>菜品名称</th>
+                            <th>重量（g）</th>
+                            <th>热量（kcal）</th>
+                            <th>碳水（g）</th>
+                            <th>蛋白质（g）</th>
+                            <th>脂肪（g）</th>
+                            <th>膳食纤维（g）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2025-01-20</td>
+                            <td>全麦面包</td>
+                            <td>100</td>
+                            <td>265</td>
+                            <td>47</td>
+                            <td>9</td>
+                            <td>4</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>2025-01-20</td>
+                            <td>鸡胸肉沙拉</td>
+                            <td>250</td>
+                            <td>230</td>
+                            <td>12</td>
+                            <td>30</td>
+                            <td>7</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>2025-01-20</td>
+                            <td>清蒸鱼</td>
+                            <td>200</td>
+                            <td>180</td>
+                            <td>0</td>
+                            <td>30</td>
+                            <td>5</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>2025-01-20</td>
+                            <td>蔬菜汤</td>
+                            <td>300</td>
+                            <td>45</td>
+                            <td>6</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- 营养均衡可视化区 -->
+            <div class="nutrition-visualization">
+                <div class="visualization-header">营养均衡情况</div>
+                
+                <!-- 碳水化合物 -->
+                <div class="nutrition-item">
+                    <div class="nutrition-label">
+                        <span class="nutrition-name">碳水化合物</span>
+                        <span class="nutrition-status">基本达标</span>
+                    </div>
+                    <div class="nutrition-bar">
+                        <div class="nutrition-fill carb" style="width: 60%;">
+                            <span class="progress-text">60%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 蛋白质 -->
+                <div class="nutrition-item">
+                    <div class="nutrition-label">
+                        <span class="nutrition-name">蛋白质</span>
+                        <span class="nutrition-status">蛋白质略低</span>
+                    </div>
+                    <div class="nutrition-bar">
+                        <div class="nutrition-fill protein" style="width: 40%;">
+                            <span class="progress-text">40%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 脂肪 -->
+                <div class="nutrition-item">
+                    <div class="nutrition-label">
+                        <span class="nutrition-name">脂肪</span>
+                        <span class="nutrition-status">脂肪适中</span>
+                    </div>
+                    <div class="nutrition-bar">
+                        <div class="nutrition-fill fat" style="width: 70%;">
+                            <span class="progress-text">70%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 膳食纤维 -->
+                <div class="nutrition-item">
+                    <div class="nutrition-label">
+                        <span class="nutrition-name">膳食纤维</span>
+                        <span class="nutrition-status">膳食纤维不足</span>
+                    </div>
+                    <div class="nutrition-bar">
+                        <div class="nutrition-fill fiber" style="width: 30%;">
+                            <span class="progress-text">30%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 提示框 -->
+            <div class="tip-box">
+                本页面数据仅为示例，实际追踪功能需要后台支持。
+            </div>
+            
+            <!-- 返回首页 -->
+            <div class="back-home">
+                <a href="index.html" class="btn-secondary">返回首页</a>
+            </div>
+        </div>
+    </main>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微量元素百科 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 区块样式 */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        /* 主内容区域 */
+        .main-content {
+            padding-top: 120px;
+            min-height: 100vh;
+        }
+        
+        /* 简介区域 */
+        .intro-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .intro-text {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .intro-text:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .tag {
+            background-color: #e8f5e8;
+            color: #2e8b57;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 16px;
+            display: inline-block;
+        }
+        
+        /* 微量元素卡片网格 */
+        .micronutrient-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .micronutrient-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .micronutrient-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .micronutrient-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .micronutrient-name {
+            font-size: 24px;
+            color: #2e8b57;
+            font-weight: bold;
+        }
+        
+        .micronutrient-symbol {
+            font-size: 28px;
+            font-weight: bold;
+            color: #666;
+        }
+        
+        .micronutrient-section {
+            margin-bottom: 20px;
+        }
+        
+        .micronutrient-section h4 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .micronutrient-section p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        
+        .food-sources {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .food-sources li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 5px;
+            color: #666;
+            font-size: 15px;
+        }
+        
+        .food-sources li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2e8b57;
+        }
+        
+        .warning-tags {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .warning-tag {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        /* 底部提示条 */
+        .footer-tip {
+            background-color: #2e8b57;
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .footer-tip p {
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+        
+        /* 返回首页按钮 */
+        .back-home {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .btn-secondary {
+            display: inline-block;
+            background-color: white;
+            color: #2e8b57;
+            border: 1px solid #2e8b57;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #2e8b57;
+            color: white;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #2e8b57;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 100px;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+        
+        .footer p:last-child {
+            margin-bottom: 0;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .navbar {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .micronutrient-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 5px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .micronutrient-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .intro-section {
+                padding: 20px;
+            }
+            
+            .tag {
+                padding: 8px 20px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .micronutrient-card {
+                padding: 20px;
+            }
+            
+            .micronutrient-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .warning-tags {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站 Calorie Station</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html" class="active">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- 主内容区域 -->
+    <main class="main-content">
+        <div class="container">
+            <h1 class="section-title">微量元素百科</h1>
+            <p class="section-subtitle">了解人体必需微量元素及食物来源</p>
+            
+            <!-- 简介区域 -->
+            <section class="intro-section">
+                <p class="intro-text">微量元素是指在人体中含量低于体重0.01%的矿物质，但它们对维持人体正常生理功能至关重要。虽然需求量微小，但缺乏或过量都会影响健康。</p>
+                <p class="intro-text">本页面介绍几种关键的微量元素：铁、钙、锌、镁、碘、硒等，帮助您了解它们的作用、缺乏症状和食物来源。</p>
+            </section>
+            
+            <!-- 标签区域 -->
+            <section class="tags-section">
+                <div class="tags-container">
+                    <span class="tag">免疫力</span>
+                    <span class="tag">骨骼健康</span>
+                    <span class="tag">造血功能</span>
+                    <span class="tag">抗氧化</span>
+                </div>
+            </section>
+            
+            <!-- 微量元素卡片网格 -->
+            <div class="micronutrient-grid">
+                <!-- 铁 Fe -->
+                <div class="micronutrient-card">
+                    <div class="micronutrient-header">
+                        <div class="micronutrient-name">铁</div>
+                        <div class="micronutrient-symbol">Fe</div>
+                    </div>
+                    <div class="micronutrient-section">
+                        <h4>主要作用</h4>
+                        <p>铁是血红蛋白的重要组成部分，负责运输氧气到身体各处组织和器官，参与能量代谢和免疫系统功能。</p>
+                    </div>
+                    <div class="micronutrient-section">
+                        <h4>缺乏提示（仅为科普）</h4>
+                        <p>铁缺乏可能导致缺铁性贫血，表现为疲劳、头晕、心悸、免疫力下降等症状。</p>
+                    </div>
+                    <div class="micronutrient-section">
+                        <h4>食物来源</h4>
+                        <ul class="food-sources">
+                            <li>瘦肉、肝脏等动物性食品</li>
+                            <li>深绿色蔬菜（菠菜、羽衣甘蓝）</li>
+                            <li>豆类、坚果</li>
+                            <li>强化谷物</li>
+                        </ul>
+                    </div>
+                    <div class="warning-tags">
+                        <span class="warning-tag">易缺乏人群</span>
+                    </div>
+                </div>
+                
+                <!-- 钙 Ca -->
+                <div class="micronutrient-card">
+                    <div class="micronutrient-header">
+                        <div class="micronutrient-name">钙</div>
+                        <div class="micronutrient-symbol">Ca</div>
+                    </div>
+                    <div class="micronutrient-section">
+                        <h4>主要作用</h4>
+                        <p>钙是骨骼和牙齿的主要组成成分，参与神经传导、肌肉收缩、血液凝固和细胞信号传递等重要生理过程。</p>
+                    </div>
+                    <div class="micronutrient-section">
+                        <h4>缺乏提示（仅为科普）</h4>
+                        <p>长期钙摄入不足可能导致骨质疏松、骨折风险增加，儿童可能影响骨骼发育。</p>
+                    </div>
+                    <div class="micronutrient-section">
+                        <h4>食物来源</h4>
+                        <ul class="food-sources">
+                            <li>乳制品（牛奶、酸奶、奶酪）</li>
+                            <li>深绿色蔬菜（西兰花、羽衣甘蓝）</li>
+                            <li>豆腐（用硫酸钙凝固的）</li>
+                            <li>沙丁鱼、三文鱼（连骨食用）</li>
+                        </ul>
+                    </div>
+                    <div class="warning-tags">
+                        <span class="warning-tag">易缺乏人群</span>
+                    </div>
+                </div>
+                
+                <!-- 锌 Zn -->
+                <div class="micronutrient-card">
+                    <div class="micronutrient-header">
+                        <div class="micronutrient-name">锌</div>
+                        <div class="micronutrient-symbol">Zn</div>
+                    </div>
+                    <div class="micronutrient-section">
+                        <h4>主要作用</h4>
+                        <p>锌参与200多种酶的合成，对免疫系统功能、伤口愈合、蛋白质合成、DNA合成和味觉功能至关重要。</p>
+                    </div>
+                    <div class="micronutrient-section">
+                        <h4>缺乏提示（仅为科普）</h4>
+                        <p>锌缺乏可能导致生长发育迟缓、免疫力下降、味觉和嗅觉异常、伤口愈合缓慢等问题。</p>
+                    </div>
+                    <div class="micronutrient-section">
+                        <h4>食物来源</h4>
+                        <ul class="food-sources">
+                            <li>瘦肉、海鲜（尤其是牡蛎）</li>
+                            <li>全谷物、豆类</li>
+                            <li>坚果、种子</li>
+                            <li>乳制品</li>
+                        </ul>
+                    </div>
+                    <div class="warning-tags">
+                        <span class="warning-tag">易缺乏人群</span>
+                    </div>
+                </div>
+                
+                <!-- 镁 Mg -->
+                <div class="micronutrient-card">
+                    <div class="micronutrient-header">
+                        <div class="micronutrient-name">镁</div>
+                        <div class="micronutrient-symbol">Mg</div>
+                    </div>
+                    <div class="micronutrient-section">
+                        <h4>主要作用</h4>
+                        <p>镁参与能量代谢、蛋白质合成、肌肉和神经功能、血压调节，也是骨骼的重要组成部分。</p>
+                    </div>
+                    <div class="micronutrient-section">
+                        <h4>缺乏提示（仅为科普）</h4>
+                        <p>镁缺乏可能导致肌肉痉挛、疲劳、心律失常、骨质疏松等问题，严重时可能影响心脏功能。</p>
+                    </div>
+                    <div class="micronutrient-section">
+                        <h4>食物来源</h4>
+                        <ul class="food-sources">
+                            <li>全谷物、坚果（杏仁、腰果）</li>
+                            <li>深绿色蔬菜（菠菜、羽衣甘蓝）</li>
+                            <li>豆类、种子</li>
+                            <li>香蕉、牛油果</li>
+                        </ul>
+                    </div>
+                    <div class="warning-tags">
+                        <span class="warning-tag">易缺乏人群</span>
+                    </div>
+                </div>
+                
+                <!-- 碘 I -->
+                <div class="micronutrient-card">
+                    <div class="micronutrient-header">
+                        <div class="micronutrient-name">碘</div>
+                        <div class="micronutrient-symbol">I</div>
+                    </div>
+                    <div class="micronutrient-section">
+                        <h4>主要作用</h4>
+                        <p>碘是甲状腺激素的必要成分，甲状腺激素调节新陈代谢、生长发育和体温，对胎儿和儿童的脑发育尤为重要。</p>
+                    </div>
+                    <div class="micronutrient-section">
+                        <h4>缺乏提示（仅为科普）</h4>
+                        <p>碘缺乏可能导致甲状腺肿（大脖子病）、甲状腺功能减退，严重时影响智力发育（克汀病）。</p>
+                    </div>
+                    <div class="micronutrient-section">
+                        <h4>食物来源</h4>
+                        <ul class="food-sources">
+                            <li>碘盐</li>
+                            <li>海鲜（海带、紫菜、鱼、贝类）</li>
+                            <li>乳制品</li>
+                            <li>鸡蛋</li>
+                        </ul>
+                    </div>
+                    <div class="warning-tags">
+                        <span class="warning-tag">易缺乏人群</span>
+                    </div>
+                </div>
+                
+                <!-- 硒 Se -->
+                <div class="micronutrient-card">
+                    <div class="micronutrient-header">
+                        <div class="micronutrient-name">硒</div>
+                        <div class="micronutrient-symbol">Se</div>
+                    </div>
+                    <div class="micronutrient-section">
+                        <h4>主要作用</h4>
+                        <p>硒是抗氧化酶谷胱甘肽过氧化物酶的组成部分，参与抗氧化防御系统，保护细胞免受自由基损伤，支持免疫系统功能。</p>
+                    </div>
+                    <div class="micronutrient-section">
+                        <h4>缺乏提示（仅为科普）</h4>
+                        <p>硒缺乏可能导致免疫力下降、抗氧化能力减弱，在某些地区可能与克山病（一种心肌病）有关。</p>
+                    </div>
+                    <div class="micronutrient-section">
+                        <h4>食物来源</h4>
+                        <ul class="food-sources">
+                            <li>海鲜（金枪鱼、虾、龙虾）</li>
+                            <li>巴西坚果（含量极高）</li>
+                            <li>肉类、蛋类</li>
+                            <li>全谷物（含量取决于土壤）</li>
+                        </ul>
+                    </div>
+                    <div class="warning-tags">
+                        <span class="warning-tag">不宜过量</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 底部提示条 -->
+            <div class="footer-tip">
+                <p>均衡饮食、多样化食物，是获取微量元素的最佳方式。内容仅为科普，不作为医疗诊断依据。如有健康问题，请咨询医生或营养师。</p>
+            </div>
+            
+            <!-- 返回首页 -->
+            <div class="back-home">
+                <a href="index.html" class="btn-secondary">返回首页</a>
+            </div>
+        </div>
+    </main>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

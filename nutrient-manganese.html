@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>锰 Manganese - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        .title-section p {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .content-section h2 {
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+        }
+        
+        .content-section ul {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        
+        .content-section li {
+            margin-bottom: 8px;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #f0f7f0;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #f0f7ff;
+            border-left: 4px solid #1e88e5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1e88e5;
+            margin-bottom: 10px;
+        }
+        
+        /* 警告框样式 */
+        .warning-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box h3 {
+            color: #ffb300;
+            margin-bottom: 10px;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #fff8e1;
+            padding: 20px;
+            text-align: center;
+            margin: 40px 0;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #7d6f47;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+        
+        .footer p:last-child {
+            margin-bottom: 0;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>锰 Manganese (Mn)</h1>
+            <p>参与能量代谢和抗氧化防御的重要微量元素</p>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>定义</h2>
+            <p>锰是人体必需的微量元素之一，在成人体内约含10-20毫克。锰主要集中在肝脏、胰腺、肾脏、骨骼、大脑和血液中。锰是多种酶的组成成分，参与人体的多种代谢过程，特别是碳水化合物、蛋白质和脂质的代谢，以及抗氧化防御系统。</p>
+        </section>
+        
+        <section class="content-section">
+            <h2>主要生理作用</h2>
+            <ul>
+                <li><strong>酶的组成与激活：</strong>参与多种酶的组成，是多种酶的激活剂</li>
+                <li><strong>能量代谢：</strong>参与碳水化合物、蛋白质和脂质的代谢过程</li>
+                <li><strong>抗氧化防御：</strong>是超氧化物歧化酶(SOD)的组成成分，具有抗氧化作用</li>
+                <li><strong>骨骼形成：</strong>参与骨骼和结缔组织的形成</li>
+                <li><strong>血糖调节：</strong>可能参与胰岛素的合成和分泌</li>
+                <li><strong>神经系统功能：</strong>对脑功能和神经递质的合成有重要作用</li>
+                <li><strong>凝血功能：</strong>可能影响凝血过程</li>
+                <li><strong>免疫功能：</strong>对免疫系统有一定调节作用</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>主要食物来源</h2>
+            <ul>
+                <li><strong>全谷物：</strong>糙米、燕麦、全麦面包等</li>
+                <li><strong>豆类：</strong>黄豆、绿豆、扁豆等</li>
+                <li><strong>坚果：</strong>杏仁、核桃、栗子等</li>
+                <li><strong>蔬菜：</strong>菠菜、甜菜、西兰花、芦笋等</li>
+                <li><strong>水果：</strong>菠萝、蓝莓、李子、香蕉等</li>
+                <li><strong>茶叶：</strong>特别是绿茶和红茶</li>
+                <li><strong>香料：</strong>肉桂、姜、咖喱粉等</li>
+                <li><strong>肉类：</strong>牛肉、鸡肉等（含量较低）</li>
+            </ul>
+            <div class="info-box">
+                <h3>锰含量对比</h3>
+                <p>以下是一些常见食物每100克可食用部分的锰含量（毫克）：</p>
+                <p>糙米：2.2毫克 | 全麦面包：1.3毫克 | 燕麦片：2.3毫克 | 黄豆：1.7毫克 | 杏仁：1.9毫克 | 菠菜：0.8毫克 | 菠萝：0.3毫克 | 绿茶：约5毫克（100毫升冲泡） | 肉桂：约17毫克（100克） | 牛肉（瘦）：0.2毫克</p>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入建议</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食锰推荐摄入量：</p>
+            <ul>
+                <li>0-6个月：0.01毫克/天（适宜摄入量）</li>
+                <li>7-12个月：0.7毫克/天</li>
+                <li>1-3岁：1.2毫克/天</li>
+                <li>4-6岁：1.5毫克/天</li>
+                <li>7-10岁：1.8毫克/天</li>
+                <li>11-13岁：2.0毫克/天</li>
+                <li>14-17岁：2.2毫克/天</li>
+                <li>18岁及以上（男性）：4.5毫克/天</li>
+                <li>18岁及以上（女性）：3.5毫克/天</li>
+                <li>孕妇：4.0毫克/天</li>
+                <li>乳母：4.5毫克/天</li>
+            </ul>
+            <p>需要注意的是，以下人群可能需要特别关注锰的摄入：</p>
+            <ul>
+                <li><strong>素食者：</strong>可能摄入较多的锰，但吸收利用率可能较低</li>
+                <li><strong>缺铁性贫血患者：</strong>铁缺乏可能影响锰的代谢</li>
+                <li><strong>肝脏疾病患者：</strong>肝脏功能异常可能影响锰的代谢</li>
+                <li><strong>甲状腺功能异常者：</strong>甲状腺激素可能影响锰的代谢</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入不足时的常见表现</h2>
+            <p>锰摄入不足在正常饮食条件下较为罕见，但长期严重不足可能导致以下健康问题（注：本内容为科普信息，如有相关症状请咨询专业医疗人员）：</p>
+            <ul>
+                <li><strong>生长发育迟缓：</strong>儿童可能出现生长发育缓慢</li>
+                <li><strong>骨骼异常：</strong>可能导致骨质疏松等骨骼问题</li>
+                <li><strong>碳水化合物代谢异常：</strong>可能影响血糖调节</li>
+                <li><strong>抗氧化能力下降：</strong>可能增加氧化应激</li>
+                <li><strong>神经功能异常：</strong>可能出现情绪变化、记忆力减退等</li>
+                <li><strong>生育能力下降：</strong>可能影响生殖系统功能</li>
+                <li><strong>免疫力降低：</strong>可能增加感染风险</li>
+                <li><strong>胆固醇代谢异常：</strong>可能影响脂质代谢</li>
+            </ul>
+            <p>锰缺乏通常与其他营养素缺乏同时存在，单纯的锰缺乏较为少见。</p>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入过量的潜在风险</h2>
+            <p>虽然锰是必需营养素，但过量摄入也可能带来健康风险（注：本内容为科普信息，实际情况请咨询专业人士）：</p>
+            <ul>
+                <li><strong>神经系统损害：</strong>长期过量摄入可能导致神经毒性，出现类似于帕金森病的症状</li>
+                <li><strong>锰中毒：</strong>可能出现头痛、头晕、失眠、乏力等症状</li>
+                <li><strong>认知功能障碍：</strong>可能影响注意力、记忆力和学习能力</li>
+                <li><strong>铁吸收障碍：</strong>过量的锰可能干扰铁的吸收</li>
+                <li><strong>肝脏损害：</strong>可能导致肝功能异常</li>
+                <li><strong>氧化应激增加：</strong>高浓度的锰可能产生氧化应激</li>
+                <li><strong>心血管系统影响：</strong>可能影响血压和心脏功能</li>
+            </ul>
+            <p>中国居民膳食锰可耐受最高摄入量（UL）：</p>
+            <ul>
+                <li>0-6个月：无法确定</li>
+                <li>7-12个月：无法确定</li>
+                <li>1-3岁：5毫克/天</li>
+                <li>4-6岁：7毫克/天</li>
+                <li>7-10岁：10毫克/天</li>
+                <li>11-13岁：15毫克/天</li>
+                <li>14-17岁：20毫克/天</li>
+                <li>18岁及以上：10毫克/天</li>
+                <li>孕妇：10毫克/天</li>
+                <li>乳母：10毫克/天</li>
+            </ul>
+            <p>需要注意的是，通过正常饮食摄入过量锰的情况相对较少，职业暴露（如矿工、钢铁工人）或长期大量摄入锰补充剂可能导致过量。</p>
+        </section>
+        
+        <section class="tip-box">
+            <h3>小贴士</h3>
+            <ul>
+                <li>均衡饮食是获取足够锰的最佳方式，注意食物的多样性</li>
+                <li>适量摄入全谷物、豆类、坚果和蔬菜等富含锰的食物</li>
+                <li>避免长期大量饮茶，特别是浓茶，因为茶叶中含有较高的锰</li>
+                <li>铁、钙、镁等矿物质可能影响锰的吸收，不宜同时大量摄入</li>
+                <li>避免长期服用锰补充剂，除非在医生的指导下</li>
+                <li>从事可能接触锰尘工作的人员应注意防护，避免职业暴露</li>
+                <li>保持良好的生活习惯，包括充足的睡眠和适度的运动</li>
+                <li>如有神经系统症状，应及时就医，排除锰中毒的可能</li>
+            </ul>
+        </section>
+        
+        <section class="info-box">
+            <h3>健康小知识</h3>
+            <p>锰是超氧化物歧化酶(SOD)的重要组成部分，这种酶能够清除体内的自由基，保护细胞免受氧化损伤。研究表明，适当的锰摄入可能有助于预防一些慢性疾病，如心血管疾病和某些癌症。</p>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            <p>本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。</p>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 卡路里基站 Calorie Station - AI智能膳食与营养管理平台</p>
+            <p>本网站提供的营养信息仅供参考，不构成医疗建议</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>镁 Magnesium - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>镁 Magnesium (Mg)</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>镁（Magnesium，Mg）是人体必需的常量元素之一，在成人体内约含25克左右。镁主要存在于骨骼和牙齿中（约占总量的50%-60%），其次分布在软组织（约占38%）和细胞外液（约占2%）中。镁在体内参与300多种酶促反应，是维持人体正常生理功能的重要营养素。镁与能量代谢、蛋白质合成、肌肉和神经功能等密切相关。</p>
+            
+            <div class="info-box">
+                <h3>【镁的代谢特点】</h3>
+                <p>镁主要在小肠被吸收，吸收率约为30%-40%。食物中的镁吸收率受多种因素影响，膳食纤维、植酸、草酸等可能抑制镁的吸收，而维生素D和蛋白质则可以促进镁的吸收。体内镁的平衡主要通过肾脏调节，当摄入不足时，肾脏会减少镁的排泄以维持体内平衡。</p>
+            </div>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>能量代谢：</strong>是ATP（三磷酸腺苷）的重要组成部分，参与葡萄糖的酵解、脂肪酸的氧化和蛋白质的合成。</li>
+                <li><strong>酶的激活：</strong>作为300多种酶的激活剂，包括参与能量代谢、蛋白质合成、DNA和RNA合成的酶。</li>
+                <li><strong>骨骼健康：</strong>是骨骼的重要组成成分，与钙、磷一起维持骨骼的结构和强度。</li>
+                <li><strong>肌肉功能：</strong>维持肌肉的正常收缩和舒张，是肌肉松弛的必需元素。</li>
+                <li><strong>神经功能：</strong>维持神经系统的正常功能，参与神经递质的释放和传导。</li>
+                <li><strong>心血管健康：</strong>参与心肌的收缩和舒张，调节血压，维持正常的心律。</li>
+                <li><strong>蛋白质合成：</strong>参与蛋白质的合成和分解代谢。</li>
+                <li><strong>DNA和RNA合成：</strong>参与核酸的合成和修复。</li>
+                <li><strong>酸碱平衡：</strong>参与维持体内的酸碱平衡。</li>
+                <li><strong>免疫功能：</strong>维持免疫系统的正常功能。</li>
+                <li><strong>激素调节：</strong>参与胰岛素、甲状旁腺激素等多种激素的分泌和功能。</li>
+                <li><strong>抗氧化防御：</strong>参与抗氧化酶系统，保护细胞免受氧化损伤。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>全谷物：</strong>糙米、燕麦、全麦面包、小米等，尤其是未精制的谷物。</li>
+                <li><strong>绿叶蔬菜：</strong>菠菜、羽衣甘蓝、瑞士甜菜、空心菜等。</li>
+                <li><strong>坚果和种子：</strong>杏仁、腰果、核桃、南瓜籽、芝麻等。</li>
+                <li><strong>豆类：</strong>黑豆、黄豆、红豆、鹰嘴豆、扁豆等。</li>
+                <li><strong>海产品：</strong>紫菜、海带、海参、贝类等。</li>
+                <li><strong>水果：</strong>香蕉、猕猴桃、鳄梨（牛油果）、枣等。</li>
+                <li><strong>乳制品：</strong>牛奶、酸奶、奶酪等。</li>
+                <li><strong>肉类：</strong>瘦肉、鸡肉等，但含量相对较低。</li>
+                <li><strong>巧克力：</strong>尤其是黑巧克力（可可含量高的）。</li>
+                <li><strong>强化食品：</strong>一些强化镁的谷物、面包、麦片等。</li>
+            </ul>
+            <p>需要注意的是，精制食品（如白米、白面粉）中的镁含量远低于全谷物，因为镁主要存在于谷物的 bran和 germ部分，这些部分在精制过程中被去除。</p>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食镁推荐摄入量：</p>
+            <ul>
+                <li>0-6个月：30毫克/天</li>
+                <li>7-12个月：70毫克/天</li>
+                <li>1-3岁：100毫克/天</li>
+                <li>4-6岁：150毫克/天</li>
+                <li>7-10岁：250毫克/天</li>
+                <li>11-13岁（男）：350毫克/天</li>
+                <li>11-13岁（女）：300毫克/天</li>
+                <li>14-17岁（男）：400毫克/天</li>
+                <li>14-17岁（女）：350毫克/天</li>
+                <li>18-49岁（男）：330毫克/天</li>
+                <li>18-49岁（女）：300毫克/天</li>
+                <li>50岁及以上（男）：350毫克/天</li>
+                <li>50岁及以上（女）：320毫克/天</li>
+                <li>孕妇（孕早期）：300毫克/天</li>
+                <li>孕妇（孕中期）：330毫克/天</li>
+                <li>孕妇（孕晚期）：370毫克/天</li>
+                <li>乳母：330毫克/天</li>
+            </ul>
+            <p>需要注意的是，以下人群可能需要特别关注镁的摄入：</p>
+            <ul>
+                <li><strong>老年人：</strong>可能因摄入不足、吸收不良或排泄增加导致镁缺乏。</li>
+                <li><strong>孕妇和乳母：</strong>需要额外的镁来满足胎儿发育和乳汁分泌的需求。</li>
+                <li><strong>糖尿病患者：</strong>可能存在镁代谢异常，尿镁排泄增加。</li>
+                <li><strong>酒精依赖者：</strong>长期饮酒可能影响镁的吸收和增加镁的排泄。</li>
+                <li><strong>胃肠道疾病患者：</strong>如腹泻、炎症性肠病等患者，镁的吸收可能受到影响。</li>
+                <li><strong>服用某些药物的人群：</strong>如利尿剂、抗生素、质子泵抑制剂等可能增加镁的排泄或影响镁的吸收。</li>
+                <li><strong>高压力人群：</strong>长期处于高压力状态可能增加镁的消耗。</li>
+                <li><strong>运动员：</strong>剧烈运动可能导致镁随汗液丢失增加。</li>
+                <li><strong>素食者：</strong>虽然植物性食物富含镁，但其中的植酸可能影响吸收。</li>
+            </ul>
+            
+            <div class="info-box">
+                <h3>【提高镁吸收率的方法】</h3>
+                <p>1. 适量摄入富含维生素D的食物或补充维生素D，可以促进镁的吸收。</p>
+                <p>2. 摄入足够的优质蛋白质，可以提高镁的吸收率。</p>
+                <p>3. 避免在同一餐中摄入过多抑制镁吸收的食物（如富含植酸的全谷物、豆类等）。</p>
+                <p>4. 发酵食物（如发酵豆制品）中的植酸会被降解，可以提高镁的吸收率。</p>
+                <p>5. 保持良好的胃肠道健康，有助于镁的正常吸收。</p>
+            </div>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>肌肉症状：</strong>肌肉痉挛、抽搐、无力、震颤等。</li>
+                <li><strong>神经症状：</strong>焦虑、抑郁、易怒、失眠、注意力不集中、记忆力下降等。</li>
+                <li><strong>心血管症状：</strong>心律失常、血压升高、冠状动脉痉挛等。</li>
+                <li><strong>骨骼问题：</strong>骨质疏松、骨骼脆弱、易骨折等。</li>
+                <li><strong>胃肠道症状：</strong>食欲减退、恶心、呕吐、腹泻等。</li>
+                <li><strong>血糖异常：</strong>可能导致胰岛素抵抗，增加糖尿病的风险。</li>
+                <li><strong>能量代谢障碍：</strong>疲劳、乏力等。</li>
+                <li><strong>电解质紊乱：</strong>可能导致低钙血症、低钾血症等。</li>
+                <li><strong>生长发育迟缓：</strong>在儿童中可能影响正常生长发育。</li>
+                <li><strong>免疫功能下降：</strong>容易感染疾病。</li>
+            </ul>
+            <p>镁缺乏通常是渐进性的，早期可能没有明显症状。长期镁摄入不足会严重影响身体健康，增加多种慢性疾病的风险。</p>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>胃肠道不适：</strong>可能出现恶心、呕吐、腹泻、腹痛等症状，这是镁过量最常见的表现。</li>
+                <li><strong>高镁血症：</strong>严重时可能导致高镁血症，表现为肌肉无力、嗜睡、呼吸困难、心律失常等。</li>
+                <li><strong>肾功能损害：</strong>长期过量摄入可能对肾脏造成负担，尤其是肾功能不全的人群。</li>
+                <li><strong>电解质紊乱：</strong>可能导致低钙血症、低钾血症等。</li>
+                <li><strong>心脏抑制：</strong>严重高镁血症可能导致心脏传导阻滞，甚至心跳骤停。</li>
+                <li><strong>中枢神经系统抑制：</strong>可能出现头晕、头痛、意识模糊等。</li>
+            </ul>
+            <p>中国居民膳食镁可耐受最高摄入量（UL）：</p>
+            <ul>
+                <li>0-1岁：100毫克/天</li>
+                <li>1-3岁：200毫克/天</li>
+                <li>4-6岁：300毫克/天</li>
+                <li>7-10岁：500毫克/天</li>
+                <li>11-17岁：700毫克/天</li>
+                <li>18岁及以上：700毫克/天</li>
+                <li>孕妇：700毫克/天</li>
+                <li>乳母：700毫克/天</li>
+            </ul>
+            <p>需要注意的是，肾功能不全的人群对镁的排泄能力下降，更容易发生镁过量，应特别注意控制镁的摄入量。</p>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 均衡饮食是获取足够镁的最佳方式，优先选择富含镁的全谷物、绿叶蔬菜、坚果和种子。</p>
+                <p>2. 减少精制食品的摄入，因为精制过程会导致镁的大量流失。</p>
+                <p>3. 适当增加镁的摄入可以帮助缓解肌肉痉挛，尤其是在运动后或夜间。</p>
+                <p>4. 对于容易缺镁的人群（如老年人、糖尿病患者、长期饮酒者等），应在医生或营养师的指导下适当补充镁剂。</p>
+                <p>5. 镁剂最好在饭后服用，以减少对胃肠道的刺激。</p>
+                <p>6. 不要自行大量补充镁剂，尤其是肾功能不全的人群。</p>
+                <p>7. 保持良好的水分摄入，有助于镁的正常代谢。</p>
+                <p>8. 避免长期大量饮用咖啡、茶和酒精，因为它们可能增加镁的排泄。</p>
+                <p>9. 定期进行体检，尤其是容易缺镁的人群，以便及早发现和治疗镁缺乏。</p>
+                <p>10. 注意食物的多样性，以确保摄入足够的镁。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>钾 Potassium - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 警告框样式 */
+        .warning-box {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box h3 {
+            color: #e65100;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .warning-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>钾 Potassium (K)</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>钾（Potassium，K）是人体必需的常量元素之一，在成人体内约含120-170克。钾在体内主要分布在细胞内液中，约占体内钾总量的98%，细胞外液仅占2%。钾是维持细胞内外液渗透压平衡、酸碱平衡以及神经肌肉功能的重要电解质。钾与钠协同作用，共同维持人体的电解质平衡和正常的生理功能。钾在体内不储存，需要每天通过饮食补充。</p>
+            
+            <div class="info-box">
+                <h3>【钾的代谢特点】</h3>
+                <p>钾主要在小肠被吸收，吸收率约为85%-90%。吸收的钾通过肾脏、汗液和粪便排泄，其中肾脏是主要的排泄途径。肾脏对钾的排泄具有很强的调节能力，在摄入不足时会减少排泄，摄入过多时会增加排泄，但这种调节有一定的滞后性。当肾脏功能受损时，容易出现高钾血症。此外，胰岛素、肾上腺素等激素也会影响钾在细胞内外的分布。</p>
+            </div>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>维持细胞内外液渗透压平衡：</strong>作为细胞内液的主要阳离子，参与维持细胞内外液的渗透压平衡。</li>
+                <li><strong>维持酸碱平衡：</strong>通过与氢离子的交换，参与调节体内的酸碱平衡。</li>
+                <li><strong>神经肌肉功能：</strong>参与神经冲动的传导和肌肉的收缩，是维持心肌、骨骼肌等正常功能所必需的。</li>
+                <li><strong>心脏功能：</strong>对维持正常的心率和心律至关重要，钾摄入不足或过量都可能导致心律失常。</li>
+                <li><strong>血压调节：</strong>增加钾的摄入有助于降低血压，可能通过促进钠的排泄、降低血管张力等机制发挥作用。</li>
+                <li><strong>参与能量代谢：</strong>参与糖的代谢和糖原的合成，以及氨基酸合成蛋白质的过程。</li>
+                <li><strong>维持细胞功能：</strong>参与维持细胞的正常体积和功能。</li>
+                <li><strong>酶的激活：</strong>是多种酶的激活剂，参与多种代谢反应。</li>
+                <li><strong>调节细胞生长：</strong>参与细胞的生长和分裂过程。</li>
+                <li><strong>胰岛素分泌：</strong>影响胰岛素的分泌和敏感性，可能与糖代谢有关。</li>
+                <li><strong>骨骼健康：</strong>可能参与钙的代谢，对维持骨骼健康有一定作用。</li>
+                <li><strong>抗氧化作用：</strong>可能通过影响体内的氧化应激反应，发挥一定的抗氧化作用。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>水果类：</strong>香蕉、橙子、哈密瓜、菠萝、杏干、李子干等。香蕉是最著名的高钾水果之一。</li>
+                <li><strong>蔬菜类：</strong>土豆、红薯、南瓜、菠菜、西兰花、芦笋、羽衣甘蓝、西红柿、黄瓜等。</li>
+                <li><strong>豆类：</strong>黄豆、黑豆、红豆、扁豆、鹰嘴豆等。</li>
+                <li><strong>坚果和种子：</strong>杏仁、核桃、南瓜籽、葵花籽等。</li>
+                <li><strong>全谷物：</strong>糙米、燕麦、全麦面包等。</li>
+                <li><strong>乳制品：</strong>牛奶、酸奶等，但含量相对较低。</li>
+                <li><strong>肉类：</strong>牛肉、猪肉、鸡肉等，但每100克中的钾含量通常低于蔬菜水果。</li>
+                <li><strong>鱼类：</strong>三文鱼、金枪鱼、鳕鱼等。</li>
+                <li><strong>其他：</strong>番茄酱、蘑菇、紫菜、海带等。</li>
+            </ul>
+            <p>需要注意的是，加工食品如罐头、腌制食品等通常含有较高的钠而钾含量较低，长期大量食用可能导致体内钾钠失衡。此外，烹饪方式也会影响食物中钾的含量，过度烹饪或浸泡可能导致钾的流失。</p>
+            
+            <div class="tip-box">
+                <h3>【钾含量对比】</h3>
+                <p>以下是一些常见食物每100克可食用部分的钾含量（毫克）：</p>
+                <p>香蕉：358毫克 | 土豆（带皮煮）：535毫克 | 红薯：542毫克 | 菠菜：558毫克 | 羽衣甘蓝：497毫克 | 西红柿：237毫克 | 橙子：181毫克 | 哈密瓜：267毫克 | 黄豆：1503毫克 | 黑豆：1377毫克 | 杏仁：705毫克 | 牛奶：150毫克 | 鸡胸肉：337毫克</p>
+            </div>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食钾推荐摄入量：</p>
+            <ul>
+                <li>0-6个月：350毫克/天</li>
+                <li>7-12个月：550毫克/天</li>
+                <li>1-3岁：900毫克/天</li>
+                <li>4-6岁：1200毫克/天</li>
+                <li>7-10岁：1500毫克/天</li>
+                <li>11-13岁：2000毫克/天</li>
+                <li>14-17岁：2500毫克/天</li>
+                <li>18-49岁：2000毫克/天</li>
+                <li>50岁及以上：2000毫克/天</li>
+                <li>孕妇（孕早期）：2000毫克/天</li>
+                <li>孕妇（孕中期）：2200毫克/天</li>
+                <li>孕妇（孕晚期）：2500毫克/天</li>
+                <li>乳母：2500毫克/天</li>
+            </ul>
+            <p>需要注意的是，以下人群可能需要特别关注钾的摄入：</p>
+            <ul>
+                <li><strong>高血压患者：</strong>适量增加钾的摄入有助于降低血压，但应在医生指导下进行。</li>
+                <li><strong>肾功能不全患者：</strong>需要限制钾的摄入，避免高钾血症。</li>
+                <li><strong>服用利尿剂的患者：</strong>某些利尿剂可能导致钾的流失，需要适当补充。</li>
+                <li><strong>运动员或高温环境工作者：</strong>大量出汗可能导致钾的流失，需要适当补充。</li>
+                <li><strong>老年人：</strong>肾功能下降可能影响钾的排泄，需要注意平衡。</li>
+                <li><strong>心血管疾病患者：</strong>适当的钾摄入对心脏健康有益。</li>
+            </ul>
+            
+            <div class="warning-box">
+                <h3>【肾功能不全患者的钾摄入注意事项】</h3>
+                <p>肾功能不全患者由于肾脏排泄能力下降，容易出现高钾血症，需要严格限制高钾食物的摄入。这类患者应在医生或营养师的指导下制定个性化的饮食计划，定期监测血钾水平。</p>
+            </div>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>肌肉症状：</strong>肌肉无力、疲劳、肌肉痉挛、抽搐等。</li>
+                <li><strong>神经症状：</strong>感觉异常、麻木、刺痛等。</li>
+                <li><strong>心血管症状：</strong>心律失常、心动过速或过缓、低血压等。严重时可能导致心力衰竭。</li>
+                <li><strong>消化系统症状：</strong>恶心、呕吐、腹痛、便秘等。</li>
+                <li><strong>泌尿系统症状：</strong>多尿、夜尿增多等。</li>
+                <li><strong>精神症状：</strong>烦躁、抑郁、嗜睡、意识障碍等。</li>
+                <li><strong>代谢紊乱：</strong>可能导致糖代谢异常、代谢性碱中毒等。</li>
+                <li><strong>血压升高：</strong>长期钾摄入不足可能增加高血压的风险。</li>
+            </ul>
+            <p>钾缺乏在正常饮食人群中很少见，通常只发生在长期严重腹泻、呕吐、大量出汗、使用某些利尿剂、醛固酮增多症等情况下。</p>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>高钾血症：</strong>最主要的风险是高钾血症，尤其是在肾功能不全的人群中。</li>
+                <li><strong>心脏毒性：</strong>严重高钾血症可能导致心律失常、心跳骤停等危及生命的情况。</li>
+                <li><strong>肌肉无力：</strong>过量的钾可能导致肌肉无力，甚至瘫痪。</li>
+                <li><strong>消化系统症状：</strong>恶心、呕吐、腹痛、腹泻等。</li>
+                <li><strong>神经系统症状：</strong>麻木、刺痛、呼吸困难等。</li>
+            </ul>
+            <p>中国居民膳食钾可耐受最高摄入量（UL）：暂无明确数据。</p>
+            <p>需要注意的是，通过正常饮食摄入过量钾的情况极为罕见，通常只发生在肾功能不全患者摄入高钾食物或补充过量钾制剂的情况下。对于肾功能正常的人群，肾脏能够有效地排出多余的钾。</p>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 增加新鲜水果和蔬菜的摄入是获取足够钾的最佳方式，尤其是深绿色蔬菜和香蕉等。</p>
+                <p>2. 减少加工食品和腌制食品的摄入，避免钠摄入过多而钾摄入不足。</p>
+                <p>3. 烹饪时尽量保留食材的完整性，避免过度烹饪或长时间浸泡，以减少钾的流失。</p>
+                <p>4. 肾功能不全的人群应严格控制高钾食物的摄入，并定期监测血钾水平。</p>
+                <p>5. 服用利尿剂的患者应注意监测血钾水平，根据情况适当补充钾。</p>
+                <p>6. 运动员或在高温环境下工作的人群，应注意补充水分和电解质，包括钾。</p>
+                <p>7. 均衡饮食，保持钠钾比例的平衡（理想比例约为1:1）。</p>
+                <p>8. 对于高血压患者，增加钾的摄入同时减少钠的摄入，有助于控制血压。</p>
+                <p>9. 选择低钠高钾的食物，如新鲜水果、蔬菜、全谷物等。</p>
+                <p>10. 注意食物的多样性，以确保摄入足够的钾和其他营养素。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

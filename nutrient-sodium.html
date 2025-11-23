@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>钠 Sodium - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        .title-section p {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .content-section h2 {
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+        }
+        
+        .content-section ul {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        
+        .content-section li {
+            margin-bottom: 8px;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #f0f7f0;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #f0f7ff;
+            border-left: 4px solid #1e88e5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1e88e5;
+            margin-bottom: 10px;
+        }
+        
+        /* 警告框样式 */
+        .warning-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box h3 {
+            color: #ffb300;
+            margin-bottom: 10px;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #fff8e1;
+            padding: 20px;
+            text-align: center;
+            margin: 40px 0;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #7d6f47;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+        
+        .footer p:last-child {
+            margin-bottom: 0;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>钠 Sodium (Na)</h1>
+            <p>调节体内水分平衡和血压的重要矿物质，但需注意适量摄入</p>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>定义</h2>
+            <p>钠是一种必需的常量矿物质，主要以钠离子（Na+）的形式存在于人体中。它是细胞外液中最主要的阳离子，约90%的钠离子存在于细胞外液，其余分布在骨骼和细胞内。钠与氯和钾一起，对维持体内的水平衡、酸碱平衡和正常的神经肌肉功能至关重要。</p>
+        </section>
+        
+        <section class="content-section">
+            <h2>主要生理作用</h2>
+            <ul>
+                <li><strong>水分平衡：</strong>与钾协同作用，调节细胞内外的水分分布，维持正常的血容量</li>
+                <li><strong>酸碱平衡：</strong>参与维持体内的酸碱平衡</li>
+                <li><strong>神经肌肉功能：</strong>维持正常的神经冲动传导和肌肉收缩功能</li>
+                <li><strong>血压调节：</strong>影响血管的渗透压和血容量，进而影响血压水平</li>
+                <li><strong>营养吸收：</strong>参与某些营养素（如葡萄糖和氨基酸）的吸收过程</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>主要食物来源</h2>
+            <ul>
+                <li><strong>加工食品：</strong>咸菜、腌制品、罐头食品、火腿、香肠、午餐肉</li>
+                <li><strong>调味品：</strong>食盐（氯化钠）、酱油、豆瓣酱、辣椒酱、鸡精、味精</li>
+                <li><strong>方便食品：</strong>方便面、速冻食品、即食食品</li>
+                <li><strong>快餐食品：</strong>汉堡、披萨、炸鸡、薯条</li>
+                <li><strong>天然食物（含钠量较低）：</strong>牛奶、鸡蛋、肉类、某些蔬菜（如芹菜、菠菜）</li>
+            </ul>
+            <div class="warning-box">
+                <h3>注意</h3>
+                <p>大部分加工食品中含有较高的钠含量，应注意控制摄入量。天然食物中的钠含量通常较低。</p>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入建议</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国营养学会推荐的成人每日钠摄入量为：</p>
+            <ul>
+                <li>成人：2000毫克/天（相当于5克食盐）</li>
+                <li>世界卫生组织建议：成人每日钠摄入量不超过2000毫克（相当于5克食盐）</li>
+            </ul>
+            <p>值得注意的是，中国居民的实际钠摄入量普遍高于推荐值，建议采取措施减少钠的摄入。</p>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入不足时的常见表现</h2>
+            <p>钠摄入不足较为罕见，主要发生在以下情况（注：本内容为科普信息，如有相关症状请咨询专业医疗人员）：</p>
+            <ul>
+                <li><strong>低钠血症：</strong>血钠水平过低，可能出现恶心、呕吐、头痛、肌肉痉挛</li>
+                <li><strong>脱水症状：</strong>口渴、尿量减少、皮肤干燥</li>
+                <li><strong>神经肌肉症状：</strong>虚弱、疲劳、肌肉无力、抽搐</li>
+                <li><strong>严重情况下：</strong>可能导致意识模糊、癫痫发作、昏迷</li>
+            </ul>
+            <p>钠缺乏通常发生在大量出汗、严重腹泻或呕吐、过度使用利尿剂等情况下。</p>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入过量的潜在风险</h2>
+            <p>钠摄入过量是较为常见的问题，可能增加以下健康风险（注：本内容为科普信息，实际情况请咨询专业人士）：</p>
+            <ul>
+                <li><strong>高血压：</strong>钠摄入过多是高血压的重要风险因素之一</li>
+                <li><strong>心血管疾病：</strong>增加心脏病、中风等心血管疾病的风险</li>
+                <li><strong>肾脏负担：</strong>增加肾脏负担，长期高钠饮食可能增加肾脏疾病风险</li>
+                <li><strong>骨质疏松：</strong>高钠饮食可能增加钙的排泄，影响骨骼健康</li>
+                <li><strong>水肿：</strong>可能导致体内水分潴留，引起水肿</li>
+            </ul>
+        </section>
+        
+        <section class="tip-box">
+            <h3>小贴士</h3>
+            <ul>
+                <li>逐渐减少饮食中的盐用量，让味蕾适应较淡的口味</li>
+                <li>烹饪时使用香草、香料、柠檬汁、醋等替代部分盐来调味</li>
+                <li>购买食品时查看营养标签，选择低钠或无钠产品</li>
+                <li>减少加工食品和快餐的摄入</li>
+                <li>在家自己烹饪，控制用盐量</li>
+                <li>注意隐形盐：酱油、豆瓣酱、鸡精等调味品中都含有大量的钠</li>
+                <li>增加钾的摄入（如香蕉、土豆、菠菜等），有助于平衡钠的影响</li>
+            </ul>
+        </section>
+        
+        <section class="warning-box">
+            <h3>特别提醒</h3>
+            <p>对于高血压患者、肾脏疾病患者、心血管疾病患者等特殊人群，应在医生指导下严格控制钠的摄入量。</p>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            <p>本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。</p>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 卡路里基站 Calorie Station - AI智能膳食与营养管理平台</p>
+            <p>本网站提供的营养信息仅供参考，不构成医疗建议</p>
+        </div>
+    </footer>
+</body>
+</html>

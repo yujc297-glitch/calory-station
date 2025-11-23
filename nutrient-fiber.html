@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>膳食纤维 - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        .title-section p {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .content-section h2 {
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+        }
+        
+        .content-section ul {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        
+        .content-section li {
+            margin-bottom: 8px;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #f0f7f0;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #f0f7ff;
+            border-left: 4px solid #1e88e5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1e88e5;
+            margin-bottom: 10px;
+        }
+        
+        /* 警告框样式 */
+        .warning-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box h3 {
+            color: #ffb300;
+            margin-bottom: 10px;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #fff8e1;
+            padding: 20px;
+            text-align: center;
+            margin: 40px 0;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #7d6f47;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+        
+        .footer p:last-child {
+            margin-bottom: 0;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>膳食纤维</h1>
+            <p>促进肠道健康和整体健康的重要营养素</p>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>定义</h2>
+            <p>膳食纤维是一种不能被人体消化酶分解的碳水化合物，主要存在于植物性食物中。虽然膳食纤维不提供能量，但它在维持肠道健康、预防慢性疾病和促进整体健康方面发挥着至关重要的作用。膳食纤维主要分为两大类：可溶性膳食纤维和不可溶性膳食纤维。</p>
+            <ul>
+                <li><strong>可溶性膳食纤维：</strong>能溶解于水，在肠道中形成凝胶状物质，包括果胶、树胶、粘胶和部分半纤维素。</li>
+                <li><strong>不可溶性膳食纤维：</strong>不溶于水，主要包括纤维素、木质素和部分半纤维素，能增加粪便体积。</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>主要生理作用</h2>
+            <ul>
+                <li><strong>促进肠道健康：</strong>
+                    <ul>
+                        <li>增加粪便体积，促进肠道蠕动，预防和缓解便秘</li>
+                        <li>降低肠道内压力，预防憩室病</li>
+                        <li>维持正常的肠道菌群平衡</li>
+                        <li>促进有益菌的生长和繁殖</li>
+                        <li>减少肠道炎症</li>
+                    </ul>
+                </li>
+                <li><strong>调节血糖和胰岛素水平：</strong>
+                    <ul>
+                        <li>延缓碳水化合物的消化和吸收</li>
+                        <li>降低餐后血糖峰值</li>
+                        <li>提高胰岛素敏感性</li>
+                        <li>有助于预防和管理2型糖尿病</li>
+                    </ul>
+                </li>
+                <li><strong>降低胆固醇水平：</strong>
+                    <ul>
+                        <li>可溶性纤维可结合胆固醇和胆汁酸</li>
+                        <li>减少胆固醇的吸收</li>
+                        <li>促进胆固醇的排泄</li>
+                        <li>降低低密度脂蛋白胆固醇(LDL-C)水平</li>
+                    </ul>
+                </li>
+                <li><strong>心血管健康保护：</strong>
+                    <ul>
+                        <li>降低冠心病风险</li>
+                        <li>降低中风风险</li>
+                        <li>调节血压</li>
+                    </ul>
+                </li>
+                <li><strong>控制体重：</strong>
+                    <ul>
+                        <li>增加饱腹感，减少食物摄入量</li>
+                        <li>延长胃排空时间</li>
+                        <li>减少热量吸收</li>
+                        <li>维持健康体重</li>
+                    </ul>
+                </li>
+                <li><strong>预防癌症：</strong>
+                    <ul>
+                        <li>降低结肠癌风险</li>
+                        <li>可能降低乳腺癌、胰腺癌等风险</li>
+                        <li>通过稀释肠道中的致癌物质</li>
+                        <li>促进有害废物快速排出体外</li>
+                    </ul>
+                </li>
+                <li><strong>免疫系统支持：</strong>
+                    <ul>
+                        <li>通过肠道菌群调节免疫功能</li>
+                        <li>短链脂肪酸(SCFAs)产生（如乙酸、丙酸、丁酸）</li>
+                        <li>增强肠道屏障功能</li>
+                    </ul>
+                </li>
+                <li><strong>其他健康益处：</strong>
+                    <ul>
+                        <li>降低炎症标志物水平</li>
+                        <li>改善肝功能</li>
+                        <li>降低肾结石风险</li>
+                        <li>可能改善认知功能</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>主要食物来源</h2>
+            <ul>
+                <li><strong>富含可溶性膳食纤维的食物：</strong>
+                    <ul>
+                        <li>燕麦：燕麦片、燕麦麸</li>
+                        <li>水果：苹果、梨、香蕉、柑橘类水果、草莓</li>
+                        <li>豆类：扁豆、鹰嘴豆、菜豆、黑豆</li>
+                        <li>种子：亚麻籽、奇亚籽、南瓜籽</li>
+                        <li>海藻类：海带、紫菜、裙带菜</li>
+                        <li>某些蔬菜：胡萝卜、土豆（带皮煮）</li>
+                        <li>菊粉：洋姜、菊芋</li>
+                    </ul>
+                </li>
+                <li><strong>富含不可溶性膳食纤维的食物：</strong>
+                    <ul>
+                        <li>全谷物：糙米、全麦面包、全麦意面</li>
+                        <li>麦麸：小麦麸皮</li>
+                        <li>坚果：杏仁、核桃、开心果</li>
+                        <li>蔬菜：西兰花、花椰菜、胡萝卜、菠菜、芹菜、白菜</li>
+                        <li>水果：带皮的苹果、梨、带籽的浆果</li>
+                        <li>豆类和豌豆</li>
+                        <li>爆米花（未添加黄油或糖）</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="info-box">
+                <h3>膳食纤维含量对比</h3>
+                <p>以下是一些常见食物每100克可食用部分的膳食纤维含量（克）：</p>
+                <p>麦麸：44.2克 | 奇亚籽：34.4克 | 亚麻籽：27.3克 | 扁豆：8.4克 | 黑豆：8.7克 | 燕麦片：10.6克 | 全麦面包：7.9克 | 西兰花：2.6克 | 菠菜：2.2克 | 苹果（带皮）：2.4克 | 梨（带皮）：3.1克 | 香蕉：2.6克 | 草莓：2.0克 | 胡萝卜：2.8克 | 红薯：3.0克</p>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入建议</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食膳食纤维推荐摄入量：</p>
+            <ul>
+                <li><strong>成人（18-50岁）：</strong>25-35克/天</li>
+                <li><strong>成人（50岁以上）：</strong>25-30克/天</li>
+                <li><strong>孕妇（中期、晚期）：</strong>25-35克/天</li>
+                <li><strong>乳母：</strong>25-35克/天</li>
+                <li><strong>青少年（14-17岁）：</strong>25-30克/天</li>
+                <li><strong>儿童（7-13岁）：</strong>15-25克/天</li>
+                <li><strong>儿童（4-6岁）：</strong>10-15克/天</li>
+                <li><strong>儿童（2-3岁）：</strong>8-10克/天</li>
+            </ul>
+            <p>需要注意的是，以下人群可能需要特别关注膳食纤维的摄入：</p>
+            <ul>
+                <li><strong>便秘患者：</strong>增加膳食纤维摄入可改善便秘症状</li>
+                <li><strong>糖尿病患者：</strong>有助于控制血糖水平</li>
+                <li><strong>心血管疾病患者：</strong>可降低胆固醇和血压</li>
+                <li><strong>肥胖人群：</strong>有助于控制体重</li>
+                <li><strong>肠道健康问题人群：</strong>如憩室病、肠易激综合征</li>
+                <li><strong>老年人：</strong>常面临便秘问题</li>
+            </ul>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入不足时的常见表现</h2>
+            <p>膳食纤维摄入不足可能导致多种健康问题（注：本内容为科普信息，如有相关症状请咨询专业医疗人员）：</p>
+            <ul>
+                <li><strong>肠道问题：</strong>
+                    <ul>
+                        <li>便秘</li>
+                        <li>排便困难</li>
+                        <li>粪便干硬</li>
+                        <li>排便次数减少</li>
+                        <li>增加患痔疮的风险</li>
+                        <li>增加患憩室病的风险</li>
+                    </ul>
+                </li>
+                <li><strong>代谢问题：</strong>
+                    <ul>
+                        <li>血糖波动大</li>
+                        <li>胰岛素敏感性下降</li>
+                        <li>增加2型糖尿病风险</li>
+                        <li>血脂异常</li>
+                    </ul>
+                </li>
+                <li><strong>心血管问题：</strong>
+                    <ul>
+                        <li>高胆固醇</li>
+                        <li>增加冠心病风险</li>
+                        <li>增加中风风险</li>
+                    </ul>
+                </li>
+                <li><strong>体重管理困难：</strong>
+                    <ul>
+                        <li>容易饥饿</li>
+                        <li>食欲控制困难</li>
+                        <li>体重增加</li>
+                    </ul>
+                </li>
+                <li><strong>肠道菌群失衡：</strong>
+                    <ul>
+                        <li>有益菌减少</li>
+                        <li>有害菌增多</li>
+                        <li>肠道炎症</li>
+                    </ul>
+                </li>
+                <li><strong>其他潜在风险：</strong>
+                    <ul>
+                        <li>增加结肠癌风险</li>
+                        <li>免疫力下降</li>
+                        <li>皮肤问题</li>
+                        <li>疲劳</li>
+                    </ul>
+                </li>
+            </ul>
+            <p>长期膳食纤维摄入不足与多种慢性疾病的风险增加有关，包括心血管疾病、2型糖尿病、肥胖症和某些类型的癌症。</p>
+        </section>
+        
+        <section class="content-section">
+            <h2>摄入过量的潜在风险</h2>
+            <p>尽管膳食纤维对健康有益，但过量摄入也可能带来一些不适（注：本内容为科普信息，实际情况请咨询专业人士）：</p>
+            <ul>
+                <li><strong>胃肠道不适：</strong>
+                    <ul>
+                        <li>腹胀</li>
+                        <li>胀气</li>
+                        <li>腹痛</li>
+                        <li>腹泻</li>
+                        <li>恶心</li>
+                    </ul>
+                </li>
+                <li><strong>营养素吸收影响：</strong>
+                    <ul>
+                        <li>可能减少某些矿物质的吸收（如钙、铁、锌、镁）</li>
+                        <li>特别是在矿物质摄入不足的情况下</li>
+                    </ul>
+                </li>
+                <li><strong>脱水风险：</strong>
+                    <ul>
+                        <li>高纤维饮食需要更多水分</li>
+                        <li>摄入过量纤维而水分不足可能加重便秘</li>
+                    </ul>
+                </li>
+                <li><strong>特殊人群注意事项：</strong>
+                    <ul>
+                        <li>肠易激综合征患者：可能加重症状</li>
+                        <li>炎症性肠病患者：需谨慎调整纤维摄入</li>
+                        <li>做过肠道手术的人群：可能需要低纤维饮食</li>
+                        <li>吞咽困难人群：高纤维食物可能难以咀嚼和吞咽</li>
+                    </ul>
+                </li>
+            </ul>
+            <p>需要注意的是，大多数健康人群通过正常饮食很难摄入过量膳食纤维，除非突然大幅增加摄入或长期大量服用纤维补充剂。</p>
+            <div class="warning-box">
+                <h3>注意</h3>
+                <p>以下人群在增加膳食纤维摄入前应咨询医生或营养师：</p>
+                <ul>
+                    <li>有炎症性肠病（如克罗恩病、溃疡性结肠炎）的人群</li>
+                    <li>有肠狭窄或肠梗阻风险的人群</li>
+                    <li>严重的肠易激综合征患者</li>
+                    <li>有胃食管反流病的人群</li>
+                    <li>正处于疾病急性期的人群</li>
+                    <li>正服用可能受膳食纤维影响的药物的人群</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="tip-box">
+            <h3>小贴士</h3>
+            <ul>
+                <li>逐渐增加膳食纤维摄入，避免突然大幅增加</li>
+                <li>每天摄入足够的水分（至少1.5-2升）</li>
+                <li>多样化饮食，选择不同来源的膳食纤维</li>
+                <li>多吃全谷物，如糙米、燕麦、全麦面包</li>
+                <li>水果尽量带皮食用</li>
+                <li>蔬菜烹饪时避免过度加工，保留更多纤维</li>
+                <li>适量食用豆类，但注意烹饪方法减少胀气</li>
+                <li>每天食用坚果和种子作为膳食纤维补充</li>
+                <li>尝试在饮食中加入奇亚籽、亚麻籽等超级食物</li>
+                <li>阅读食品标签，选择高纤维食品</li>
+                <li>避免过度依赖精细加工食品</li>
+                <li>考虑使用全谷物面粉替代精制面粉</li>
+            </ul>
+        </section>
+        
+        <section class="info-box">
+            <h3>健康小知识</h3>
+            <p>膳食纤维被称为"肠道清道夫"，它不仅能促进肠道蠕动，还能作为益生元促进肠道有益菌的生长。肠道菌群通过发酵膳食纤维产生短链脂肪酸(SCFAs)，这些物质对肠道健康、免疫功能和代谢调节都有重要作用。研究表明，富含膳食纤维的饮食模式（如地中海饮食）与长寿和降低慢性疾病风险密切相关。</p>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            <p>本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。</p>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 卡路里基站 Calorie Station - AI智能膳食与营养管理平台</p>
+            <p>本网站提供的营养信息仅供参考，不构成医疗建议</p>
+        </div>
+    </footer>
+</body>
+</html>

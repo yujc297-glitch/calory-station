@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多不饱和脂肪酸 Polyunsaturated Fat - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>多不饱和脂肪酸 Polyunsaturated Fat</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>多不饱和脂肪酸是碳链中含有两个或两个以上双键的脂肪酸。由于其分子结构中存在多个不饱和键，在常温下通常呈液态。多不饱和脂肪酸是人体必需的脂肪酸，无法由人体自身合成，必须通过食物摄入。主要包括Omega-3脂肪酸和Omega-6脂肪酸两大类。</p>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>保护心血管健康：</strong>多不饱和脂肪酸可以降低血液中总胆固醇和低密度脂蛋白胆固醇（"坏"胆固醇）水平，同时提高高密度脂蛋白胆固醇（"好"胆固醇）水平，有助于减少动脉粥样硬化和心血管疾病的风险。</li>
+                <li><strong>维持神经系统健康：</strong>是大脑和神经系统的重要组成成分，特别是DHA（一种Omega-3脂肪酸）对大脑发育和功能至关重要。</li>
+                <li><strong>调节炎症反应：</strong>多不饱和脂肪酸，尤其是Omega-3脂肪酸，具有抗炎作用，可以减轻炎症反应，对慢性炎症相关疾病有一定益处。</li>
+                <li><strong>维持细胞膜功能：</strong>是细胞膜的重要组成成分，有助于维持细胞膜的流动性和功能。</li>
+                <li><strong>促进视力发育：</strong>DHA是视网膜的重要组成成分，对视力发育和维持有重要作用。</li>
+                <li><strong>改善认知功能：</strong>一些研究表明，适量摄入Omega-3脂肪酸可能有助于改善认知功能，降低认知障碍的风险。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>Omega-3脂肪酸来源：</strong>
+                    <ul>
+                        <li>深海鱼类：三文鱼、金枪鱼、鲭鱼、鳕鱼、沙丁鱼等。</li>
+                        <li>亚麻籽和亚麻籽油：富含α-亚麻酸（ALA），是Omega-3脂肪酸的前体。</li>
+                        <li>核桃和核桃油：含有一定量的α-亚麻酸。</li>
+                        <li>奇亚籽：富含α-亚麻酸。</li>
+                        <li>藻类：某些海藻和微藻含有DHA和EPA。</li>
+                    </ul>
+                </li>
+                <li><strong>Omega-6脂肪酸来源：</strong>
+                    <ul>
+                        <li>植物油：大豆油、玉米油、葵花籽油、芝麻油、红花籽油等。</li>
+                        <li>坚果和种子：花生、杏仁、腰果、葵花籽等。</li>
+                        <li>肉类：尤其是谷物饲养的肉类。</li>
+                        <li>蛋类：含有一定量的Omega-6脂肪酸。</li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>营养指南通常建议，多不饱和脂肪酸应占总能量摄入的6%-10%。在多不饱和脂肪酸摄入中，应注意以下几点：</p>
+            <ul>
+                <li>保持Omega-6和Omega-3脂肪酸的适当比例，一般建议为4:1至1:1之间。</li>
+                <li>每周至少食用2-3次富含Omega-3脂肪酸的鱼类（如三文鱼、金枪鱼等）。</li>
+                <li>适量食用亚麻籽、核桃等富含Omega-3脂肪酸的植物性食物。</li>
+                <li>选择多种植物油交替使用，避免长期单一使用某一种植物油。</li>
+                <li>对于素食者或鱼类摄入不足的人群，可考虑适当补充Omega-3脂肪酸补充剂（如藻油DHA）。</li>
+            </ul>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>皮肤问题：</strong>必需脂肪酸缺乏可能导致皮肤干燥、脱屑、湿疹等问题。</li>
+                <li><strong>神经系统症状：</strong>可能出现注意力不集中、记忆力下降、情绪波动等。</li>
+                <li><strong>免疫功能下降：</strong>必需脂肪酸缺乏可能影响免疫系统功能。</li>
+                <li><strong>心血管健康风险增加：</strong>Omega-3脂肪酸摄入不足可能增加心血管疾病风险。</li>
+                <li><strong>生长发育迟缓：</strong>对于儿童和青少年，必需脂肪酸缺乏可能影响生长发育。</li>
+            </ul>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>氧化应激：</strong>多不饱和脂肪酸含有多个双键，容易发生氧化，产生自由基，过量摄入可能增加氧化应激。</li>
+                <li><strong>炎症反应失衡：</strong>如果Omega-6脂肪酸摄入过多而Omega-3脂肪酸摄入不足，可能导致炎症反应失衡。</li>
+                <li><strong>出血风险增加：</strong>过量摄入某些Omega-3脂肪酸补充剂可能增加出血风险，特别是对于正在服用抗凝药物的人群。</li>
+                <li><strong>能量过剩：</strong>虽然是健康脂肪，但过量摄入仍会导致能量过剩，增加肥胖风险。</li>
+            </ul>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 每周食用2-3次深海鱼类，如三文鱼、金枪鱼等，以摄入足够的Omega-3脂肪酸。</p>
+                <p>2. 在饮食中加入亚麻籽（磨碎后食用更易吸收）、核桃等富含Omega-3的食物。</p>
+                <p>3. 选择多种植物油交替使用，如橄榄油、亚麻籽油、大豆油等。</p>
+                <p>4. 减少油炸食品的摄入，避免油脂过度加热导致的氧化。</p>
+                <p>5. 保持Omega-6和Omega-3脂肪酸的平衡，避免过度摄入富含Omega-6的植物油。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

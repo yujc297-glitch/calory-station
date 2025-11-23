@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>维生素K Vitamin K - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>维生素K Vitamin K</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>维生素K是一组脂溶性维生素的统称，其名称源于德语“Koagulationsvitamin”（凝血维生素），反映了它在血液凝固中的重要作用。维生素K主要包括两种形式：维生素K1（叶绿醌，phylloquinone）和维生素K2（甲基萘醌类，menaquinones）。维生素K1主要存在于植物性食物中，特别是绿叶蔬菜；维生素K2则由肠道细菌合成，并存在于某些发酵食品中。维生素K在体内主要作为凝血因子和骨钙素等蛋白质的γ-羧化反应的辅助因子，参与血液凝固和骨骼代谢等重要生理过程。</p>
+            
+            <div class="info-box">
+                <h3>【维生素K的来源】</h3>
+                <p>维生素K有两个主要来源：饮食摄入和肠道细菌合成。健康成年人的肠道菌群通常可以合成足够的维生素K2，但在某些情况下（如使用抗生素、肠道疾病等），肠道合成可能不足，需要通过饮食补充。</p>
+            </div>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>血液凝固：</strong>是维生素K最著名的功能，作为凝血因子Ⅱ、Ⅶ、Ⅸ、Ⅹ的γ-羧化反应的辅助因子，促进这些凝血因子的活化，维持正常的凝血功能。</li>
+                <li><strong>骨骼代谢：</strong>参与骨钙素（osteocalcin）和基质Gla蛋白（MGP）的γ-羧化，促进钙在骨骼中的沉积，抑制骨骼中钙的流失，维持骨骼健康。</li>
+                <li><strong>心血管健康：</strong>通过抑制血管钙化（主要通过羧化MGP），可能有助于预防动脉硬化和心血管疾病。</li>
+                <li><strong>细胞凋亡调节：</strong>参与某些细胞凋亡相关蛋白的羧化，可能对细胞生长和分化有调节作用。</li>
+                <li><strong>胰岛素敏感性：</strong>一些研究表明，维生素K可能与胰岛素敏感性相关，对糖尿病有一定的预防作用。</li>
+                <li><strong>肾脏健康：</strong>可能参与肾脏中某些蛋白质的羧化，对肾脏功能有保护作用。</li>
+                <li><strong>牙齿健康：</strong>参与牙本质中的蛋白质羧化，可能有助于预防龋齿。</li>
+                <li><strong>免疫系统功能：</strong>可能对免疫系统有调节作用，影响某些免疫细胞的功能。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>绿叶蔬菜：</strong>羽衣甘蓝、菠菜、西兰花、花椰菜、生菜、芥蓝、芦笋等，是维生素K1的主要来源。</li>
+                <li><strong>发酵食品：</strong>纳豆（日本传统发酵大豆食品）、某些发酵奶酪（如切达干酪、布里奶酪）等，含有丰富的维生素K2。</li>
+                <li><strong>植物油：</strong>大豆油、橄榄油、菜籽油等，含有少量维生素K1。</li>
+                <li><strong>动物肝脏：</strong>猪肝、鸡肝等，含有一定量的维生素K。</li>
+                <li><strong>蛋黄：</strong>含有少量维生素K。</li>
+                <li><strong>全谷物：</strong>糙米、全麦面包等，含有少量维生素K。</li>
+                <li><strong>水果：</strong>牛油果（鳄梨）、猕猴桃等，含有少量维生素K。</li>
+            </ul>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食维生素K推荐摄入量：</p>
+            <ul>
+                <li>成人：80微克/天</li>
+                <li>孕妇和乳母：80-90微克/天</li>
+                <li>儿童根据年龄不同：10-80微克/天</li>
+            </ul>
+            <p>需要注意的是，以下人群可能需要特别关注维生素K摄入：</p>
+            <ul>
+                <li><strong>新生儿：</strong>出生时体内维生素K储存量低，肠道菌群尚未建立，通常会在出生后注射维生素K以预防出血性疾病。</li>
+                <li><strong>长期使用抗生素的人群：</strong>抗生素可能抑制肠道细菌，减少维生素K的合成。</li>
+                <li><strong>脂肪吸收不良的人群：</strong>如患有胆汁淤积、乳糜泻、炎症性肠病等疾病的患者，可能无法有效吸收脂溶性维生素K。</li>
+                <li><strong>长期使用抗凝血药物（如华法林）的人群：</strong>需要严格控制维生素K的摄入量，以维持药物疗效的稳定。</li>
+                <li><strong>老年人：</strong>吸收能力可能下降，且可能同时服用多种药物。</li>
+                <li><strong>素食者：</strong>如果不食用发酵食品，可能需要特别注意维生素K2的摄入。</li>
+            </ul>
+            
+            <div class="info-box">
+                <h3>【维生素K与抗凝血药物的关系】</h3>
+                <p>维生素K与抗凝血药物（如华法林）之间存在拮抗作用。华法林通过抑制维生素K的活性来发挥抗凝血作用。因此，长期服用华法林的患者需要保持维生素K摄入量的相对稳定，避免摄入波动过大导致凝血功能不稳定。在调整饮食或服用维生素K补充剂前，应咨询医生。</p>
+            </div>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>凝血障碍：</strong>最常见的表现是出血倾向增加，如鼻出血、牙龈出血、皮下瘀斑、月经过多、胃肠道出血等。严重情况下可能出现颅内出血。</li>
+                <li><strong>新生儿出血症：</strong>在新生儿中，维生素K缺乏可能导致新生儿出血症（HDN），表现为皮肤、胃肠道、颅内等部位的出血。</li>
+                <li><strong>骨质疏松风险增加：</strong>长期维生素K缺乏可能影响骨钙素的羧化，导致骨密度下降，增加骨质疏松和骨折的风险。</li>
+                <li><strong>血管钙化风险增加：</strong>可能导致血管钙化，增加心血管疾病风险。</li>
+            </ul>
+            <p>维生素K缺乏在健康成年人中较为罕见，但在特定人群中（如新生儿、长期使用抗生素者、脂肪吸收不良者）需要特别关注。</p>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>干扰抗凝血药物疗效：</strong>摄入过量的维生素K可能降低华法林等抗凝血药物的疗效，增加血栓形成的风险。</li>
+                <li><strong>溶血性贫血：</strong>在新生儿中，大剂量维生素K补充可能导致溶血性贫血和高胆红素血症。</li>
+                <li><strong>过敏反应：</strong>个别情况下可能出现过敏反应，如皮疹、瘙痒等。</li>
+                <li><strong>消化系统症状：</strong>可能出现恶心、呕吐、腹泻等。</li>
+            </ul>
+            <p>维生素K的毒性相对较低，通过正常饮食摄入一般不会导致过量。但长期大剂量摄入补充剂可能带来风险，特别是对正在服用抗凝血药物的人群。目前尚未确定维生素K的可耐受最高摄入量（UL）。</p>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 多吃绿叶蔬菜，如菠菜、羽衣甘蓝、西兰花等，它们是维生素K1的最佳来源。</p>
+                <p>2. 适量食用发酵食品，如纳豆、发酵奶酪等，以获取维生素K2。</p>
+                <p>3. 烹饪蔬菜时，避免长时间高温烹饪，以保留更多的维生素K。</p>
+                <p>4. 长期服用抗生素的人群，应注意增加富含维生素K的食物摄入，或在医生指导下适当补充。</p>
+                <p>5. 服用抗凝血药物（如华法林）的患者，应保持饮食中维生素K摄入的相对稳定，避免突然大量摄入或大幅减少摄入。</p>
+                <p>6. 对于有出血倾向或正在服用抗凝血药物的人群，在补充维生素K前应咨询医生。</p>
+                <p>7. 保持健康的肠道菌群，有助于维生素K2的合成，可以通过摄入益生菌或富含膳食纤维的食物来维持肠道健康。</p>
+                <p>8. 维生素K与维生素D、钙协同作用，共同维持骨骼健康，保持均衡饮食有助于获得全面的营养支持。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

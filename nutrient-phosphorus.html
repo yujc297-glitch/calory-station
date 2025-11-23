@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>磷 Phosphorus - 营养科普 - 卡路里基站</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: #2e8b57;
+            background-color: rgba(46, 139, 87, 0.1);
+        }
+        
+        /* 标题区域样式 */
+        .title-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        
+        .title-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+        
+        /* 内容区域样式 */
+        .content-section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            font-size: 24px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* 提示框样式 */
+        .tip-box {
+            background-color: #e8f5e8;
+            border-left: 4px solid #2e8b57;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box h3 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .tip-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 信息框样式 */
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .info-box p {
+            margin-bottom: 0;
+        }
+        
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-block;
+            background-color: #2e8b57;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            background-color: #277a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        /* 底部提示样式 */
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer .container {
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">卡路里基站</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="cooking-assistant.html">烹饪助手</a></li>
+                    <li><a href="recipe-recommend.html">菜谱推荐</a></li>
+                    <li><a href="health-tracking.html">健康追踪</a></li>
+                    <li><a href="dish-recognition.html">原材料识别</a></li>
+                    <li><a href="nutrition-knowledge.html">营养科普</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <section class="title-section">
+            <h1>磷 Phosphorus (P)</h1>
+        </section>
+        
+        <!-- 返回按钮 -->
+        <a href="nutrition-knowledge.html" class="back-button">返回营养科普总览</a>
+        
+        <!-- 内容区域 -->
+        <section class="content-section">
+            <h2>【定义】</h2>
+            <p>磷（Phosphorus，P）是人体必需的常量元素之一，在成人体内约含700-1400克。磷在体内的分布非常广泛，约85%存在于骨骼和牙齿中，14%存在于软组织，1%存在于细胞外液。磷在体内主要以磷酸盐的形式存在，是人体能量代谢、遗传物质构成和酸碱平衡的重要参与者。磷与钙一起是构成骨骼和牙齿的主要成分，在细胞内代谢和信号传导中也发挥着关键作用。</p>
+            
+            <div class="info-box">
+                <h3>【磷的代谢特点】</h3>
+                <p>磷主要在小肠被吸收，吸收率约为50%-70%。食物中的磷吸收率受多种因素影响，维生素D可以促进磷的吸收，而钙、镁、铁等矿物质过多可能抑制磷的吸收。体内磷的平衡主要通过肾脏调节，当摄入不足时，肾脏会减少磷的排泄以维持体内平衡。磷与钙的比例对健康至关重要，理想的钙磷比例约为1:1。</p>
+            </div>
+            
+            <h2>【主要生理作用】</h2>
+            <ul>
+                <li><strong>骨骼和牙齿构成：</strong>与钙一起形成羟磷灰石晶体，是骨骼和牙齿的主要成分，占骨骼重量的约85%。</li>
+                <li><strong>能量代谢：</strong>是ATP（三磷酸腺苷）和磷酸肌酸的重要组成部分，参与能量的储存和释放。</li>
+                <li><strong>遗传物质构成：</strong>是DNA和RNA的重要组成部分，参与遗传信息的传递和表达。</li>
+                <li><strong>细胞膜构成：</strong>是磷脂的重要组成部分，参与细胞膜的构成和功能。</li>
+                <li><strong>信号传导：</strong>参与细胞内的信号传导，如磷酸化和去磷酸化反应。</li>
+                <li><strong>酸碱平衡：</strong>作为体内重要的缓冲系统成分，参与维持体内的酸碱平衡。</li>
+                <li><strong>酶的组成和激活：</strong>是多种酶的组成成分或激活剂，参与多种代谢反应。</li>
+                <li><strong>蛋白质功能调节：</strong>通过磷酸化修饰调节蛋白质的功能和活性。</li>
+                <li><strong>脂质代谢：</strong>参与脂质的代谢和运输。</li>
+                <li><strong>红细胞功能：</strong>参与红细胞中2,3-二磷酸甘油酸的合成，调节氧气的释放。</li>
+                <li><strong>神经肌肉功能：</strong>参与神经冲动的传导和肌肉的收缩。</li>
+                <li><strong>细胞分裂和生长：</strong>参与细胞的分裂、生长和修复。</li>
+            </ul>
+            
+            <h2>【主要食物来源】</h2>
+            <ul>
+                <li><strong>乳制品：</strong>牛奶、酸奶、奶酪等，是磷的良好来源。</li>
+                <li><strong>肉类和禽类：</strong>牛肉、猪肉、鸡肉等，尤其是瘦肉部分。</li>
+                <li><strong>鱼类和海鲜：</strong>三文鱼、金枪鱼、虾、贝类等。</li>
+                <li><strong>坚果和种子：</strong>杏仁、腰果、南瓜籽、芝麻等。</li>
+                <li><strong>豆类：</strong>黑豆、黄豆、红豆、鹰嘴豆、扁豆等。</li>
+                <li><strong>全谷物：</strong>糙米、燕麦、全麦面包、小米等。</li>
+                <li><strong>蛋类：</strong>鸡蛋、鸭蛋等，主要在蛋黄中。</li>
+                <li><strong>加工食品：</strong>一些加工食品如碳酸饮料、加工肉类等含有添加的磷酸盐。</li>
+                <li><strong>蔬菜：</strong>菠菜、西兰花、土豆等，含量相对较低。</li>
+                <li><strong>水果：</strong>香蕉、橙子、苹果等，含量相对较低。</li>
+            </ul>
+            <p>需要注意的是，精制食品（如白米、白面粉）中的磷含量远低于全谷物，因为磷主要存在于谷物的外层部分。此外，一些加工食品中添加的磷酸盐可能会影响体内的钙磷平衡。</p>
+            
+            <h2>【摄入建议】</h2>
+            <p>推荐摄入量相关信息仅为参考，实际应以权威指南和专业人士意见为准。</p>
+            <p>中国居民膳食磷推荐摄入量：</p>
+            <ul>
+                <li>0-6个月：100毫克/天</li>
+                <li>7-12个月：220毫克/天</li>
+                <li>1-3岁：300毫克/天</li>
+                <li>4-6岁：450毫克/天</li>
+                <li>7-10岁：500毫克/天</li>
+                <li>11-13岁：900毫克/天</li>
+                <li>14-17岁：1000毫克/天</li>
+                <li>18-49岁：720毫克/天</li>
+                <li>50岁及以上：720毫克/天</li>
+                <li>孕妇（孕早期）：720毫克/天</li>
+                <li>孕妇（孕中期）：780毫克/天</li>
+                <li>孕妇（孕晚期）：840毫克/天</li>
+                <li>乳母：840毫克/天</li>
+            </ul>
+            <p>需要注意的是，以下人群可能需要特别关注磷的摄入：</p>
+            <ul>
+                <li><strong>肾功能不全患者：</strong>肾脏对磷的排泄能力下降，需要限制磷的摄入。</li>
+                <li><strong>骨质疏松患者：</strong>需要注意钙磷比例的平衡，避免高磷低钙饮食。</li>
+                <li><strong>儿童和青少年：</strong>处于生长发育阶段，需要足够的磷来支持骨骼生长。</li>
+                <li><strong>孕妇和乳母：</strong>需要额外的磷来满足胎儿发育和乳汁分泌的需求。</li>
+                <li><strong>素食者：</strong>虽然植物性食物中含有磷，但其中的植酸可能影响吸收。</li>
+            </ul>
+            
+            <div class="info-box">
+                <h3>【提高磷吸收率的方法】</h3>
+                <p>1. 适量摄入富含维生素D的食物或补充维生素D，可以促进磷的吸收。</p>
+                <p>2. 注意钙磷比例的平衡，避免高磷低钙饮食。</p>
+                <p>3. 发酵食物（如发酵豆制品）中的植酸会被降解，可以提高磷的吸收率。</p>
+                <p>4. 保持良好的胃肠道健康，有助于磷的正常吸收。</p>
+            </div>
+            
+            <h2>【摄入不足时的常见表现】</h2>
+            <ul>
+                <li><strong>骨骼问题：</strong>骨质疏松、佝偻病（在儿童中）、骨骼疼痛、易骨折等。</li>
+                <li><strong>能量代谢障碍：</strong>疲劳、乏力、肌肉无力等。</li>
+                <li><strong>神经肌肉症状：</strong>肌肉痉挛、抽搐、感觉异常等。</li>
+                <li><strong>红细胞功能异常：</strong>可能导致贫血、红细胞形态异常等。</li>
+                <li><strong>食欲减退：</strong>可能出现食欲下降、恶心、呕吐等。</li>
+                <li><strong>生长发育迟缓：</strong>在儿童中可能影响正常生长发育。</li>
+                <li><strong>免疫功能下降：</strong>容易感染疾病。</li>
+                <li><strong>酸碱平衡紊乱：</strong>可能导致代谢性酸中毒。</li>
+            </ul>
+            <p>磷缺乏在正常饮食人群中很少见，通常只发生在严重营养不良、吸收不良综合征、长期腹泻、酒精中毒或某些疾病状态下。</p>
+            
+            <h2>【摄入过量的潜在风险】</h2>
+            <ul>
+                <li><strong>骨骼健康问题：</strong>高磷摄入可能导致钙磷比例失衡，增加钙的排泄，从而影响骨骼健康，增加骨质疏松的风险。</li>
+                <li><strong>心血管疾病风险：</strong>长期高磷饮食可能增加心血管疾病的风险，尤其是在肾功能不全的人群中。</li>
+                <li><strong>肾功能损害：</strong>长期过量摄入可能增加肾脏的负担，尤其是在肾功能不全的人群中。</li>
+                <li><strong>甲状旁腺功能异常：</strong>高磷血症可能导致继发性甲状旁腺功能亢进。</li>
+                <li><strong>软组织钙化：</strong>严重高磷血症可能导致软组织（如血管、心脏等）的钙化。</li>
+                <li><strong>电解质紊乱：</strong>可能影响其他电解质（如钙、镁）的平衡。</li>
+            </ul>
+            <p>中国居民膳食磷可耐受最高摄入量（UL）：</p>
+            <ul>
+                <li>1-3岁：1000毫克/天</li>
+                <li>4-6岁：1500毫克/天</li>
+                <li>7-10岁：2000毫克/天</li>
+                <li>11-17岁：3500毫克/天</li>
+                <li>18岁及以上：3500毫克/天</li>
+                <li>孕妇：3500毫克/天</li>
+                <li>乳母：3500毫克/天</li>
+            </ul>
+            <p>需要注意的是，随着加工食品的普及，现代人的磷摄入量有增加的趋势。尤其是肾功能不全的人群，需要严格控制磷的摄入，避免高磷食物和含添加磷酸盐的加工食品。</p>
+            
+            <div class="tip-box">
+                <h3>【小贴士】</h3>
+                <p>1. 均衡饮食是获取足够磷的最佳方式，注意钙磷比例的平衡（理想比例约为1:1）。</p>
+                <p>2. 减少精制食品和加工食品的摄入，尤其是含有添加磷酸盐的食品。</p>
+                <p>3. 对于肾功能不全的人群，应在医生或营养师的指导下严格控制磷的摄入。</p>
+                <p>4. 增加富含钙的食物摄入，如乳制品、深绿色蔬菜等，有助于维持钙磷平衡。</p>
+                <p>5. 儿童和青少年应确保足够的磷摄入，以支持骨骼的生长发育。</p>
+                <p>6. 老年人应注意钙磷平衡，避免高磷低钙饮食，有助于预防骨质疏松。</p>
+                <p>7. 保持适量的户外活动，促进维生素D的合成，有助于磷的吸收。</p>
+                <p>8. 避免长期大量饮用碳酸饮料，因为其中含有磷酸，可能影响钙磷平衡。</p>
+                <p>9. 定期进行体检，尤其是肾功能不全的人群，以便及早发现和治疗高磷血症。</p>
+                <p>10. 注意食物的多样性，以确保摄入足够的磷。</p>
+            </div>
+        </section>
+        
+        <!-- 底部提示 -->
+        <div class="disclaimer">
+            本页面内容为营养科普，不作为诊断或治疗依据，如有特殊健康状况，请咨询医生或营养师。
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
+            <p>本页面为演示前端界面，不包含实际功能。</p>
+        </div>
+    </footer>
+</body>
+</html>

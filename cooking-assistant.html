@@ -801,26 +801,53 @@
         const generateRecipeBtn = document.getElementById('generate-recipe-btn');
         const recipesGrid = document.querySelector('.recipes-grid');
         
+        // 预处理AI返回的内容，提取JSON代码块
+        function preprocessAnswer(answer) {
+            // 去除首尾空白字符
+            let trimmedAnswer = answer.trim();
+            
+            // 检查是否包含三反引号代码块
+            if (trimmedAnswer.includes('```')) {
+                // 匹配第一个代码块，支持```json或```开头
+                const codeBlockMatch = trimmedAnswer.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+                if (codeBlockMatch && codeBlockMatch[1]) {
+                    return codeBlockMatch[1].trim();
+                }
+            }
+            
+            // 如果没有代码块，尝试提取{}之间的内容
+            const firstBraceIndex = trimmedAnswer.indexOf('{');
+            const lastBraceIndex = trimmedAnswer.lastIndexOf('}');
+            
+            if (firstBraceIndex !== -1 && lastBraceIndex !== -1 && firstBraceIndex < lastBraceIndex) {
+                return trimmedAnswer.substring(firstBraceIndex, lastBraceIndex + 1).trim();
+            }
+            
+            // 如果以上都失败，返回原始文本
+            return trimmedAnswer;
+        }
+
         // 生成菜谱的异步函数
         async function generateRecipes(ingredients, cuisine, tastes) {
-            // 组织prompt
-            const prompt = `请根据以下条件设计 3 道菜品：
+            // 组织prompt，要求只返回JSON，不包含解释性文字和Markdown代码块，最多4个菜谱
+            const prompt = `请根据以下条件设计菜品：
 - 可用食材：${ingredients.join('、')}
 - 目标菜系：${cuisine}
 - 口味偏好：${tastes.join('、')}
-要求每道菜输出：菜名、主要食材、详细做法步骤（3-6 步）、预计热量（大致 kcal）、营养特点。
-请使用 JSON 格式返回，结构为：
+
+请注意：
+1. 只返回JSON格式，不要前后任何解释性文字，不要使用Markdown代码块
+2. 返回格式固定为：
 {
   "recipes": [
-    {
-      "name": "",
-      "summary": "",
-      "ingredients": ["", ""],
-      "steps": ["", ""],
-      "estimated_calories": 0
-    }
+    { "name": "...", "summary": "...", "ingredients": [...], "steps": [...], "estimated_calories": 0 },
+    ...
   ]
-}`;
+}
+3. recipes数组长度为4，如果条件有限可以少于4，但最多不要超过4
+4. 请使用中文输出菜名、摘要、步骤
+
+要求每道菜包含：菜名、简短描述、主要食材列表、详细做法步骤（3-6步）、预计热量（大致kcal）。`;
             
             try {
                 // 调用后端API
@@ -984,20 +1011,26 @@
                         return;
                     }
                     
+                    // 预处理AI响应以提取可能的JSON内容
+                    const jsonStr = preprocessAnswer(aiResponse);
+                    
                     // 尝试解析JSON
                     try {
-                        const result = JSON.parse(aiResponse);
+                        const result = JSON.parse(jsonStr);
                         if (result.recipes && Array.isArray(result.recipes)) {
-                            renderRecipes(result.recipes);
+                            // 限制最多显示4个菜谱
+                            const recipesToShow = result.recipes.slice(0, 4);
+                            renderRecipes(recipesToShow);
                         } else {
-                            // JSON格式不对，显示原始文本作为回退
-                            showErrorMessage('当前为文本格式，未能解析为结构化菜谱：' + aiResponse.substring(0, 200) + '...');
+                            // JSON格式不对，显示简化的错误信息
+                            showErrorMessage('AI 返回的格式无法完全解析，以下为原始内容：' + aiResponse.substring(0, 200) + '...');
                             console.log('原始AI响应:', aiResponse);
                         }
                     } catch (parseError) {
-                        // 解析失败，显示原始文本作为回退
-                        showErrorMessage('当前为文本格式，未能解析为结构化菜谱：' + aiResponse.substring(0, 200) + '...');
+                        // 解析失败，显示简化的错误信息
+                        showErrorMessage('AI 返回的格式无法完全解析，以下为原始内容：' + aiResponse.substring(0, 200) + '...');
                         console.log('原始AI响应:', aiResponse);
+                        console.error('JSON解析错误:', parseError);
                     }
                 } catch (error) {
                     console.error('错误:', error);

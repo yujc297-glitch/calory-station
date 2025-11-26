@@ -596,8 +596,8 @@
                 <div class="form-group">
                     <label for="ingredients">已有食材</label>
                     <div class="ingredients-input-container">
-                        <input type="text" id="ingredients" placeholder="鸡胸肉、西兰花、番茄" />
-                        <button class="btn-add disabled">加入</button>
+                        <input type="text" id="ingredient-input" placeholder="鸡胸肉、西兰花、番茄" />
+                        <button id="add-ingredient-btn" class="btn-add disabled" disabled>加入</button>
                     </div>
                     
                     <!-- 说明：此处展示"加入"按钮的两种视觉状态，实际不具备交互功能 -->
@@ -611,31 +611,10 @@
                 </div>
                 
                 <!-- 已添加食材展示区 -->
-                <div class="added-ingredients demo">
-                    <!-- 说明：以上食材标签为静态展示，用于模拟"加入食材"后的视觉效果 -->
+                <div class="added-ingredients">
                     <h4>已添加食材</h4>
-                    <div class="ingredients-tags">
-                        <!-- 示例：若用户从"原材料识别"页面点击"添加到烹饪助手"，此处模拟"已添加西兰花"效果 -->
-                        <div class="ingredient-tag">
-                            西兰花
-                            <span class="tag-remove">×</span>
-                        </div>
-                        <div class="ingredient-tag">
-                            鸡胸肉
-                            <span class="tag-remove">×</span>
-                        </div>
-                        <div class="ingredient-tag">
-                            胡萝卜
-                            <span class="tag-remove">×</span>
-                        </div>
-                        <div class="ingredient-tag">
-                            鸡蛋
-                            <span class="tag-remove">×</span>
-                        </div>
-                        <div class="ingredient-tag">
-                            番茄
-                            <span class="tag-remove">×</span>
-                        </div>
+                    <div id="ingredient-list" class="ingredients-tags">
+                        <!-- 这里的标签由 JavaScript 动态插入 -->
                     </div>
                 </div>
                 
@@ -750,5 +729,93 @@
             <p>本页面为演示前端界面，不包含实际功能。</p>
         </div>
     </footer>
+    <script>
+        // 获取DOM元素
+        const ingredientInput = document.getElementById('ingredient-input');
+        const addIngredientBtn = document.getElementById('add-ingredient-btn');
+        const ingredientList = document.getElementById('ingredient-list');
+        
+        // 存储已添加的食材
+        let ingredients = [];
+        
+        // 从localStorage加载食材
+        function loadIngredients() {
+            const savedIngredients = localStorage.getItem('cookingAssistantIngredients');
+            if (savedIngredients) {
+                ingredients = JSON.parse(savedIngredients);
+                renderIngredients();
+            }
+        }
+        
+        // 保存食材到localStorage
+        function saveIngredients() {
+            localStorage.setItem('cookingAssistantIngredients', JSON.stringify(ingredients));
+        }
+        
+        // 渲染食材标签
+        function renderIngredients() {
+            ingredientList.innerHTML = '';
+            
+            ingredients.forEach((ingredient, index) => {
+                const tag = document.createElement('div');
+                tag.className = 'ingredient-tag';
+                tag.textContent = ingredient;
+                
+                const removeBtn = document.createElement('span');
+                removeBtn.className = 'tag-remove';
+                removeBtn.textContent = '×';
+                removeBtn.onclick = () => removeIngredient(index);
+                
+                tag.appendChild(removeBtn);
+                ingredientList.appendChild(tag);
+            });
+        }
+        
+        // 添加食材
+        function addIngredient() {
+            const value = ingredientInput.value.trim();
+            if (value && !ingredients.includes(value)) {
+                ingredients.push(value);
+                saveIngredients();
+                renderIngredients();
+                ingredientInput.value = '';
+                updateAddButton();
+            }
+        }
+        
+        // 删除食材
+        function removeIngredient(index) {
+            ingredients.splice(index, 1);
+            saveIngredients();
+            renderIngredients();
+        }
+        
+        // 更新添加按钮状态
+        function updateAddButton() {
+            const hasValue = ingredientInput.value.trim() !== '';
+            if (hasValue) {
+                addIngredientBtn.classList.remove('disabled');
+                addIngredientBtn.classList.add('active');
+                addIngredientBtn.disabled = false;
+            } else {
+                addIngredientBtn.classList.remove('active');
+                addIngredientBtn.classList.add('disabled');
+                addIngredientBtn.disabled = true;
+            }
+        }
+        
+        // 事件监听
+        ingredientInput.addEventListener('input', updateAddButton);
+        addIngredientBtn.addEventListener('click', addIngredient);
+        ingredientInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !addIngredientBtn.disabled) {
+                addIngredient();
+            }
+        });
+        
+        // 初始化
+        loadIngredients();
+        updateAddButton();
+    </script>
 </body>
 </html>

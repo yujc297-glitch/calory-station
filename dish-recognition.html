@@ -434,114 +434,7 @@
             }
         }
         
-        /* 烹饪小助手区域样式 */
-        .cooking-assistant-section {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            padding: 40px;
-            margin-top: 60px;
-        }
-        
-        .cooking-assistant-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .cooking-assistant-title {
-            font-size: 28px;
-            color: #2e8b57;
-            margin-bottom: 15px;
-        }
-        
-        .cooking-assistant-description {
-            color: #666;
-            font-size: 16px;
-            line-height: 1.6;
-        }
-        
-        .recipe-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-        
-        .recipe-card {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-            padding: 25px;
-            transition: all 0.3s ease;
-            border: 1px solid #e8f5e8;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .recipe-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .recipe-card-tag {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background-color: #2e8b57;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-        
-        .recipe-title {
-            font-size: 20px;
-            color: #333;
-            margin-bottom: 10px;
-            padding-right: 100px;
-        }
-        
-        .recipe-reason {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-        
-        .recipe-info {
-            margin-bottom: 15px;
-        }
-        
-        .recipe-info-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .recipe-info-label {
-            font-weight: bold;
-            color: #333;
-            min-width: 80px;
-            flex-shrink: 0;
-        }
-        
-        .recipe-tags {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-top: 15px;
-        }
-        
-        .recipe-tags .tag {
-            background-color: #e8f5e8;
-            color: #2e8b57;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-        }
+        /* 烹饪小助手相关样式已移除 */
         
         /* 按钮区域样式 */
         .buttons-section {
@@ -638,93 +531,7 @@
                 </div>
             </div>
             
-            <!-- 烹饪小助手区域 -->
-            <div class="cooking-assistant-section">
-                <div class="cooking-assistant-header">
-                    <h2 class="cooking-assistant-title">烹饪小助手 · 根据原材料推荐菜品</h2>
-                    <p class="cooking-assistant-description">当系统识别出某种原材料后，将根据食材特性推荐适合的家常做法和菜品搭配。</p>
-                </div>
-                
-                <div class="recipe-cards">
-                    <!-- 推荐菜品卡片 1 -->
-                    <div class="recipe-card">
-                        <span class="recipe-card-tag">基于：西兰花</span>
-                        <h3 class="recipe-title">清炒西兰花</h3>
-                        <p class="recipe-reason">保留蔬菜脆嫩口感，低油低盐</p>
-                        <div class="recipe-info">
-                            <div class="recipe-info-item">
-                                <span class="recipe-info-label">主要食材：</span>
-                                <span>西兰花、蒜、橄榄油、少量盐</span>
-                            </div>
-                            <div class="recipe-info-item">
-                                <span class="recipe-info-label">烹饪方式：</span>
-                                <span>清炒</span>
-                            </div>
-                            <div class="recipe-info-item">
-                                <span class="recipe-info-label">预计热量：</span>
-                                <span>约 150 kcal / 份（示例值）</span>
-                            </div>
-                        </div>
-                        <div class="recipe-tags">
-                            <span class="tag">低脂</span>
-                            <span class="tag">高纤维</span>
-                            <span class="tag">减脂推荐</span>
-                        </div>
-                    </div>
-                    
-                    <!-- 推荐菜品卡片 2 -->
-                    <div class="recipe-card">
-                        <span class="recipe-card-tag">基于：西兰花</span>
-                        <h3 class="recipe-title">西兰花鸡胸肉沙拉</h3>
-                        <p class="recipe-reason">搭配鸡胸肉增加蛋白质摄入</p>
-                        <div class="recipe-info">
-                            <div class="recipe-info-item">
-                                <span class="recipe-info-label">主要食材：</span>
-                                <span>西兰花、鸡胸肉、黄瓜、橄榄油、柠檬汁</span>
-                            </div>
-                            <div class="recipe-info-item">
-                                <span class="recipe-info-label">烹饪方式：</span>
-                                <span>凉拌</span>
-                            </div>
-                            <div class="recipe-info-item">
-                                <span class="recipe-info-label">预计热量：</span>
-                                <span>约 280 kcal / 份（示例值）</span>
-                            </div>
-                        </div>
-                        <div class="recipe-tags">
-                            <span class="tag">高蛋白</span>
-                            <span class="tag">低卡</span>
-                            <span class="tag">营养均衡</span>
-                        </div>
-                    </div>
-                    
-                    <!-- 推荐菜品卡片 3 -->
-                    <div class="recipe-card">
-                        <span class="recipe-card-tag">基于：西兰花</span>
-                        <h3 class="recipe-title">蒜蓉西兰花</h3>
-                        <p class="recipe-reason">蒜蓉提香，简单美味</p>
-                        <div class="recipe-info">
-                            <div class="recipe-info-item">
-                                <span class="recipe-info-label">主要食材：</span>
-                                <span>西兰花、大蒜、生抽、橄榄油</span>
-                            </div>
-                            <div class="recipe-info-item">
-                                <span class="recipe-info-label">烹饪方式：</span>
-                                <span>清炒</span>
-                            </div>
-                            <div class="recipe-info-item">
-                                <span class="recipe-info-label">预计热量：</span>
-                                <span>约 180 kcal / 份（示例值）</span>
-                            </div>
-                        </div>
-                        <div class="recipe-tags">
-                            <span class="tag">家常菜</span>
-                            <span class="tag">快手菜</span>
-                            <span class="tag">低卡</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- 烹饪小助手区域已移除 -->
             
             <!-- 按钮区域 -->
             <div class="buttons-section">
@@ -746,5 +553,114 @@
             <p>本页面为演示前端界面，不包含实际功能。</p>
         </div>
     </footer>
+    <script>
+        // 原材料识别 → 健康追踪数据传递逻辑
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取识别结果区域的元素
+            const dishNameElement = document.querySelector('.dish-name');
+            const nutritionValues = document.querySelectorAll('.nutrition-value');
+            
+            // 获取按钮元素
+            const addToTrackingBtn = document.querySelector('.btn-primary');
+            const addToCookingBtn = document.querySelector('.btn-secondary');
+            
+            // 如果有按钮，添加点击事件
+            if (addToTrackingBtn) {
+                addToTrackingBtn.addEventListener('click', function(e) {
+                    e.preventDefault(); // 阻止默认跳转
+                    
+                    try {
+                        // 提取识别结果数据
+                        const recognizedName = dishNameElement ? dishNameElement.textContent.trim() : '';
+                        
+                        // 提取重量（从第二个nutrition-value元素）
+                        let recognizedWeight = '';
+                        if (nutritionValues.length > 1) {
+                            const weightText = nutritionValues[1].textContent;
+                            // 提取数字部分
+                            const weightMatch = weightText.match(/\d+/);
+                            recognizedWeight = weightMatch ? weightMatch[0] : '';
+                        }
+                        
+                        // 提取热量（从第三个nutrition-value元素）
+                        let recognizedCaloriesPer100g = 0;
+                        if (nutritionValues.length > 2) {
+                            const caloriesText = nutritionValues[2].textContent;
+                            // 提取数字部分
+                            const caloriesMatch = caloriesText.match(/\d+/);
+                            recognizedCaloriesPer100g = caloriesMatch ? parseInt(caloriesMatch[0]) : 0;
+                        }
+                        
+                        // 计算总热量
+                        const totalCalories = recognizedWeight && recognizedCaloriesPer100g 
+                            ? Math.round(parseInt(recognizedWeight) * recognizedCaloriesPer100g / 100)
+                            : 0;
+                        
+                        // 构建要存储的数据对象
+                        const foodData = {
+                            name: recognizedName,
+                            weight: recognizedWeight,
+                            calories: totalCalories
+                        };
+                        
+                        // 存储到localStorage
+                        localStorage.setItem('pendingIntakeFromRecognition', JSON.stringify(foodData));
+                        
+                        // 跳转到健康追踪页面，并带上锚点
+                        window.location.href = 'health-tracking.html#log-food-modal';
+                    } catch (error) {
+                        console.error('提取识别结果时出错:', error);
+                        // 即使出错，也执行跳转，但不传递数据
+                        window.location.href = 'health-tracking.html';
+                    }
+                });
+            }
+            
+            // 原材料识别 → 烹饪助手数据传递逻辑
+            if (addToCookingBtn && addToCookingBtn.textContent.includes('添加到烹饪助手')) {
+                addToCookingBtn.addEventListener('click', function(e) {
+                    e.preventDefault(); // 阻止默认跳转
+                    
+                    try {
+                        // 提取识别到的原材料名称
+                        const recognizedName = dishNameElement ? dishNameElement.textContent.trim() : '';
+                        
+                        if (recognizedName) {
+                            // 从localStorage中获取现有的食材数组
+                            let ingredients = [];
+                            const existingIngredients = localStorage.getItem('cookingAssistantIngredients');
+                            
+                            if (existingIngredients) {
+                                try {
+                                    ingredients = JSON.parse(existingIngredients);
+                                    // 确保是数组
+                                    if (!Array.isArray(ingredients)) {
+                                        ingredients = [];
+                                    }
+                                } catch (parseError) {
+                                    console.error('解析食材数据时出错:', parseError);
+                                    ingredients = [];
+                                }
+                            }
+                            
+                            // 检查食材是否已存在，不存在则添加
+                            if (!ingredients.includes(recognizedName)) {
+                                ingredients.push(recognizedName);
+                                // 保存回localStorage
+                                localStorage.setItem('cookingAssistantIngredients', JSON.stringify(ingredients));
+                            }
+                        }
+                        
+                        // 跳转到烹饪助手页面
+                        window.location.href = 'cooking-assistant.html';
+                    } catch (error) {
+                        console.error('添加食材到烹饪助手时出错:', error);
+                        // 即使出错，也执行跳转
+                        window.location.href = 'cooking-assistant.html';
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

@@ -747,6 +747,10 @@
 
         // 在脚本顶部定义一个全局对话历史数组
         let history = [];
+        // 用于标记是否正在打字的标志
+        let isTyping = false;
+        // 存储当前打字动画的定时器ID
+        let typewriterTimer = null;
 
         // 滚动到对话底部
         function scrollToBottom() {
@@ -782,6 +786,40 @@
         // - 不提供任何医疗诊断、用药建议、具体治疗方案
         // - 如用户提问明显超出范围（疾病诊断、处方药、政治等），后端会做过滤
         // - 前端如收到空回答或错误时统一提示用户
+        
+        // 模拟打字效果的函数
+        function typeWriterEffect(element, text, callback) {
+            // 标记为正在打字
+            isTyping = true;
+            let index = 0;
+            
+            // 清除可能存在的旧定时器
+            if (typewriterTimer) {
+                clearInterval(typewriterTimer);
+            }
+            
+            // 先清空元素内容
+            element.textContent = '';
+            
+            // 开始打字效果
+            typewriterTimer = setInterval(() => {
+                if (index < text.length) {
+                    // 追加字符
+                    element.textContent += text.charAt(index);
+                    index++;
+                    // 滚动到底部
+                    scrollToBottom();
+                } else {
+                    // 打字完成，清除定时器
+                    clearInterval(typewriterTimer);
+                    isTyping = false;
+                    // 调用回调函数
+                    if (callback) {
+                        callback();
+                    }
+                }
+            }, 30); // 30ms的间隔，可调整
+        }
         
         // 调用后端API获取AI回答
         async function callNutritionAI(userText) {
@@ -833,9 +871,12 @@
                     answer = '抱歉，我目前只能提供一般性的营养和饮食科普建议，建议你就具体健康问题咨询专业医生。';
                 }
                 
-                // 更新占位气泡内容
+                // 更新占位气泡内容，但不直接显示完整回答
                 message.className = 'ai-message';
-                message.textContent = answer;
+                // 使用打字效果显示回答
+                typeWriterEffect(message, answer, () => {
+                    // 打字完成后的操作
+                });
                 
                 // 将AI回答添加到历史记录
                 history.push({ role: 'assistant', content: answer });
@@ -846,7 +887,13 @@
             } catch (error) {
                 console.error('AI调用失败:', error);
                 
-                // 更新占位气泡为错误提示
+                // 确保打字状态被重置
+                isTyping = false;
+                if (typewriterTimer) {
+                    clearInterval(typewriterTimer);
+                }
+                
+                // 更新占位气泡为错误提示（错误时不做流式显示）
                 message.className = 'ai-message error';
                 message.textContent = '抱歉，本次回答失败了，请稍后再试。';
                 
@@ -886,6 +933,12 @@
                 // 清空输入框并让光标回到输入框
                 inputElement.value = '';
                 inputElement.focus();
+                
+                // 如果正在打字，先清除旧的定时器，让上一条消息快速完成
+                if (isTyping && typewriterTimer) {
+                    clearInterval(typewriterTimer);
+                    isTyping = false;
+                }
                 
                 // 调用异步函数去请求后端
                 callNutritionAI(userText);

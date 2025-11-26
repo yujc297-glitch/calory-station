@@ -624,23 +624,23 @@
                     <h4>选择菜系</h4>
                     <div class="styled-options">
                         <div class="styled-option">
-                            <input type="radio" id="cuisine1" name="cuisine" checked />
+                            <input type="radio" id="cuisine1" name="cuisine" value="chinese" checked />
                             <label for="cuisine1">中餐</label>
                         </div>
                         <div class="styled-option">
-                            <input type="radio" id="cuisine2" name="cuisine" />
+                            <input type="radio" id="cuisine2" name="cuisine" value="western" />
                             <label for="cuisine2">西餐</label>
                         </div>
                         <div class="styled-option">
-                            <input type="radio" id="cuisine3" name="cuisine" />
+                            <input type="radio" id="cuisine3" name="cuisine" value="japanese" />
                             <label for="cuisine3">日餐</label>
                         </div>
                         <div class="styled-option">
-                            <input type="radio" id="cuisine4" name="cuisine" />
+                            <input type="radio" id="cuisine4" name="cuisine" value="korean" />
                             <label for="cuisine4">韩餐</label>
                         </div>
                         <div class="styled-option">
-                            <input type="radio" id="cuisine5" name="cuisine" />
+                            <input type="radio" id="cuisine5" name="cuisine" value="southeast_asian" />
                             <label for="cuisine5">东南亚</label>
                         </div>
                     </div>
@@ -652,67 +652,36 @@
                     <h4>选择口味偏好</h4>
                     <div class="styled-options">
                         <div class="styled-option">
-                            <input type="checkbox" id="taste1" checked />
+                            <input type="checkbox" id="taste1" value="light" checked />
                             <label for="taste1">清淡</label>
                         </div>
                         <div class="styled-option">
-                            <input type="checkbox" id="taste2" />
+                            <input type="checkbox" id="taste2" value="spicy" />
                             <label for="taste2">麻辣</label>
                         </div>
                         <div class="styled-option">
-                            <input type="checkbox" id="taste3" />
+                            <input type="checkbox" id="taste3" value="less_oil" />
                             <label for="taste3">少油</label>
                         </div>
                         <div class="styled-option">
-                            <input type="checkbox" id="taste4" />
+                            <input type="checkbox" id="taste4" value="keep_nutrition" />
                             <label for="taste4">保留营养</label>
                         </div>
                         <div class="styled-option">
-                            <input type="checkbox" id="taste5" />
+                            <input type="checkbox" id="taste5" value="low_salt" />
                             <label for="taste5">低盐</label>
                         </div>
                     </div>
                 </div>
                 
-                <button class="btn-primary">生成做菜方案</button>
+                <button id="generate-recipe-btn" class="btn-primary">生成做菜方案</button>
             </section>
             
             <!-- AI菜谱建议展示区 -->
             <section class="recipes-section">
                 <h2 class="section-title">推荐菜谱</h2>
                 <div class="recipes-grid">
-                    <div class="recipe-card">
-                        <h3>清蒸鸡胸肉配西兰花</h3>
-                        <div class="recipe-meta">
-                            <span>难度：简单</span>
-                            <span>预计用时：20分钟</span>
-                        </div>
-                        <p class="recipe-description">高蛋白低脂肪的健康选择，保留食材原味，烹饪简单快捷。鸡胸肉嫩滑多汁，西兰花清脆爽口。</p>
-                    </div>
-                    <div class="recipe-card">
-                        <h3>番茄鸡蛋意面</h3>
-                        <div class="recipe-meta">
-                            <span>难度：简单</span>
-                            <span>预计用时：15分钟</span>
-                        </div>
-                        <p class="recipe-description">酸甜可口的经典组合，适合工作日晚餐。番茄富含维生素，鸡蛋提供优质蛋白，意面提供碳水化合物。</p>
-                    </div>
-                    <div class="recipe-card">
-                        <h3>鸡胸肉西兰花沙拉</h3>
-                        <div class="recipe-meta">
-                            <span>难度：简单</span>
-                            <span>预计用时：15分钟</span>
-                        </div>
-                        <p class="recipe-description">清爽健康的沙拉选择，可作为午餐或轻食。搭配橄榄油和柠檬汁调味，营养均衡。</p>
-                    </div>
-                    <div class="recipe-card">
-                        <h3>番茄鸡胸肉炖菜</h3>
-                        <div class="recipe-meta">
-                            <span>难度：中等</span>
-                            <span>预计用时：25分钟</span>
-                        </div>
-                        <p class="recipe-description">浓郁的番茄汤底，搭配嫩滑的鸡胸肉和新鲜蔬菜，营养丰富，适合秋冬季节食用。</p>
-                    </div>
+                    <!-- 空容器，等待JavaScript动态插入内容 -->
                 </div>
             </section>
             
@@ -816,6 +785,230 @@
         // 初始化
         loadIngredients();
         updateAddButton();
+        
+        // 安全提示注释
+        /*
+        * 注意事项：
+        * 1. AI生成的菜谱仅为参考示例
+        * 2. 实际烹饪时请注意食物过敏、个人疾病等情况，需要专业人士指导
+        * 3. 不作为医疗或营养治疗处方
+        */
+        
+        // 为烹饪助手创建独立的历史数组
+        let cookingHistory = [];
+        
+        // 获取生成按钮元素
+        const generateRecipeBtn = document.getElementById('generate-recipe-btn');
+        const recipesGrid = document.querySelector('.recipes-grid');
+        
+        // 生成菜谱的异步函数
+        async function generateRecipes(ingredients, cuisine, tastes) {
+            // 组织prompt
+            const prompt = `请根据以下条件设计 3 道菜品：
+- 可用食材：${ingredients.join('、')}
+- 目标菜系：${cuisine}
+- 口味偏好：${tastes.join('、')}
+要求每道菜输出：菜名、主要食材、详细做法步骤（3-6 步）、预计热量（大致 kcal）、营养特点。
+请使用 JSON 格式返回，结构为：
+{
+  "recipes": [
+    {
+      "name": "",
+      "summary": "",
+      "ingredients": ["", ""],
+      "steps": ["", ""],
+      "estimated_calories": 0
+    }
+  ]
+}`;
+            
+            try {
+                // 调用后端API
+                const response = await fetch('/api/nutrition-ai', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: prompt,
+                        history: cookingHistory
+                    })
+                });
+                
+                // 检查响应状态
+                if (!response.ok) {
+                    throw new Error(`API返回错误: ${response.status}`);
+                }
+                
+                // 解析JSON响应
+                const data = await response.json();
+                
+                // 更新历史记录
+                cookingHistory.push({ role: 'user', content: prompt });
+                cookingHistory.push({ role: 'assistant', content: data.answer });
+                
+                // 限制历史记录长度
+                if (cookingHistory.length > 10) {
+                    cookingHistory = cookingHistory.slice(-10);
+                }
+                
+                return data.answer;
+            } catch (error) {
+                console.error('生成菜谱失败:', error);
+                throw error;
+            }
+        }
+        
+        // 渲染菜谱卡片
+        function renderRecipes(recipes) {
+            // 清空现有内容
+            recipesGrid.innerHTML = '';
+            
+            // 检查是否有菜谱
+            if (!recipes || recipes.length === 0) {
+                showErrorMessage('抱歉，未能生成任何菜谱，请尝试调整食材和偏好。');
+                return;
+            }
+            
+            // 遍历创建卡片
+            recipes.forEach(recipe => {
+                // 创建卡片容器
+                const card = document.createElement('div');
+                card.className = 'recipe-card';
+                
+                // 创建卡片内容
+                let cardContent = '';
+                
+                // 添加菜名
+                if (recipe.name) {
+                    cardContent += `<h3 class="recipe-title">${recipe.name}</h3>`;
+                }
+                
+                // 添加元信息
+                cardContent += '<div class="recipe-meta">';
+                if (recipe.estimated_calories) {
+                    cardContent += `<span>预计热量：约${recipe.estimated_calories} kcal/份</span>`;
+                }
+                cardContent += '</div>';
+                
+                // 添加简短描述
+                if (recipe.summary) {
+                    cardContent += `<p class="recipe-description">${recipe.summary}</p>`;
+                }
+                
+                // 添加主要食材
+                if (recipe.ingredients && recipe.ingredients.length > 0) {
+                    cardContent += '<div class="recipe-ingredients">';
+                    cardContent += '<h4>主要食材：</h4>';
+                    cardContent += `<p>${recipe.ingredients.join('、')}</p>`;
+                    cardContent += '</div>';
+                }
+                
+                // 添加步骤
+                if (recipe.steps && recipe.steps.length > 0) {
+                    cardContent += '<div class="recipe-steps">';
+                    cardContent += '<h4>烹饪步骤：</h4>';
+                    cardContent += '<ol>';
+                    recipe.steps.forEach(step => {
+                        cardContent += `<li>${step}</li>`;
+                    });
+                    cardContent += '</ol>';
+                    cardContent += '</div>';
+                }
+                
+                // 设置卡片内容
+                card.innerHTML = cardContent;
+                
+                // 添加到网格中
+                recipesGrid.appendChild(card);
+            });
+        }
+        
+        // 显示错误信息
+        function showErrorMessage(message) {
+            // 清空现有内容
+            recipesGrid.innerHTML = '';
+            
+            // 创建错误提示元素
+            const errorElement = document.createElement('div');
+            errorElement.className = 'error-message';
+            errorElement.style.cssText = `
+                background-color: #ffebee;
+                color: #c62828;
+                padding: 20px;
+                border-radius: 8px;
+                text-align: center;
+                font-size: 16px;
+                margin-top: 20px;
+                width: 100%;
+            `;
+            errorElement.textContent = message;
+            
+            // 添加到网格中
+            recipesGrid.appendChild(errorElement);
+        }
+        
+        // 绑定生成按钮点击事件
+        if (generateRecipeBtn && recipesGrid) {
+            generateRecipeBtn.addEventListener('click', async function() {
+                // 校验食材是否至少有一个
+                if (ingredients.length === 0) {
+                    alert('请先添加至少一种食材');
+                    return;
+                }
+                
+                // 读取选中的菜系
+                const selectedCuisine = document.querySelector('input[name="cuisine"]:checked');
+                if (!selectedCuisine) {
+                    alert('请选择一个菜系');
+                    return;
+                }
+                const cuisineValue = selectedCuisine.value;
+                
+                // 读取选中的口味偏好
+                const selectedTastes = Array.from(
+                    document.querySelectorAll('input[type="checkbox"]:checked')
+                ).map(checkbox => checkbox.value);
+                
+                // 显示加载状态
+                generateRecipeBtn.disabled = true;
+                generateRecipeBtn.textContent = '生成中...';
+                
+                try {
+                    // 调用生成函数
+                    const aiResponse = await generateRecipes(ingredients, cuisineValue, selectedTastes);
+                    
+                    // 检查结果是否为空
+                    if (!aiResponse || aiResponse.trim() === '') {
+                        showErrorMessage('抱歉，本次未能生成菜谱，请稍后重试或调整食材和偏好。');
+                        return;
+                    }
+                    
+                    // 尝试解析JSON
+                    try {
+                        const result = JSON.parse(aiResponse);
+                        if (result.recipes && Array.isArray(result.recipes)) {
+                            renderRecipes(result.recipes);
+                        } else {
+                            // JSON格式不对，显示原始文本作为回退
+                            showErrorMessage('当前为文本格式，未能解析为结构化菜谱：' + aiResponse.substring(0, 200) + '...');
+                            console.log('原始AI响应:', aiResponse);
+                        }
+                    } catch (parseError) {
+                        // 解析失败，显示原始文本作为回退
+                        showErrorMessage('当前为文本格式，未能解析为结构化菜谱：' + aiResponse.substring(0, 200) + '...');
+                        console.log('原始AI响应:', aiResponse);
+                    }
+                } catch (error) {
+                    console.error('错误:', error);
+                    showErrorMessage('抱歉，本次未能生成菜谱，请稍后重试或调整食材和偏好。');
+                } finally {
+                    // 恢复按钮状态
+                    generateRecipeBtn.disabled = false;
+                    generateRecipeBtn.textContent = '生成做菜方案';
+                }
+            });
+        }
     </script>
 </body>
 </html>

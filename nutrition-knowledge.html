@@ -242,15 +242,15 @@
                 </div>
                 
                 <!-- 对话容器 -->
-                <div class="ai-chat-container" id="ai-chat-container">
-                    <!-- 欢迎消息 -->
-                    <div class="ai-message-wrapper">
-                        <div class="ai-message">
-                            <p>您好！我是AI营养助手。请问有什么关于营养、健康饮食或食物成分的问题我可以帮助您解答？</p>
-                        </div>
+                <div class="ai-chat-container" id="ai-chat-messages">
+                <!-- 欢迎消息 -->
+                <div class="ai-message-wrapper">
+                    <div class="ai-message">
+                        <p>您好！我是AI营养助手。请问有什么关于营养、健康饮食或食物成分的问题我可以帮助您解答？</p>
                     </div>
-                    <!-- 对话将在这里动态添加 -->
                 </div>
+                <!-- 对话将在这里动态添加 -->
+            </div>
                 
                 <!-- 输入区 -->
                 <div class="ai-input-container">
@@ -350,6 +350,20 @@
                 max-width: 80%;
                 word-wrap: break-word;
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Loading 状态样式 */
+            .ai-message.loading {
+                color: #666;
+                font-style: italic;
+                background-color: #f8f8f8;
+            }
+            
+            /* 错误状态样式 */
+            .ai-message .message-bubble.error {
+                background-color: #ffebee;
+                color: #c62828;
+                border-left: 3px solid #c62828;
             }
             
             /* 输入区样式 */
@@ -730,61 +744,123 @@
         // 3. 不提供任何违法违规内容
         // 4. 不输出敏感个人建议（如诊断疾病、药物指示、具体治疗方案）
         // 5. 不评论政治、不涉及隐私、不输出歧视性内容
-        // 6. 如果用户提问超出营养科普范围，应回答："抱歉，我只能回答与营养和健康饮食相关的问题。"
 
-        // 预留的 Gemini API 调用函数
-        async function callGeminiAPI(userMessage) {
-            // 未来你将实现：把 userMessage 发送给 Gemini，并返回真实回答
-            // 当前先留空作为占位
-            return "（AI 将在接入 Gemini API 后给出营养科普回答）";
-        }
-
-        // 模拟 AI 回复的函数
-        function fetchAIResponse(message) {
-            // 使用 setTimeout 模拟网络延迟和 AI 处理时间
-            setTimeout(() => {
-                // 获取对话容器元素
-                const messagesContainer = document.getElementById('ai-messages-container');
-                
-                // 确保元素存在
-                if (!messagesContainer) {
-                    console.log('消息容器元素未找到');
-                    return;
-                }
-                
-                // 生成 AI 回复消息
-                const aiResponse = "（AI 将在接入 Gemini API 后给出营养科普回答）";
-                
-                // 创建 AI 消息元素
-                const aiMessageElement = document.createElement('div');
-                aiMessageElement.className = 'message ai-message';
-                aiMessageElement.innerHTML = `
-                    <div class="message-bubble">
-                        ${aiResponse}
-                    </div>
-                `;
-                
-                // 将 AI 消息添加到对话容器
-                messagesContainer.appendChild(aiMessageElement);
-                
-                // 滚动到最新消息
-                scrollToBottom();
-            }, 800); // 800ms 的延迟，模拟思考时间
-        }
+        // 在脚本顶部定义一个全局对话历史数组
+        let history = [];
 
         // 滚动到对话底部
         function scrollToBottom() {
-            const messagesContainer = document.getElementById('ai-messages-container');
+            const messagesContainer = document.getElementById('ai-chat-messages');
             if (messagesContainer) {
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
             }
         }
 
+        // 封装插入用户消息的函数
+        function appendUserMessage(text) {
+            const messagesContainer = document.getElementById('ai-chat-messages');
+            if (!messagesContainer) return;
+            
+            // 创建用户消息包装器和内容元素
+            const wrapper = document.createElement('div');
+            wrapper.className = 'user-message-wrapper';
+            
+            const message = document.createElement('div');
+            message.className = 'user-message';
+            message.textContent = text;
+            
+            // 组装并添加到容器
+            wrapper.appendChild(message);
+            messagesContainer.appendChild(wrapper);
+            
+            // 滚动到底部
+            scrollToBottom();
+        }
+
+        // 安全提示与回答范围限制注释：
+        // - 仅用于营养与健康饮食科普
+        // - 不提供任何医疗诊断、用药建议、具体治疗方案
+        // - 如用户提问明显超出范围（疾病诊断、处方药、政治等），后端会做过滤
+        // - 前端如收到空回答或错误时统一提示用户
+        
+        // 调用后端API获取AI回答
+        async function callNutritionAI(userText) {
+            const messagesContainer = document.getElementById('ai-chat-messages');
+            if (!messagesContainer) return;
+            
+            // 创建 AI 正在思考的占位气泡
+            const wrapper = document.createElement('div');
+            wrapper.className = 'ai-message-wrapper';
+            
+            const message = document.createElement('div');
+            message.className = 'ai-message loading';
+            message.textContent = 'AI 正在思考...';
+            
+            // 组装并添加到容器
+            wrapper.appendChild(message);
+            messagesContainer.appendChild(wrapper);
+            
+            // 滚动到底部
+            scrollToBottom();
+            
+            try {
+                // 调用后端API
+                const response = await fetch('/api/nutrition-ai', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: userText,
+                        history: history
+                    })
+                });
+                
+                // 检查响应状态
+                if (!response.ok) {
+                    throw new Error('服务器响应错误');
+                }
+                
+                // 解析JSON响应
+                const data = await response.json();
+                
+                // 处理回答
+                let answer = data.answer || '';
+                answer = answer.trim();
+                
+                // 当回答为空或只含空白时的处理
+                if (!answer) {
+                    answer = '抱歉，我目前只能提供一般性的营养和饮食科普建议，建议你就具体健康问题咨询专业医生。';
+                }
+                
+                // 更新占位气泡内容
+                message.className = 'ai-message';
+                message.textContent = answer;
+                
+                // 将AI回答添加到历史记录
+                history.push({ role: 'assistant', content: answer });
+                
+                // 再次滚动到底部
+                scrollToBottom();
+                
+            } catch (error) {
+                console.error('AI调用失败:', error);
+                
+                // 更新占位气泡为错误提示
+                message.className = 'ai-message error';
+                message.textContent = '抱歉，本次回答失败了，请稍后再试。';
+                
+                // 滚动到底部
+                scrollToBottom();
+            }
+        }
+
         // 初始化事件监听
         document.addEventListener('DOMContentLoaded', function() {
+            // 绑定关键 DOM 元素
             const inputElement = document.getElementById('ai-query-input');
             const sendButton = document.getElementById('ai-query-send');
-            const messagesContainer = document.getElementById('ai-messages-container');
+            const messagesContainer = document.getElementById('ai-chat-messages');
             
             // 确保所有必要元素都存在
             if (!inputElement || !sendButton || !messagesContainer) {
@@ -794,41 +870,38 @@
             
             // 发送消息函数
             function sendMessage() {
-                const message = inputElement.value.trim();
+                const userText = inputElement.value.trim();
                 
-                // 如果消息不为空，则发送
-                if (message) {
-                    // 创建用户消息元素
-                    const userMessageElement = document.createElement('div');
-                    userMessageElement.className = 'message user-message';
-                    userMessageElement.innerHTML = `
-                        <div class="message-bubble">
-                            ${message}
-                        </div>
-                    `;
-                    
-                    // 将用户消息添加到对话容器
-                    messagesContainer.appendChild(userMessageElement);
-                    
-                    // 清空输入框
-                    inputElement.value = '';
-                    
-                    // 滚动到最新消息
-                    scrollToBottom();
-                    
-                    // 调用模拟的 AI 回复函数
-                    fetchAIResponse(message);
+                // 如果消息为空，直接返回
+                if (!userText) {
+                    return;
                 }
+                
+                // 立即在对话区追加一条"用户气泡"显示这条消息
+                appendUserMessage(userText);
+                
+                // 将用户消息添加到历史数组
+                history.push({ role: 'user', content: userText });
+                
+                // 清空输入框并让光标回到输入框
+                inputElement.value = '';
+                inputElement.focus();
+                
+                // 调用异步函数去请求后端
+                callNutritionAI(userText);
             }
             
             // 监听发送按钮点击事件
             sendButton.addEventListener('click', sendMessage);
             
             // 监听输入框回车事件
-            inputElement.addEventListener('keypress', function(event) {
-                if (event.key === 'Enter') {
+            inputElement.addEventListener('keydown', function(event) {
+                // 用户按 Enter（不带 Shift）时阻止默认换行并调用 sendMessage()
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault(); // 阻止默认的换行行为
                     sendMessage();
                 }
+                // 带 Shift+Enter 可以换行（浏览器默认行为）
             });
             
             // 初始化时滚动到底部

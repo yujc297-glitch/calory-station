@@ -562,7 +562,14 @@
                 max-width: 100%;
             }
         }
-    </style>
+    .recipe-note {
+            font-size: 14px;
+            color: #666;
+            margin: 5px 0 20px 0;
+            text-align: center;
+            font-style: italic;
+        }
+        </style>
 </head>
 <body>
     <!-- 导航栏 -->
@@ -643,6 +650,30 @@
                             <input type="radio" id="cuisine5" name="cuisine" value="southeast_asian" />
                             <label for="cuisine5">东南亚</label>
                         </div>
+                        <div class="styled-option">
+                            <input type="radio" id="cuisine6" name="cuisine" value="sichuan" />
+                            <label for="cuisine6">川菜</label>
+                        </div>
+                        <div class="styled-option">
+                            <input type="radio" id="cuisine7" name="cuisine" value="cantonese" />
+                            <label for="cuisine7">粤菜</label>
+                        </div>
+                        <div class="styled-option">
+                            <input type="radio" id="cuisine8" name="cuisine" value="shandong" />
+                            <label for="cuisine8">鲁菜</label>
+                        </div>
+                        <div class="styled-option">
+                            <input type="radio" id="cuisine9" name="cuisine" value="hunan" />
+                            <label for="cuisine9">湘菜</label>
+                        </div>
+                        <div class="styled-option">
+                            <input type="radio" id="cuisine10" name="cuisine" value="quick_homemade" />
+                            <label for="cuisine10">家常快手</label>
+                        </div>
+                        <div class="styled-option">
+                            <input type="radio" id="cuisine11" name="cuisine" value="low_fat_fitness" />
+                            <label for="cuisine11">低脂健身</label>
+                        </div>
                     </div>
                 </div>
                 
@@ -671,6 +702,22 @@
                             <input type="checkbox" id="taste5" value="low_salt" />
                             <label for="taste5">低盐</label>
                         </div>
+                        <div class="styled-option">
+                            <input type="checkbox" id="taste6" value="sour_spicy" />
+                            <label for="taste6">酸辣</label>
+                        </div>
+                        <div class="styled-option">
+                            <input type="checkbox" id="taste7" value="sweet" />
+                            <label for="taste7">甜口</label>
+                        </div>
+                        <div class="styled-option">
+                            <input type="checkbox" id="taste8" value="rich_oil_salt" />
+                            <label for="taste8">重油重盐</label>
+                        </div>
+                        <div class="styled-option">
+                            <input type="checkbox" id="taste9" value="low_sugar" />
+                            <label for="taste9">低糖</label>
+                        </div>
                     </div>
                 </div>
                 
@@ -680,6 +727,7 @@
             <!-- AI菜谱建议展示区 -->
             <section class="recipes-section">
                 <h2 class="section-title">推荐菜谱</h2>
+                <p class="recipe-note">菜谱将在这里生成，由AI智能推荐</p>
                 <div class="recipes-grid">
                     <!-- 空容器，等待JavaScript动态插入内容 -->
                 </div>
@@ -787,7 +835,7 @@
         updateAddButton();
         
         // 安全提示注释
-        /*
+        /* 安全提示注释
         * 注意事项：
         * 1. AI生成的菜谱仅为参考示例
         * 2. 实际烹饪时请注意食物过敏、个人疾病等情况，需要专业人士指导
@@ -829,23 +877,24 @@
 
         // 生成菜谱的异步函数
         async function generateRecipes(ingredients, cuisine, tastes) {
-            // 组织prompt，要求只返回JSON，不包含解释性文字和Markdown代码块，最多4个菜谱
+            // 组织prompt，要求只返回JSON，不包含解释性文字和Markdown代码块，返回6个菜谱
             const prompt = `请根据以下条件设计菜品：
 - 可用食材：${ingredients.join('、')}
 - 目标菜系：${cuisine}
 - 口味偏好：${tastes.join('、')}
 
 请注意：
-1. 只返回JSON格式，不要前后任何解释性文字，不要使用Markdown代码块
-2. 返回格式固定为：
+1. 请确保生成的每一道菜谱都必须实际使用用户提供的所有原材料（${ingredients.join('、')}），不能遗漏，也不要引入用户未提供的主要食材。可以额外少量添加调味品（盐、油、葱姜蒜等）。
+2. 只返回JSON格式，不要前后任何解释性文字，不要使用Markdown代码块
+3. 返回格式固定为：
 {
   "recipes": [
     { "name": "...", "summary": "...", "ingredients": [...], "steps": [...], "estimated_calories": 0 },
     ...
   ]
 }
-3. recipes数组长度为4，如果条件有限可以少于4，但最多不要超过4
-4. 请使用中文输出菜名、摘要、步骤
+4. recipes数组长度为6，如确实无法凑够可以少于6，但默认按6道菜生成
+5. 请使用中文输出菜名、摘要、步骤
 
 要求每道菜包含：菜名、简短描述、主要食材列表、详细做法步骤（3-6步）、预计热量（大致kcal）。`;
             
@@ -897,8 +946,11 @@
                 return;
             }
             
+            // 限制最多显示6个菜谱
+            const recipesToShow = recipes.slice(0, 6);
+            
             // 遍历创建卡片
-            recipes.forEach(recipe => {
+            recipesToShow.forEach(recipe => {
                 // 创建卡片容器
                 const card = document.createElement('div');
                 card.className = 'recipe-card';
@@ -943,13 +995,40 @@
                     cardContent += '</div>';
                 }
                 
+                // 添加写入健康追踪按钮
+                cardContent += '<div class="recipe-actions">';
+                cardContent += `<button class="btn-write-health" data-name="${recipe.name}" data-calories="${recipe.estimated_calories || 0}">写入健康追踪</button>`;
+                cardContent += '</div>';
+                
                 // 设置卡片内容
                 card.innerHTML = cardContent;
                 
-                // 添加到网格中
+                // 将卡片添加到网格中
                 recipesGrid.appendChild(card);
             });
         }
+        
+        // 为推荐菜谱容器添加事件委托，监听写入健康追踪按钮点击
+        recipesGrid.addEventListener('click', function(event) {
+            if (event.target.classList.contains('btn-write-health')) {
+                const button = event.target;
+                const recipeName = button.getAttribute('data-name');
+                const recipeCalories = parseInt(button.getAttribute('data-calories'));
+                
+                // 将信息写入localStorage
+                const pendingData = {
+                    "type": "recipe",
+                    "name": recipeName,
+                    "calories": recipeCalories,
+                    "note": "由烹饪助手生成的菜谱"
+                };
+                
+                localStorage.setItem('pendingIntakeFromCooking', JSON.stringify(pendingData));
+                
+                // 跳转到健康追踪页面的记录食物弹窗
+                window.location.href = 'health-tracking.html#log-food-modal';
+            }
+        });
         
         // 显示错误信息
         function showErrorMessage(message) {

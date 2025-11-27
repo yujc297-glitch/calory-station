@@ -534,6 +534,22 @@
                         富含维生素 C、膳食纤维和多种微量元素
                     </div>
                     
+                    <!-- 调试显示区 -->
+                    <div class="ble-debug-panel" style="margin-top: 16px; font-size: 12px; color: #666;">
+                      <div style="margin-bottom: 4px;">调试：原始设备数据（临时）</div>
+                      <pre id="ble-debug-raw" style="
+                          max-height: 120px;
+                          overflow: auto;
+                          background: #f7f7f7;
+                          border-radius: 4px;
+                          padding: 8px;
+                          font-family: Menlo, Consolas, monospace;
+                          font-size: 11px;
+                          white-space: pre-wrap;
+                          word-break: break-all;
+                      "></pre>
+                    </div>
+                    
                     <!-- 说明："添加到烹饪助手"为静态跳转示意，不具备真实食材传递功能 -->
                     <div class="recognition-actions">
                         <a class="btn-primary" href="health-tracking.html">添加至健康追踪</a>
@@ -565,7 +581,7 @@
     <footer class="footer">
         <div class="container">
             <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
-            <p>本页面为演示前端界面，不包含实际功能。</p>
+
         </div>
     </footer>
     <script>
@@ -830,17 +846,26 @@
  // 用硬件数据更新右侧识别结果
  function updateRecognitionResultFromData(data) {
    if (!data) return;
- 
+
    const arr = Array.isArray(data.array) ? data.array : [];
    const modeValue = getMode(arr);
- 
-   if (materialNameEl && modeValue !== null && modeValue !== undefined) {
-     // 目前先直接显示众数数字；之后可根据映射表把数字转成“西兰花/鸡蛋”等名字
-     materialNameEl.textContent = String(modeValue);
-   }
- 
-   if (materialWeightEl && typeof data.float_value === 'number') {
-     materialWeightEl.textContent = data.float_value.toFixed(1);
+
+   if (modeValue !== null && modeValue !== undefined && Number(modeValue) >= 5) {
+     // 识别成功：显示众数和重量
+     if (materialNameEl) {
+       materialNameEl.textContent = String(modeValue);
+     }
+     if (materialWeightEl && typeof data.float_value === 'number') {
+       materialWeightEl.textContent = data.float_value.toFixed(1);
+     }
+   } else {
+     // 识别失败：提示失败并清空重量
+     if (materialNameEl) {
+       materialNameEl.textContent = '识别失败';
+     }
+     if (materialWeightEl) {
+       materialWeightEl.textContent = '--';
+     }
    }
  }
  
@@ -849,10 +874,17 @@
    const value = event.target.value;
    const decoder = new TextDecoder('utf-8');
    const jsonData = decoder.decode(value);
- 
+
    try {
      const data = JSON.parse(jsonData);
      console.log('[BLE] received data:', data);
+     
+     // 写入调试面板
+     const debugEl = document.getElementById('ble-debug-raw');
+     if (debugEl) {
+       debugEl.textContent = jsonData;
+     }
+     
      updateRecognitionResultFromData(data);
    } catch (err) {
      console.error('[BLE] parse JSON error:', err, jsonData);

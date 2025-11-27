@@ -40,7 +40,7 @@ export default async function handler(req, res) {
     const input = String(message).slice(0, 2000);
 
     // 读取API密钥
-    const apiKey = process.env.DEEPSEEK_API_KEY1;
+    const apiKey = process.env.DEEPSEEK_API_KEY2;
     if (!apiKey) {
       return res.status(500).json({ error: 'NO_API_KEY' });
     }

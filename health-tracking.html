@@ -251,16 +251,16 @@
             top: 50%;
             left: 10px;
             transform: translateY(-50%);
-            color: white;
+            color: black;
             font-weight: bold;
             font-size: 12px;
             z-index: 2;
         }
         
-        /* 维生素进度条文字用深色 */
-        .nutrition-fill.vitamin .progress-text {
+        /* 所有进度条文字都使用黑色 */
+        /* .nutrition-fill.vitamin .progress-text {
             color: #333;
-        }
+        } */
         
         /* 超出100%的样式 */
         .nutrition-fill.over-100 {
@@ -766,6 +766,8 @@
                             <th>蛋白质（g）</th>
                             <th>脂肪（g）</th>
                             <th>膳食纤维（g）</th>
+                            <th>矿物质（mg）</th>
+                            <th>维生素（mg）</th>
                             <th>时间</th>
                             <th>备注</th>
                         </tr>
@@ -1203,7 +1205,8 @@
                                 <input id="food-protein" type="number" placeholder="蛋白质(g)" min="0">
                                 <input id="food-fat" type="number" placeholder="脂肪(g)" min="0">
                                 <input id="food-fiber" type="number" placeholder="膳食纤维(g)" min="0">
-                                <input id="food-mineral" type="number" placeholder="矿物质(%)" min="0" max="100">
+                                <input id="food-mineral" type="number" placeholder="矿物质(mg)" min="0">
+                                <input id="food-vitamin" type="number" placeholder="维生素(mg)" min="0">
                             </div>
                         </div>
                     </div>
@@ -1667,6 +1670,8 @@
                 record.protein,
                 record.fat,
                 record.fiber,
+                record.mineral,
+                record.vitamin,
                 record.time,
                 record.note
             ];

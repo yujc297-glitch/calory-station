@@ -73,171 +73,97 @@
             background-color: rgba(46, 139, 87, 0.1);
         }
         
-        /* 区块样式 */
-        .section {
-            padding: 80px 0;
+        /* 主内容区域 */
+        .main-content {
+            padding-top: 120px;
+            padding-bottom: 80px;
+            min-height: 100vh;
         }
         
-        .section-title {
-            font-size: 36px;
-            color: #2e8b57;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-        
-        .section-subtitle {
-            font-size: 18px;
-            color: #666;
+        /* 顶部说明/步骤条 */
+        .intro-section {
             margin-bottom: 40px;
             text-align: center;
         }
         
-        /* 主内容区域 */
-        .main-content {
-            padding-top: 120px;
-            min-height: 100vh;
+        .page-title {
+            font-size: 32px;
+            color: #2e8b57;
+            margin-bottom: 15px;
+            font-weight: bold;
         }
         
-        /* 标签样式 */
-        .tags-section {
-            text-align: center;
-            margin-bottom: 60px;
+        .page-description {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
-        .tags-container {
+        /* 流程条 */
+        .process-steps {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
         }
         
-        .tag {
-            background-color: white;
-            color: #2e8b57;
-            padding: 10px 25px;
-            border-radius: 30px;
-            border: 1px solid #2e8b57;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
+        .step-item {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            flex: 1;
+            max-width: 250px;
         }
         
-        .tag:hover,
-        .tag.active {
-            background-color: #2e8b57;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
-        }
-        
-        /* 菜谱分组样式 */
-        .recipe-category {
-            margin-bottom: 60px;
-        }
-        
-        .category-title {
-            font-size: 28px;
-            color: #333;
-            margin-bottom: 25px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e8f5e8;
-        }
-        
-        .recipe-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-        }
-        
-        .recipe-card {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            padding: 25px;
-            transition: all 0.3s ease;
-        }
-        
-        .recipe-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .recipe-card h3 {
-            color: #2e8b57;
-            margin-bottom: 15px;
-            font-size: 22px;
-        }
-        
-        .recipe-info {
-            margin-bottom: 15px;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .recipe-info strong {
-            color: #333;
-        }
-        
-        .recipe-description {
-            color: #666;
-            margin-bottom: 15px;
-            font-size: 15px;
-            line-height: 1.6;
-        }
-        
-        .recipe-ingredients {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-        }
-        
-        .recipe-ingredients h4 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-        
-        .recipe-ingredients ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .recipe-ingredients li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 5px;
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .recipe-ingredients li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: #2e8b57;
-        }
-        
-        /* 提示样式 */
-        .tip-box {
+        .step-icon {
+            width: 60px;
+            height: 60px;
             background-color: #e8f5e8;
-            border-left: 4px solid #2e8b57;
-            padding: 20px;
-            margin-top: 50px;
-            border-radius: 5px;
-            text-align: center;
-            color: #555;
+            color: #2e8b57;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            position: relative;
         }
         
-        /* 新的布局样式 */
+        .step-icon::after {
+            content: '';
+            position: absolute;
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 2px;
+            background-color: #ddd;
+        }
+        
+        .step-item:last-child .step-icon::after {
+            display: none;
+        }
+        
+        .step-text {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+        
+        /* 主要布局容器 */
         .recipe-planner-container {
             display: grid;
-            grid-template-columns: 350px 1fr;
+            grid-template-columns: 380px 1fr;
             gap: 30px;
-            margin-top: 40px;
+            margin-top: 30px;
         }
         
+        /* 左侧个人信息卡片 */
         .input-card {
             background-color: white;
             border-radius: 10px;
@@ -248,13 +174,6 @@
             top: 140px;
         }
         
-        .result-container {
-            background-color: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-        }
-        
         .card-title {
             font-size: 20px;
             color: #2e8b57;
@@ -263,13 +182,25 @@
             border-bottom: 2px solid #e8f5e8;
         }
         
+        /* 表单样式 */
+        .form-section {
+            margin-bottom: 25px;
+        }
+        
+        .form-section h4 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
         .form-group {
             margin-bottom: 20px;
         }
         
         .form-row {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             margin-bottom: 20px;
         }
@@ -313,19 +244,16 @@
             align-items: center;
             font-weight: normal;
             cursor: pointer;
+            flex: 1 0 45%;
         }
         
         .radio-group input[type="radio"],
         .checkbox-group input[type="checkbox"] {
-            margin-right: 5px;
+            margin-right: 8px;
             width: auto;
         }
         
-        .action-section {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
+        /* 按钮样式 */
         .btn-primary {
             background-color: #2e8b57;
             color: white;
@@ -336,6 +264,8 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
         }
         
         .btn-primary:hover {
@@ -348,22 +278,48 @@
             transform: translateY(0);
         }
         
+        /* 右侧结果卡片 */
+        .result-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .result-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .result-header p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        
+        .result-header .btn-primary {
+            display: inline-block;
+            width: auto;
+            margin-top: 0;
+        }
+        
         /* 加载指示器 */
         .loading-indicator {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
+            padding: 60px 20px;
+            text-align: center;
         }
         
         .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #2e8b57;
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #2e8b57;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         @keyframes spin {
@@ -371,53 +327,59 @@
             100% { transform: rotate(360deg); }
         }
         
+        .loading-text {
+            color: #666;
+            font-size: 16px;
+        }
+        
         /* 概览卡片 */
         .summary-card {
             background-color: #f8f9fa;
             border-radius: 10px;
-            padding: 25px;
+            padding: 30px;
             margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
         }
         
         .summary-card h3 {
             color: #2e8b57;
             margin-bottom: 20px;
             font-size: 22px;
-        }
-        
-        .summary-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-        
-        .stat-item {
             text-align: center;
         }
         
-        .stat-value {
-            display: block;
-            font-size: 28px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
+        .summary-content {
+            text-align: center;
+            padding: 10px 0;
         }
         
-        .stat-label {
-            font-size: 14px;
+        .calorie-info {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .dietary-evaluation {
+            font-size: 16px;
             color: #666;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         /* 餐段样式 */
         .meal-section {
             margin-bottom: 40px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
         
         .meal-header {
             background-color: #2e8b57;
             color: white;
-            padding: 15px 20px;
-            border-radius: 8px 8px 0 0;
+            padding: 18px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -428,22 +390,25 @@
             font-weight: bold;
         }
         
-        .meal-calories {
-            font-size: 16px;
-            opacity: 0.9;
-        }
-        
         .meal-recipes {
             border: 1px solid #e0e0e0;
-            border-radius: 0 0 8px 8px;
-            padding: 20px;
+            border-top: none;
+            padding: 25px;
         }
         
+        /* 菜谱卡片 */
         .recipe-item {
             background-color: #f8f9fa;
             border-radius: 8px;
-            padding: 20px;
+            padding: 25px;
             margin-bottom: 20px;
+            border: 1px solid #e8f5e8;
+            transition: all 0.3s ease;
+        }
+        
+        .recipe-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
         }
         
         .recipe-item:last-child {
@@ -453,7 +418,7 @@
         .recipe-name {
             font-size: 18px;
             color: #2e8b57;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-weight: bold;
         }
         
@@ -461,38 +426,39 @@
             color: #666;
             margin-bottom: 15px;
             line-height: 1.6;
+            font-size: 15px;
         }
         
         .recipe-details h4 {
             color: #333;
             margin-bottom: 10px;
             font-size: 16px;
+            font-weight: 600;
         }
         
         .recipe-ingredients-list {
             list-style: none;
             padding-left: 0;
             margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         
         .recipe-ingredients-list li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 5px;
-            color: #666;
-        }
-        
-        .recipe-ingredients-list li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
+            background-color: #e8f5e8;
             color: #2e8b57;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 0;
         }
         
         .recipe-steps {
             counter-reset: step;
             padding-left: 0;
             list-style: none;
+            margin-bottom: 15px;
         }
         
         .recipe-steps li {
@@ -501,6 +467,7 @@
             margin-bottom: 10px;
             color: #666;
             line-height: 1.5;
+            font-size: 14px;
         }
         
         .recipe-steps li::before {
@@ -527,6 +494,15 @@
             border-top: 1px solid #ddd;
             font-size: 14px;
             color: #666;
+            font-weight: 500;
+        }
+        
+        /* 重新生成按钮 */
+        .regenerate-section {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e8f5e8;
         }
         
         /* 错误消息 */
@@ -534,32 +510,27 @@
             background-color: #ffebee;
             border: 1px solid #ffcdd2;
             border-radius: 8px;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            color: #c62828;
         }
         
-        .error-icon {
-            font-size: 32px;
-            color: #c62828;
-            margin-bottom: 10px;
+        .error-message p {
+            margin: 0;
+            font-size: 16px;
         }
         
         /* 空状态 */
         .empty-state {
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 20px;
             color: #666;
-        }
-        
-        .empty-icon {
-            font-size: 64px;
-            margin-bottom: 20px;
         }
         
         .empty-state h3 {
             color: #333;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             font-size: 22px;
         }
         
@@ -598,6 +569,82 @@
             padding: 30px 0;
             text-align: center;
             margin-top: 100px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .recipe-planner-container {
+                grid-template-columns: 350px 1fr;
+                gap: 25px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .radio-group label,
+            .checkbox-group label {
+                flex: 1 0 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .recipe-planner-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .input-card {
+                position: static;
+                margin-bottom: 30px;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .step-item {
+                max-width: 100%;
+            }
+            
+            .step-icon::after {
+                right: 50%;
+                top: 80px;
+                transform: translateX(50%) rotate(90deg);
+                width: 2px;
+                height: 30px;
+            }
+            
+            .page-title {
+                font-size: 28px;
+            }
+            
+            .meal-header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .page-title {
+                font-size: 24px;
+            }
+            
+            .input-card,
+            .result-container {
+                padding: 20px;
+            }
+            
+            .step-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
         }
         
         .footer p {
@@ -675,114 +722,148 @@
     <!-- 主内容区域 -->
     <main class="main-content">
         <div class="container">
-            <h1 class="section-title">菜谱推荐</h1>
-            <p class="section-subtitle">根据你的健康目标和口味偏好智能生成个性化菜谱</p>
+            <!-- 顶部说明/步骤条 -->
+            <div class="section-header">
+                <h1 class="section-title">个性化一天菜谱推荐</h1>
+                <p class="section-description">根据您的身体状况、健康目标和口味偏好，AI智能生成营养均衡的一日三餐计划</p>
+                
+                <!-- 三步流程条 -->
+                <div class="process-steps">
+                    <div class="step-item">
+                        <div class="step-icon">1</div>
+                        <div class="step-text">填写个人信息与目标</div>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-item">
+                        <div class="step-icon">2</div>
+                        <div class="step-text">点击生成今日菜谱</div>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step-item">
+                        <div class="step-icon">3</div>
+                        <div class="step-text">根据推荐烹饪并追踪</div>
+                    </div>
+                </div>
+            </div>
             
             <div class="recipe-planner-container">
-                <!-- 左侧输入卡片 -->
+                <!-- 左侧卡片：个人信息与目标设置 -->
                 <div class="input-card">
-                    <h3 class="card-title">个人信息与偏好</h3>
+                    <h3 class="card-title">个人信息与目标设置</h3>
                     
-                    <div class="form-group">
-                        <label>性别</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="gender" value="male" checked> 男</label>
-                            <label><input type="radio" name="gender" value="female"> 女</label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
+                    <div class="form-content">
+                        <!-- 基本信息部分 -->
                         <div class="form-group">
-                            <label>年龄（岁）</label>
-                            <input type="number" id="age" min="1" max="120" value="30">
+                            <label>性别</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="gender" value="male" checked> 男</label>
+                                <label><input type="radio" name="gender" value="female"> 女</label>
+                            </div>
                         </div>
+                        
+                        <!-- 三列布局的基本身体数据 -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>年龄（岁）</label>
+                                <input type="number" id="age" min="1" max="120" value="30">
+                            </div>
+                            <div class="form-group">
+                                <label>身高（cm）</label>
+                                <input type="number" id="height" min="50" max="250" value="170">
+                            </div>
+                            <div class="form-group">
+                                <label>体重（kg）</label>
+                                <input type="number" id="weight" min="10" max="300" value="65">
+                            </div>
+                        </div>
+                        
+                        <!-- 活动水平和目标 -->
                         <div class="form-group">
-                            <label>身高（cm）</label>
-                            <input type="number" id="height" min="50" max="250" value="170">
+                            <label>活动水平</label>
+                            <select id="activity-level">
+                                <option value="sedentary">久坐（很少运动）</option>
+                                <option value="light">轻度（每周运动1-3次）</option>
+                                <option value="moderate" selected>中度（每周运动3-5次）</option>
+                                <option value="active">高度（每周运动6-7次）</option>
+                                <option value="very-active">非常活跃（每天高强度运动）</option>
+                            </select>
                         </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>目标类型</label>
+                                <select id="goal-type">
+                                    <option value="减脂">减脂</option>
+                                    <option value="增肌">增肌</option>
+                                    <option value="维持">维持</option>
+                                    <option value="健康饮食" selected>健康饮食</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>目标总能量（kcal）</label>
+                                <input type="number" id="calorie-goal" min="500" max="5000" value="2000">
+                            </div>
+                        </div>
+                        
+                        <!-- 饮食偏好部分 -->
                         <div class="form-group">
-                            <label>体重（kg）</label>
-                            <input type="number" id="weight" min="10" max="300" value="65">
+                            <label>菜系偏好（可多选）</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="cuisine" value="中餐" checked> 中餐</label>
+                                <label><input type="checkbox" name="cuisine" value="家常菜" checked> 家常菜</label>
+                                <label><input type="checkbox" name="cuisine" value="川菜"> 川菜</label>
+                                <label><input type="checkbox" name="cuisine" value="健身餐"> 健身餐</label>
+                                <label><input type="checkbox" name="cuisine" value="素食"> 素食</label>
+                                <label><input type="checkbox" name="cuisine" value="日餐"> 日餐</label>
+                                <label><input type="checkbox" name="cuisine" value="西餐"> 西餐</label>
+                                <label><input type="checkbox" name="cuisine" value="地中海"> 地中海</label>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>活动水平</label>
-                        <select id="activity-level">
-                            <option value="sedentary">久坐（很少运动）</option>
-                            <option value="light">轻度（每周运动1-3次）</option>
-                            <option value="moderate" selected>中度（每周运动3-5次）</option>
-                            <option value="active">高度（每周运动6-7次）</option>
-                            <option value="very-active">非常活跃（每天高强度运动）</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>目标类型</label>
-                        <select id="goal-type">
-                            <option value="减脂">减脂</option>
-                            <option value="增肌">增肌</option>
-                            <option value="维持">维持</option>
-                            <option value="健康饮食" selected>健康饮食</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>目标总能量（kcal）</label>
-                        <input type="number" id="calorie-goal" min="500" max="5000" value="2000">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>菜系偏好（可多选）</label>
-                        <div class="checkbox-group">
-                            <label><input type="checkbox" name="cuisine" value="中餐" checked> 中餐</label>
-                            <label><input type="checkbox" name="cuisine" value="家常菜" checked> 家常菜</label>
-                            <label><input type="checkbox" name="cuisine" value="川菜"> 川菜</label>
-                            <label><input type="checkbox" name="cuisine" value="健身餐"> 健身餐</label>
-                            <label><input type="checkbox" name="cuisine" value="素食"> 素食</label>
-                            <label><input type="checkbox" name="cuisine" value="日餐"> 日餐</label>
-                            <label><input type="checkbox" name="cuisine" value="西餐"> 西餐</label>
-                            <label><input type="checkbox" name="cuisine" value="地中海"> 地中海</label>
+                        
+                        <div class="form-group">
+                            <label>口味偏好（可多选）</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="taste" value="清淡" checked> 清淡</label>
+                                <label><input type="checkbox" name="taste" value="少油" checked> 少油</label>
+                                <label><input type="checkbox" name="taste" value="低糖" checked> 低糖</label>
+                                <label><input type="checkbox" name="taste" value="低盐"> 低盐</label>
+                                <label><input type="checkbox" name="taste" value="麻辣"> 麻辣</label>
+                                <label><input type="checkbox" name="taste" value="甜口"> 甜口</label>
+                                <label><input type="checkbox" name="taste" value="营养保留"> 营养保留</label>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>口味偏好（可多选）</label>
-                        <div class="checkbox-group">
-                            <label><input type="checkbox" name="taste" value="清淡" checked> 清淡</label>
-                            <label><input type="checkbox" name="taste" value="少油" checked> 少油</label>
-                            <label><input type="checkbox" name="taste" value="低糖" checked> 低糖</label>
-                            <label><input type="checkbox" name="taste" value="低盐"> 低盐</label>
-                            <label><input type="checkbox" name="taste" value="麻辣"> 麻辣</label>
-                            <label><input type="checkbox" name="taste" value="甜口"> 甜口</label>
-                            <label><input type="checkbox" name="taste" value="营养保留"> 营养保留</label>
+                        
+                        <!-- 禁忌食物 -->
+                        <div class="form-group">
+                            <label>禁忌食物</label>
+                            <textarea id="avoid-foods" rows="3" placeholder="请输入您不能食用的食物，如：海鲜、坚果、乳制品等"></textarea>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>禁忌食物</label>
-                        <textarea id="avoid-foods" rows="3" placeholder="请输入您不能食用的食物，如：海鲜、坚果、乳制品等"></textarea>
                     </div>
                 </div>
                 
-                <!-- 右侧结果区域 -->
+                <!-- 右侧卡片：今日菜谱推荐 + 结果展示 -->
                 <div class="result-container">
+                    <!-- 生成按钮区域 -->
                     <div class="action-section">
                         <button id="generate-btn" class="btn-primary">生成今日菜谱</button>
-                        <div id="loading-indicator" class="hidden">
+                        <p class="action-tip">点击按钮后，AI将根据您的信息生成个性化一日菜谱</p>
+                        
+                        <!-- 加载指示器 -->
+                        <div id="loading-indicator" class="loading-indicator hidden">
                             <div class="spinner"></div>
-                            <p>正在生成个性化菜谱...</p>
+                            <p>正在生成个性化菜谱，请稍候...</p>
                         </div>
                     </div>
                     
+                    <!-- 结果内容区域 -->
                     <div id="result-content" class="hidden">
-                        <!-- 概览信息 -->
-                        <div class="summary-card">
+                        <!-- 概览卡片 -->
+                        <div class="summary-card" id="summary-card">
                             <h3>今日饮食概览</h3>
                             <div class="summary-stats">
                                 <div class="stat-item">
                                     <span class="stat-value" id="total-calories">0</span>
-                                    <span class="stat-label">总热量 (kcal)</span>
+                                    <span class="stat-label">推荐能量 (kcal)</span>
                                 </div>
                                 <div class="stat-item">
                                     <span class="stat-value" id="protein-ratio">0</span>
@@ -797,19 +878,67 @@
                                     <span class="stat-label">脂肪占比</span>
                                 </div>
                             </div>
+                            <div class="summary-evaluation">
+                                <p class="evaluation-text">这是一份营养均衡的一日膳食计划，符合您的健康目标。</p>
+                            </div>
                         </div>
                         
                         <!-- 餐段展示区域 -->
-                        <div id="meals-container">
-                            <!-- 这里会动态生成早餐、午餐、晚餐、加餐的内容 -->
+                        <div id="meals-container" class="meals-container">
+                            <!-- 早餐部分 -->
+                            <div class="meal-section">
+                                <div class="meal-header">
+                                    <div class="meal-title">早餐</div>
+                                </div>
+                                <div class="meal-recipes">
+                                    <!-- 这里会动态生成早餐菜谱 -->
+                                </div>
+                            </div>
+                            
+                            <!-- 午餐部分 -->
+                            <div class="meal-section">
+                                <div class="meal-header">
+                                    <div class="meal-title">午餐</div>
+                                </div>
+                                <div class="meal-recipes">
+                                    <!-- 这里会动态生成午餐菜谱 -->
+                                </div>
+                            </div>
+                            
+                            <!-- 晚餐部分 -->
+                            <div class="meal-section">
+                                <div class="meal-header">
+                                    <div class="meal-title">晚餐</div>
+                                </div>
+                                <div class="meal-recipes">
+                                    <!-- 这里会动态生成晚餐菜谱 -->
+                                </div>
+                            </div>
+                            
+                            <!-- 加餐/零食部分 -->
+                            <div class="meal-section">
+                                <div class="meal-header">
+                                    <div class="meal-title">加餐/零食</div>
+                                </div>
+                                <div class="meal-recipes">
+                                    <!-- 这里会动态生成加餐菜谱 -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 重新生成按钮 -->
+                        <div class="regenerate-section">
+                            <button id="regenerate-btn" class="btn-secondary">重新生成菜谱</button>
                         </div>
                     </div>
                     
-                    <div id="error-message" class="hidden">
+                    <!-- 错误提示区域 -->
+                    <div id="error-message" class="error-message hidden">
                         <div class="error-icon">!</div>
                         <p>生成菜谱时出现错误，请稍后重试。</p>
                     </div>
                     
+                    <!-- 空状态 -->
                     <div id="empty-state" class="empty-state">
                         <div class="empty-icon">📋</div>
                         <h3>还没有生成菜谱</h3>
@@ -817,8 +946,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
         </div>
     </main>
     

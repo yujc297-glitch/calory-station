@@ -484,21 +484,36 @@
             
             <!-- 识别区域 -->
             <div class="recognition-container">
-                <!-- 左侧图片区域 -->
+                <!-- 左侧蓝牙连接区域 -->
                 <div class="image-section">
-                    <div class="image-placeholder">
-                        <div class="image-placeholder-text">
-                            原材料图片/摄像头区域（示意）
+                    <div class="ble-status-block">
+                        <p id="ble-status-text" style="font-size: 18px; font-weight: 600; color: #666;">
+                            设备未连接
+                        </p>
+                        <p id="ble-status-desc" style="margin-top: 8px; color: #999; font-size: 14px;">
+                            请先连接识别设备，然后点击"开始扫描"获取原材料数据。
+                        </p>
+
+                        <div class="ble-button-group" style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
+                            <button id="ble-connect-btn" class="upload-btn">
+                                连接设备
+                            </button>
+                            <button id="ble-disconnect-btn" class="btn-secondary" disabled>
+                                取消连接
+                            </button>
+                            <button id="ble-scan-btn" class="btn-secondary" disabled>
+                                开始扫描
+                            </button>
                         </div>
                     </div>
-                    <p style="color: #666; text-align: center; margin-top: 10px; font-size: 14px;">示例：西兰花、鸡蛋、胡萝卜、鸡胸肉等原材料</p>
+                    <p style="color: #666; text-align: center; margin-top: 20px; font-size: 14px;">蓝牙设备：ESP32S3-Add10</p>
                     <button class="upload-btn">上传原材料图片</button>
                 </div>
                 
                 <!-- 右侧结果区域 -->
                 <div class="result-section">
                     <div class="result-header">识别结果</div>
-                    <div class="dish-name">西兰花</div>
+                    <div class="dish-name" id="material-name">西兰花</div>
                     
                     <div class="nutrition-info">
                         <div class="nutrition-row">
@@ -507,7 +522,7 @@
                         </div>
                         <div class="nutrition-row">
                             <span class="nutrition-label">重量示例：</span>
-                            <span class="nutrition-value">约 120 g</span>
+                            <span class="nutrition-value">约 <span id="material-weight">120</span> g</span>
                         </div>
                         <div class="nutrition-row">
                             <span class="nutrition-label">参考热量：</span>
@@ -662,5 +677,277 @@
             }
         });
     </script>
-</body>
+<script>
+        // ============ 烹饪助手和健康追踪数据传递逻辑 ============
+        document.addEventListener('DOMContentLoaded', function() {
+            // 健康追踪数据传递
+            const healthTrackBtn = document.getElementById('health-track-btn');
+            if (healthTrackBtn) {
+                healthTrackBtn.addEventListener('click', function() {
+                    // 获取当前识别结果
+                    const foodName = document.getElementById('material-name')?.textContent || '未知食材';
+                    const foodWeight = document.getElementById('material-weight')?.textContent || '0';
+                    
+                    // 创建数据对象
+                    const foodData = {
+                        name: foodName,
+                        weight: parseFloat(foodWeight),
+                        timestamp: new Date().toISOString()
+                    };
+                    
+                    // 存储到localStorage
+                    localStorage.setItem('lastFoodData', JSON.stringify(foodData));
+                    console.log('健康追踪数据已保存:', foodData);
+                    
+                    // 跳转到健康追踪页面
+                    window.location.href = 'health-tracking.html';
+                });
+            }
+            
+            // 烹饪助手数据传递
+            const cookingAssistantBtn = document.getElementById('cooking-assistant-btn');
+            if (cookingAssistantBtn) {
+                cookingAssistantBtn.addEventListener('click', function() {
+                    // 获取当前识别结果
+                    const foodName = document.getElementById('material-name')?.textContent || '未知食材';
+                    
+                    // 解析食材名称（处理可能的数字编号）
+                    let parsedFoodName = foodName;
+                    // 尝试根据数字编号映射到实际食材名称（示例映射）
+                    const foodMap = {
+                        '1': '西兰花',
+                        '2': '鸡蛋',
+                        '3': '胡萝卜',
+                        '4': '鸡胸肉',
+                        '5': '西红柿',
+                        '6': '黄瓜',
+                        '7': '土豆'
+                    };
+                    if (foodMap[foodName]) {
+                        parsedFoodName = foodMap[foodName];
+                    }
+                    
+                    // 从localStorage获取现有食材列表
+                    let ingredientList = [];
+                    const existingIngredients = localStorage.getItem('ingredients');
+                    if (existingIngredients) {
+                        try {
+                            ingredientList = JSON.parse(existingIngredients);
+                        } catch (e) {
+                            ingredientList = [];
+                        }
+                    }
+                    
+                    // 检查是否已存在相同食材
+                    const exists = ingredientList.some(item => item.name === parsedFoodName);
+                    if (!exists) {
+                        // 添加新食材到列表
+                        ingredientList.push({
+                            name: parsedFoodName,
+                            timestamp: new Date().toISOString()
+                        });
+                        
+                        // 保存回localStorage
+                        localStorage.setItem('ingredients', JSON.stringify(ingredientList));
+                        console.log('食材已添加到烹饪助手:', parsedFoodName);
+                    }
+                    
+                    // 跳转到烹饪助手页面
+                    window.location.href = 'cooking-assistant.html';
+                });
+            }
+        });
+    </script>
+    <script>
+ // ============ BLE 配置（必须与 ESP32 一致） ============
+ const SERVICE_UUID = '12345678-1234-5678-1234-56789abcdef0';
+ const CHARACTERISTIC_UUID = '12345678-1234-5678-1234-56789abcdef1';
+ 
+ let bleDevice = null;
+ let bleServer = null;
+ let bleService = null;
+ let bleCharacteristic = null;
+ let bleConnected = false;
+ 
+ // DOM 元素
+ const bleStatusText = document.getElementById('ble-status-text');
+ const bleStatusDesc = document.getElementById('ble-status-desc');
+ const connectBtn = document.getElementById('ble-connect-btn');
+ const disconnectBtn = document.getElementById('ble-disconnect-btn');
+ const scanBtn = document.getElementById('ble-scan-btn');
+ 
+ // 右侧识别结果元素
+ const materialNameEl = document.getElementById('material-name');
+ const materialWeightEl = document.getElementById('material-weight');
+ 
+ // 更新左侧 UI 状态
+ function updateBleUI(connected) {
+   bleConnected = connected;
+   if (connected) {
+     if (bleStatusText) {
+       bleStatusText.textContent = '设备已连接';
+       bleStatusText.style.color = '#28a745';
+     }
+     if (bleStatusDesc) {
+       bleStatusDesc.textContent = '设备连接成功，可以点击“开始扫描”获取原材料数据。';
+     }
+     if (connectBtn) connectBtn.disabled = true;
+     if (disconnectBtn) disconnectBtn.disabled = false;
+     if (scanBtn) scanBtn.disabled = false;
+   } else {
+     if (bleStatusText) {
+       bleStatusText.textContent = '设备未连接';
+       bleStatusText.style.color = '#666';
+     }
+     if (bleStatusDesc) {
+       bleStatusDesc.textContent = '请先连接识别设备，然后点击“开始扫描”获取原材料数据。';
+     }
+     if (connectBtn) connectBtn.disabled = false;
+     if (disconnectBtn) disconnectBtn.disabled = true;
+     if (scanBtn) scanBtn.disabled = true;
+   }
+ }
+ 
+ // 计算数组众数
+ function getMode(array) {
+   if (!Array.isArray(array) || array.length === 0) return null;
+   const countMap = {};
+   let maxCount = 0;
+   let mode = array[0];
+ 
+   array.forEach((v) => {
+     const key = String(v);
+     countMap[key] = (countMap[key] || 0) + 1;
+     if (countMap[key] > maxCount) {
+       maxCount = countMap[key];
+       mode = v;
+     }
+   });
+ 
+   return mode;
+ }
+ 
+ // 用硬件数据更新右侧识别结果
+ function updateRecognitionResultFromData(data) {
+   if (!data) return;
+ 
+   const arr = Array.isArray(data.array) ? data.array : [];
+   const modeValue = getMode(arr);
+ 
+   if (materialNameEl && modeValue !== null && modeValue !== undefined) {
+     // 目前先直接显示众数数字；之后可根据映射表把数字转成“西兰花/鸡蛋”等名字
+     materialNameEl.textContent = String(modeValue);
+   }
+ 
+   if (materialWeightEl && typeof data.float_value === 'number') {
+     materialWeightEl.textContent = data.float_value.toFixed(1);
+   }
+ }
+ 
+ // 处理从 ESP32 收到的数据
+ function handleDataResponse(event) {
+   const value = event.target.value;
+   const decoder = new TextDecoder('utf-8');
+   const jsonData = decoder.decode(value);
+ 
+   try {
+     const data = JSON.parse(jsonData);
+     console.log('[BLE] received data:', data);
+     updateRecognitionResultFromData(data);
+   } catch (err) {
+     console.error('[BLE] parse JSON error:', err, jsonData);
+   }
+ }
+ 
+ // 连接到 ESP32
+ async function connectToESP32() {
+   try {
+     if (!navigator.bluetooth) {
+       alert('当前浏览器不支持 Web Bluetooth，请使用桌面版 Chrome / Edge。');
+       return;
+     }
+ 
+     const device = await navigator.bluetooth.requestDevice({
+       filters: [{ name: 'ESP32S3-Add10' }],
+       optionalServices: [SERVICE_UUID]
+     });
+ 
+     bleDevice = device;
+     bleServer = await bleDevice.gatt.connect();
+     bleService = await bleServer.getPrimaryService(SERVICE_UUID);
+     bleCharacteristic = await bleService.getCharacteristic(CHARACTERISTIC_UUID);
+ 
+     await bleCharacteristic.startNotifications();
+     bleCharacteristic.addEventListener('characteristicvaluechanged', handleDataResponse);
+ 
+     bleDevice.addEventListener('gattserverdisconnected', onDisconnected);
+ 
+     updateBleUI(true);
+   } catch (err) {
+     console.error('[BLE] connect error:', err);
+     updateBleUI(false);
+   }
+ }
+ 
+ // 断开连接
+ function disconnectFromESP32() {
+   try {
+     if (bleDevice && bleDevice.gatt.connected) {
+       bleDevice.gatt.disconnect();
+     }
+   } catch (err) {
+     console.error('[BLE] disconnect error:', err);
+   }
+   updateBleUI(false);
+ }
+ 
+ function onDisconnected() {
+   console.warn('[BLE] device disconnected');
+   updateBleUI(false);
+ }
+ 
+ // 向 ESP32 发送“开始扫描”命令
+ async function startScanFromDevice() {
+   if (!bleConnected || !bleCharacteristic) {
+     console.warn('[BLE] not connected, cannot scan');
+     return;
+   }
+ 
+   try {
+     const encoder = new TextEncoder('utf-8');
+     // 与 ESP32 约定的命令：这里沿用原 demo 的 'get_data'
+     const command = encoder.encode('get_data');
+     await bleCharacteristic.writeValue(command);
+     console.log('[BLE] scan command sent');
+   } catch (err) {
+     console.error('[BLE] send command error:', err);
+   }
+ }
+ 
+ // 初始化绑定按钮事件
+ document.addEventListener('DOMContentLoaded', () => {
+   updateBleUI(false);
+ 
+   if (!navigator.bluetooth) {
+     if (bleStatusDesc) {
+       bleStatusDesc.textContent = '当前浏览器不支持 Web Bluetooth，请使用桌面版 Chrome 或 Edge。';
+     }
+     if (connectBtn) connectBtn.disabled = true;
+     if (disconnectBtn) disconnectBtn.disabled = true;
+     if (scanBtn) scanBtn.disabled = true;
+     return;
+   }
+ 
+   if (connectBtn) {
+     connectBtn.addEventListener('click', connectToESP32);
+   }
+   if (disconnectBtn) {
+     disconnectBtn.addEventListener('click', disconnectFromESP32);
+   }
+   if (scanBtn) {
+     scanBtn.addEventListener('click', startScanFromDevice);
+   }
+ });
+    </script>
+    </body>
 </html>

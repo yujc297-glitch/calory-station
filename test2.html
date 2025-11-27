@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI API 测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            text-align: left;
+            min-height: 100px;
+        }
+        #loading {
+            display: none;
+            margin-top: 20px;
+            color: #666;
+        }
+        #error {
+            margin-top: 20px;
+            color: #d32f2f;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI 接口测试</h1>
+        <button id="testButton">测试 AI 接口</button>
+        <div id="loading">加载中...</div>
+        <div id="result"></div>
+        <div id="error"></div>
+    </div>
+
+    <script>
+        document.getElementById('testButton').addEventListener('click', async function() {
+            const resultDiv = document.getElementById('result');
+            const loadingDiv = document.getElementById('loading');
+            const errorDiv = document.getElementById('error');
+            
+            // 重置UI
+            resultDiv.textContent = '';
+            errorDiv.textContent = '';
+            errorDiv.style.display = 'none';
+            loadingDiv.style.display = 'block';
+            
+            try {
+                const response = await fetch('/api/nutrition-ai', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: '测试一下接口是否正常工作',
+                        history: []
+                    })
+                });
+                
+                const data = await response.json();
+                loadingDiv.style.display = 'none';
+                
+                console.log('AI test result:', data);
+                
+                if (response.ok) {
+                    if (data.answer) {
+                        resultDiv.textContent = data.answer.substring(0, 100) + (data.answer.length > 100 ? '...' : '');
+                        resultDiv.style.color = '#333';
+                    } else {
+                        resultDiv.textContent = '没有收到有效的回答';
+                        resultDiv.style.color = '#666';
+                    }
+                } else {
+                    errorDiv.textContent = `接口错误: ${data.error || '未知错误'}`;
+                    errorDiv.style.display = 'block';
+                    if (data.detail) {
+                        console.error('Error detail:', data.detail);
+                    }
+                }
+            } catch (err) {
+                loadingDiv.style.display = 'none';
+                errorDiv.textContent = `网络错误: ${err.message}`;
+                errorDiv.style.display = 'block';
+                console.error('AI test error:', err);
+            }
+        });
+    </script>
+</body>
+</html>

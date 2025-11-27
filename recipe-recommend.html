@@ -230,6 +230,344 @@
             color: #555;
         }
         
+        /* 新的布局样式 */
+        .recipe-planner-container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .input-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            height: fit-content;
+            position: sticky;
+            top: 140px;
+        }
+        
+        .result-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .card-title {
+            font-size: 20px;
+            color: #2e8b57;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e8f5e8;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2e8b57;
+        }
+        
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .radio-group label,
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            cursor: pointer;
+        }
+        
+        .radio-group input[type="radio"],
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 5px;
+            width: auto;
+        }
+        
+        .action-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .btn-primary {
+            background-color: #2e8b57;
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #1e7049;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        /* 加载指示器 */
+        .loading-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #2e8b57;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 概览卡片 */
+        .summary-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .summary-card h3 {
+            color: #2e8b57;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            display: block;
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 餐段样式 */
+        .meal-section {
+            margin-bottom: 40px;
+        }
+        
+        .meal-header {
+            background-color: #2e8b57;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .meal-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .meal-calories {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .meal-recipes {
+            border: 1px solid #e0e0e0;
+            border-radius: 0 0 8px 8px;
+            padding: 20px;
+        }
+        
+        .recipe-item {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .recipe-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .recipe-name {
+            font-size: 18px;
+            color: #2e8b57;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .recipe-summary {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .recipe-details h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .recipe-ingredients-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 15px;
+        }
+        
+        .recipe-ingredients-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        
+        .recipe-ingredients-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2e8b57;
+        }
+        
+        .recipe-steps {
+            counter-reset: step;
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        .recipe-steps li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .recipe-steps li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: #2e8b57;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .recipe-calories {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 错误消息 */
+        .error-message {
+            background-color: #ffebee;
+            border: 1px solid #ffcdd2;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .error-icon {
+            font-size: 32px;
+            color: #c62828;
+            margin-bottom: 10px;
+        }
+        
+        /* 空状态 */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+        
+        .empty-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        
+        .empty-state h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+        
+        /* 隐藏类 */
+        .hidden {
+            display: none;
+        }
+        
         /* 返回首页按钮 */
         .back-home {
             text-align: center;
@@ -338,158 +676,149 @@
     <main class="main-content">
         <div class="container">
             <h1 class="section-title">菜谱推荐</h1>
-            <p class="section-subtitle">根据你的健康目标智能组合菜谱</p>
+            <p class="section-subtitle">根据你的健康目标和口味偏好智能生成个性化菜谱</p>
             
-            <!-- 健康目标标签区 -->
-            <section class="tags-section">
-                <div class="tags-container">
-                    <span class="tag active">少热量</span>
-                    <span class="tag">高蛋白</span>
-                    <span class="tag">骨折恢复餐</span>
-                    <span class="tag">软食友好</span>
-                </div>
-            </section>
-            
-            <!-- 高蛋白菜谱组 -->
-            <section class="recipe-category">
-                <h2 class="category-title">高蛋白菜谱</h2>
-                <div class="recipe-grid">
-                    <div class="recipe-card">
-                        <h3>鸡胸肉沙拉碗</h3>
-                        <div class="recipe-info">
-                            <strong>适用人群：</strong>健身增肌、减脂人群
-                        </div>
-                        <div class="recipe-description">
-                            鲜嫩多汁的煎鸡胸肉搭配新鲜蔬菜和藜麦，营养均衡，饱腹感强。橄榄油和柠檬汁调味，健康低脂。
-                        </div>
-                        <div class="recipe-ingredients">
-                            <h4>主要食材：</h4>
-                            <ul>
-                                <li>鸡胸肉 150g</li>
-                                <li>混合生菜 100g</li>
-                                <li>藜麦 50g</li>
-                                <li>鸡蛋 1个</li>
-                                <li>牛油果 1/2个</li>
-                                <li>橄榄油、柠檬汁适量</li>
-                            </ul>
+            <div class="recipe-planner-container">
+                <!-- 左侧输入卡片 -->
+                <div class="input-card">
+                    <h3 class="card-title">个人信息与偏好</h3>
+                    
+                    <div class="form-group">
+                        <label>性别</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="gender" value="male" checked> 男</label>
+                            <label><input type="radio" name="gender" value="female"> 女</label>
                         </div>
                     </div>
-                    <div class="recipe-card">
-                        <h3>牛肉藜麦碗</h3>
-                        <div class="recipe-info">
-                            <strong>适用人群：</strong>健身增肌、需要补充铁质人群
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>年龄（岁）</label>
+                            <input type="number" id="age" min="1" max="120" value="30">
                         </div>
-                        <div class="recipe-description">
-                            瘦牛肉富含优质蛋白和铁，搭配藜麦和蔬菜，是营养丰富的健康主食选择。
+                        <div class="form-group">
+                            <label>身高（cm）</label>
+                            <input type="number" id="height" min="50" max="250" value="170">
                         </div>
-                        <div class="recipe-ingredients">
-                            <h4>主要食材：</h4>
-                            <ul>
-                                <li>瘦牛肉 150g</li>
-                                <li>藜麦 50g</li>
-                                <li>彩椒 1/2个</li>
-                                <li>西兰花 80g</li>
-                                <li>胡萝卜 1根</li>
-                                <li>低钠酱油、黑胡椒适量</li>
-                            </ul>
+                        <div class="form-group">
+                            <label>体重（kg）</label>
+                            <input type="number" id="weight" min="10" max="300" value="65">
                         </div>
                     </div>
-                    <div class="recipe-card">
-                        <h3>三文鱼牛油果碗</h3>
-                        <div class="recipe-info">
-                            <strong>适用人群：</strong>需要补充Omega-3、健康养生人群
-                        </div>
-                        <div class="recipe-description">
-                            三文鱼富含优质蛋白和Omega-3脂肪酸，牛油果提供健康脂肪，搭配糙米和蔬菜，营养全面。
-                        </div>
-                        <div class="recipe-ingredients">
-                            <h4>主要食材：</h4>
-                            <ul>
-                                <li>三文鱼 120g</li>
-                                <li>牛油果 1/2个</li>
-                                <li>糙米 50g</li>
-                                <li>海苔丝 适量</li>
-                                <li>黄瓜 1/2根</li>
-                                <li>姜、柠檬适量</li>
-                            </ul>
+                    
+                    <div class="form-group">
+                        <label>活动水平</label>
+                        <select id="activity-level">
+                            <option value="sedentary">久坐（很少运动）</option>
+                            <option value="light">轻度（每周运动1-3次）</option>
+                            <option value="moderate" selected>中度（每周运动3-5次）</option>
+                            <option value="active">高度（每周运动6-7次）</option>
+                            <option value="very-active">非常活跃（每天高强度运动）</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>目标类型</label>
+                        <select id="goal-type">
+                            <option value="减脂">减脂</option>
+                            <option value="增肌">增肌</option>
+                            <option value="维持">维持</option>
+                            <option value="健康饮食" selected>健康饮食</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>目标总能量（kcal）</label>
+                        <input type="number" id="calorie-goal" min="500" max="5000" value="2000">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>菜系偏好（可多选）</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="cuisine" value="中餐" checked> 中餐</label>
+                            <label><input type="checkbox" name="cuisine" value="家常菜" checked> 家常菜</label>
+                            <label><input type="checkbox" name="cuisine" value="川菜"> 川菜</label>
+                            <label><input type="checkbox" name="cuisine" value="健身餐"> 健身餐</label>
+                            <label><input type="checkbox" name="cuisine" value="素食"> 素食</label>
+                            <label><input type="checkbox" name="cuisine" value="日餐"> 日餐</label>
+                            <label><input type="checkbox" name="cuisine" value="西餐"> 西餐</label>
+                            <label><input type="checkbox" name="cuisine" value="地中海"> 地中海</label>
                         </div>
                     </div>
-                </div>
-            </section>
-            
-            <!-- 少热量菜谱组 -->
-            <section class="recipe-category">
-                <h2 class="category-title">少热量菜谱</h2>
-                <div class="recipe-grid">
-                    <div class="recipe-card">
-                        <h3>清蒸鱼配蔬菜</h3>
-                        <div class="recipe-info">
-                            <strong>适用人群：</strong>减脂塑形、高血压人群
-                        </div>
-                        <div class="recipe-description">
-                            清蒸方式保留鱼肉的鲜美和营养，搭配多种时令蔬菜，清淡少油，热量低，适合减脂期食用。
-                        </div>
-                        <div class="recipe-ingredients">
-                            <h4>主要食材：</h4>
-                            <ul>
-                                <li>鲈鱼/鲫鱼 200g</li>
-                                <li>西兰花 100g</li>
-                                <li>胡萝卜 1/2根</li>
-                                <li>豆腐 100g</li>
-                                <li>葱、姜、蒸鱼豉油适量</li>
-                            </ul>
+                    
+                    <div class="form-group">
+                        <label>口味偏好（可多选）</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="taste" value="清淡" checked> 清淡</label>
+                            <label><input type="checkbox" name="taste" value="少油" checked> 少油</label>
+                            <label><input type="checkbox" name="taste" value="低糖" checked> 低糖</label>
+                            <label><input type="checkbox" name="taste" value="低盐"> 低盐</label>
+                            <label><input type="checkbox" name="taste" value="麻辣"> 麻辣</label>
+                            <label><input type="checkbox" name="taste" value="甜口"> 甜口</label>
+                            <label><input type="checkbox" name="taste" value="营养保留"> 营养保留</label>
                         </div>
                     </div>
-                    <div class="recipe-card">
-                        <h3>凉拌三丝</h3>
-                        <div class="recipe-info">
-                            <strong>适用人群：</strong>减脂塑形、夏季开胃
-                        </div>
-                        <div class="recipe-description">
-                            爽口的凉拌菜，低热量高蛋白，酸辣开胃，膳食纤维丰富，有助于促进肠道蠕动。
-                        </div>
-                        <div class="recipe-ingredients">
-                            <h4>主要食材：</h4>
-                            <ul>
-                                <li>鸡胸肉 100g</li>
-                                <li>黄瓜 1根</li>
-                                <li>胡萝卜 1/2根</li>
-                                <li>粉丝 50g</li>
-                                <li>醋、香油、蒜末适量</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="recipe-card">
-                        <h3>蔬菜豆腐汤</h3>
-                        <div class="recipe-info">
-                            <strong>适用人群：</strong>减脂塑形、需要控制体重人群
-                        </div>
-                        <div class="recipe-description">
-                            清淡的蔬菜豆腐汤，热量极低，富含水分和膳食纤维，有助于增加饱腹感，减少其他食物的摄入。
-                        </div>
-                        <div class="recipe-ingredients">
-                            <h4>主要食材：</h4>
-                            <ul>
-                                <li>嫩豆腐 200g</li>
-                                <li>白菜 150g</li>
-                                <li>西红柿 1个</li>
-                                <li>菌菇类 80g</li>
-                                <li>葱花、盐适量</li>
-                            </ul>
-                        </div>
+                    
+                    <div class="form-group">
+                        <label>禁忌食物</label>
+                        <textarea id="avoid-foods" rows="3" placeholder="请输入您不能食用的食物，如：海鲜、坚果、乳制品等"></textarea>
                     </div>
                 </div>
-            </section>
-            
-            <!-- 提示框 -->
-            <div class="tip-box">
-                菜谱内容为示例，实际使用时可结合医生或营养师建议。
+                
+                <!-- 右侧结果区域 -->
+                <div class="result-container">
+                    <div class="action-section">
+                        <button id="generate-btn" class="btn-primary">生成今日菜谱</button>
+                        <div id="loading-indicator" class="hidden">
+                            <div class="spinner"></div>
+                            <p>正在生成个性化菜谱...</p>
+                        </div>
+                    </div>
+                    
+                    <div id="result-content" class="hidden">
+                        <!-- 概览信息 -->
+                        <div class="summary-card">
+                            <h3>今日饮食概览</h3>
+                            <div class="summary-stats">
+                                <div class="stat-item">
+                                    <span class="stat-value" id="total-calories">0</span>
+                                    <span class="stat-label">总热量 (kcal)</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" id="protein-ratio">0</span>
+                                    <span class="stat-label">蛋白质占比</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" id="carbs-ratio">0</span>
+                                    <span class="stat-label">碳水占比</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" id="fat-ratio">0</span>
+                                    <span class="stat-label">脂肪占比</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 餐段展示区域 -->
+                        <div id="meals-container">
+                            <!-- 这里会动态生成早餐、午餐、晚餐、加餐的内容 -->
+                        </div>
+                    </div>
+                    
+                    <div id="error-message" class="hidden">
+                        <div class="error-icon">!</div>
+                        <p>生成菜谱时出现错误，请稍后重试。</p>
+                    </div>
+                    
+                    <div id="empty-state" class="empty-state">
+                        <div class="empty-icon">📋</div>
+                        <h3>还没有生成菜谱</h3>
+                        <p>填写左侧个人信息，点击生成按钮，获取专属于你的一日菜谱</p>
+                    </div>
+                </div>
             </div>
-            
-            <!-- 返回首页 -->
-            <div class="back-home">
-                <a href="index.html" class="btn-secondary">返回首页</a>
-            </div>
+        </div>
+    </main>
         </div>
     </main>
     
@@ -500,5 +829,346 @@
             <p>本页面为演示前端界面，不包含实际功能。</p>
         </div>
     </footer>
+    
+    <script>
+        // 常量定义
+        const RECIPE_API_URL = '/api/recipe-planner-ai';
+        
+        // DOM元素
+        const generateBtn = document.getElementById('generate-btn');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const resultContent = document.getElementById('result-content');
+        const errorMessage = document.getElementById('error-message');
+        const emptyState = document.getElementById('empty-state');
+        const mealsContainer = document.getElementById('meals-container');
+        
+        // 营养摄入统计元素
+        const totalCaloriesElement = document.getElementById('total-calories');
+        const proteinRatioElement = document.getElementById('protein-ratio');
+        const carbsRatioElement = document.getElementById('carbs-ratio');
+        const fatRatioElement = document.getElementById('fat-ratio');
+        
+        // 添加生成按钮点击事件
+        generateBtn.addEventListener('click', generateRecipe);
+        
+        // 生成菜谱函数
+        async function generateRecipe() {
+            // 显示加载状态
+            showLoading();
+            
+            try {
+                // 收集用户输入
+                const userInput = collectUserInput();
+                
+                // 构造提示词
+                const prompt = constructPrompt(userInput);
+                
+                // 调用API
+                const response = await fetch(RECIPE_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        message: prompt, 
+                        history: [] 
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('API调用失败');
+                }
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                
+                // 解析响应
+                const recipeData = parseResponse(data.answer);
+                
+                // 渲染结果
+                renderRecipe(recipeData);
+                
+                // 显示结果内容
+                showResult();
+                
+            } catch (error) {
+                console.error('生成菜谱失败:', error);
+                showError();
+            } finally {
+                hideLoading();
+            }
+        }
+        
+        // 收集用户输入
+        function collectUserInput() {
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const age = document.getElementById('age').value;
+            const height = document.getElementById('height').value;
+            const weight = document.getElementById('weight').value;
+            const activityLevel = document.getElementById('activity-level').value;
+            const goalType = document.getElementById('goal-type').value;
+            const calorieGoal = document.getElementById('calorie-goal').value;
+            
+            // 收集多选框的值
+            const cuisines = Array.from(document.querySelectorAll('input[name="cuisine"]:checked'))
+                .map(cb => cb.value);
+            
+            const tastes = Array.from(document.querySelectorAll('input[name="taste"]:checked'))
+                .map(cb => cb.value);
+            
+            const avoidFoods = document.getElementById('avoid-foods').value.trim();
+            
+            return {
+                gender,
+                age,
+                height,
+                weight,
+                activityLevel,
+                goalType,
+                calorieGoal,
+                cuisines,
+                tastes,
+                avoidFoods
+            };
+        }
+        
+        // 构造提示词
+        function constructPrompt(userInput) {
+            const { gender, age, height, weight, activityLevel, goalType, calorieGoal, cuisines, tastes, avoidFoods } = userInput;
+            
+            let activityLevelText = '';
+            switch(activityLevel) {
+                case 'sedentary': activityLevelText = '久坐（很少运动）'; break;
+                case 'light': activityLevelText = '轻度（每周运动1-3次）'; break;
+                case 'moderate': activityLevelText = '中度（每周运动3-5次）'; break;
+                case 'active': activityLevelText = '高度（每周运动6-7次）'; break;
+                case 'very-active': activityLevelText = '非常活跃（每天高强度运动）'; break;
+            }
+            
+            return `请为以下用户生成一日菜谱计划：
+
+用户信息：
+- 性别：${gender === 'male' ? '男' : '女'}
+- 年龄：${age}岁
+- 身高：${height}cm
+- 体重：${weight}kg
+- 活动水平：${activityLevelText}
+- 健康目标：${goalType}
+- 目标总能量：${calorieGoal}kcal
+- 菜系偏好：${cuisines.join('、')}
+- 口味偏好：${tastes.join('、')}
+${avoidFoods ? `- 禁忌食物：${avoidFoods}` : ''}
+
+请根据以上信息，为用户生成一天的菜单计划，包括早餐、午餐、晚餐和加餐。每个菜谱需要包含：菜名、简介、主要食材、详细步骤和预估热量。
+
+请严格按照以下JSON格式返回，不要包含任何其他格式（如markdown、代码块标记等）：
+{
+  "day_summary": {
+    "total_calories": 2000,
+    "protein_ratio": "20%",
+    "carbs_ratio": "50%",
+    "fat_ratio": "30%"
+  },
+  "meals": [
+    {
+      "type": "早餐",
+      "calories": 400,
+      "recipes": [
+        {
+          "name": "全麦面包配鸡蛋",
+          "summary": "营养均衡的早餐，富含蛋白质和复合碳水",
+          "ingredients": ["全麦面包 2片", "鸡蛋 1个", "牛油果 1/4个", "番茄 1个"],
+          "steps": ["1. 将鸡蛋煮熟或煎熟", "2. 全麦面包烤至金黄", "3. 牛油果切片，番茄切片", "4. 将所有食材组合即可食用"],
+          "estimated_calories": 400
+        }
+      ]
+    }
+  ]
+}`;
+        }
+        
+        // 解析API响应
+        function parseResponse(answer) {
+            try {
+                // 移除可能的代码块标记
+                let cleanResponse = answer;
+                if (cleanResponse.startsWith('```json') || cleanResponse.startsWith('```')) {
+                    cleanResponse = cleanResponse.replace(/^```(json)?/, '').replace(/```$/, '').trim();
+                }
+                
+                return JSON.parse(cleanResponse);
+            } catch (error) {
+                console.error('解析响应失败:', error);
+                // 提供模拟数据以便展示
+                return getMockRecipeData();
+            }
+        }
+        
+        // 渲染菜谱结果
+        function renderRecipe(recipeData) {
+            // 更新概览信息
+            if (recipeData.day_summary) {
+                totalCaloriesElement.textContent = recipeData.day_summary.total_calories || '0';
+                proteinRatioElement.textContent = recipeData.day_summary.protein_ratio || '0%';
+                carbsRatioElement.textContent = recipeData.day_summary.carbs_ratio || '0%';
+                fatRatioElement.textContent = recipeData.day_summary.fat_ratio || '0%';
+            }
+            
+            // 清空餐段容器
+            mealsContainer.innerHTML = '';
+            
+            // 渲染每个餐段
+            if (recipeData.meals && Array.isArray(recipeData.meals)) {
+                recipeData.meals.forEach(meal => {
+                    const mealSection = document.createElement('div');
+                    mealSection.className = 'meal-section';
+                    
+                    // 餐段头部
+                    const mealHeader = document.createElement('div');
+                    mealHeader.className = 'meal-header';
+                    mealHeader.innerHTML = `
+                        <div class="meal-title">${meal.type}</div>
+                        <div class="meal-calories">${meal.calories || 0} kcal</div>
+                    `;
+                    
+                    // 餐段内容
+                    const mealRecipes = document.createElement('div');
+                    mealRecipes.className = 'meal-recipes';
+                    
+                    // 渲染每个菜谱
+                    if (meal.recipes && Array.isArray(meal.recipes)) {
+                        meal.recipes.forEach(recipe => {
+                            const recipeItem = document.createElement('div');
+                            recipeItem.className = 'recipe-item';
+                            
+                            recipeItem.innerHTML = `
+                                <div class="recipe-name">${recipe.name || '未知菜谱'}</div>
+                                <div class="recipe-summary">${recipe.summary || ''}</div>
+                                <div class="recipe-details">
+                                    <h4>主要食材：</h4>
+                                    <ul class="recipe-ingredients-list">
+                                        ${recipe.ingredients && Array.isArray(recipe.ingredients) 
+                                            ? recipe.ingredients.map(ing => `<li>${ing}</li>`).join('') 
+                                            : '<li>暂无食材信息</li>'}
+                                    </ul>
+                                    <h4>制作步骤：</h4>
+                                    <ol class="recipe-steps">
+                                        ${recipe.steps && Array.isArray(recipe.steps) 
+                                            ? recipe.steps.map(step => `<li>${step}</li>`).join('') 
+                                            : '<li>暂无步骤信息</li>'}
+                                    </ol>
+                                </div>
+                                <div class="recipe-calories">预估热量：${recipe.estimated_calories || 0} kcal</div>
+                            `;
+                            
+                            mealRecipes.appendChild(recipeItem);
+                        });
+                    }
+                    
+                    mealSection.appendChild(mealHeader);
+                    mealSection.appendChild(mealRecipes);
+                    mealsContainer.appendChild(mealSection);
+                });
+            }
+        }
+        
+        // 获取模拟菜谱数据（用于演示）
+        function getMockRecipeData() {
+            return {
+                "day_summary": {
+                    "total_calories": 2000,
+                    "protein_ratio": "20%",
+                    "carbs_ratio": "55%",
+                    "fat_ratio": "25%"
+                },
+                "meals": [
+                    {
+                        "type": "早餐",
+                        "calories": 400,
+                        "recipes": [
+                            {
+                                "name": "全麦面包配鸡蛋",
+                                "summary": "营养均衡的早餐，富含蛋白质和复合碳水",
+                                "ingredients": ["全麦面包 2片", "鸡蛋 1个", "牛油果 1/4个", "番茄 1个", "橄榄油 5ml", "盐和胡椒适量"],
+                                "steps": ["将鸡蛋煮熟或煎熟", "全麦面包烤至金黄", "牛油果切片，番茄切片", "将所有食材组合，撒上盐和胡椒即可食用"],
+                                "estimated_calories": 400
+                            }
+                        ]
+                    },
+                    {
+                        "type": "午餐",
+                        "calories": 650,
+                        "recipes": [
+                            {
+                                "name": "鸡胸肉沙拉碗",
+                                "summary": "高蛋白低脂肪的午餐选择",
+                                "ingredients": ["鸡胸肉 150g", "混合生菜 100g", "藜麦 50g", "黄瓜 1/2根", "红椒 1/2个", "橄榄油 10ml", "柠檬汁 15ml", "盐和胡椒适量"],
+                                "steps": ["藜麦提前煮熟备用", "鸡胸肉用盐和胡椒腌制后煎熟切片", "将所有蔬菜洗净切块", "将所有食材混合，淋上橄榄油和柠檬汁调味"],
+                                "estimated_calories": 650
+                            }
+                        ]
+                    },
+                    {
+                        "type": "晚餐",
+                        "calories": 700,
+                        "recipes": [
+                            {
+                                "name": "清蒸鲈鱼配蔬菜",
+                                "summary": "清淡健康的晚餐选择",
+                                "ingredients": ["鲈鱼 200g", "西兰花 100g", "胡萝卜 1/2根", "豆腐 100g", "葱 2根", "姜 5片", "蒸鱼豉油 15ml", "橄榄油 5ml"],
+                                "steps": ["鲈鱼洗净擦干，放上姜片和葱段", "水烧开后蒸8-10分钟", "西兰花和胡萝卜焯水，豆腐切块", "蒸好的鱼淋上蒸鱼豉油和热油", "搭配蔬菜和豆腐食用"],
+                                "estimated_calories": 700
+                            }
+                        ]
+                    },
+                    {
+                        "type": "加餐",
+                        "calories": 250,
+                        "recipes": [
+                            {
+                                "name": "水果酸奶杯",
+                                "summary": "健康美味的加餐选择",
+                                "ingredients": ["希腊酸奶 150g", "蓝莓 50g", "香蕉 1/2根", "燕麦片 20g"],
+                                "steps": ["将香蕉切片", "希腊酸奶倒入杯中", "铺上水果和燕麦片", "轻轻搅拌即可食用"],
+                                "estimated_calories": 250
+                            }
+                        ]
+                    }
+                ]
+            };
+        }
+        
+        // 显示加载状态
+        function showLoading() {
+            generateBtn.disabled = true;
+            loadingIndicator.classList.remove('hidden');
+            resultContent.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+            emptyState.classList.add('hidden');
+        }
+        
+        // 隐藏加载状态
+        function hideLoading() {
+            generateBtn.disabled = false;
+            loadingIndicator.classList.add('hidden');
+        }
+        
+        // 显示结果
+        function showResult() {
+            resultContent.classList.remove('hidden');
+            errorMessage.classList.add('hidden');
+            emptyState.classList.add('hidden');
+        }
+        
+        // 显示错误
+        function showError() {
+            resultContent.classList.add('hidden');
+            errorMessage.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+        }
+    </script>
 </body>
 </html>

@@ -826,11 +826,11 @@
  
  // 计算数组众数
  function getMode(array) {
-   if (!Array.isArray(array) || array.length === 0) return null;
+   if (!Array.isArray(array) || array.length === 0) return { value: null, count: 0 };
    const countMap = {};
    let maxCount = 0;
    let mode = array[0];
- 
+
    array.forEach((v) => {
      const key = String(v);
      countMap[key] = (countMap[key] || 0) + 1;
@@ -839,8 +839,8 @@
        mode = v;
      }
    });
- 
-   return mode;
+
+   return { value: mode, count: maxCount };
  }
  
  // 用硬件数据更新右侧识别结果
@@ -848,12 +848,12 @@
    if (!data) return;
 
    const arr = Array.isArray(data.array) ? data.array : [];
-   const modeValue = getMode(arr);
+   const mode = getMode(arr);
 
-   if (modeValue !== null && modeValue !== undefined && Number(modeValue) >= 5) {
+   if (mode.count >= 5) {
      // 识别成功：显示众数和重量
      if (materialNameEl) {
-       materialNameEl.textContent = String(modeValue);
+       materialNameEl.textContent = String(mode.value);
      }
      if (materialWeightEl && typeof data.float_value === 'number') {
        materialWeightEl.textContent = data.float_value.toFixed(1);

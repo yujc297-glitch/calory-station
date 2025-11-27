@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卡路里基站 - API测试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .test-section {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #2980b9;
+        }
+        .logs {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            min-height: 100px;
+            overflow-x: auto;
+        }
+        .link-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .page-link {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #e74c3c;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .page-link:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h1>卡路里基站 - API测试页面</h1>
+    
+    <div class="link-container">
+        <a href="nutrition-knowledge.html" class="page-link">营养科普</a>
+        <a href="cooking-assistant.html" class="page-link">烹饪助手</a>
+        <a href="health-tracking.html" class="page-link">健康追踪</a>
+        <a href="recipe-recommend.html" class="page-link">个性化菜谱推荐</a>
+        <a href="index.html" class="page-link">首页</a>
+    </div>
+    
+    <div class="test-section">
+        <h2>API测试</h2>
+        <p>测试 /api/nutrition-ai 接口功能：</p>
+        <button class="button" onclick="testApi()">测试API</button>
+        <div id="apiLogs" class="logs">日志将显示在这里...</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>修复总结</h2>
+        <p>本网站的AI功能已经过修复和优化，主要包括：</p>
+        <ul>
+            <li>统一了API调用格式</li>
+            <li>增强了错误处理机制</li>
+            <li>完善了日志记录功能</li>
+            <li>提供了友好的错误提示</li>
+        </ul>
+    </div>
+    
+    <script>
+        async function testApi() {
+            const logs = document.getElementById('apiLogs');
+            logs.textContent = '正在测试API...';
+            
+            try {
+                // 记录开始时间
+                const startTime = new Date().toISOString();
+                logs.textContent += `\n[${startTime}] 开始测试API调用`;
+                
+                // 构造请求参数
+                const testData = {
+                    message: "请简要介绍蛋白质的作用",
+                    history: []
+                };
+                
+                logs.textContent += `\n请求参数: ${JSON.stringify(testData)}`;
+                
+                // 发送请求
+                const response = await fetch('/api/nutrition-ai', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testData)
+                });
+                
+                // 获取响应文本（用于调试）
+                const responseText = await response.text();
+                logs.textContent += `\nHTTP状态码: ${response.status}`;
+                logs.textContent += `\n响应原始文本: ${responseText}`;
+                
+                // 检查HTTP状态
+                if (!response.ok) {
+                    throw new Error(`HTTP错误! 状态: ${response.status}`);
+                }
+                
+                // 尝试解析JSON
+                let data;
+                try {
+                    data = JSON.parse(responseText);
+                    logs.textContent += `\nJSON解析成功`;
+                } catch (jsonError) {
+                    logs.textContent += `\nJSON解析错误: ${jsonError.message}`;
+                    throw new Error(`无效的JSON响应`);
+                }
+                
+                // 验证响应格式
+                if (!data || typeof data.answer !== 'string') {
+                    logs.textContent += `\n响应格式错误: 缺少answer字段或类型不正确`;
+                    throw new Error(`API响应格式不正确`);
+                }
+                
+                logs.textContent += `\nAPI测试成功!`;
+                logs.textContent += `\n\n响应内容: ${data.answer}`;
+                
+            } catch (error) {
+                const errorTime = new Date().toISOString();
+                logs.textContent += `\n[${errorTime}] 错误: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

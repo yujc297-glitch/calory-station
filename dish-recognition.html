@@ -587,6 +587,16 @@
     <script>
         // 原材料识别 → 健康追踪数据传递逻辑
         document.addEventListener('DOMContentLoaded', function() {
+            // 食物元数据映射
+            const FOOD_META = {
+                '西红柿': { category: '蔬菜水果类' },
+                '辣椒': { category: '蔬菜类' },
+                '蘑菇': { category: '菌菇类' },
+                '甜椒': { category: '蔬菜类' },
+                '彩椒': { category: '蔬菜类' },
+                '西兰花': { category: '蔬菜类' }
+            };
+            
             // 获取识别结果区域的元素
             const dishNameElement = document.querySelector('.dish-name');
             const nutritionValues = document.querySelectorAll('.nutrition-value');
@@ -594,6 +604,28 @@
             // 获取按钮元素
             const addToTrackingBtn = document.querySelector('.btn-primary');
             const addToCookingBtn = document.querySelector('.btn-secondary');
+            
+            // 添加查看详细营养信息按钮
+            const recognitionActions = document.querySelector('.recognition-actions');
+            const detailButton = document.createElement('a');
+            detailButton.className = 'btn-primary';
+            detailButton.textContent = '查看详细营养信息';
+            recognitionActions.appendChild(detailButton);
+            
+            // 更新分类信息和详情按钮链接
+            function updateCategoryAndDetailLink(foodName) {
+                // 更新分类信息
+                if (nutritionValues.length > 0) {
+                    const category = FOOD_META[foodName]?.category || '其他';
+                    nutritionValues[0].textContent = category;
+                }
+                
+                // 更新详情按钮链接
+                detailButton.href = 'food-detail.html?food=' + encodeURIComponent(foodName);
+            }
+            
+            // 初始化时更新
+            updateCategoryAndDetailLink(dishNameElement.textContent);
             
             // 如果有按钮，添加点击事件
             if (addToTrackingBtn) {
@@ -853,7 +885,10 @@
    if (mode.count >= 5) {
      // 识别成功：显示众数和重量
      if (materialNameEl) {
-       materialNameEl.textContent = String(mode.value);
+       const foodName = String(mode.value);
+       materialNameEl.textContent = foodName;
+       // 更新分类信息和详情按钮链接
+       updateCategoryAndDetailLink(foodName);
      }
      if (materialWeightEl && typeof data.float_value === 'number') {
        materialWeightEl.textContent = data.float_value.toFixed(1);

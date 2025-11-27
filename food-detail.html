@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>食材详情 - 卡路里基站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff6b6b;
+            text-decoration: none;
+        }
+        
+        .back-link {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .back-link:hover {
+            background-color: #ff5252;
+        }
+        
+        .food-detail-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .food-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 20px;
+        }
+        
+        .food-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 30px;
+            background-color: #f0f0f0;
+        }
+        
+        .food-info h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .nutrition-summary {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .nutrition-item {
+            text-align: center;
+        }
+        
+        .nutrition-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+        
+        .nutrition-label {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .section h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            bottom: 5px;
+            width: 5px;
+            background-color: #ff6b6b;
+            border-radius: 3px;
+        }
+        
+        .nutrition-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .nutrition-card {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .nutrition-card .value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4caf50;
+        }
+        
+        .nutrition-card .label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .health-benefits, .usage-tips {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .health-benefits ul, .usage-tips ul {
+            padding-left: 20px;
+        }
+        
+        .health-benefits li, .usage-tips li {
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+        
+        .not-found {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+        
+        .not-found h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">卡路里基站</a>
+            <a href="javascript:history.back()" class="back-link">返回上一页</a>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="food-detail-container" id="foodDetail">
+            <!-- 食材不存在时显示 -->
+            <div class="not-found" id="notFound">
+                <h2>食材未找到</h2>
+                <p>抱歉，我们没有找到您查询的食材信息。</p>
+            </div>
+            
+            <!-- 食材详情内容，默认隐藏 -->
+            <div style="display: none;" id="foodContent">
+                <div class="food-header">
+                    <img src="" alt="食材图片" class="food-image" id="foodImage">
+                    <div class="food-info">
+                        <h1 id="foodName">食材名称</h1>
+                        <div class="nutrition-summary">
+                            <div class="nutrition-item">
+                                <div class="nutrition-value" id="calories">0</div>
+                                <div class="nutrition-label">卡路里 (kcal)</div>
+                            </div>
+                            <div class="nutrition-item">
+                                <div class="nutrition-value" id="protein">0</div>
+                                <div class="nutrition-label">蛋白质 (g)</div>
+                            </div>
+                            <div class="nutrition-item">
+                                <div class="nutrition-value" id="carbs">0</div>
+                                <div class="nutrition-label">碳水化合物 (g)</div>
+                            </div>
+                            <div class="nutrition-item">
+                                <div class="nutrition-value" id="fat">0</div>
+                                <div class="nutrition-label">脂肪 (g)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>营养成分</h2>
+                    <div class="nutrition-details">
+                        <div class="nutrition-card">
+                            <div class="value" id="fiber">0</div>
+                            <div class="label">膳食纤维 (g)</div>
+                        </div>
+                        <div class="nutrition-card">
+                            <div class="value" id="vitaminC">0</div>
+                            <div class="label">维生素C (mg)</div>
+                        </div>
+                        <div class="nutrition-card">
+                            <div class="value" id="calcium">0</div>
+                            <div class="label">钙 (mg)</div>
+                        </div>
+                        <div class="nutrition-card">
+                            <div class="value" id="iron">0</div>
+                            <div class="label">铁 (mg)</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>健康益处</h2>
+                    <div class="health-benefits" id="healthBenefits">
+                        <ul>
+                            <li>加载中...</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>食用建议</h2>
+                    <div class="usage-tips" id="usageTips">
+                        <ul>
+                            <li>加载中...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 卡路里基站 - 您的健康饮食助手</p>
+    </footer>
+    
+    <script>
+        // URL参数解析函数
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+        
+        // 模拟食材数据库
+        const foodDatabase = {
+            '西兰花': {
+                calories: 34,
+                protein: 2.8,
+                carbs: 7.0,
+                fat: 0.4,
+                fiber: 2.6,
+                vitaminC: 89.2,
+                calcium: 47,
+                iron: 0.73,
+                image: 'https://via.placeholder.com/300x300?text=西兰花',
+                healthBenefits: [
+                    '富含抗氧化物质，有助于抵抗自由基损伤',
+                    '含有丰富的维生素C，增强免疫力',
+                    '富含膳食纤维，促进肠道健康',
+                    '含有抗癌化合物，如萝卜硫素'
+                ],
+                usageTips: [
+                    '烹饪时间不宜过长，以保持其营养价值和脆嫩口感',
+                    '可清蒸、水煮或快炒，保留更多营养',
+                    '与蒜蓉搭配炒食，风味更佳',
+                    '可作为沙拉的主要成分，生食口感清爽'
+                ]
+            },
+            '鸡胸肉': {
+                calories: 165,
+                protein: 31,
+                carbs: 0,
+                fat: 3.6,
+                fiber: 0,
+                vitaminC: 0,
+                calcium: 15,
+                iron: 1.0,
+                image: 'https://via.placeholder.com/300x300?text=鸡胸肉',
+                healthBenefits: [
+                    '富含优质蛋白质，有助于肌肉生长和修复',
+                    '低脂肪，适合减肥期间食用',
+                    '含有丰富的B族维生素，提供能量',
+                    '含有重要矿物质，如磷和硒'
+                ],
+                usageTips: [
+                    '烹饪前可腌制，增加风味',
+                    '烤、煎或煮食均可，避免油炸',
+                    '烹饪至熟透，但不要过度，以免肉质变老',
+                    '可与各种蔬菜搭配，制作健康餐食'
+                ]
+            },
+            '三文鱼': {
+                calories: 208,
+                protein: 25,
+                carbs: 0,
+                fat: 12,
+                fiber: 0,
+                vitaminC: 0,
+                calcium: 12,
+                iron: 0.8,
+                image: 'https://via.placeholder.com/300x300?text=三文鱼',
+                healthBenefits: [
+                    '富含欧米茄-3脂肪酸，有益心脏健康',
+                    '含有优质蛋白质，促进肌肉生长',
+                    '富含维生素D，有助于钙的吸收',
+                    '含有抗氧化物质，减少炎症'
+                ],
+                usageTips: [
+                    '可生食（如刺身、寿司），但需确保食材新鲜',
+                    '简单煎烤，撒上少量盐和胡椒即可',
+                    '避免过度烹饪，保持肉质鲜嫩',
+                    '可搭配柠檬和香草，提升风味'
+                ]
+            },
+            '苹果': {
+                calories: 52,
+                protein: 0.3,
+                carbs: 13.8,
+                fat: 0.2,
+                fiber: 2.4,
+                vitaminC: 4.6,
+                calcium: 6,
+                iron: 0.1,
+                image: 'https://via.placeholder.com/300x300?text=苹果',
+                healthBenefits: [
+                    '富含膳食纤维，促进肠道健康',
+                    '含有抗氧化物质，如类黄酮',
+                    '有助于控制血糖水平',
+                    '含有果胶，有助于降低胆固醇'
+                ],
+                usageTips: [
+                    '最好连皮食用，以获取更多营养',
+                    '可直接生食，或制作沙拉',
+                    '可制成果泥、果酱或果汁',
+                    '与坚果搭配食用，增加饱腹感'
+                ]
+            },
+            '糙米': {
+                calories: 111,
+                protein: 2.6,
+                carbs: 23,
+                fat: 0.9,
+                fiber: 1.8,
+                vitaminC: 0,
+                calcium: 10,
+                iron: 0.5,
+                image: 'https://via.placeholder.com/300x300?text=糙米',
+                healthBenefits: [
+                    '富含膳食纤维，有助于消化',
+                    '含有复合碳水化合物，提供持久能量',
+                    '含有多种维生素和矿物质',
+                    '有助于控制体重和血糖'
+                ],
+                usageTips: [
+                    '烹饪前最好浸泡2-4小时，缩短烹饪时间',
+                    '与白米相比需要更多的水和更长的烹饪时间',
+                    '可与蔬菜、肉类搭配制作健康主食',
+                    '可制作糙米寿司或炒饭'
+                ]
+            }
+        };
+        
+        // 获取URL中的食材参数
+        const foodName = getUrlParameter('food');
+        
+        // 检查是否有食材参数
+        if (foodName) {
+            document.getElementById('notFound').style.display = 'none';
+            document.getElementById('foodContent').style.display = 'block';
+            document.getElementById('foodName').textContent = foodName;
+            
+            // 从数据库中获取食材信息
+            const foodData = foodDatabase[foodName];
+            
+            if (foodData) {
+                // 更新营养信息
+                document.getElementById('calories').textContent = foodData.calories;
+                document.getElementById('protein').textContent = foodData.protein;
+                document.getElementById('carbs').textContent = foodData.carbs;
+                document.getElementById('fat').textContent = foodData.fat;
+                document.getElementById('fiber').textContent = foodData.fiber;
+                document.getElementById('vitaminC').textContent = foodData.vitaminC;
+                document.getElementById('calcium').textContent = foodData.calcium;
+                document.getElementById('iron').textContent = foodData.iron;
+                document.getElementById('foodImage').src = foodData.image;
+                document.getElementById('foodImage').alt = foodName;
+                
+                // 更新健康益处
+                const benefitsList = document.createElement('ul');
+                foodData.healthBenefits.forEach(benefit => {
+                    const li = document.createElement('li');
+                    li.textContent = benefit;
+                    benefitsList.appendChild(li);
+                });
+                const healthBenefitsContainer = document.getElementById('healthBenefits');
+                healthBenefitsContainer.innerHTML = '';
+                healthBenefitsContainer.appendChild(benefitsList);
+                
+                // 更新食用建议
+                const tipsList = document.createElement('ul');
+                foodData.usageTips.forEach(tip => {
+                    const li = document.createElement('li');
+                    li.textContent = tip;
+                    tipsList.appendChild(li);
+                });
+                const usageTipsContainer = document.getElementById('usageTips');
+                usageTipsContainer.innerHTML = '';
+                usageTipsContainer.appendChild(tipsList);
+            } else {
+                // 如果没有找到食材信息，显示通用提示
+                document.getElementById('calories').textContent = '--';
+                document.getElementById('protein').textContent = '--';
+                document.getElementById('carbs').textContent = '--';
+                document.getElementById('fat').textContent = '--';
+                document.getElementById('fiber').textContent = '--';
+                document.getElementById('vitaminC').textContent = '--';
+                document.getElementById('calcium').textContent = '--';
+                document.getElementById('iron').textContent = '--';
+                
+                const defaultBenefits = document.createElement('ul');
+                defaultBenefits.innerHTML = '<li>暂无详细健康益处信息</li>';
+                document.getElementById('healthBenefits').innerHTML = '';
+                document.getElementById('healthBenefits').appendChild(defaultBenefits);
+                
+                const defaultTips = document.createElement('ul');
+                defaultTips.innerHTML = '<li>暂无详细食用建议</li>';
+                document.getElementById('usageTips').innerHTML = '';
+                document.getElementById('usageTips').appendChild(defaultTips);
+            }
+        }
+        
+        // 设置页面标题
+        if (foodName) {
+            document.title = foodName + ' - 食材详情 - 卡路里基站';
+        }
+    </script>
+</body>
+</html>

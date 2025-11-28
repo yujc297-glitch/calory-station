@@ -18,6 +18,10 @@ st.set_page_config(
     layout="wide"
 )
 
+# 初始化session_state标记，用于控制自动跳转只执行一次
+if "detail_opened" not in st.session_state:
+    st.session_state["detail_opened"] = False
+
 # 食物名称映射
 FOOD_NAME_MAP = {
     "bell pepper": "辣椒",
@@ -231,6 +235,9 @@ with st.sidebar:
     
     # 添加手动重置按钮（用于解锁识别状态）
     manual_reset = st.button("🔄 重置/重新识别", use_container_width=True, type="primary")
+    if manual_reset:
+        # 重置detail_opened标记，允许下次识别后再次自动跳转
+        st.session_state["detail_opened"] = False
     
     st.markdown("---")
     run_detection = st.toggle('🚀 启动系统', value=False)
@@ -276,6 +283,9 @@ if run_detection:
             display_product = "扫描中..."
             display_color = "#95a5a6" # 灰色
 
+            # 初始化status_html避免NameError
+            status_html = "<div class='metric-card' style='padding:10px;'>🔄 系统初始化中...</div>"
+            
             if detection_locked:
                 # --- 已锁定状态 ---
                 # 直接使用保存的画面和名称，不再调用摄像头和AI
@@ -295,11 +305,13 @@ if run_detection:
                 }
                 full_url = url + "?" + urllib.parse.urlencode(params, encoding="utf-8")
                 
-                # 尝试自动在系统浏览器中打开
-                try:
-                    webbrowser.open(full_url)
-                except:
-                    pass
+                # 尝试自动在系统浏览器中打开，仅当未打开过时
+                if not st.session_state["detail_opened"]:
+                    try:
+                        webbrowser.open(full_url)
+                        st.session_state["detail_opened"] = True
+                    except:
+                        pass
                 
                 status_html = f"""<div class='metric-card' style='padding:10px; background:#e8f8f5;'>
                     <span style='color:#27ae60'>🔒 <b>已锁定结果，可点击下方查看营养信息</b></span><br>
@@ -324,17 +336,17 @@ if run_detection:
                             # 如果有检测结果，绘制并检查
                             if len(results[0].boxes) > 0:
                                 annotated_frame = results[0].plot()
-                                
+                                 
                                 # 获取识别到的物体名称
                                 for box in results[0].boxes:
                                     cls_id = int(box.cls[0])
                                     detected_objs.append(results[0].names[cls_id])
-                                
+                                 
                                 # === 触发锁定 ===
                                 detection_locked = True
                                 frozen_frame = cv2.cvtColor(annotated_frame, cv2.COLOR_BGR2RGB)
                                 frozen_product_name = detected_objs[0] # 取第一个识别到的
-                                
+                                 
                                 display_frame = frozen_frame
                                 display_product = frozen_product_name
                                 display_color = "#27ae60"
@@ -348,6 +360,9 @@ if run_detection:
                     
                     if not detection_locked:
                         status_html = "<div class='metric-card' style='padding:10px;'>👀 正在识别，请保持食材稳定</div>"
+                else:
+                    # 摄像头未捕获到画面时的状态提示
+                    status_html = "<div class='metric-card' style='padding:10px;'>📷 摄像头未获取到画面</div>"
                 
             # 3. 更新 UI (确保在循环内实时刷新)
             

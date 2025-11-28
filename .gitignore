@@ -38,3 +38,12 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# 大型模型文件
+*.pt
+*.onnx
+*.h5
+*.pb
+
+# Python虚拟环境
+.venv/

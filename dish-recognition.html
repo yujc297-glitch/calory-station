@@ -456,6 +456,14 @@
             font-size: 14px;
             line-height: 1.6;
         }
+        
+        /* 灰色小字提示 */
+        .recognition-note {
+            color: #999;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -484,35 +492,23 @@
             
             <!-- 识别区域 -->
             <div class="recognition-container">
-                <!-- 左侧蓝牙连接区域 -->
+                <!-- 左侧设备说明区域 -->
                 <div class="image-section">
-                    <div class="ble-status-block">
-                        <p id="ble-status-text" style="font-size: 18px; font-weight: 600; color: #666;">
-                            设备未连接
+                    <div class="device-info">
+                        <h3 style="font-size: 18px; font-weight: 600; color: #666; margin-bottom: 15px;">
+                            设备说明
+                        </h3>
+                        <p style="color: #666; line-height: 1.6; margin-bottom: 20px;">
+                            请在本地启动 AI 智能电子秤程序，识别成功后会自动跳转到本页面并填写右侧结果。
                         </p>
-                        <p id="ble-status-desc" style="margin-top: 8px; color: #999; font-size: 14px;">
-                            请先连接识别设备，然后点击"开始扫描"获取原材料数据。
-                        </p>
-
-                        <div class="ble-button-group" style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
-                            <button id="ble-connect-btn" class="upload-btn">
-                                连接设备
-                            </button>
-                            <button id="ble-disconnect-btn" class="btn-secondary" disabled>
-                                取消连接
-                            </button>
-                            <button id="ble-scan-btn" class="btn-secondary" disabled>
-                                开始扫描
-                            </button>
-                        </div>
                     </div>
-                    <p style="color: #666; text-align: center; margin-top: 20px; font-size: 14px;">蓝牙设备：ESP32S3-DataServer</p>
                     <button class="upload-btn">上传原材料图片</button>
                 </div>
                 
                 <!-- 右侧结果区域 -->
                 <div class="result-section">
                     <div class="result-header">识别结果</div>
+                    <p class="recognition-note">当本地 AI 智能电子秤识别成功后，本页面会自动填入名称和重量。</p>
                     <div class="dish-name" id="material-name">等待设备识别…</div>
                     
                     <div class="nutrition-info">
@@ -535,8 +531,9 @@
                     </div>
                     
                     <div class="recognition-actions">
-                        <a class="btn-primary" href="health-tracking.html">添加至健康追踪</a>
-                        <a class="btn-secondary" href="cooking-assistant.html">添加到烹饪助手</a>
+                        <a class="btn-primary" id="btn-to-health" href="health-tracking.html">添加至健康追踪</a>
+                        <a class="btn-secondary" id="btn-to-cooking" href="cooking-assistant.html">添加到烹饪助手</a>
+                        <a class="btn-secondary" id="btn-to-detail" href="nutrition-detail.html">查看详细营养信息</a>
                     </div>
                 </div>
             </div>
@@ -560,468 +557,8 @@
     <footer class="footer">
         <div class="container">
             <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
-
         </div>
     </footer>
-    <script>
-        // 原材料识别 → 健康追踪数据传递逻辑
-        document.addEventListener('DOMContentLoaded', function() {
-            // 从URL参数中获取食材名称和重量
-            function getUrlParams() {
-                const params = new URLSearchParams(window.location.search);
-                return {
-                    name: params.get('name') || '',
-                    weight: params.get('weight') || ''
-                };
-            }
-            
-            // 处理URL参数，如果存在则更新页面显示
-            const urlParams = getUrlParams();
-            if (urlParams.name) {
-                const materialNameElement = document.getElementById('material-name');
-                if (materialNameElement) {
-                    materialNameElement.textContent = urlParams.name;
-                    console.log('从URL参数更新食材名称:', urlParams.name);
-                }
-            }
-            
-            if (urlParams.weight) {
-                const materialWeightElement = document.getElementById('material-weight');
-                if (materialWeightElement) {
-                    materialWeightElement.textContent = urlParams.weight;
-                    console.log('从URL参数更新食材重量:', urlParams.weight);
-                }
-            }
-            
-            // 食物元数据映射
-            const FOOD_META = {
-                '西红柿': { category: '蔬菜水果类' },
-                '辣椒': { category: '蔬菜类' },
-                '蘑菇': { category: '菌菇类' },
-                '甜椒': { category: '蔬菜类' },
-                '彩椒': { category: '蔬菜类' },
-                '西兰花': { category: '蔬菜类' }
-            };
-            
-            // 获取识别结果区域的元素
-            const dishNameElement = document.querySelector('.dish-name');
-            const nutritionValues = document.querySelectorAll('.nutrition-value');
-            
-            // 获取按钮元素
-            const addToTrackingBtn = document.querySelector('.btn-primary');
-            const addToCookingBtn = document.querySelector('.btn-secondary');
-            
-            // 添加查看详细营养信息按钮
-            const recognitionActions = document.querySelector('.recognition-actions');
-            const detailButton = document.createElement('a');
-            detailButton.className = 'btn-primary';
-            detailButton.textContent = '查看详细营养信息';
-            recognitionActions.appendChild(detailButton);
-            
-            // 更新分类信息和详情按钮链接
-            function updateCategoryAndDetailLink(foodName) {
-                // 更新分类信息
-                if (nutritionValues.length > 0) {
-                    const category = FOOD_META[foodName]?.category || '其他';
-                    nutritionValues[0].textContent = category;
-                }
-                
-                // 更新详情按钮链接
-                detailButton.href = 'food-detail.html?food=' + encodeURIComponent(foodName);
-            }
-            
-            // 初始化时更新
-            updateCategoryAndDetailLink(dishNameElement.textContent);
-            
-            // 如果有按钮，添加点击事件
-            if (addToTrackingBtn) {
-                addToTrackingBtn.addEventListener('click', function(e) {
-                    e.preventDefault(); // 阻止默认跳转
-                    
-                    try {
-                        // 提取识别结果数据
-                        const recognizedName = dishNameElement ? dishNameElement.textContent.trim() : '';
-                        
-                        // 提取重量（从第二个nutrition-value元素）
-                        let recognizedWeight = '';
-                        if (nutritionValues.length > 1) {
-                            const weightText = nutritionValues[1].textContent;
-                            // 提取数字部分
-                            const weightMatch = weightText.match(/\d+/);
-                            recognizedWeight = weightMatch ? weightMatch[0] : '';
-                        }
-                        
-                        // 提取热量（从第三个nutrition-value元素）
-                        let recognizedCaloriesPer100g = 0;
-                        if (nutritionValues.length > 2) {
-                            const caloriesText = nutritionValues[2].textContent;
-                            // 提取数字部分
-                            const caloriesMatch = caloriesText.match(/\d+/);
-                            recognizedCaloriesPer100g = caloriesMatch ? parseInt(caloriesMatch[0]) : 0;
-                        }
-                        
-                        // 计算总热量
-                        const totalCalories = recognizedWeight && recognizedCaloriesPer100g 
-                            ? Math.round(parseInt(recognizedWeight) * recognizedCaloriesPer100g / 100)
-                            : 0;
-                        
-                        // 构建要存储的数据对象
-                        const foodData = {
-                            name: recognizedName,
-                            weight: recognizedWeight,
-                            calories: totalCalories
-                        };
-                        
-                        // 存储到localStorage
-                        localStorage.setItem('pendingIntakeFromRecognition', JSON.stringify(foodData));
-                        
-                        // 跳转到健康追踪页面，并带上锚点
-                        window.location.href = 'health-tracking.html#log-food-modal';
-                    } catch (error) {
-                        console.error('提取识别结果时出错:', error);
-                        // 即使出错，也执行跳转，但不传递数据
-                        window.location.href = 'health-tracking.html';
-                    }
-                });
-            }
-            
-            // 原材料识别 → 烹饪助手数据传递逻辑
-            if (addToCookingBtn && addToCookingBtn.textContent.includes('添加到烹饪助手')) {
-                addToCookingBtn.addEventListener('click', function(e) {
-                    e.preventDefault(); // 阻止默认跳转
-                    
-                    try {
-                        // 提取识别到的原材料名称
-                        const recognizedName = dishNameElement ? dishNameElement.textContent.trim() : '';
-                        
-                        if (recognizedName) {
-                            // 从localStorage中获取现有的食材数组
-                            let ingredients = [];
-                            const existingIngredients = localStorage.getItem('cookingAssistantIngredients');
-                            
-                            if (existingIngredients) {
-                                try {
-                                    ingredients = JSON.parse(existingIngredients);
-                                    // 确保是数组
-                                    if (!Array.isArray(ingredients)) {
-                                        ingredients = [];
-                                    }
-                                } catch (parseError) {
-                                    console.error('解析食材数据时出错:', parseError);
-                                    ingredients = [];
-                                }
-                            }
-                            
-                            // 检查食材是否已存在，不存在则添加
-                            if (!ingredients.includes(recognizedName)) {
-                                ingredients.push(recognizedName);
-                                // 保存回localStorage
-                                localStorage.setItem('cookingAssistantIngredients', JSON.stringify(ingredients));
-                            }
-                        }
-                        
-                        // 跳转到烹饪助手页面
-                        window.location.href = 'cooking-assistant.html';
-                    } catch (error) {
-                        console.error('添加食材到烹饪助手时出错:', error);
-                        // 即使出错，也执行跳转
-                        window.location.href = 'cooking-assistant.html';
-                    }
-                });
-            }
-        });
-    </script>
-<script>
-        // ============ 烹饪助手和健康追踪数据传递逻辑 ============
-        document.addEventListener('DOMContentLoaded', function() {
-            // 健康追踪数据传递
-            const healthTrackBtn = document.getElementById('health-track-btn');
-            if (healthTrackBtn) {
-                healthTrackBtn.addEventListener('click', function() {
-                    // 获取当前识别结果
-                    const foodName = document.getElementById('material-name')?.textContent || '未知食材';
-                    const foodWeight = document.getElementById('material-weight')?.textContent || '0';
-                    
-                    // 创建数据对象
-                    const foodData = {
-                        name: foodName,
-                        weight: parseFloat(foodWeight),
-                        timestamp: new Date().toISOString()
-                    };
-                    
-                    // 存储到localStorage
-                    localStorage.setItem('lastFoodData', JSON.stringify(foodData));
-                    console.log('健康追踪数据已保存:', foodData);
-                    
-                    // 跳转到健康追踪页面
-                    window.location.href = 'health-tracking.html';
-                });
-            }
-            
-            // 烹饪助手数据传递
-            const cookingAssistantBtn = document.getElementById('cooking-assistant-btn');
-            if (cookingAssistantBtn) {
-                cookingAssistantBtn.addEventListener('click', function() {
-                    // 获取当前识别结果
-                    const foodName = document.getElementById('material-name')?.textContent || '未知食材';
-                    
-                    // 解析食材名称（处理可能的数字编号）
-                    let parsedFoodName = foodName;
-                    // 尝试根据数字编号映射到实际食材名称（示例映射）
-                    const foodMap = {
-                        '1': '西兰花',
-                        '2': '鸡蛋',
-                        '3': '胡萝卜',
-                        '4': '鸡胸肉',
-                        '5': '西红柿',
-                        '6': '黄瓜',
-                        '7': '土豆'
-                    };
-                    if (foodMap[foodName]) {
-                        parsedFoodName = foodMap[foodName];
-                    }
-                    
-                    // 从localStorage获取现有食材列表
-                    let ingredientList = [];
-                    const existingIngredients = localStorage.getItem('ingredients');
-                    if (existingIngredients) {
-                        try {
-                            ingredientList = JSON.parse(existingIngredients);
-                        } catch (e) {
-                            ingredientList = [];
-                        }
-                    }
-                    
-                    // 检查是否已存在相同食材
-                    const exists = ingredientList.some(item => item.name === parsedFoodName);
-                    if (!exists) {
-                        // 添加新食材到列表
-                        ingredientList.push({
-                            name: parsedFoodName,
-                            timestamp: new Date().toISOString()
-                        });
-                        
-                        // 保存回localStorage
-                        localStorage.setItem('ingredients', JSON.stringify(ingredientList));
-                        console.log('食材已添加到烹饪助手:', parsedFoodName);
-                    }
-                    
-                    // 跳转到烹饪助手页面
-                    window.location.href = 'cooking-assistant.html';
-                });
-            }
-        });
-    </script>
-    <script>
- // ============ BLE 配置（必须与 ESP32 一致） ============
- const SERVICE_UUID = '12345678-1234-5678-1234-56789abcdef0';
- const CHARACTERISTIC_UUID = '12345678-1234-5678-1234-56789abcdef1';
- 
- let bleDevice = null;
- let bleServer = null;
- let bleService = null;
- let bleCharacteristic = null;
- let bleConnected = false;
- 
- // DOM 元素
- const bleStatusText = document.getElementById('ble-status-text');
- const bleStatusDesc = document.getElementById('ble-status-desc');
- const connectBtn = document.getElementById('ble-connect-btn');
- const disconnectBtn = document.getElementById('ble-disconnect-btn');
- const scanBtn = document.getElementById('ble-scan-btn');
- 
- // 右侧识别结果元素
- const materialNameEl = document.getElementById('material-name');
- const materialWeightEl = document.getElementById('material-weight');
- 
- // 更新左侧 UI 状态
- function updateBleUI(connected) {
-   bleConnected = connected;
-   if (connected) {
-     if (bleStatusText) {
-       bleStatusText.textContent = '设备已连接';
-       bleStatusText.style.color = '#28a745';
-     }
-     if (bleStatusDesc) {
-       bleStatusDesc.textContent = '设备连接成功，可以点击“开始扫描”获取原材料数据。';
-     }
-     if (connectBtn) connectBtn.disabled = true;
-     if (disconnectBtn) disconnectBtn.disabled = false;
-     if (scanBtn) scanBtn.disabled = false;
-   } else {
-     if (bleStatusText) {
-       bleStatusText.textContent = '设备未连接';
-       bleStatusText.style.color = '#666';
-     }
-     if (bleStatusDesc) {
-       bleStatusDesc.textContent = '请先连接识别设备，然后点击“开始扫描”获取原材料数据。';
-     }
-     if (connectBtn) connectBtn.disabled = false;
-     if (disconnectBtn) disconnectBtn.disabled = true;
-     if (scanBtn) scanBtn.disabled = true;
-   }
- }
- 
- // 计算数组众数
- function getMode(array) {
-   if (!Array.isArray(array) || array.length === 0) return { value: null, count: 0 };
-   const countMap = {};
-   let maxCount = 0;
-   let mode = array[0];
-
-   array.forEach((v) => {
-     const key = String(v);
-     countMap[key] = (countMap[key] || 0) + 1;
-     if (countMap[key] > maxCount) {
-       maxCount = countMap[key];
-       mode = v;
-     }
-   });
-
-   return { value: mode, count: maxCount };
- }
- 
- // 用硬件数据更新右侧识别结果
- function updateRecognitionResultFromData(data) {
-   if (!data) return;
-
-   const arr = Array.isArray(data.array) ? data.array : [];
-   const mode = getMode(arr);
-
-   if (mode.count >= 5) {
-     // 识别成功：显示众数和重量
-     if (materialNameEl) {
-       const foodName = String(mode.value);
-       materialNameEl.textContent = foodName;
-       // 更新分类信息和详情按钮链接
-       updateCategoryAndDetailLink(foodName);
-     }
-     if (materialWeightEl && typeof data.float_value === 'number') {
-       materialWeightEl.textContent = data.float_value.toFixed(1);
-     }
-   } else {
-     // 识别失败：提示失败并清空重量
-     if (materialNameEl) {
-       materialNameEl.textContent = '识别失败';
-     }
-     if (materialWeightEl) {
-       materialWeightEl.textContent = '--';
-     }
-   }
- }
- 
- // 处理从 ESP32 收到的数据
- function handleDataResponse(event) {
-   const value = event.target.value;
-   const decoder = new TextDecoder('utf-8');
-   const jsonData = decoder.decode(value);
-
-   try {
-     const data = JSON.parse(jsonData);
-     console.log('[BLE] received data:', data);
-     
-     // 写入调试面板
-     const debugEl = document.getElementById('ble-debug-raw');
-     if (debugEl) {
-       debugEl.textContent = jsonData;
-     }
-     
-     updateRecognitionResultFromData(data);
-   } catch (err) {
-     console.error('[BLE] parse JSON error:', err, jsonData);
-   }
- }
- 
- // 连接到 ESP32
- async function connectToESP32() {
-   try {
-     if (!navigator.bluetooth) {
-       alert('当前浏览器不支持 Web Bluetooth，请使用桌面版 Chrome / Edge。');
-       return;
-     }
- 
-     const device = await navigator.bluetooth.requestDevice({
-       filters: [{ name: 'ESP32S3-DataServer' }],
-       optionalServices: [SERVICE_UUID]
-     });
- 
-     bleDevice = device;
-     bleServer = await bleDevice.gatt.connect();
-     bleService = await bleServer.getPrimaryService(SERVICE_UUID);
-     bleCharacteristic = await bleService.getCharacteristic(CHARACTERISTIC_UUID);
- 
-     await bleCharacteristic.startNotifications();
-     bleCharacteristic.addEventListener('characteristicvaluechanged', handleDataResponse);
- 
-     bleDevice.addEventListener('gattserverdisconnected', onDisconnected);
- 
-     updateBleUI(true);
-   } catch (err) {
-     console.error('[BLE] connect error:', err);
-     updateBleUI(false);
-   }
- }
- 
- // 断开连接
- function disconnectFromESP32() {
-   try {
-     if (bleDevice && bleDevice.gatt.connected) {
-       bleDevice.gatt.disconnect();
-     }
-   } catch (err) {
-     console.error('[BLE] disconnect error:', err);
-   }
-   updateBleUI(false);
- }
- 
- function onDisconnected() {
-   console.warn('[BLE] device disconnected');
-   updateBleUI(false);
- }
- 
- // 向 ESP32 发送“开始扫描”命令
- async function startScanFromDevice() {
-   if (!bleConnected || !bleCharacteristic) {
-     console.warn('[BLE] not connected, cannot scan');
-     return;
-   }
- 
-   try {
-     const encoder = new TextEncoder('utf-8');
-     // 与 ESP32 约定的命令：这里沿用原 demo 的 'get_data'
-     const command = encoder.encode('get_data');
-     await bleCharacteristic.writeValue(command);
-     console.log('[BLE] scan command sent');
-   } catch (err) {
-     console.error('[BLE] send command error:', err);
-   }
- }
- 
- // 初始化绑定按钮事件
- document.addEventListener('DOMContentLoaded', () => {
-   updateBleUI(false);
- 
-   if (!navigator.bluetooth) {
-     if (bleStatusDesc) {
-       bleStatusDesc.textContent = '当前浏览器不支持 Web Bluetooth，请使用桌面版 Chrome 或 Edge。';
-     }
-     if (connectBtn) connectBtn.disabled = true;
-     if (disconnectBtn) disconnectBtn.disabled = true;
-     if (scanBtn) scanBtn.disabled = true;
-     return;
-   }
- 
-   if (connectBtn) {
-     connectBtn.addEventListener('click', connectToESP32);
-   }
-   if (disconnectBtn) {
-     disconnectBtn.addEventListener('click', disconnectFromESP32);
-   }
-   if (scanBtn) {
-     scanBtn.addEventListener('click', startScanFromDevice);
-   }
- });
-    </script>
     <script>
         // 静态映射：中文名 -> 分类 + 参考热量
         const FOOD_META = {
@@ -1032,6 +569,7 @@
         };
         
         document.addEventListener("DOMContentLoaded", function () {
+          // URL参数处理
           const params = new URLSearchParams(window.location.search);
           const name = params.get("name");    // camera.py 传来的中文名
           const weight = params.get("weight"); // g
@@ -1055,7 +593,7 @@
           if (weight && weightEl) {
             const w = parseFloat(weight);
             if (!isNaN(w)) {
-              weightEl.textContent = "约 " + w.toFixed(1) + " g";
+              weightEl.textContent = w.toFixed(1);
             } else {
               weightEl.textContent = "--";
             }
@@ -1065,7 +603,62 @@
           if (!name && nameEl) {
             nameEl.textContent = "等待设备识别…";
           }
+          
+          // 辅助函数：检查是否有有效的识别结果
+          function checkRecognitionResult() {
+            const nameText = nameEl ? nameEl.textContent.trim() : '';
+            if (!nameText || nameText === "等待设备识别…" || nameText === "--") {
+              alert("请先识别食材");
+              return false;
+            }
+            return nameText;
+          }
+          
+          // 为三个按钮添加事件监听
+          // 1. 添加至健康追踪按钮
+          const healthBtn = document.getElementById("btn-to-health");
+          if (healthBtn) {
+            healthBtn.addEventListener('click', function(e) {
+              e.preventDefault();
+              const nameText = checkRecognitionResult();
+              if (!nameText) return;
+              
+              const weightText = weightEl ? weightEl.textContent.trim() : '';
+              const weightVal = weightText !== "--" ? weightText : params.get("weight") || "";
+              
+              const targetUrl = `health-tracking.html?source=recognition&name=${encodeURIComponent(nameText)}&weight=${encodeURIComponent(weightVal)}`;
+              window.location.href = targetUrl;
+            });
+          }
+          
+          // 2. 添加到烹饪助手按钮
+          const cookingBtn = document.getElementById("btn-to-cooking");
+          if (cookingBtn) {
+            cookingBtn.addEventListener('click', function(e) {
+              e.preventDefault();
+              const nameText = checkRecognitionResult();
+              if (!nameText) return;
+              
+              const targetUrl = `cooking-assistant.html?from=recognition&ingredient=${encodeURIComponent(nameText)}`;
+              window.location.href = targetUrl;
+            });
+          }
+          
+          // 3. 查看详细营养信息按钮
+          const detailBtn = document.getElementById("btn-to-detail");
+          if (detailBtn) {
+            detailBtn.addEventListener('click', function(e) {
+              e.preventDefault();
+              const nameText = checkRecognitionResult();
+              if (!nameText) return;
+              
+              // 检查是否存在nutrition-detail.html或food-detail.html
+              // 根据用户要求使用nutrition-detail.html
+              const targetUrl = `nutrition-detail.html?food=${encodeURIComponent(nameText)}`;
+              window.location.href = targetUrl;
+            });
+          }
         });
     </script>
-    </body>
+</body>
 </html>

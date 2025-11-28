@@ -579,52 +579,6 @@
                     '可生食、凉拌或烹饪，加热后番茄红素更易吸收。',
                     '与橄榄油搭配食用，有助于提高抗氧化物质的吸收率。'
                 ]
-            },
-            '香蕉': {
-                nameZh: '香蕉',
-                nameEn: 'banana',
-                category: '水果类',
-                energy: 89,
-                protein: 1.1,
-                carbs: 22.8,
-                fat: 0.3,
-                fiber: 2.6,
-                vitaminC: 8.7,
-                potassium: 358,
-                iron: 0.3,
-                healthBenefits: [
-                    '富含钾元素，有助于维持正常血压和心脏功能。',
-                    '含有丰富的膳食纤维和抗性淀粉，有助于肠道健康。',
-                    '提供快速能量，适合运动前后食用。'
-                ],
-                eatingTips: [
-                    '可直接生食，或加入水果沙拉、燕麦粥中食用。',
-                    '成熟度适中的香蕉口感最佳，过生的香蕉可能引起胃部不适。',
-                    '香蕉皮变黑但果肉无异味时仍可食用，此时抗氧化物质含量更高。'
-                ]
-            },
-            'banana': {
-                nameZh: '香蕉',
-                nameEn: 'banana',
-                category: '水果类',
-                energy: 89,
-                protein: 1.1,
-                carbs: 22.8,
-                fat: 0.3,
-                fiber: 2.6,
-                vitaminC: 8.7,
-                potassium: 358,
-                iron: 0.3,
-                healthBenefits: [
-                    '富含钾元素，有助于维持正常血压和心脏功能。',
-                    '含有丰富的膳食纤维和抗性淀粉，有助于肠道健康。',
-                    '提供快速能量，适合运动前后食用。'
-                ],
-                eatingTips: [
-                    '可直接生食，或加入水果沙拉、燕麦粥中食用。',
-                    '成熟度适中的香蕉口感最佳，过生的香蕉可能引起胃部不适。',
-                    '香蕉皮变黑但果肉无异味时仍可食用，此时抗氧化物质含量更高。'
-                ]
             }
         };
 
@@ -686,21 +640,7 @@
         // 主逻辑
         if (foodParam) {
             // 尝试直接匹配
-            let foodData = FOOD_DATA[foodParam];
-            
-            // 如果直接匹配失败，尝试模糊匹配
-            if (!foodData) {
-                // 转换为小写进行匹配
-                const lowerFoodParam = foodParam.toLowerCase();
-                for (const key in FOOD_DATA) {
-                    if (key.toLowerCase().includes(lowerFoodParam) || 
-                        FOOD_DATA[key].nameZh.includes(foodParam) || 
-                        FOOD_DATA[key].nameEn.toLowerCase().includes(lowerFoodParam)) {
-                        foodData = FOOD_DATA[key];
-                        break;
-                    }
-                }
-            }
+            const foodData = FOOD_DATA[foodParam];
             
             if (foodData) {
                 renderFoodDetails(foodData);

@@ -6,31 +6,58 @@ import serial
 import serial.tools.list_ports
 import time
 import re
+import webbrowser
+import urllib.parse
 
 # ==========================================
 # 页面配置
 # ==========================================
 st.set_page_config(
-    page_title="智能电子秤终端",
+    page_title="AI 智能电子秤 Calorie Station",
     page_icon="⚖️",
     layout="wide"
 )
 
+# 食物名称映射
+FOOD_NAME_MAP = {
+    "bell pepper": "辣椒",
+    "mushroom": "蘑菇",
+    "mush": "蘑菇",
+    "banana": "香蕉",
+    "tomato": "西红柿",
+}
+
 # 自定义 CSS 样式
 st.markdown("""
     <style>
-    .main { background-color: #f5f5f5; }
-    .stApp > header { background-color: transparent; }
+    /* 侧边栏样式 - 设置为浅灰色 */
+    [data-testid="stSidebar"] {
+        background-color: #f8f9fa;
+    }
     
-    /* 仪表盘卡片样式 */
+    /* 主内容区域 - 设置为白色背景 */
+    .css-18e3th9 { 
+        background-color: #ffffff; 
+    }
+    .main { 
+        background-color: #ffffff; 
+    }
+    .stApp > header { 
+        background-color: transparent; 
+    }
+    
+    /* 仪表盘卡片样式 - 确保白色卡片 */
     .metric-card {
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        border-radius: 12px;
+        border: 1px solid #e0f2f1;
+        background: #ffffff;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        padding: 16px 20px;
         text-align: center;
         margin-bottom: 20px;
     }
+    
+    /* 文本样式 */
     .weight-text {
         font-size: 3em;
         font-weight: bold;
@@ -40,16 +67,36 @@ st.markdown("""
         font-size: 1.5em;
         color: #7f8c8d;
     }
-    .status-badge {
-        display: inline-block;
-        padding: 5px 10px;
-        border-radius: 15px;
+    
+    /* 按钮样式 - 使用绿色主题 */
+    .primary-btn {
+        background-color: #2e7d32;
+        color: #fff;
+        border-radius: 8px;
+        padding: 8px 18px;
+        border: none;
+    }
+    .primary-btn:hover {
+        background-color: #256628;
+    }
+    
+    /* 修改Streamlit默认按钮为绿色 */
+    .stButton > button {
+        background-color: #2e7d32;
         color: white;
-        font-weight: bold;
-        margin-bottom: 10px;
+    }
+    .stButton > button:hover {
+        background-color: #256628;
+    }
+    
+    /* 警告信息使用浅红色文字而不是红色背景 */
+    .stWarning, .stAlert {
+        border-left-color: #ff6b6b !important;
+        background-color: #fff5f5 !important;
+        color: #d63384 !important;
     }
     </style>
-    """, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
 # ==========================================
 # 串口管理类
@@ -167,12 +214,12 @@ with st.sidebar:
     
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("连接", use_container_width=True):
+        if st.button("连接", use_container_width=True, type="primary"):
             if selected_port != "未检测到串口":
                 if serial_mgr.connect(selected_port, baud_rate):
                     st.success("已连接")
     with col2:
-        if st.button("断开", use_container_width=True):
+        if st.button("断开", use_container_width=True, type="primary"):
             serial_mgr.disconnect()
             st.success("已断开")
 
@@ -192,7 +239,7 @@ with st.sidebar:
 # 3. 主程序逻辑
 # ==========================================
 model = load_yolo_model()
-st.title("⚖️ AI 智能电子秤 - 基于猛狮OS内置YOLO系统")
+st.title("⚖️ AI 智能电子秤 Calorie Station")
 
 col1, col2 = st.columns([3, 1])
 
@@ -237,11 +284,28 @@ if run_detection:
                 display_color = "#27ae60" # 绿色
                 
                 # 状态提示
+                # 转换为中文名称并生成跳转链接
+                zh_name = FOOD_NAME_MAP.get(display_product, display_product)
+                # 这里的 weight_value 单位是 g
+                weight_value = float(weight)
+                url = "https://calory-station.vercel.app/dish-recognition.html"
+                params = {
+                    "name": zh_name,
+                    "weight": f"{weight_value:.2f}"
+                }
+                full_url = url + "?" + urllib.parse.urlencode(params, encoding="utf-8")
+                
+                # 尝试自动在系统浏览器中打开
+                try:
+                    webbrowser.open(full_url)
+                except:
+                    pass
+                
                 status_html = f"""<div class='metric-card' style='padding:10px; background:#e8f8f5;'>
-                    <span style='color:#27ae60'>🔒 <b>已锁定结果</b></span><br>
+                    <span style='color:#27ae60'>🔒 <b>已锁定结果，可点击下方查看营养信息</b></span><br>
                     <small>点击侧边栏"重置"解锁</small>
-                    <div>
-                        <a href="https://calory-station.vercel.app/food-detail.html?food={display_product}">查看{display_product}介绍</a>
+                    <div style='margin-top: 10px;'>
+                        <a href="{full_url}" target="_blank" class="primary-btn">查看"{zh_name}"营养信息</a>
                     </div>
                 </div>"""
                 
@@ -283,7 +347,7 @@ if run_detection:
                             print(e)
                     
                     if not detection_locked:
-                        status_html = "<div class='metric-card' style='padding:10px;'>👀 正在识别...</div>"
+                        status_html = "<div class='metric-card' style='padding:10px;'>👀 正在识别，请保持食材稳定</div>"
                 
             # 3. 更新 UI (确保在循环内实时刷新)
             

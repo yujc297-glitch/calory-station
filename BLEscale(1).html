@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32-S3 Balance Monitor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .status-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid #dc3545;
+            transition: all 0.3s ease;
+        }
+
+        .status-card.connected {
+            border-left-color: #28a745;
+            background: #f0fff4;
+        }
+
+        .status-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #dc3545;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        .status-card.connected .status-indicator {
+            background: #28a745;
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .control-section {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .btn-fetch {
+            background: #007bff;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn-fetch:hover:not(:disabled) {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .btn-fetch:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .btn-tare {
+            background: #28a745;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .btn-tare:hover:not(:disabled) {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-connect {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-connect:hover:not(:disabled) {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .btn-disconnect {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-disconnect:hover:not(:disabled) {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .data-section {
+            background: #e7f3ff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 2px dashed #007bff;
+            text-align: center;
+        }
+
+        .data-section h3 {
+            color: #007bff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .weight-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #28a745;
+        }
+
+        .weight-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .weight-value {
+            font-size: 3em;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .unit {
+            font-size: 1.5em;
+            color: #666;
+            margin-left: 10px;
+        }
+
+        .last-update {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 15px;
+        }
+
+        .log-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .log-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .log-messages {
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .log-entry {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+
+        .log-time {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .log-info {
+            color: #007bff;
+        }
+
+        .log-success {
+            color: #28a745;
+        }
+
+        .log-error {
+            color: #dc3545;
+        }
+
+        .log-warning {
+            color: #ffc107;
+        }
+
+        .log-json {
+            color: #6f42c1;
+        }
+
+        /* Scrollbar styling */
+        .log-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .log-messages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .log-messages::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .log-messages::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚖️ ESP32-S3 Balance</h1>
+            <p>Real-time weight monitoring via BLE</p>
+        </div>
+
+        <div id="statusCard" class="status-card">
+            <h3>
+                <span class="status-indicator"></span>
+                Status: <span id="statusText">Disconnected</span>
+            </h3>
+            <p id="statusDescription">Click "Connect to ESP32" to establish BLE connection</p>
+        </div>
+
+        <div class="control-section">
+            <button id="fetchBtn" class="btn-fetch" onclick="fetchData()" disabled>
+                <span>🔄</span> Get Weight Reading
+            </button>
+            <button id="tareBtn" class="btn-tare" onclick="sendTare()" disabled>
+                <span>⚖️</span> Tare (Zero)
+            </button>
+        </div>
+
+        <div class="button-group">
+            <button id="connectBtn" class="btn-connect" onclick="connectToESP32()">
+                <span>🔗</span> Connect to ESP32
+            </button>
+            <button id="disconnectBtn" class="btn-disconnect" onclick="disconnectFromESP32()" disabled>
+                <span>🔴</span> Disconnect
+            </button>
+        </div>
+
+        <div id="dataSection" class="data-section" style="display: none;">
+            <h3>📊 Current Weight</h3>
+            
+            <div class="weight-container">
+                <div class="weight-title">Weight:</div>
+                <div class="weight-value">
+                    <span id="weightValue">0.0</span>
+                    <span class="unit">g</span>
+                </div>
+            </div>
+
+            <div class="last-update" id="lastUpdate">
+                Last updated: Never
+            </div>
+        </div>
+
+        <div class="log-section">
+            <h3>📝 Activity Log</h3>
+            <div id="logMessages" class="log-messages">
+                <div class="log-entry">
+                    <span class="log-time">[System]</span> 
+                    <span class="log-info">Page loaded. Ready to connect to ESP32-S3 Balance.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // BLE Configuration - MUST match your ESP32 code
+        const SERVICE_UUID = '12345678-1234-5678-1234-56789abcdef0';
+        const CHARACTERISTIC_UUID = '12345678-1234-5678-1234-56789abcdef1';
+
+        let bleDevice = null;
+        let bleServer = null;
+        let bleService = null;
+        let bleCharacteristic = null;
+        let isConnected = false;
+
+        // DOM Elements
+        const statusCard = document.getElementById('statusCard');
+        const statusText = document.getElementById('statusText');
+        const statusDescription = document.getElementById('statusDescription');
+        const connectBtn = document.getElementById('connectBtn');
+        const fetchBtn = document.getElementById('fetchBtn');
+        const tareBtn = document.getElementById('tareBtn');
+        const disconnectBtn = document.getElementById('disconnectBtn');
+        const dataSection = document.getElementById('dataSection');
+        const weightValue = document.getElementById('weightValue');
+        const lastUpdate = document.getElementById('lastUpdate');
+        const logMessages = document.getElementById('logMessages');
+
+        // Logging function
+        function addLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.innerHTML = `
+                <span class="log-time">[${timestamp}]</span> 
+                <span class="log-${type}">${message}</span>
+            `;
+            logMessages.appendChild(logEntry);
+            logMessages.scrollTop = logMessages.scrollHeight;
+        }
+
+        // Update connection status
+        function updateConnectionStatus(connected) {
+            isConnected = connected;
+            
+            if (connected) {
+                statusCard.classList.add('connected');
+                statusText.textContent = 'Connected';
+                statusDescription.textContent = 'Connected to ESP32S3-Balance. Ready to read weight.';
+                connectBtn.disabled = true;
+                fetchBtn.disabled = false;
+                tareBtn.disabled = false;
+                disconnectBtn.disabled = false;
+                addLog('Successfully connected to ESP32-S3 Balance', 'success');
+            } else {
+                statusCard.classList.remove('connected');
+                statusText.textContent = 'Disconnected';
+                statusDescription.textContent = 'Click "Connect to ESP32" to establish BLE connection';
+                connectBtn.disabled = false;
+                fetchBtn.disabled = true;
+                tareBtn.disabled = true;
+                disconnectBtn.disabled = true;
+                dataSection.style.display = 'none';
+            }
+        }
+
+        // Connect to ESP32 BLE
+        async function connectToESP32() {
+            try {
+                addLog('Requesting BLE device...', 'info');
+                
+                if (!navigator.bluetooth) {
+                    throw new Error('Web Bluetooth is not supported in this browser. Please use Chrome, Edge, or Opera.');
+                }
+
+                // Request BLE device
+                bleDevice = await navigator.bluetooth.requestDevice({
+                    filters: [
+                        { name: 'ESP32S3-Balance' }
+                    ],
+                    optionalServices: [SERVICE_UUID]
+                });
+
+                addLog(`Found device: ${bleDevice.name}`, 'success');
+
+                // Connect to GATT server
+                addLog('Connecting to GATT server...', 'info');
+                bleServer = await bleDevice.gatt.connect();
+
+                // Get service
+                addLog('Getting BLE service...', 'info');
+                bleService = await bleServer.getPrimaryService(SERVICE_UUID);
+
+                // Get characteristic
+                addLog('Getting characteristic...', 'info');
+                bleCharacteristic = await bleService.getCharacteristic(CHARACTERISTIC_UUID);
+
+                // Set up notifications
+                await bleCharacteristic.startNotifications();
+                bleCharacteristic.addEventListener('characteristicvaluechanged', handleDataResponse);
+                addLog('Notifications enabled', 'success');
+
+                // Handle disconnection
+                bleDevice.addEventListener('gattserverdisconnected', onDisconnected);
+
+                updateConnectionStatus(true);
+
+            } catch (error) {
+                addLog(`Connection failed: ${error.message || error}`, 'error');
+                updateConnectionStatus(false);
+            }
+        }
+
+        // Handle incoming data response
+        function handleDataResponse(event) {
+            const value = event.target.value;
+            const decoder = new TextDecoder('utf-8');
+            const jsonData = decoder.decode(value);
+            
+            try {
+                const data = JSON.parse(jsonData);
+                addLog(`Received weight data: ${jsonData}`, 'json');
+                
+                // Update weight display
+                weightValue.textContent = data.float_value.toFixed(1);
+                
+                // Update timestamp
+                const now = new Date();
+                lastUpdate.textContent = `Last updated: ${now.toLocaleTimeString()}`;
+                
+                // Show data section
+                dataSection.style.display = 'block';
+                
+                addLog('Weight displayed successfully', 'success');
+                
+            } catch (error) {
+                addLog(`Error parsing JSON data: ${error}`, 'error');
+            }
+        }
+
+        // Fetch data from ESP32
+        async function fetchData() {
+            if (!isConnected || !bleCharacteristic) {
+                addLog('Not connected to ESP32', 'error');
+                return;
+            }
+
+            try {
+                addLog('Requesting weight data...', 'info');
+                
+                const encoder = new TextEncoder('utf-8');
+                const command = encoder.encode('get_data');
+                
+                await bleCharacteristic.writeValue(command);
+                addLog('Weight request sent successfully', 'success');
+                
+            } catch (error) {
+                addLog(`Error sending weight request: ${error.message || error}`, 'error');
+            }
+        }
+
+        // Send tare command
+        async function sendTare() {
+            if (!isConnected || !bleCharacteristic) {
+                addLog('Not connected to ESP32', 'error');
+                return;
+            }
+
+            try {
+                addLog('Sending tare command...', 'info');
+                
+                const encoder = new TextEncoder('utf-8');
+                const command = encoder.encode('tare');
+                
+                await bleCharacteristic.writeValue(command);
+                addLog('Tare command sent successfully', 'success');
+                
+            } catch (error) {
+                addLog(`Error sending tare command: ${error.message || error}`, 'error');
+            }
+        }
+
+        // Disconnect from ESP32
+        function disconnectFromESP32() {
+            if (bleDevice && bleDevice.gatt.connected) {
+                bleDevice.gatt.disconnect();
+                addLog('Disconnected from ESP32', 'info');
+            }
+            updateConnectionStatus(false);
+        }
+
+        // Handle automatic disconnection
+        function onDisconnected() {
+            addLog('Device disconnected', 'warning');
+            updateConnectionStatus(false);
+        }
+
+        // Browser compatibility check
+        if (!navigator.bluetooth) {
+            addLog('⚠️ Web Bluetooth API not available. Please use Chrome, Edge, or Opera on desktop.', 'error');
+            connectBtn.disabled = true;
+            connectBtn.innerHTML = '<span>❌</span> Web Bluetooth Not Supported';
+        }
+    </script>
+</body>
+</html>

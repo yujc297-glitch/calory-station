@@ -639,8 +639,29 @@
 
         // 主逻辑
         if (foodParam) {
-            // 尝试直接匹配
-            const foodData = FOOD_DATA[foodParam];
+            // 解码URL参数，确保能正确处理编码后的食物名称
+            const decodedFoodParam = decodeURIComponent(foodParam);
+            
+            // 尝试直接匹配解码后的参数
+            let foodData = FOOD_DATA[decodedFoodParam];
+            
+            // 如果直接匹配失败，尝试一些常见的变种（如大小写转换）
+            if (!foodData) {
+                // 转换为小写尝试匹配
+                const lowerCaseParam = decodedFoodParam.toLowerCase();
+                foodData = FOOD_DATA[lowerCaseParam];
+                
+                // 如果还是没找到，遍历数据库查找包含关系
+                if (!foodData) {
+                    for (const key in FOOD_DATA) {
+                        if (FOOD_DATA.hasOwnProperty(key) && 
+                            (key.includes(decodedFoodParam) || decodedFoodParam.includes(key))) {
+                            foodData = FOOD_DATA[key];
+                            break;
+                        }
+                    }
+                }
+            }
             
             if (foodData) {
                 renderFoodDetails(foodData);

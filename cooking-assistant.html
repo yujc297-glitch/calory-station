@@ -764,6 +764,29 @@
             }
         }
         
+        // 解析URL参数，如果有ingredient参数则自动添加食材
+        function checkUrlForIngredient() {
+            const params = new URLSearchParams(window.location.search);
+            const ingredientParam = params.get('ingredient');
+            
+            if (ingredientParam) {
+                try {
+                    const ingredient = decodeURIComponent(ingredientParam).trim();
+                    if (ingredient && !ingredients.includes(ingredient)) {
+                        // 延迟执行以确保页面完全加载
+                        setTimeout(() => {
+                            ingredients.push(ingredient);
+                            saveIngredients();
+                            renderIngredients();
+                            console.log('已从URL自动添加食材:', ingredient);
+                        }, 100);
+                    }
+                } catch (e) {
+                    console.error('解析食材参数失败:', e);
+                }
+            }
+        }
+        
         // 保存食材到localStorage
         function saveIngredients() {
             localStorage.setItem('cookingAssistantIngredients', JSON.stringify(ingredients));
@@ -833,6 +856,9 @@
         // 初始化
         loadIngredients();
         updateAddButton();
+        
+        // 检查URL是否包含食材参数并自动添加
+        checkUrlForIngredient();
         
         // 安全提示注释
         /* 安全提示注释

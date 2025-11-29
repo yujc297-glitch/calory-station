@@ -24,11 +24,43 @@ if "detail_opened" not in st.session_state:
 
 # 食物名称映射
 FOOD_NAME_MAP = {
-    "bell pepper": "辣椒",
-    "mushroom": "蘑菇",
-    "mush": "蘑菇",
+    # 水果
+    "apple": "苹果",
     "banana": "香蕉",
+    "orange": "橙子",
+    "grape": "葡萄",
+    "strawberry": "草莓",
+    "pear": "梨",
+    "lemon": "柠檬",
+    "peach": "桃子",
+    "watermelon": "西瓜",
+    "kiwi": "猕猴桃",
+    
+    # 蔬菜
     "tomato": "西红柿",
+    "potato": "土豆",
+    "carrot": "胡萝卜",
+    "cucumber": "黄瓜",
+    "broccoli": "西兰花",
+    "bell pepper": "青椒",
+    "mushroom": "蘑菇",
+    "eggplant": "茄子",
+    "onion": "洋葱",
+    "cabbage": "卷心菜",
+    "corn": "玉米",
+    "spinach": "菠菜",
+    "snow_pea":"荷兰豆",
+    "chestnut":"栗子",
+    "chilli":"辣椒 ",
+    "white ball":"大蒜",
+    "yellow cylinder":"玉米",
+    "yellow ball":"玉米",
+    "red stick":"辣椒",
+    #加工食品
+    "bread":"面包",
+    "OREO":"奥利奥",
+    "chocolate":"巧克力",
+
 }
 
 # 自定义 CSS 样式
@@ -187,13 +219,22 @@ class CameraManager:
 @st.cache_resource
 def load_yolo_model():
     try:
+        # 使用 yolov8s-world.pt，也可以尝试 yolov8m-world.pt (更准但更慢)
         model = YOLOWorld('yolov8s-world.pt')
-        classes = ["bell pepper", "mush", "mushroom", "banana"]
+        
+        # --- 修改重点：定义所有你希望模型能识别的英文单词 ---
+        # 这里的单词必须是英文，模型会根据这些词去寻找物体
+        classes = [ 
+            "tomato",  "carrot",  "cucumber", 
+            "mushroom", "corn","snow_pea","chestnut"
+            "OREO","corn","chocolate","chilli","white ball","yellow cylinder","yellow ball","red stick","bread"
+        ]
         model.set_classes(classes)
         return model
     except Exception as e:
         st.error(f"模型加载失败: {e}")
         return None
+
 
 # 初始化管理器
 if 'serial_mgr' not in st.session_state:
@@ -308,9 +349,11 @@ if run_detection:
                 # 尝试自动在系统浏览器中打开，仅当未打开过时
                 if not st.session_state["detail_opened"]:
                     try:
+                        # 延迟 2 秒，等称重数据稳定
+                        time.sleep(2)
                         webbrowser.open(full_url)
                         st.session_state["detail_opened"] = True
-                    except:
+                    except Exception:
                         pass
                 
                 status_html = f"""<div class='metric-card' style='padding:10px; background:#e8f8f5;'>

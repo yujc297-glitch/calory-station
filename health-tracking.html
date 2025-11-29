@@ -392,6 +392,48 @@
             color: white;
         }
         
+        /* AI计算中弹窗样式 */
+        .ai-calculation-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .ai-calculation-dialog {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .ai-calculation-dialog h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        /* Loading Spinner 样式 */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #eee;
+            border-top-color: #2e7d32;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
         /* 记录食物按钮样式 */
         .btn-record-food {
             display: block;
@@ -1229,6 +1271,18 @@
     </main>
     
     <!-- 页脚 -->
+    <!-- AI计算中弹窗 -->
+    <div id="ai-calc-overlay" class="ai-calculation-overlay">
+        <div class="ai-calculation-dialog">
+            <h3>AI 正在计算营养信息...</h3>
+            <div class="spinner"></div>
+            <p>请稍候，正在分析食物成分...</p>
+        </div>
+    </div>
+    
+    <!-- AI错误信息显示区域 -->
+    <div id="ai-error-message" style="display: none; background-color: #fee; color: #c62828; padding: 10px; margin: 10px 0; border-radius: 5px;"></div>
+    
     <footer class="footer">
         <div class="container">
             <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
@@ -1312,6 +1366,30 @@
             // 原材料识别 → 健康追踪数据传递逻辑
             // 检查localStorage中是否有待记录的食物数据
             checkPendingFoodData();
+            
+            // 解析URL参数，如果source === 'recognition'且有name，则自动打开记录食物弹窗并预填数据
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('source') === 'recognition' && params.get('name')) {
+                const name = decodeURIComponent(params.get('name'));
+                const weight = params.get('weight') ? decodeURIComponent(params.get('weight')) : '';
+                
+                // 延迟一小段时间确保所有元素都已加载完成
+                setTimeout(() => {
+                    // 设置食物名称和重量
+                    if (foodNameInput) foodNameInput.value = name;
+                    if (foodWeightInput) foodWeightInput.value = weight;
+                    
+                    // 更新来源标签
+                    const sourceLabel = document.getElementById('intake-source-label');
+                    if (sourceLabel) sourceLabel.textContent = '食材识别导入';
+                    
+                    // 打开记录食物的弹窗
+                    window.location.hash = '#log-food-modal';
+                    
+                    // 检查食物是否在数据库中
+                    checkFoodInDatabase();
+                }, 100);
+            }
             
             // 加载数据和设置事件监听
             loadRecords();
@@ -1412,12 +1490,55 @@
                     fiberInput.value = result.fiber.toFixed(1);
                 }
                 
+                // 矿物质上限校正逻辑
                 if (result.minerals && typeof result.minerals === 'number') {
-                    mineralInput.value = result.minerals.toFixed(0);
+                    // 获取数据库中的参考值（如果存在）
+                    const dbFood = foodNutritionDB[foodName];
+                    let correctedMineral = result.minerals;
+                    
+                    // 如果食物在数据库中，基于每100g值做校正
+                    if (dbFood && dbFood.mineral) {
+                        const ratio = weight / 100;
+                        const basePer100g = dbFood.mineral;
+                        const expectedValue = basePer100g * ratio;
+                        const maxAllowedValue = expectedValue * 1.5;
+                        
+                        // 确保不超过上限
+                        correctedMineral = Math.min(result.minerals, maxAllowedValue);
+                        
+                        // 如果数据库有值但AI返回为0或很小，使用数据库计算值
+                        if (result.minerals <= 0 && expectedValue > 0) {
+                            correctedMineral = expectedValue;
+                        }
+                    } else if (result.minerals > 1000) {
+                        // 对于未知食物，设置一个合理上限
+                        correctedMineral = 1000; // 每100g食物矿物质通常不会超过1000mg
+                    }
+                    
+                    mineralInput.value = Math.floor(correctedMineral);
                 }
                 
+                // 维生素也应用类似的校正逻辑
                 if (result.vitamins && typeof result.vitamins === 'number') {
-                    vitaminInput.value = result.vitamins.toFixed(0);
+                    const dbFood = foodNutritionDB[foodName];
+                    let correctedVitamin = result.vitamins;
+                    
+                    if (dbFood && dbFood.vitamin) {
+                        const ratio = weight / 100;
+                        const basePer100g = dbFood.vitamin;
+                        const expectedValue = basePer100g * ratio;
+                        const maxAllowedValue = expectedValue * 1.5;
+                        
+                        correctedVitamin = Math.min(result.vitamins, maxAllowedValue);
+                        
+                        if (result.vitamins <= 0 && expectedValue > 0) {
+                            correctedVitamin = expectedValue;
+                        }
+                    } else if (result.vitamins > 500) {
+                        correctedVitamin = 500; // 每100g食物维生素通常不会超过500mg
+                    }
+                    
+                    vitaminInput.value = Math.floor(correctedVitamin);
                 }
                 
             } catch (error) {

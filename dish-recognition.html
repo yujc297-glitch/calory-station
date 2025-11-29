@@ -533,7 +533,7 @@
                     <div class="recognition-actions">
                         <a class="btn-primary" id="btn-to-health" href="health-tracking.html">添加至健康追踪</a>
                         <a class="btn-secondary" id="btn-to-cooking" href="cooking-assistant.html">添加到烹饪助手</a>
-                        <a class="btn-secondary" id="btn-to-detail" href="nutrition-detail.html">查看详细营养信息</a>
+                        <a class="btn-secondary" id="btn-to-detail" href="food-detail.html">查看详细营养信息</a>
                     </div>
                 </div>
             </div>
@@ -594,9 +594,13 @@
             const w = parseFloat(weight);
             if (!isNaN(w)) {
               weightEl.textContent = w.toFixed(1);
+              weightEl.dataset.value = w.toFixed(1); // 存储原始重量值
             } else {
               weightEl.textContent = "--";
+              weightEl.dataset.value = "";
             }
+          } else if (weightEl) {
+            weightEl.dataset.value = "";
           }
         
           // 如果没有 name 参数，可以保留"等待识别…"或其它默认提示
@@ -652,9 +656,8 @@
               const nameText = checkRecognitionResult();
               if (!nameText) return;
               
-              // 检查是否存在nutrition-detail.html或food-detail.html
-              // 根据用户要求使用nutrition-detail.html
-              const targetUrl = `nutrition-detail.html?food=${encodeURIComponent(nameText)}`;
+              // 根据需求使用food-detail.html
+              const targetUrl = `food-detail.html?food=${encodeURIComponent(nameText)}`;
               window.location.href = targetUrl;
             });
           }

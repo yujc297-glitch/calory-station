@@ -560,7 +560,40 @@
         </div>
     </footer>
     <script>
-        // 静态映射：中文名 -> 分类 + 参考热量
+        // 食物信息映射表：中文名 -> 分类 + 参考热量
+        const FOOD_INFO_MAP = {
+          "绿彩椒": {
+            category: "蔬菜类",
+            kcalPer100g: 20
+          },
+          "黄彩椒": {
+            category: "蔬菜类",
+            kcalPer100g: 27
+          },
+          "橘子": {
+            category: "水果类",
+            kcalPer100g: 43
+          },
+          "苹果": {
+            category: "水果类",
+            kcalPer100g: 52
+          },
+          "面包": {
+            category: "主食/谷物类",
+            kcalPer100g: 265
+          }
+        };
+        
+        // 英文到中文的映射
+        const EN_TO_ZH_MAP = {
+          "green bell pepper": "绿彩椒",
+          "yellow bell pepper": "黄彩椒",
+          "orange": "橘子",
+          "apple": "苹果",
+          "bread": "面包"
+        };
+        
+        // 静态映射：中文名 -> 分类 + 参考热量 (保留旧映射作为补充)
         const FOOD_META = {
           "辣椒": { category: "蔬菜类", caloriesPer100g: 31 },
           "蘑菇": { category: "菌菇类", caloriesPer100g: 22 },
@@ -579,15 +612,39 @@
           const weightEl = document.getElementById("material-weight");
           const calEl = document.getElementById("material-calorie");
         
-          if (name && nameEl) {
-            nameEl.textContent = name;
-            const meta = FOOD_META[name] || {};
-            if (catEl) catEl.textContent = meta.category || "其他";
-            if (calEl && meta.caloriesPer100g) {
-              calEl.textContent = meta.caloriesPer100g + " kcal / 100 g";
-            } else if (calEl) {
-              calEl.textContent = "--";
+          // 更新食物信息的函数
+          function updateFoodInfo(recognizedNameRaw) {
+            let name = recognizedNameRaw;
+            
+            // 英文转中文（如果匹配到）
+            const lower = name.toLowerCase();
+            if (EN_TO_ZH_MAP[lower]) {
+              name = EN_TO_ZH_MAP[lower];
             }
+            
+            // 显示名称
+            nameEl.textContent = name;
+            
+            // 首先尝试在FOOD_INFO_MAP中查找
+            const info = FOOD_INFO_MAP[name];
+            if (info) {
+              if (catEl) catEl.textContent = info.category;
+              if (calEl) calEl.textContent = `约 ${info.kcalPer100g} kcal / 100 g`;
+            } 
+            // 如果没找到，尝试在旧映射中查找
+            else {
+              const meta = FOOD_META[name] || {};
+              if (catEl) catEl.textContent = meta.category || "其他";
+              if (calEl && meta.caloriesPer100g) {
+                calEl.textContent = meta.caloriesPer100g + " kcal / 100 g";
+              } else if (calEl) {
+                calEl.textContent = "--";
+              }
+            }
+          }
+          
+          if (name && nameEl) {
+            updateFoodInfo(name);
           }
         
           if (weight && weightEl) {

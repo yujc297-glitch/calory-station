@@ -965,7 +965,7 @@
                     isTyping = false;
                     
                     // 打字完成后将文本转换为Markdown
-                    const markdownHtml = parseMarkdown(text);
+                    const markdownHtml = markdownToHtml(text);
                     element.innerHTML = markdownHtml;
                     
                     // 调用回调函数
@@ -1027,13 +1027,12 @@
 - 不返回HTML标签`;
                 
                 // 调用后端API
-                const response = await fetch('/api/nutrition-ai', {
+                const response = await fetch('/api/nutrition-knowledge-ai', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        system_prompt: systemPrompt,
                         message: userText,
                         history: history
                     })
@@ -1044,10 +1043,10 @@
                     throw new Error('服务器响应错误');
                 }
                 
-                // 解析JSON响应
+                // 解析JSON响应并直接处理Markdown内容
                 const data = await response.json();
                 
-                // 处理回答
+                // 直接从响应中获取Markdown格式的回答
                 let answer = data.answer || '';
                 answer = answer.trim();
                 
@@ -1098,7 +1097,7 @@
                 // 将工具栏添加到消息包装器
                 wrapper.appendChild(toolbar);
                 
-                // 使用打字效果显示回答
+                // 使用打字效果显示回答，打字完成后在typeWriterEffect内部会自动转换为HTML
                 typeWriterEffect(message, answer, () => {
                     // 打字完成后的操作
                 });

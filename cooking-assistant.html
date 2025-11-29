@@ -199,6 +199,52 @@
         .form-group input[type="text"]::placeholder {
             color: #999;
         }
+
+        /* 加载遮罩层样式 */
+        .cooking-loading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            border-radius: 10px;
+        }
+
+        .cooking-loading-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* 加载动画样式 */
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #2e8b57;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .recipes-section {
+            position: relative;
+        }
         
         /* 食材输入区域样式 */
         .ingredients-input-container {
@@ -731,6 +777,13 @@
                 <div class="recipes-grid">
                     <!-- 空容器，等待JavaScript动态插入内容 -->
                 </div>
+                <!-- 加载遮罩层 -->
+                <div id="cooking-loading-overlay" class="cooking-loading" style="display:none;">
+                    <div class="cooking-loading-card">
+                        <div class="spinner"></div>
+                        <p>正在为你生成菜谱方案，请稍候…</p>
+                    </div>
+                </div>
             </section>
             
             <div style="text-align: center; margin-top: 50px;">
@@ -1106,6 +1159,10 @@
                 generateRecipeBtn.disabled = true;
                 generateRecipeBtn.textContent = '生成中...';
                 
+                // 显示加载遮罩层
+                const overlay = document.getElementById('cooking-loading-overlay');
+                if (overlay) overlay.style.display = 'flex';
+                
                 try {
                     // 调用生成函数
                     const aiResponse = await generateRecipes(ingredients, cuisineValue, selectedTastes);
@@ -1144,6 +1201,10 @@
                     // 恢复按钮状态
                     generateRecipeBtn.disabled = false;
                     generateRecipeBtn.textContent = '生成做菜方案';
+                    
+                    // 隐藏加载遮罩层
+                    const overlay = document.getElementById('cooking-loading-overlay');
+                    if (overlay) overlay.style.display = 'none';
                 }
             });
         }

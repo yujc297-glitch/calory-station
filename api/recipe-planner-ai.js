@@ -1,4 +1,4 @@
-// 菜谱推荐AI助手后端API（优化版）
+// 菜谱推荐AI助手后端API
 // 前端调用方式：
 // URL: /api/recipe-planner-ai
 // 方法: POST
@@ -16,9 +16,9 @@
 // 配置Node.js运行时
 export const config = { runtime: 'nodejs' };
 
-// DeepSeek API配置 - 放在handler外部，避免重复初始化
+// DeepSeek API配置
 const DS_URL = 'https://api.deepseek.com/v1/chat/completions';
-const MODEL = 'deepseek-chat'; // 使用较快的模型
+const MODEL = 'deepseek-chat';
 
 // 默认导出的处理函数
 export default async function handler(req, res) {
@@ -45,19 +45,37 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'NO_API_KEY' });
     }
 
-    // 构造精简的系统提示
+    // 构造系统提示
     const systemMessage = {
       role: 'system',
-      content: '你是菜谱规划助手，根据用户需求生成一日三餐加加餐的营养菜谱。严格按JSON格式返回，包含名称、简介、食材、步骤和热量。'
+      content: '你是一个专业的菜谱规划助手，擅长根据用户的身体状况、饮食偏好和目标生成一日三餐的菜单计划。请严格按照JSON格式返回，不包含任何markdown或代码块。返回的数据应包括早餐、午餐、晚餐和加餐的详细菜谱，每个菜谱包含名称、简介、主要食材、步骤和估计热量。请确保营养均衡，符合用户的健康目标。'
     };
 
-    // 构造messages数组（移除历史消息处理，加快响应）
-    const messages = [systemMessage, {
+    // 构造messages数组
+    const messages = [systemMessage];
+    
+    // 处理历史消息
+    if (Array.isArray(history)) {
+      history.forEach(item => {
+        // 只接受有效的历史记录
+        if (item && 
+            (item.role === 'user' || item.role === 'assistant') &&
+            typeof item.content === 'string') {
+          messages.push({
+            role: item.role,
+            content: item.content.slice(0, 1000) // 限制历史消息长度
+          });
+        }
+      });
+    }
+
+    // 添加当前用户问题
+    messages.push({
       role: 'user',
       content: input
-    }];
+    });
 
-    // 调用DeepSeek API - 使用更快的配置
+    // 调用DeepSeek API
     const resp = await fetch(DS_URL, {
       method: 'POST',
       headers: {
@@ -67,8 +85,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: MODEL,
         messages,
-        temperature: 0.4, // 稍微提高temperature增加多样性
-        max_tokens: 768  // 减少max_tokens加快响应速度
+        temperature: 0.2
       })
     });
 
@@ -91,7 +108,7 @@ export default async function handler(req, res) {
       return res.status(200).json({ answer: trimmedContent });
     } else {
       return res.status(200).json({ 
-        answer: '暂无推荐，请稍后再试。' // 简化错误提示
+        answer: '抱歉，这次没有生成有效回答，请稍后再试。' 
       });
     }
 

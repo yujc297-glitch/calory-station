@@ -29,6 +29,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Python
+__pycache__/
+.venv/
+
 # Editor directories
 .vscode/*
 !.vscode/extensions.json

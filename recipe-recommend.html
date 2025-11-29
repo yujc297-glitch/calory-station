@@ -928,7 +928,7 @@
                         
                         <!-- 重新生成按钮 -->
                         <div class="regenerate-section">
-                            <button id="btn-regenerate-recipes" class="btn-secondary">重新生成菜谱</button>
+                            <button id="regenerate-btn" class="btn-secondary">重新生成菜谱</button>
                         </div>
                     </div>
                     
@@ -953,7 +953,7 @@
     <footer class="footer">
         <div class="container">
             <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
-            <p>本页面为演示前端界面，不包含实际功能。</p>
+            <!-- 演示前端界面提示已移除 -->
         </div>
     </footer>
     
@@ -963,7 +963,6 @@
         
         // DOM元素
         const generateBtn = document.getElementById('generate-btn');
-        const regenerateBtn = document.getElementById('regenerate-btn');
         const loadingIndicator = document.getElementById('loading-indicator');
         const resultContent = document.getElementById('result-content');
         const errorMessage = document.getElementById('error-message');
@@ -979,11 +978,6 @@
         // 添加生成按钮点击事件
         generateBtn.addEventListener('click', generateRecipe);
         
-        // 添加重新生成按钮点击事件
-        if (regenerateBtn) {
-            regenerateBtn.addEventListener('click', generateRecipe);
-        }
-        
         // 生成菜谱函数
         async function generateRecipe() {
             // 显示加载状态
@@ -993,23 +987,18 @@
                 // 收集用户输入
                 const userInput = collectUserInput();
                 
-                // 调用优化后的API，使用结构化参数
+                // 构造提示词
+                const prompt = constructPrompt(userInput);
+                
+                // 调用API
                 const response = await fetch(RECIPE_API_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({
-                        gender: userInput.gender === 'male' ? '男' : '女',
-                        age: parseInt(userInput.age),
-                        height: parseInt(userInput.height),
-                        weight: parseInt(userInput.weight),
-                        activity_level: userInput.activityLevel,
-                        goal: userInput.goalType,
-                        calorie_goal: parseInt(userInput.calorieGoal),
-                        cuisines: userInput.cuisines,
-                        tastes: userInput.tastes,
-                        avoid_foods: userInput.avoidFoods
+                    body: JSON.stringify({ 
+                        message: prompt, 
+                        history: [] 
                     })
                 });
                 
@@ -1023,8 +1012,11 @@
                     throw new Error(data.error);
                 }
                 
-                // 直接使用结构化数据进行渲染
-                renderRecipe(data.day_plan || data);
+                // 解析响应
+                const recipeData = parseResponse(data.answer);
+                
+                // 渲染结果
+                renderRecipe(recipeData);
                 
                 // 显示结果内容
                 showResult();
@@ -1278,116 +1270,32 @@ ${avoidFoods ? `- 禁忌食物：${avoidFoods}` : ''}
         
         // 显示加载状态
         function showLoading() {
-            // 确保加载指示器存在并配置
-            if (loadingIndicator) {
-                loadingIndicator.innerHTML = '<div class="spinner"></div><p class="loading-text">正在为您生成菜谱，请稍候...</p>';
-                loadingIndicator.classList.remove('hidden');
-            }
-            
-            // 禁用所有生成按钮
-            if (generateBtn) {
-                generateBtn.disabled = true;
-                generateBtn.textContent = '生成中...';
-                generateBtn.classList.add('btn-loading');
-            }
-            if (regenerateBtn) {
-                regenerateBtn.disabled = true;
-                regenerateBtn.textContent = '生成中...';
-                regenerateBtn.classList.add('btn-loading');
-            }
-            
-            // 隐藏其他元素
-            if (resultContent) {
-                resultContent.classList.add('hidden');
-            }
-            if (errorMessage) {
-                errorMessage.classList.add('hidden');
-            }
-            if (emptyState) {
-                emptyState.classList.add('hidden');
-            }
+            generateBtn.disabled = true;
+            loadingIndicator.classList.remove('hidden');
+            resultContent.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+            emptyState.classList.add('hidden');
         }
-
+        
         // 隐藏加载状态
         function hideLoading() {
-            if (loadingIndicator) {
-                loadingIndicator.classList.add('hidden');
-            }
-            
-            // 恢复所有生成按钮
-            if (generateBtn) {
-                generateBtn.disabled = false;
-                generateBtn.textContent = '生成今日菜谱';
-                generateBtn.classList.remove('btn-loading');
-            }
-            if (regenerateBtn) {
-                regenerateBtn.disabled = false;
-                regenerateBtn.textContent = '重新生成菜谱';
-                regenerateBtn.classList.remove('btn-loading');
-            }
+            generateBtn.disabled = false;
+            loadingIndicator.classList.add('hidden');
         }
-
+        
         // 显示结果
         function showResult() {
-            if (resultContent) {
-                resultContent.classList.remove('hidden');
-            }
-            if (errorMessage) {
-                errorMessage.classList.add('hidden');
-            }
-            if (emptyState) {
-                emptyState.classList.add('hidden');
-            }
+            resultContent.classList.remove('hidden');
+            errorMessage.classList.add('hidden');
+            emptyState.classList.add('hidden');
         }
-
+        
         // 显示错误
-        function showError(message = '生成菜谱时出现错误，请稍后重试。') {
-            if (errorMessage) {
-                // 设置错误消息文本
-                const errorParagraph = errorMessage.querySelector('p') || document.createElement('p');
-                errorParagraph.textContent = message;
-                if (!errorMessage.querySelector('p')) {
-                    errorMessage.appendChild(errorParagraph);
-                }
-                
-                errorMessage.classList.remove('hidden');
-                if (resultContent) {
-                    resultContent.classList.add('hidden');
-                }
-                if (emptyState) {
-                    emptyState.classList.add('hidden');
-                }
-                
-                // 3秒后自动隐藏错误信息
-                setTimeout(() => {
-                    if (errorMessage) {
-                        errorMessage.classList.add('hidden');
-                    }
-                }, 3000);
-            }
+        function showError() {
+            resultContent.classList.add('hidden');
+            errorMessage.classList.remove('hidden');
+            emptyState.classList.add('hidden');
         }
-        
-        // 添加CSS样式
-        function addStyles() {
-            const styleId = 'loading-animation-styles';
-            if (!document.getElementById(styleId)) {
-                const style = document.createElement('style');
-                style.id = styleId;
-                style.textContent = `
-                    .btn-loading {
-                        opacity: 0.7;
-                        cursor: not-allowed;
-                    }
-                    .error-message {
-                        transition: opacity 0.3s ease;
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-        }
-        
-        // 初始化时添加样式
-        addStyles();
     </script>
 </body>
 </html>

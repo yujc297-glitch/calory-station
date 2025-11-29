@@ -350,6 +350,60 @@
                 max-width: 80%;
                 word-wrap: break-word;
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                position: relative;
+            }
+            
+            /* AI消息工具栏样式 */
+            .ai-message-toolbar {
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                display: flex;
+                gap: 4px;
+                opacity: 0;
+                transition: opacity 0.2s ease;
+            }
+            
+            /* 消息包装器hover时显示工具栏 */
+            .ai-message-wrapper:hover .ai-message-toolbar {
+                opacity: 1;
+            }
+            
+            /* 按钮样式 */
+            .ai-message-btn {
+                background-color: transparent;
+                border: 1px solid #2e7d32;
+                color: #2e7d32;
+                font-size: 12px;
+                padding: 2px 6px;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+            
+            .ai-message-btn:hover {
+                background-color: #2e7d32;
+                color: white;
+            }
+            
+            /* 复制成功提示样式 */
+            .copy-success-toast {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: #4caf50;
+                color: white;
+                padding: 8px 16px;
+                border-radius: 4px;
+                font-size: 14px;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                z-index: 1000;
+            }
+            
+            .copy-success-toast.show {
+                opacity: 1;
             }
             
             /* Loading 状态样式 */
@@ -731,7 +785,7 @@
     <footer class="footer">
         <div class="container">
             <p>© 2025 卡路里基站 | AI 智能饮食与营养管理平台</p>
-            <p>本页面为演示前端界面，不包含实际功能。</p>
+            
         </div>
     </footer>
 
@@ -751,6 +805,37 @@
         let isTyping = false;
         // 存储当前打字动画的定时器ID
         let typewriterTimer = null;
+        
+        // 初始化复制成功提示元素
+        function initCopyToast() {
+            const toast = document.createElement('div');
+            toast.className = 'copy-success-toast';
+            toast.textContent = '已复制到剪贴板';
+            document.body.appendChild(toast);
+        }
+        
+        // 显示复制成功提示
+        function showCopyToast() {
+            const toast = document.querySelector('.copy-success-toast');
+            if (toast) {
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 1500);
+            }
+        }
+        
+        // 复制文本到剪贴板
+        async function copyToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                showCopyToast();
+                return true;
+            } catch (err) {
+                console.error('复制失败:', err);
+                return false;
+            }
+        }
 
         // 滚动到对话底部
         function scrollToBottom() {
@@ -787,6 +872,71 @@
         // - 如用户提问明显超出范围（疾病诊断、处方药、政治等），后端会做过滤
         // - 前端如收到空回答或错误时统一提示用户
         
+        // 简单的Markdown解析函数
+        function parseMarkdown(text) {
+            // 解析h1标题
+            text = text.replace(/^#\s+([^\n]+)/gm, '<h1>$1</h1>');
+            // 解析h2标题
+            text = text.replace(/^##\s+([^\n]+)/gm, '<h2>$1</h2>');
+            // 解析h3标题
+            text = text.replace(/^###\s+([^\n]+)/gm, '<h3>$1</h3>');
+            // 解析无序列表
+            text = text.replace(/^-\s+([^\n]+)/gm, '<li>$1</li>');
+            // 将连续的li标签包装到ul标签中
+            text = text.replace(/<\/li>\s*<li>/g, '</li><li>');
+            text = text.replace(/(<li>.*?<\/li>)/gs, '<ul>$1</ul>');
+            // 解析段落（将非标题、非列表的行包装成p标签）
+            const lines = text.split('\n');
+            let inUl = false;
+            let result = '';
+            
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+                
+                // 跳过空行
+                if (line === '') {
+                    if (inUl) {
+                        result += '</ul>';
+                        inUl = false;
+                    }
+                    continue;
+                }
+                
+                // 检查是否是标题
+                if (line.startsWith('<h1>') || line.startsWith('<h2>') || line.startsWith('<h3>')) {
+                    if (inUl) {
+                        result += '</ul>';
+                        inUl = false;
+                    }
+                    result += line + '\n';
+                } 
+                // 检查是否是列表项
+                else if (line.startsWith('<ul>')) {
+                    result += line;
+                    inUl = true;
+                } 
+                else if (line === '</ul>') {
+                    result += line + '\n';
+                    inUl = false;
+                }
+                // 普通段落
+                else {
+                    if (inUl) {
+                        result += '</ul>';
+                        inUl = false;
+                    }
+                    result += '<p>' + line + '</p>\n';
+                }
+            }
+            
+            // 确保关闭最后一个ul标签
+            if (inUl) {
+                result += '</ul>';
+            }
+            
+            return result;
+        }
+        
         // 模拟打字效果的函数
         function typeWriterEffect(element, text, callback) {
             // 标记为正在打字
@@ -813,6 +963,11 @@
                     // 打字完成，清除定时器
                     clearInterval(typewriterTimer);
                     isTyping = false;
+                    
+                    // 打字完成后将文本转换为Markdown
+                    const markdownHtml = parseMarkdown(text);
+                    element.innerHTML = markdownHtml;
+                    
                     // 调用回调函数
                     if (callback) {
                         callback();
@@ -842,6 +997,35 @@
             scrollToBottom();
             
             try {
+                // 设置system prompt以规范AI回复格式
+                const systemPrompt = `你是一位专业的营养科普助手，请严格按照以下结构格式回复，不要输出散文：
+
+# 主题概览（大标题）
+一句话总结本次回答的核心观点。
+
+## 一、主要功效 / 作用（小标题）
+- 功效1：一段简短说明  
+- 功效2：一段简短说明  
+- 功效3：一段简短说明  
+
+## 二、适合人群（小标题）
+- 人群1：说明  
+- 人群2：说明  
+
+## 三、注意事项（小标题）
+- 注意点1  
+- 注意点2  
+
+## 四、常见来源（小标题）
+- 来源1  
+- 来源2  
+
+要求：
+- 文本清晰、避免大段堆叠
+- 每条回复不超过500字
+- 按Markdown格式输出标题与列表
+- 不返回HTML标签`;
+                
                 // 调用后端API
                 const response = await fetch('/api/nutrition-ai', {
                     method: 'POST',
@@ -849,6 +1033,7 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
+                        system_prompt: systemPrompt,
                         message: userText,
                         history: history
                     })
@@ -873,6 +1058,46 @@
                 
                 // 更新占位气泡内容，但不直接显示完整回答
                 message.className = 'ai-message';
+                
+                // 创建工具栏
+                const toolbar = document.createElement('div');
+                toolbar.className = 'ai-message-toolbar';
+                
+                // 创建复制按钮
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'ai-message-btn';
+                copyBtn.textContent = '复制';
+                copyBtn.onclick = function() {
+                    copyToClipboard(answer);
+                };
+                
+                // 创建重新生成按钮
+                const regenerateBtn = document.createElement('button');
+                regenerateBtn.className = 'ai-message-btn';
+                regenerateBtn.textContent = '重新生成';
+                regenerateBtn.onclick = function() {
+                    // 找到对应的用户消息
+                    const lastUserMessage = history[history.length - 2];
+                    if (lastUserMessage && lastUserMessage.role === 'user') {
+                        // 清空当前AI消息
+                        message.textContent = 'AI 正在思考...';
+                        message.className = 'ai-message loading';
+                        
+                        // 从历史中移除当前AI消息
+                        history.pop();
+                        
+                        // 重新调用AI获取回答
+                        callNutritionAI(lastUserMessage.content);
+                    }
+                };
+                
+                // 添加按钮到工具栏
+                toolbar.appendChild(copyBtn);
+                toolbar.appendChild(regenerateBtn);
+                
+                // 将工具栏添加到消息包装器
+                wrapper.appendChild(toolbar);
+                
                 // 使用打字效果显示回答
                 typeWriterEffect(message, answer, () => {
                     // 打字完成后的操作
@@ -904,6 +1129,55 @@
 
         // 初始化事件监听
         document.addEventListener('DOMContentLoaded', function() {
+            // 初始化复制提示元素
+            initCopyToast();
+            
+            // 添加Markdown样式到文档头部
+            const style = document.createElement('style');
+            style.textContent = `
+                /* Markdown标题样式 */
+                .ai-message h1 {
+                    font-size: 20px;
+                    color: #2e7d32;
+                    font-weight: bold;
+                    margin-top: 0;
+                    margin-bottom: 10px;
+                }
+                
+                .ai-message h2 {
+                    font-size: 17px;
+                    color: #388e3c;
+                    font-weight: bold;
+                    margin-top: 15px;
+                    margin-bottom: 8px;
+                }
+                
+                .ai-message h3 {
+                    font-size: 15px;
+                    color: #4caf50;
+                    font-weight: bold;
+                    margin-top: 12px;
+                    margin-bottom: 6px;
+                }
+                
+                /* Markdown列表样式 */
+                .ai-message ul {
+                    margin-top: 6px;
+                    margin-bottom: 6px;
+                    padding-left: 24px;
+                }
+                
+                .ai-message li {
+                    margin-bottom: 8px;
+                    line-height: 1.5;
+                }
+                
+                /* 确保HTML渲染时的基本样式 */
+                .ai-message p {
+                    margin: 6px 0;
+                    line-height: 1.5;
+                }`;
+            document.head.appendChild(style);
             // 绑定关键 DOM 元素
             const inputElement = document.getElementById('ai-query-input');
             const sendButton = document.getElementById('ai-query-send');

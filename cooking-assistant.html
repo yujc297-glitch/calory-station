@@ -877,63 +877,57 @@
         
         // 预处理AI返回的内容，提取JSON代码块
         function preprocessAnswer(answer) {
-            // 去除首尾空白字符
-            let trimmedAnswer = answer.trim();
+            // 简化处理，现在主要依赖API返回结构化数据
+            if (typeof answer === 'object') {
+                return answer;
+            }
             
-            // 检查是否包含三反引号代码块
-            if (trimmedAnswer.includes('```')) {
-                // 匹配第一个代码块，支持```json或```开头
-                const codeBlockMatch = trimmedAnswer.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
-                if (codeBlockMatch && codeBlockMatch[1]) {
-                    return codeBlockMatch[1].trim();
+            // 如果传入的是字符串，尝试解析JSON
+            if (typeof answer === 'string') {
+                try {
+                    return JSON.parse(answer);
+                } catch (e) {
+                    // 如果解析失败，尝试提取代码块
+                    let trimmedAnswer = answer.trim();
+                    
+                    // 检查是否包含三反引号代码块
+                    if (trimmedAnswer.includes('```')) {
+                        // 匹配第一个代码块，支持```json或```开头
+                        const codeBlockMatch = trimmedAnswer.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+                        if (codeBlockMatch && codeBlockMatch[1]) {
+                            try {
+                                return JSON.parse(codeBlockMatch[1].trim());
+                            } catch (parseError) {
+                                console.error('解析代码块内容失败:', parseError);
+                            }
+                        }
+                    }
                 }
             }
             
-            // 如果没有代码块，尝试提取{}之间的内容
-            const firstBraceIndex = trimmedAnswer.indexOf('{');
-            const lastBraceIndex = trimmedAnswer.lastIndexOf('}');
-            
-            if (firstBraceIndex !== -1 && lastBraceIndex !== -1 && firstBraceIndex < lastBraceIndex) {
-                return trimmedAnswer.substring(firstBraceIndex, lastBraceIndex + 1).trim();
-            }
-            
-            // 如果以上都失败，返回原始文本
-            return trimmedAnswer;
+            // 返回原始内容
+            return answer;
         }
 
         // 生成菜谱的异步函数
         async function generateRecipes(ingredients, cuisine, tastes) {
-            // 组织prompt，要求只返回JSON，不包含解释性文字和Markdown代码块，返回6个菜谱
-            const prompt = `请根据以下条件设计菜品：
-- 可用食材：${ingredients.join('、')}
-- 目标菜系：${cuisine}
-- 口味偏好：${tastes.join('、')}
-
-请注意：
-1. 请确保生成的每一道菜谱都必须实际使用用户提供的所有原材料（${ingredients.join('、')}），不能遗漏，也不要引入用户未提供的主要食材。可以额外少量添加调味品（盐、油、葱姜蒜等）。
-2. 只返回JSON格式，不要前后任何解释性文字，不要使用Markdown代码块
-3. 返回格式固定为：
-{
-  "recipes": [
-    { "name": "...", "summary": "...", "ingredients": [...], "steps": [...], "estimated_calories": 0 },
-    ...
-  ]
-}
-4. recipes数组长度为6，如确实无法凑够可以少于6，但默认按6道菜生成
-5. 请使用中文输出菜名、摘要、步骤
-
-要求每道菜包含：菜名、简短描述、主要食材列表、详细做法步骤（3-6步）、预计热量（大致kcal）。`;
+            // 参数校验
+            if (!ingredients || ingredients.length === 0) {
+                throw new Error('请至少选择一种食材');
+            }
             
             try {
-                // 调用后端API
-                const response = await fetch('/api/nutrition-ai', {
+                // 调用优化后的API，使用结构化参数
+                const response = await fetch('/api/cooking-ai', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        message: prompt,
-                        history: cookingHistory
+                        ingredients: ingredients,
+                        cuisine: cuisine,
+                        tastes: tastes,
+                        dietType: '健康饮食' // 默认饮食类型
                     })
                 });
                 
@@ -945,16 +939,21 @@
                 // 解析JSON响应
                 const data = await response.json();
                 
+                // 检查是否有错误
+                if (data.error) {
+                    throw new Error(data.detail || '生成失败');
+                }
+                
                 // 更新历史记录
-                cookingHistory.push({ role: 'user', content: prompt });
-                cookingHistory.push({ role: 'assistant', content: data.answer });
+                cookingHistory.push({ role: 'user', content: JSON.stringify({ingredients, cuisine, tastes}) });
+                cookingHistory.push({ role: 'assistant', content: JSON.stringify(data) });
                 
                 // 限制历史记录长度
                 if (cookingHistory.length > 10) {
                     cookingHistory = cookingHistory.slice(-10);
                 }
                 
-                return data.answer;
+                return data;
             } catch (error) {
                 console.error('生成菜谱失败:', error);
                 throw error;
@@ -1056,29 +1055,7 @@
             }
         });
         
-        // 显示错误信息
-        function showErrorMessage(message) {
-            // 清空现有内容
-            recipesGrid.innerHTML = '';
-            
-            // 创建错误提示元素
-            const errorElement = document.createElement('div');
-            errorElement.className = 'error-message';
-            errorElement.style.cssText = `
-                background-color: #ffebee;
-                color: #c62828;
-                padding: 20px;
-                border-radius: 8px;
-                text-align: center;
-                font-size: 16px;
-                margin-top: 20px;
-                width: 100%;
-            `;
-            errorElement.textContent = message;
-            
-            // 添加到网格中
-            recipesGrid.appendChild(errorElement);
-        }
+        // 显示错误信息 (将被上面新定义的带加载状态管理的函数替代)
         
         // 绑定生成按钮点击事件
         if (generateRecipeBtn && recipesGrid) {
@@ -1103,8 +1080,74 @@
                 ).map(checkbox => checkbox.value);
                 
                 // 显示加载状态
-                generateRecipeBtn.disabled = true;
-                generateRecipeBtn.textContent = '生成中...';
+                function showLoading() {
+                    // 创建加载指示器元素（如果不存在）
+                    let loadingElement = document.getElementById('loading-indicator');
+                    if (!loadingElement) {
+                        loadingElement = document.createElement('div');
+                        loadingElement.id = 'loading-indicator';
+                        loadingElement.style.cssText = 'text-align: center; padding: 30px 0;';
+                        const resultArea = document.querySelector('.recipes-section');
+                        resultArea.insertBefore(loadingElement, recipesGrid);
+                    }
+                    
+                    loadingElement.innerHTML = '<div style="display: inline-block; width: 30px; height: 30px; border: 3px solid #f3f3f3; border-top: 3px solid #2e8b57; border-radius: 50%; animation: spin 1s linear infinite;"></div><p style="margin-top: 15px; color: #666;">正在为您生成菜谱，请稍候...</p>';
+                    loadingElement.style.display = 'block';
+                    
+                    // 禁用生成按钮
+                    if (generateRecipeBtn) {
+                        generateRecipeBtn.disabled = true;
+                        generateRecipeBtn.textContent = '生成中...';
+                        generateRecipeBtn.classList.add('btn-loading');
+                    }
+                    
+                    // 隐藏可能存在的错误信息
+                    const errorElement = document.getElementById('error-message');
+                    if (errorElement) {
+                        errorElement.style.display = 'none';
+                    }
+                }
+                
+                // 隐藏加载状态
+                function hideLoading() {
+                    const loadingElement = document.getElementById('loading-indicator');
+                    if (loadingElement) {
+                        loadingElement.style.display = 'none';
+                    }
+                    
+                    // 恢复生成按钮
+                    if (generateRecipeBtn) {
+                        generateRecipeBtn.disabled = false;
+                        generateRecipeBtn.textContent = '生成做菜方案';
+                        generateRecipeBtn.classList.remove('btn-loading');
+                    }
+                }
+                
+                // 创建和显示错误信息
+                function showErrorMessage(message) {
+                    let errorElement = document.getElementById('error-message');
+                    if (!errorElement) {
+                        errorElement = document.createElement('div');
+                        errorElement.id = 'error-message';
+                        errorElement.style.cssText = 'background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; font-size: 16px;';
+                        const resultArea = document.querySelector('.recipes-section');
+                        resultArea.insertBefore(errorElement, recipesGrid);
+                    }
+                    
+                    errorElement.textContent = message;
+                    errorElement.style.display = 'block';
+                }
+                
+                // 添加加载动画样式
+                if (!document.getElementById('loading-animation-style')) {
+                    const style = document.createElement('style');
+                    style.id = 'loading-animation-style';
+                    style.textContent = `@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } } .btn-loading { opacity: 0.7; cursor: not-allowed; }`;
+                    document.head.appendChild(style);
+                }
+                
+                // 调用显示加载状态函数
+                showLoading();
                 
                 try {
                     // 调用生成函数
@@ -1113,6 +1156,7 @@
                     // 检查结果是否为空
                     if (!aiResponse || aiResponse.trim() === '') {
                         showErrorMessage('抱歉，本次未能生成菜谱，请稍后重试或调整食材和偏好。');
+                        hideLoading();
                         return;
                     }
                     
@@ -1138,13 +1182,12 @@
                         console.error('JSON解析错误:', parseError);
                     }
                 } catch (error) {
-                    console.error('错误:', error);
-                    showErrorMessage('抱歉，本次未能生成菜谱，请稍后重试或调整食材和偏好。');
-                } finally {
-                    // 恢复按钮状态
-                    generateRecipeBtn.disabled = false;
-                    generateRecipeBtn.textContent = '生成做菜方案';
-                }
+                        console.error('错误:', error);
+                        showErrorMessage('抱歉，生成过程中出现错误，请稍后重试。错误详情: ' + error.message);
+                    } finally {
+                        // 隐藏加载状态
+                        hideLoading();
+                    }
             });
         }
     </script>

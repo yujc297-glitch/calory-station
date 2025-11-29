@@ -5,7 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>食材详情 - 卡路里基站</title>
     <style>
-        /* 全局样式 */
+        /* 全局样式 - 使用CSS变量保持绿色主题一致性 */
+        :root {
+            --primary-color: #2e8b57; /* 绿色主色调 */
+            --primary-light: rgba(46, 139, 87, 0.1); /* 浅绿色背景 */
+            --primary-dark: #237a48; /* 深绿色，用于悬停状态 */
+            --text-dark: #333; /* 深色文本 */
+            --text-medium: #666; /* 中等文本颜色 */
+            --text-light: #999; /* 浅色文本 */
+            --border-color: #f0f0f0; /* 边框颜色 */
+            --background-light: #f8f9fa; /* 浅色背景 */
+            --background-white: #ffffff; /* 白色背景 */
+            --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1); /* 轻微阴影 */
+            --shadow-medium: 0 4px 15px rgba(0, 0, 0, 0.08); /* 中等阴影 */
+            --border-radius: 12px; /* 标准圆角 */
+            --border-radius-sm: 8px; /* 小尺寸圆角 */
+            --border-radius-pill: 20px; /* 药丸形状圆角 */
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -15,8 +32,8 @@
         body {
             font-family: 'Microsoft YaHei', Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
+            color: var(--text-dark);
+            background-color: var(--background-light);
         }
         
         .container {
@@ -28,7 +45,7 @@
         /* 导航栏样式 */
         .header {
             background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-light);
             position: fixed;
             width: 100%;
             top: 0;
@@ -46,7 +63,7 @@
         .logo {
             font-size: 24px;
             font-weight: bold;
-            color: #2e8b57;
+            color: var(--primary-color);
             text-decoration: none;
         }
         
@@ -61,22 +78,22 @@
         
         .nav-links li a {
             text-decoration: none;
-            color: #333;
+            color: var(--text-dark);
             padding: 10px 15px;
             border-radius: 5px;
             transition: all 0.3s ease;
         }
         
         .nav-links li a:hover, .nav-links li a.active {
-            color: #2e8b57;
-            background-color: rgba(46, 139, 87, 0.1);
+            color: var(--primary-color);
+            background-color: var(--primary-light);
         }
         
         /* 返回按钮 */
         .back-button {
             background-color: transparent;
-            color: #2e8b57;
-            border: 1px solid #2e8b57;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
             padding: 8px 15px;
             border-radius: 5px;
             cursor: pointer;
@@ -85,7 +102,7 @@
         }
         
         .back-button:hover {
-            background-color: #2e8b57;
+            background-color: var(--primary-color);
             color: white;
         }
         
@@ -97,9 +114,9 @@
         
         /* 食物详情卡片 */
         .food-detail-card {
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            background-color: var(--background-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-medium);
             margin: 0 auto 40px;
             max-width: 960px;
             overflow: hidden;
@@ -109,7 +126,7 @@
         .food-header {
             display: flex;
             padding: 30px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid var(--border-color);
             flex-wrap: wrap;
             gap: 30px;
         }
@@ -119,7 +136,7 @@
             width: 180px;
             height: 180px;
             border-radius: 50%;
-            background-color: #f5f5f5;
+            background-color: var(--border-color);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -127,7 +144,7 @@
         }
         
         .food-image-placeholder {
-            color: #999;
+            color: var(--text-light);
             font-size: 18px;
         }
         
@@ -142,13 +159,13 @@
         
         .food-name-zh {
             font-size: 28px;
-            color: #333;
+            color: var(--text-dark);
             margin-right: 10px;
         }
         
         .food-name-en {
             font-size: 20px;
-            color: #666;
+            color: var(--text-medium);
             font-weight: normal;
         }
         
@@ -159,22 +176,22 @@
         }
         
         .food-tag {
-            background-color: rgba(46, 139, 87, 0.1);
-            color: #2e8b57;
+            background-color: var(--primary-light);
+            color: var(--primary-color);
             padding: 5px 12px;
-            border-radius: 20px;
+            border-radius: var(--border-radius-pill);
             font-size: 14px;
         }
         
         /* 宏量营养素卡片区域 */
         .macros-section {
             padding: 30px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid var(--border-color);
         }
         
         .section-title {
             font-size: 22px;
-            color: #333;
+            color: var(--text-dark);
             margin-bottom: 20px;
         }
         
@@ -185,28 +202,28 @@
         }
         
         .macro-card {
-            background-color: #f8f9fa;
-            border-radius: 8px;
+            background-color: var(--background-light);
+            border-radius: var(--border-radius-sm);
             padding: 20px;
             text-align: center;
         }
         
         .macro-value {
             font-size: 28px;
-            color: #2e8b57;
+            color: var(--primary-color);
             font-weight: bold;
             margin-bottom: 5px;
         }
         
         .macro-name {
             font-size: 16px;
-            color: #666;
+            color: var(--text-medium);
         }
         
         /* 营养成分细分卡片区 */
         .nutrition-details-section {
             padding: 30px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid var(--border-color);
         }
         
         .nutrition-details-grid {
@@ -219,7 +236,7 @@
             display: flex;
             justify-content: space-between;
             padding: 10px 0;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid var(--border-color);
         }
         
         .nutrition-detail-item:last-child {
@@ -227,18 +244,18 @@
         }
         
         .nutrition-detail-label {
-            color: #666;
+            color: var(--text-medium);
         }
         
         .nutrition-detail-value {
-            color: #333;
+            color: var(--text-dark);
             font-weight: 500;
         }
         
         /* 健康益处和食用建议区域 */
         .health-section, .tips-section {
             padding: 30px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid var(--border-color);
         }
         
         .health-section:last-child, .tips-section:last-child {
@@ -260,7 +277,7 @@
             content: '•';
             position: absolute;
             left: 0;
-            color: #2e8b57;
+            color: var(--primary-color);
             font-size: 20px;
             line-height: 1;
         }
@@ -269,17 +286,18 @@
         .food-not-found {
             text-align: center;
             padding: 80px 20px;
-            color: #666;
+            color: var(--text-medium);
         }
         
         .food-not-found h2 {
             font-size: 24px;
             margin-bottom: 15px;
+            color: var(--primary-color);
         }
         
         /* 页脚 */
         .footer {
-            background-color: #2e8b57;
+            background-color: var(--primary-color);
             color: white;
             text-align: center;
             padding: 20px 0;
@@ -452,20 +470,26 @@
     </footer>
     
     <script>
-        // 静态食物数据对象
+        // 静态食物数据对象 - 扩展支持新的数据结构
         const FOOD_DATA = {
+            // 现有食物数据（兼容旧格式）
             '辣椒': {
                 nameZh: '辣椒',
                 nameEn: 'bell pepper',
                 category: '蔬菜类',
-                energy: 31,
-                protein: 1.0,
-                carbs: 6.0,
-                fat: 0.3,
-                fiber: 1.7,
-                vitaminC: 80,
-                potassium: 210,
-                iron: 0.5,
+                per100g: {
+                    energy: 31,
+                    protein: 1.0,
+                    carbs: 6.0,
+                    fat: 0.3,
+                    fiber: 1.7
+                },
+                micronutrients: {
+                    vitaminC: 80,
+                    potassium: 210,
+                    iron: 0.5
+                },
+                tags: ['蔬菜', '富含维生素C'],
                 healthBenefits: [
                     '富含维生素C和类胡萝卜素，有助于抗氧化。',
                     '能量低，适合作为减脂期蔬菜配菜。'
@@ -479,14 +503,19 @@
                 nameZh: '辣椒',
                 nameEn: 'bell pepper',
                 category: '蔬菜类',
-                energy: 31,
-                protein: 1.0,
-                carbs: 6.0,
-                fat: 0.3,
-                fiber: 1.7,
-                vitaminC: 80,
-                potassium: 210,
-                iron: 0.5,
+                per100g: {
+                    energy: 31,
+                    protein: 1.0,
+                    carbs: 6.0,
+                    fat: 0.3,
+                    fiber: 1.7
+                },
+                micronutrients: {
+                    vitaminC: 80,
+                    potassium: 210,
+                    iron: 0.5
+                },
+                tags: ['蔬菜', '富含维生素C'],
                 healthBenefits: [
                     '富含维生素C和类胡萝卜素，有助于抗氧化。',
                     '能量低，适合作为减脂期蔬菜配菜。'
@@ -500,14 +529,19 @@
                 nameZh: '蘑菇',
                 nameEn: 'mushroom',
                 category: '菌菇类',
-                energy: 22,
-                protein: 3.1,
-                carbs: 3.3,
-                fat: 0.3,
-                fiber: 1.0,
-                vitaminC: 2,
-                potassium: 318,
-                iron: 0.5,
+                per100g: {
+                    energy: 22,
+                    protein: 3.1,
+                    carbs: 3.3,
+                    fat: 0.3,
+                    fiber: 1.0
+                },
+                micronutrients: {
+                    vitaminC: 2,
+                    potassium: 318,
+                    iron: 0.5
+                },
+                tags: ['菌菇', '低热量'],
                 healthBenefits: [
                     '富含多种B族维生素和矿物质，支持能量代谢。',
                     '含一定量膳食纤维和抗氧化物质，有助于心血管健康。'
@@ -521,14 +555,19 @@
                 nameZh: '蘑菇',
                 nameEn: 'mushroom',
                 category: '菌菇类',
-                energy: 22,
-                protein: 3.1,
-                carbs: 3.3,
-                fat: 0.3,
-                fiber: 1.0,
-                vitaminC: 2,
-                potassium: 318,
-                iron: 0.5,
+                per100g: {
+                    energy: 22,
+                    protein: 3.1,
+                    carbs: 3.3,
+                    fat: 0.3,
+                    fiber: 1.0
+                },
+                micronutrients: {
+                    vitaminC: 2,
+                    potassium: 318,
+                    iron: 0.5
+                },
+                tags: ['菌菇', '低热量'],
                 healthBenefits: [
                     '富含多种B族维生素和矿物质，支持能量代谢。',
                     '含一定量膳食纤维和抗氧化物质，有助于心血管健康。'
@@ -542,14 +581,19 @@
                 nameZh: '西红柿',
                 nameEn: 'tomato',
                 category: '蔬菜水果类',
-                energy: 18,
-                protein: 0.9,
-                carbs: 3.9,
-                fat: 0.2,
-                fiber: 1.2,
-                vitaminC: 13.7,
-                potassium: 237,
-                iron: 0.3,
+                per100g: {
+                    energy: 18,
+                    protein: 0.9,
+                    carbs: 3.9,
+                    fat: 0.2,
+                    fiber: 1.2
+                },
+                micronutrients: {
+                    vitaminC: 13.7,
+                    potassium: 237,
+                    iron: 0.3
+                },
+                tags: ['蔬果', '低热量'],
                 healthBenefits: [
                     '富含番茄红素，具有强大的抗氧化作用。',
                     '低热量高纤维，有助于控制体重。'
@@ -563,14 +607,19 @@
                 nameZh: '西红柿',
                 nameEn: 'tomato',
                 category: '蔬菜水果类',
-                energy: 18,
-                protein: 0.9,
-                carbs: 3.9,
-                fat: 0.2,
-                fiber: 1.2,
-                vitaminC: 13.7,
-                potassium: 237,
-                iron: 0.3,
+                per100g: {
+                    energy: 18,
+                    protein: 0.9,
+                    carbs: 3.9,
+                    fat: 0.2,
+                    fiber: 1.2
+                },
+                micronutrients: {
+                    vitaminC: 13.7,
+                    potassium: 237,
+                    iron: 0.3
+                },
+                tags: ['蔬果', '低热量'],
                 healthBenefits: [
                     '富含番茄红素，具有强大的抗氧化作用。',
                     '低热量高纤维，有助于控制体重。'
@@ -579,36 +628,381 @@
                     '可生食、凉拌或烹饪，加热后番茄红素更易吸收。',
                     '与橄榄油搭配食用，有助于提高抗氧化物质的吸收率。'
                 ]
+            },
+            
+            // 新增食物数据
+            "绿彩椒": {
+                nameZh: "绿彩椒",
+                nameEn: "Green bell pepper",
+                category: "蔬菜类",
+                per100g: {
+                    energy: 20,
+                    protein: 1.0,
+                    carbs: 4.6,
+                    fat: 0.2,
+                    fiber: 1.7
+                },
+                micronutrients: {
+                    vitaminC: 80,
+                    potassium: 175,
+                    vitaminA: 110,
+                    folate: 10
+                },
+                tags: ["低能量蔬菜", "富含维生素C", "适合减脂期"],
+                healthBenefits: [
+                    "富含维生素C和抗氧化成分，有助于提高免疫力、减轻氧化压力。",
+                    "能量密度低，适合作为减脂期间增加体积感和饱腹感的配菜。",
+                    "含有一定量膳食纤维，有助于维持肠道健康、促进排便。"
+                ],
+                eatingTips: [
+                    "适合清炒、凉拌或与鸡蛋、瘦肉搭配翻炒，注意不要长时间高温烹饪，以免维生素C损失过多。",
+                    "对辣味敏感的人群可以优先选择甜味彩椒，颜色越深一般类胡萝卜素含量越高。",
+                    "如对茄科植物过敏，请按照医生建议控制摄入量。"
+                ]
+            },
+            "Yellow bell pepper": {
+                nameZh: "绿彩椒",
+                nameEn: "Green bell pepper",
+                category: "蔬菜类",
+                per100g: {
+                    energy: 20,
+                    protein: 1.0,
+                    carbs: 4.6,
+                    fat: 0.2,
+                    fiber: 1.7
+                },
+                micronutrients: {
+                    vitaminC: 80,
+                    potassium: 175,
+                    vitaminA: 110,
+                    folate: 10
+                },
+                tags: ["低能量蔬菜", "富含维生素C", "适合减脂期"],
+                healthBenefits: [
+                    "富含维生素C和抗氧化成分，有助于提高免疫力、减轻氧化压力。",
+                    "能量密度低，适合作为减脂期间增加体积感和饱腹感的配菜。",
+                    "含有一定量膳食纤维，有助于维持肠道健康、促进排便。"
+                ],
+                eatingTips: [
+                    "适合清炒、凉拌或与鸡蛋、瘦肉搭配翻炒，注意不要长时间高温烹饪，以免维生素C损失过多。",
+                    "对辣味敏感的人群可以优先选择甜味彩椒，颜色越深一般类胡萝卜素含量越高。",
+                    "如对茄科植物过敏，请按照医生建议控制摄入量。"
+                ]
+            },
+            "黄彩椒": {
+                nameZh: "黄彩椒",
+                nameEn: "Yellow bell pepper",
+                category: "蔬菜类",
+                per100g: {
+                    energy: 27,
+                    protein: 1.0,
+                    carbs: 6.3,
+                    fat: 0.2,
+                    fiber: 1.3
+                },
+                micronutrients: {
+                    vitaminC: 120,
+                    potassium: 210,
+                    vitaminA: 160,
+                    folate: 26
+                },
+                tags: ["高维生素C", "颜色鲜艳", "适合生食/凉拌"],
+                healthBenefits: [
+                    "维生素C含量较高，有助于胶原合成和抗氧化，支持皮肤和血管健康。",
+                    "黄色彩椒中的类胡萝卜素等植物化学物质有助于保护视力和心血管健康。",
+                    "能量不高，可作为色彩丰富、营养均衡的蔬菜配菜。"
+                ],
+                eatingTips: [
+                    "适合切丝/切丁做沙拉或凉拌，也可以与其他彩椒、洋葱一起翻炒。",
+                    "建议不过度油炸或长时间炖煮，以避免维生素C大量流失。",
+                    "清洗时注意清理内部白色筋膜和籽，口感更好。"
+                ]
+            },
+            "Yellow bell pepper": {
+                nameZh: "黄彩椒",
+                nameEn: "Yellow bell pepper",
+                category: "蔬菜类",
+                per100g: {
+                    energy: 27,
+                    protein: 1.0,
+                    carbs: 6.3,
+                    fat: 0.2,
+                    fiber: 1.3
+                },
+                micronutrients: {
+                    vitaminC: 120,
+                    potassium: 210,
+                    vitaminA: 160,
+                    folate: 26
+                },
+                tags: ["高维生素C", "颜色鲜艳", "适合生食/凉拌"],
+                healthBenefits: [
+                    "维生素C含量较高，有助于胶原合成和抗氧化，支持皮肤和血管健康。",
+                    "黄色彩椒中的类胡萝卜素等植物化学物质有助于保护视力和心血管健康。",
+                    "能量不高，可作为色彩丰富、营养均衡的蔬菜配菜。"
+                ],
+                eatingTips: [
+                    "适合切丝/切丁做沙拉或凉拌，也可以与其他彩椒、洋葱一起翻炒。",
+                    "建议不过度油炸或长时间炖煮，以避免维生素C大量流失。",
+                    "清洗时注意清理内部白色筋膜和籽，口感更好。"
+                ]
+            },
+            "橘子": {
+                nameZh: "橘子",
+                nameEn: "Mandarin orange",
+                category: "水果类",
+                per100g: {
+                    energy: 43,
+                    protein: 0.8,
+                    carbs: 10.2,
+                    fat: 0.2,
+                    fiber: 1.8
+                },
+                micronutrients: {
+                    vitaminC: 26,
+                    potassium: 150,
+                    vitaminA: 34,
+                    folate: 16
+                },
+                tags: ["常见水果", "富含维生素C", "方便携带"],
+                healthBenefits: [
+                    "富含维生素C和柠檬酸，有助于抗氧化和减轻疲劳感。",
+                    "适量的膳食纤维有利于改善肠道环境、帮助控制血脂。",
+                    "相对温和的酸度和甜度，适合作为日常加餐水果。"
+                ],
+                eatingTips: [
+                    "适量食用，一般建议每日 1～2 个，糖尿病或血糖偏高人群需控制总摄入量。",
+                    "饭后立刻大量食用柑橘类水果可能增加胃部负担，推荐在两餐之间作为加餐。",
+                    "服用某些药物期间（如部分抗过敏药）可能需限制柑橘类摄入，请遵医嘱。"
+                ]
+            },
+            "Mandarin orange": {
+                nameZh: "橘子",
+                nameEn: "Mandarin orange",
+                category: "水果类",
+                per100g: {
+                    energy: 43,
+                    protein: 0.8,
+                    carbs: 10.2,
+                    fat: 0.2,
+                    fiber: 1.8
+                },
+                micronutrients: {
+                    vitaminC: 26,
+                    potassium: 150,
+                    vitaminA: 34,
+                    folate: 16
+                },
+                tags: ["常见水果", "富含维生素C", "方便携带"],
+                healthBenefits: [
+                    "富含维生素C和柠檬酸，有助于抗氧化和减轻疲劳感。",
+                    "适量的膳食纤维有利于改善肠道环境、帮助控制血脂。",
+                    "相对温和的酸度和甜度，适合作为日常加餐水果。"
+                ],
+                eatingTips: [
+                    "适量食用，一般建议每日 1～2 个，糖尿病或血糖偏高人群需控制总摄入量。",
+                    "饭后立刻大量食用柑橘类水果可能增加胃部负担，推荐在两餐之间作为加餐。",
+                    "服用某些药物期间（如部分抗过敏药）可能需限制柑橘类摄入，请遵医嘱。"
+                ]
+            },
+            "苹果": {
+                nameZh: "苹果",
+                nameEn: "Apple",
+                category: "水果类",
+                per100g: {
+                    energy: 52,
+                    protein: 0.3,
+                    carbs: 13.8,
+                    fat: 0.2,
+                    fiber: 2.4
+                },
+                micronutrients: {
+                    vitaminC: 4.6,
+                    potassium: 107,
+                    folate: 3,
+                    polyphenols: "含量丰富（不精确量化）"
+                },
+                tags: ["高纤维水果", "日常加餐", "相对低能量密度"],
+                healthBenefits: [
+                    "含有较多可溶性和不溶性膳食纤维，有助于调节血脂和促进肠道蠕动。",
+                    "多酚类物质具有一定抗氧化作用，有助于心血管健康。",
+                    "能量适中，适合替代部分高糖零食作为加餐。"
+                ],
+                eatingTips: [
+                    "连皮食用可以获得更多膳食纤维和多酚，但需清洗干净或削皮以减少农残摄入风险。",
+                    "糖尿病或减脂人群可选择中等大小苹果并注意与一天总碳水化合物摄入搭配。",
+                    "不建议长期仅吃水果代替正餐，以免蛋白质和其他营养摄入不足。"
+                ]
+            },
+            "Apple": {
+                nameZh: "苹果",
+                nameEn: "Apple",
+                category: "水果类",
+                per100g: {
+                    energy: 52,
+                    protein: 0.3,
+                    carbs: 13.8,
+                    fat: 0.2,
+                    fiber: 2.4
+                },
+                micronutrients: {
+                    vitaminC: 4.6,
+                    potassium: 107,
+                    folate: 3,
+                    polyphenols: "含量丰富（不精确量化）"
+                },
+                tags: ["高纤维水果", "日常加餐", "相对低能量密度"],
+                healthBenefits: [
+                    "含有较多可溶性和不溶性膳食纤维，有助于调节血脂和促进肠道蠕动。",
+                    "多酚类物质具有一定抗氧化作用，有助于心血管健康。",
+                    "能量适中，适合替代部分高糖零食作为加餐。"
+                ],
+                eatingTips: [
+                    "连皮食用可以获得更多膳食纤维和多酚，但需清洗干净或削皮以减少农残摄入风险。",
+                    "糖尿病或减脂人群可选择中等大小苹果并注意与一天总碳水化合物摄入搭配。",
+                    "不建议长期仅吃水果代替正餐，以免蛋白质和其他营养摄入不足。"
+                ]
+            },
+            "面包": {
+                nameZh: "面包",
+                nameEn: "Bread (white toast)",
+                category: "主食类",
+                per100g: {
+                    energy: 265,
+                    protein: 9.0,
+                    carbs: 49.0,
+                    fat: 3.2,
+                    fiber: 2.7
+                },
+                micronutrients: {
+                    sodium: 450,
+                    calcium: 150,
+                    iron: 2.5
+                },
+                tags: ["主食", "碳水来源", "方便食用"],
+                healthBenefits: [
+                    "提供碳水化合物作为主要能量来源，适合作为早餐或加餐的主食部分。",
+                    "如果选用全麦或部分全谷物面包，可提高膳食纤维和维生素B族摄入。",
+                    "搭配优质蛋白（如鸡蛋、奶制品）和蔬菜，可以构成较均衡的一餐。"
+                ],
+                eatingTips: [
+                    "白面包相比全麦面包纤维和微量营养素较少，可作为偶尔选择，日常推荐优先全谷物。",
+                    "留意配料表中添加糖和黄油/人造黄油的含量，控制总能量和饱和脂肪摄入。",
+                    "糖尿病患者或需要控制血糖者应注意面包份量，并与蛋白质/脂肪搭配以减缓血糖波动。"
+                ]
+            },
+            "Bread": {
+                nameZh: "面包",
+                nameEn: "Bread (white toast)",
+                category: "主食类",
+                per100g: {
+                    energy: 265,
+                    protein: 9.0,
+                    carbs: 49.0,
+                    fat: 3.2,
+                    fiber: 2.7
+                },
+                micronutrients: {
+                    sodium: 450,
+                    calcium: 150,
+                    iron: 2.5
+                },
+                tags: ["主食", "碳水来源", "方便食用"],
+                healthBenefits: [
+                    "提供碳水化合物作为主要能量来源，适合作为早餐或加餐的主食部分。",
+                    "如果选用全麦或部分全谷物面包，可提高膳食纤维和维生素B族摄入。",
+                    "搭配优质蛋白（如鸡蛋、奶制品）和蔬菜，可以构成较均衡的一餐。"
+                ],
+                eatingTips: [
+                    "白面包相比全麦面包纤维和微量营养素较少，可作为偶尔选择，日常推荐优先全谷物。",
+                    "留意配料表中添加糖和黄油/人造黄油的含量，控制总能量和饱和脂肪摄入。",
+                    "糖尿病患者或需要控制血糖者应注意面包份量，并与蛋白质/脂肪搭配以减缓血糖波动。"
+                ]
             }
         };
 
-        // 使用URLSearchParams读取food参数
-        const urlParams = new URLSearchParams(window.location.search);
-        const foodParam = urlParams.get('food');
-
         // 渲染页面数据
         function renderFoodDetails(foodData) {
-            // 显示食物名称和分类
-            document.getElementById('food-name-zh').textContent = foodData.nameZh;
+            // 更新食物名称和分类（兼容新旧ID）
+            const nameElement = document.getElementById('food-name-zh') || document.getElementById('food-name');
+            if (nameElement) nameElement.textContent = foodData.nameZh;
             document.getElementById('food-name-en').textContent = foodData.nameEn;
-            document.getElementById('food-category').textContent = foodData.category;
+            const categoryElement = document.getElementById('food-category');
+            if (categoryElement) categoryElement.textContent = foodData.category;
 
-            // 更新宏量营养素
-            document.getElementById('macro-energy').textContent = foodData.energy;
-            document.getElementById('macro-protein').textContent = foodData.protein;
-            document.getElementById('macro-carbs').textContent = foodData.carbs;
-            document.getElementById('macro-fat').textContent = foodData.fat;
+            // 更新宏量营养素（兼容新旧数据结构）
+            const energy = foodData.per100g?.energy || foodData.energy || 0;
+            const protein = foodData.per100g?.protein || foodData.protein || 0;
+            const carbs = foodData.per100g?.carbs || foodData.carbs || 0;
+            const fat = foodData.per100g?.fat || foodData.fat || 0;
+            const fiber = foodData.per100g?.fiber || foodData.fiber || 0;
+            
+            document.getElementById('macro-energy').textContent = energy;
+            document.getElementById('macro-protein').textContent = protein;
+            document.getElementById('macro-carbs').textContent = carbs;
+            document.getElementById('macro-fat').textContent = fat;
 
-            // 更新营养成分细分
-            document.getElementById('detail-fiber').textContent = foodData.fiber + ' g';
-            document.getElementById('detail-vitaminC').textContent = foodData.vitaminC + ' mg';
-            document.getElementById('detail-potassium').textContent = foodData.potassium + ' mg';
-            document.getElementById('detail-iron').textContent = foodData.iron + ' mg';
+            // 获取营养成分细分容器
+            const nutritionContainer = document.querySelector('.nutrition-details-grid');
+            if (nutritionContainer) {
+                // 清空现有内容
+                nutritionContainer.innerHTML = '';
+                
+                // 添加膳食纤维
+                const fiberItem = document.createElement('div');
+                fiberItem.className = 'nutrition-detail-item';
+                fiberItem.innerHTML = `
+                    <span class="nutrition-detail-label">膳食纤维</span>
+                    <span class="nutrition-detail-value">${fiber} g</span>
+                `;
+                nutritionContainer.appendChild(fiberItem);
+                
+                // 动态生成微量营养素列表
+                const micronutrients = foodData.micronutrients || {};
+                for (const [key, value] of Object.entries(micronutrients)) {
+                    if (key === 'vitaminC' || key === 'potassium' || key === 'iron' || key === 'vitaminA' || 
+                        key === 'folate' || key === 'sodium' || key === 'calcium' || key === 'polyphenols') {
+                        
+                        const nutrientItem = document.createElement('div');
+                        nutrientItem.className = 'nutrition-detail-item';
+                        
+                        // 营养素名称映射
+                        const nutrientNames = {
+                            vitaminC: '维生素C',
+                            potassium: '钾',
+                            iron: '铁',
+                            vitaminA: '维生素A',
+                            folate: '叶酸',
+                            sodium: '钠',
+                            calcium: '钙',
+                            polyphenols: '多酚类'
+                        };
+                        
+                        // 营养素单位
+                        let unit = ' mg';
+                        if (key === 'vitaminA' || key === 'folate') {
+                            unit = ' μg';
+                        } else if (typeof value === 'string') {
+                            // 对于文本描述的营养素（如多酚类），不添加单位
+                            unit = '';
+                        }
+                        
+                        const displayName = nutrientNames[key] || key;
+                        const displayValue = value;
+                        
+                        nutrientItem.innerHTML = `
+                            <span class="nutrition-detail-label">${displayName}</span>
+                            <span class="nutrition-detail-value">${displayValue}${unit}</span>
+                        `;
+                        nutritionContainer.appendChild(nutrientItem);
+                    }
+                }
+            }
 
             // 更新健康益处
             const healthBenefitsList = document.getElementById('health-benefits');
             healthBenefitsList.innerHTML = '';
-            foodData.healthBenefits.forEach(benefit => {
+            (foodData.healthBenefits || []).forEach(benefit => {
                 const li = document.createElement('li');
                 li.textContent = benefit;
                 healthBenefitsList.appendChild(li);
@@ -617,60 +1011,128 @@
             // 更新食用建议
             const eatingTipsList = document.getElementById('eating-tips');
             eatingTipsList.innerHTML = '';
-            foodData.eatingTips.forEach(tip => {
+            (foodData.eatingTips || []).forEach(tip => {
                 const li = document.createElement('li');
                 li.textContent = tip;
                 eatingTipsList.appendChild(li);
             });
 
+            // 更新食物标签
+            const foodTags = document.querySelector('.food-tags');
+            foodTags.innerHTML = '';
+            
+            // 添加分类标签
+            const categoryTag = document.createElement('span');
+            categoryTag.className = 'food-tag';
+            categoryTag.textContent = foodData.category || '其他';
+            foodTags.appendChild(categoryTag);
+            
+            // 添加其他标签
+            (foodData.tags || []).forEach(tag => {
+                const tagElement = document.createElement('span');
+                tagElement.className = 'food-tag';
+                tagElement.textContent = tag;
+                foodTags.appendChild(tagElement);
+            });
+
             // 设置页面标题
-            document.title = foodData.nameZh + ' - 食物详情 - 卡路里基站';
+            document.title = foodData.nameZh + ' - 食材详情 - 卡路里基站';
 
             // 显示内容，隐藏未找到提示
             document.querySelector('.food-detail-card').style.display = 'block';
             document.getElementById('food-not-found').style.display = 'none';
         }
 
-        // 显示未找到提示
-        function showNotFound() {
+        // 显示未找到食物提示
+        function showNotFound(foodName) {
+            // 隐藏食物详情，显示未找到提示
             document.querySelector('.food-detail-card').style.display = 'none';
-            document.getElementById('food-not-found').style.display = 'block';
+            const notFoundElement = document.getElementById('food-not-found');
+            
+            // 确保未找到提示元素存在，如果不存在则创建
+            if (!notFoundElement) {
+                // 创建一个未找到提示的容器
+                const notFoundContainer = document.createElement('div');
+                notFoundContainer.id = 'food-not-found';
+                notFoundContainer.className = 'food-not-found';
+                notFoundContainer.style.display = 'block';
+                notFoundContainer.style.backgroundColor = '#f8fff8'; // 浅绿色背景
+                notFoundContainer.style.border = '2px solid #2e8b57'; // 绿色边框
+                notFoundContainer.style.borderRadius = '8px';
+                notFoundContainer.style.padding = '30px';
+                notFoundContainer.style.textAlign = 'center';
+                notFoundContainer.style.margin = '20px auto';
+                notFoundContainer.style.maxWidth = '600px';
+                notFoundContainer.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+                
+                // 添加到页面
+                document.querySelector('.main-content').prepend(notFoundContainer);
+            } else {
+                notFoundElement.style.display = 'block';
+            }
+            
+            // 更新未找到提示内容
+            const foodParamText = foodName ? `"${decodeURIComponent(foodName)}"` : '指定';
+            notFoundElement.innerHTML = `
+                <div style="margin-bottom: 20px;">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto; color:#2e8b57;">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 7C13.66 7 15 8.34 15 10C15 11.66 13.66 13 12 13C10.34 13 9 11.66 9 10C9 8.34 10.34 7 12 7ZM12 15C13.1 15 14 15.9 14 17C14 18.1 13.1 19 12 19C10.9 19 10 18.1 10 17C10 15.9 10.9 15 12 15Z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <h2 style="color:#2e8b57; margin-bottom:15px;">暂未收录该食物的详细营养信息</h2>
+                <p style="color:#333; line-height:1.6; margin-bottom:20px;">我们正在不断扩充食物数据库。您搜索的食物 ${foodParamText} 目前尚未收录在我们的数据库中。</p>
+                <p style="color:#666; margin-bottom:30px;">建议您尝试搜索其他食物，或者稍后再来查询。</p>
+                <a href="food-detail.html" style="display:inline-block; padding:10px 25px; background-color:#2e8b57; color:white; text-decoration:none; border-radius:4px; transition:background-color 0.3s;">
+                    返回首页
+                </a>
+            `;
+            
+            // 设置页面标题
+            document.title = '食物未找到 - 卡路里基站';
         }
 
-        // 主逻辑
-        if (foodParam) {
-            // 解码URL参数，确保能正确处理编码后的食物名称
-            const decodedFoodParam = decodeURIComponent(foodParam);
+        // URL参数解析
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取URL中的食物参数
+            const urlParams = new URLSearchParams(window.location.search);
+            const foodParam = urlParams.get('food');
             
-            // 尝试直接匹配解码后的参数
-            let foodData = FOOD_DATA[decodedFoodParam];
+            console.log('传入的食物参数:', foodParam);
             
-            // 如果直接匹配失败，尝试一些常见的变种（如大小写转换）
-            if (!foodData) {
-                // 转换为小写尝试匹配
-                const lowerCaseParam = decodedFoodParam.toLowerCase();
-                foodData = FOOD_DATA[lowerCaseParam];
-                
-                // 如果还是没找到，遍历数据库查找包含关系
-                if (!foodData) {
+            // 查找对应的食物数据
+            let foodData = null;
+            
+            if (foodParam) {
+                // 尝试直接使用传入的参数作为key
+                if (FOOD_DATA[foodParam]) {
+                    foodData = FOOD_DATA[foodParam];
+                } 
+                // 如果没找到，尝试进行简单的匹配（支持中英文）
+                else {
+                    const lowerFoodParam = foodParam.toLowerCase();
                     for (const key in FOOD_DATA) {
-                        if (FOOD_DATA.hasOwnProperty(key) && 
-                            (key.includes(decodedFoodParam) || decodedFoodParam.includes(key))) {
-                            foodData = FOOD_DATA[key];
-                            break;
+                        if (FOOD_DATA.hasOwnProperty(key)) {
+                            const item = FOOD_DATA[key];
+                            if (key.toLowerCase().includes(lowerFoodParam) || 
+                                (item.nameEn && item.nameEn.toLowerCase().includes(lowerFoodParam))) {
+                                foodData = item;
+                                break;
+                            }
                         }
                     }
                 }
             }
             
+            console.log('找到的食物数据:', foodData);
+            
+            // 如果找到食物数据，渲染详情页面
             if (foodData) {
                 renderFoodDetails(foodData);
             } else {
-                showNotFound();
+                // 如果没有找到，显示未找到提示
+                showNotFound(foodParam);
             }
-        } else {
-            showNotFound();
-        }
+        });
     </script>
 </body>
 </html>

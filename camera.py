@@ -22,6 +22,10 @@ st.set_page_config(
 if "detail_opened" not in st.session_state:
     st.session_state["detail_opened"] = False
 
+# 初始化重置标记
+if "needs_reset" not in st.session_state:
+    st.session_state["needs_reset"] = False
+
 # 食物名称映射
 FOOD_NAME_MAP = {
     # 水果
@@ -213,6 +217,9 @@ class CameraManager:
         if self.cap:
             self.cap.release()
 
+# 注意：重量稳定判断现在使用连续相同次数的方式，不再使用max-min差值判断
+
+
 # ==========================================
 # 1. 加载模型
 # ==========================================
@@ -227,7 +234,7 @@ def load_yolo_model():
         classes = [ 
             "tomato",  "carrot",  "cucumber", 
             "mushroom", "corn","snow_pea","chestnut"
-            "OREO","corn","chocolate","chilli","white ball","yellow cylinder","yellow ball","red stick","bread"
+            "OREO","corn","chocolate","chilli","white ball","yellow cylinder","yellow ball","red stick","bread","orange","banana","steamed bread","pear","apple","strawberry"
         ]
         model.set_classes(classes)
         return model
@@ -277,8 +284,10 @@ with st.sidebar:
     # 添加手动重置按钮（用于解锁识别状态）
     manual_reset = st.button("🔄 重置/重新识别", use_container_width=True, type="primary")
     if manual_reset:
-        # 重置detail_opened标记，允许下次识别后再次自动跳转
+        # 重置所有相关状态标志
         st.session_state["detail_opened"] = False
+        # 使用session_state标记需要重置
+        st.session_state["needs_reset"] = True
     
     st.markdown("---")
     run_detection = st.toggle('🚀 启动系统', value=False)
@@ -311,13 +320,60 @@ if run_detection:
         detection_locked = False        # 是否已锁定识别结果
         frozen_frame = None             # 锁定的画面
         frozen_product_name = "扫描中..." # 锁定的商品名
+        weight_history = []             # 重量历史记录，用于稳定判断
+        
+        # 重量稳定状态变量
+        last_weight_rounded = None      # 上一次四舍五入后的重量
+        stable_count = 0                # 连续相同重量的计数
+        REQUIRED_STABLE_COUNT = 10      # 连续10次相同视为稳定
         
         # 如果用户点击了侧边栏的重置按钮（这会触发脚本重新运行），
         # 代码会从头执行，变量重置，所以实际上不需要在循环内检测按钮。
         
         while run_detection:
+            # 检查是否需要重置
+            if st.session_state.get("needs_reset", False):
+                # 重置所有状态
+                detection_locked = False
+                frozen_frame = None
+                frozen_product_name = "扫描中..."
+                weight_history.clear()
+                # 清空稳定状态
+                last_weight_rounded = None
+                stable_count = 0
+                # 重置标记清除
+                st.session_state["needs_reset"] = False
+            
             # 1. 始终实时读取重量 (不管是否锁定)
             weight = serial_mgr.read_weight_data()
+            
+            # 更新重量稳定状态
+            try:
+                current_weight = float(weight)
+                current_weight_rounded = round(current_weight, 1)
+                
+                if last_weight_rounded is None:
+                    last_weight_rounded = current_weight_rounded
+                    stable_count = 1
+                else:
+                    if current_weight_rounded == last_weight_rounded:
+                        stable_count += 1
+                    else:
+                        last_weight_rounded = current_weight_rounded
+                        stable_count = 1
+            except ValueError:
+                # 如果重量转换失败，不更新稳定状态
+                pass
+            
+            # 更新重量历史记录
+            try:
+                current_weight = float(weight)
+                weight_history.append(current_weight)
+                if len(weight_history) > 12:
+                    weight_history.pop(0)
+            except ValueError:
+                # 如果重量转换失败，不更新历史记录
+                pass
             
             # 2. 视觉处理逻辑
             display_frame = None
@@ -346,10 +402,10 @@ if run_detection:
                 }
                 full_url = url + "?" + urllib.parse.urlencode(params, encoding="utf-8")
                 
-                # 尝试自动在系统浏览器中打开，仅当未打开过时
-                if not st.session_state["detail_opened"]:
+                # 只有在重量完全不变足够次数时才跳转
+                if stable_count >= REQUIRED_STABLE_COUNT and not st.session_state["detail_opened"]:
                     try:
-                        # 延迟 2 秒，等称重数据稳定
+                        # 延迟 2 秒，等称重数据进一步稳定
                         time.sleep(2)
                         webbrowser.open(full_url)
                         st.session_state["detail_opened"] = True

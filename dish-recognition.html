@@ -586,11 +586,43 @@
         
         // 英文到中文的映射
         const EN_TO_ZH_MAP = {
+          // 彩椒相关英文变体
           "green bell pepper": "绿彩椒",
+          "green pepper": "绿彩椒",
+          "bell pepper green": "绿彩椒",
+          "sweet pepper green": "绿彩椒",
+          "青椒": "绿彩椒",
+          "青彩椒": "绿彩椒",
+          
           "yellow bell pepper": "黄彩椒",
-          "orange": "橘子",
+          "yellow pepper": "黄彩椒",
+          "bell pepper yellow": "黄彩椒",
+          "sweet pepper yellow": "黄彩椒",
+          "黄椒": "黄彩椒",
+          "黄彩椒": "黄彩椒",
+          
+          // 苹果相关英文变体
           "apple": "苹果",
-          "bread": "面包"
+          "red apple": "苹果",
+          "green apple": "苹果",
+          "apple slice": "苹果",
+          "sliced apple": "苹果",
+          "苹果": "苹果",
+          
+          // 橘子相关英文变体
+          "orange": "橘子",
+          "mandarin": "橘子",
+          "tangerine": "橘子",
+          "clementine": "橘子",
+          "橘子": "橘子",
+          
+          // 面包相关英文变体
+          "bread": "面包",
+          "toast": "面包",
+          "sliced bread": "面包",
+          "white bread": "面包",
+          "全麦面包": "面包",
+          "面包": "面包"
         };
         
         // 静态映射：中文名 -> 分类 + 参考热量 (保留旧映射作为补充)
@@ -614,30 +646,128 @@
         
           // 更新食物信息的函数
           function updateFoodInfo(recognizedNameRaw) {
-            let name = recognizedNameRaw;
+            // 添加调试日志
+            console.log('原始识别名称:', recognizedNameRaw);
+            console.log('FOOD_INFO_MAP中的键:', Object.keys(FOOD_INFO_MAP));
+            
+            // 基础处理：去除首尾空格
+            let name = recognizedNameRaw ? recognizedNameRaw.trim() : '';
+            console.log('去除空格后:', name);
             
             // 英文转中文（如果匹配到）
             const lower = name.toLowerCase();
+            console.log('转小写后:', lower);
             if (EN_TO_ZH_MAP[lower]) {
+              console.log('找到英文映射:', EN_TO_ZH_MAP[lower]);
               name = EN_TO_ZH_MAP[lower];
             }
+            
+            // 标准化名称映射 - 处理可能的变体
+            const NAME_STANDARDIZATION = {
+              // 橘子相关变体
+              '桔子': '橘子',
+              '橙子': '橘子',
+              '橘子 ': '橘子',
+              
+              // 苹果相关变体
+              '苹果 ': '苹果',
+              '红苹果': '苹果',
+              '青苹果': '苹果',
+              '苹果片': '苹果',
+              
+              // 彩椒相关变体
+              '绿彩椒 ': '绿彩椒',
+              '青椒': '绿彩椒',
+              '青彩椒': '绿彩椒',
+              '青圆椒': '绿彩椒',
+              '绿色彩椒': '绿彩椒',
+              
+              '黄彩椒 ': '黄彩椒',
+              '黄椒': '黄彩椒',
+              '黄圆椒': '黄彩椒',
+              '黄色彩椒': '黄彩椒',
+              
+              // 面包相关变体
+              '面包 ': '面包',
+              '吐司': '面包',
+              '切片面包': '面包'
+            };
+            
+            // 应用标准化
+            if (NAME_STANDARDIZATION[name]) {
+              console.log('标准化名称:', name, '->', NAME_STANDARDIZATION[name]);
+              name = NAME_STANDARDIZATION[name];
+            }
+            
+            console.log('处理后名称:', name);
             
             // 显示名称
             nameEl.textContent = name;
             
-            // 首先尝试在FOOD_INFO_MAP中查找
-            const info = FOOD_INFO_MAP[name];
+            // 首先尝试在FOOD_INFO_MAP中精确查找
+            console.log('在FOOD_INFO_MAP中查找:', name);
+            let info = FOOD_INFO_MAP[name];
+            
+            // 如果精确查找失败，尝试模糊匹配
+            if (!info) {
+              console.log('FOOD_INFO_MAP中未精确找到，尝试模糊匹配');
+              const foodKeys = Object.keys(FOOD_INFO_MAP);
+              
+              // 1. 检查是否包含关键字
+              for (const key of foodKeys) {
+                if (name.includes(key) || key.includes(name)) {
+                  console.log('找到包含关系匹配:', name, '->', key);
+                  info = FOOD_INFO_MAP[key];
+                  name = key; // 更新名称为标准名称
+                  nameEl.textContent = name; // 更新显示的名称
+                  break;
+                }
+              }
+              
+              // 2. 如果包含关系也没找到，检查字符相似度
+              if (!info) {
+                let bestMatch = null;
+                let bestScore = 0;
+                
+                for (const key of foodKeys) {
+                  // 简单的字符匹配分数计算
+                  let score = 0;
+                  for (let i = 0; i < Math.min(name.length, key.length); i++) {
+                    if (name[i] === key[i]) score++;
+                  }
+                  const matchRatio = score / Math.max(name.length, key.length);
+                  
+                  if (matchRatio > 0.6 && matchRatio > bestScore) {
+                    bestScore = matchRatio;
+                    bestMatch = key;
+                  }
+                }
+                
+                if (bestMatch) {
+                  console.log('找到相似匹配:', name, '->', bestMatch, '(相似度:', bestScore, ')');
+                  info = FOOD_INFO_MAP[bestMatch];
+                  name = bestMatch; // 更新名称为标准名称
+                  nameEl.textContent = name; // 更新显示的名称
+                }
+              }
+            }
+            
+            // 使用找到的信息
             if (info) {
+              console.log('在FOOD_INFO_MAP中找到:', info);
               if (catEl) catEl.textContent = info.category;
               if (calEl) calEl.textContent = `约 ${info.kcalPer100g} kcal / 100 g`;
             } 
             // 如果没找到，尝试在旧映射中查找
             else {
+              console.log('FOOD_INFO_MAP中未找到，尝试FOOD_META');
               const meta = FOOD_META[name] || {};
+              console.log('FOOD_META结果:', meta);
               if (catEl) catEl.textContent = meta.category || "其他";
               if (calEl && meta.caloriesPer100g) {
                 calEl.textContent = meta.caloriesPer100g + " kcal / 100 g";
               } else if (calEl) {
+                console.log('未找到热量信息，显示为--');
                 calEl.textContent = "--";
               }
             }
